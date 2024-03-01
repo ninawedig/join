@@ -28,6 +28,7 @@ main {
     justify-content: center;
     align-items: center;
     gap: 16px;
+    transition: 100ms all ease-in-out;
 }
 
 .newContactButton:hover{

@@ -4,7 +4,7 @@ const smallMenu = document.getElementById('smallMenu');
 function init(){
     renderHeader();
     renderNavbar();
-    makeNavbarActive('summary');
+    makeNavbarActive('contacts');
 }
 
 function showSmallMenu(){

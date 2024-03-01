@@ -6,7 +6,7 @@ main {
 .contactsFrame {
     background-color: white;
     width: 456px;
-    height: 100vh;
+    height: calc(100vh - 96px);
     position: fixed;
     box-shadow: 4px 0px 6px 0px #00000014;
     padding: 32px 24px 32px 48px;
@@ -32,6 +32,8 @@ main {
 
 .newContactButton:hover{
     background-color: var(--secondarycolor);
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid transparent;
 }
 
 .newContactButton img {
@@ -41,6 +43,7 @@ main {
 .contactsList {
     display: flex;
     flex-direction: column;
+    
 }
 
 .contactLetter {
@@ -51,4 +54,20 @@ main {
 
 .contactsSeparationLine {
     border: 1px solid #D1D1D1;
+}
+
+.contactField{
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 15px 24px;
+}
+
+.contactProfileBadge{
+    font-size: 12px;
+    background-color: #9327FF;
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: 12px;
+    color: white;
 }

@@ -19,7 +19,7 @@
 
 .headingBorder{
     height: 59px;
-    border: 3px solid #29ABE2;
+    border: 3px solid var(--secundarycolor);
 
 }
 
@@ -80,6 +80,15 @@
     gap: 13px;
 }
 
+.urgentToDoDate{
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.urgentToDoInfo{
+    font-size: 16px;
+}
+
 .summaryCurrentTasksOverview{
     display: flex;
     justify-content: space-between;
@@ -97,4 +106,24 @@
 .summaryTextDescription{
     font-size: 20px;
     text-align: center;
+}
+
+.summaryPageGreeting{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.greetingMessage{
+    font-size: 47px;
+    font-weight: 500;
+    color: var(--maincolor);
+    line-height: 56.4px;
+}
+
+.greetingName{
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76.8px;
+    color: var(--secundarycolor);
 }

@@ -89,7 +89,7 @@ header {
 
 .activeUser {
     background-color: #FFF;
-    border: 3px solid #2A3647;
+    border: 3px solid var(--maincolor);
     border-radius: 50%;
     padding: 10px;
     display: flex;
@@ -111,7 +111,7 @@ header {
     right: 40px;
     display: flex;
     flex-direction: column;
-    background-color: #2A3647;
+    background-color: var(--maincolor);
     padding: 10px;
     border-radius: 20px 0px 20px 20px;
 }
@@ -130,7 +130,7 @@ header {
 /* NAVIGATION */
 
 nav {
-    background-color: #2A3647;
+    background-color: var(--maincolor);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

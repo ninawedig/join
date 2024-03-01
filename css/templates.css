@@ -1,6 +1,6 @@
 :root{
  --maincolor: #2A3647;
- --secundarycolor: #29ABE2;
+ --secondarycolor: #29ABE2;
 }
 
 * {
@@ -94,7 +94,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--secundarycolor);
+    color: var(--secondarycolor);
 }
 
 .activeUser:hover {
@@ -199,5 +199,5 @@ nav {
 
 .sidenavLegalLinks a:hover {
     font-weight: 700;
-    color: var(--secundarycolor);
+    color: var(--secondarycolor);
 }

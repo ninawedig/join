@@ -1,0 +1,54 @@
+main {
+    padding-left: 232px !important;
+    padding-top: 96px !important;
+}
+
+.contactsFrame {
+    background-color: white;
+    width: 456px;
+    height: 100vh;
+    position: fixed;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    padding: 32px 24px 32px 48px;
+    overflow-y: scroll;
+}
+
+.newContactButton {
+    background-color: var(--maincolor);
+    color: white;
+    width: 100%;
+    padding: 12px 0;
+    border: 1px solid var(--maincolor);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 21px;
+    line-height: 25.2px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.newContactButton:hover{
+    background-color: var(--secondarycolor);
+}
+
+.newContactButton img {
+    height: 21px;
+}
+
+.contactsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactLetter {
+    padding: 17px 36px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.contactsSeparationLine {
+    border: 1px solid #D1D1D1;
+}

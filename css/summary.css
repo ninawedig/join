@@ -19,7 +19,7 @@
 
 .headingBorder{
     height: 59px;
-    border: 3px solid var(--secundarycolor);
+    border: 3px solid var(--secondarycolor);
 
 }
 
@@ -125,5 +125,5 @@
     font-size: 64px;
     font-weight: 700;
     line-height: 76.8px;
-    color: var(--secundarycolor);
+    color: var(--secondarycolor);
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/templates.css">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+</head>
+
+<body onload="init()">
+    <header id="header">
+    </header>
+
+    <div id="smallMenu" class="smallMenu noDisplay">
+    </div>    
+    <nav id="navbar">
+    </nav>
+    <main class="summaryPage">
+        <div class="summaryPageHeading">
+            <h1>Join 360</h1>
+            <div class="headingBorder"></div>
+            <h2>Key Metrics at a Glance</h2>
+        </div>
+        <div class="summaryPageContent">
+            <div class="summaryPageTasksContainer">
+                <div class="summaryToDosGeneral">
+                    <div class="summaryToDosContainer summaryBoxes">
+                        <img src="./img/summary/pen.svg" alt="">
+                        <div class="summaryToDosContainerText">
+                            <div class="summaryToDosNumber">1</div>
+                            <div class="summaryTextDescription">To-do</div>
+                        </div>
+                    </div>
+                    <div class="summaryToDosContainer summaryBoxes">
+                        <img src="./img/summary/tick.svg" alt="">
+                        <div class="summaryToDosContainerText">
+                            <div class="summaryToDosNumber">1</div>
+                            <div class="summaryTextDescription">Done</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="summaryUrgentToDos summaryBoxes">
+
+                </div>
+                <div class="summaryCurrentTasksOverview">
+                    <div class="summaryBoxes summaryTasksBox">
+                        <div class="summaryToDosNumber">5</div>
+                        <div class="summaryTextDescription">Tasks in<br>Board</div>
+                    </div>
+                    <div class="summaryBoxes summaryTasksBox">
+                        <div class="summaryToDosNumber">2</div>
+                        <div class="summaryTextDescription">Tasks in<br>Progress</div>
+                    </div>
+                    <div class="summaryBoxes summaryTasksBox">
+                        <div class="summaryToDosNumber">2</div>
+                        <div class="summaryTextDescription">Awaiting<br>Feedback</div>
+                    </div>
+                </div>
+            </div>
+            <div class="summaryPageGreeting">
+                <div>Good morning,</div>
+                <div>Sofia Müller</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./javascript/header.js"></script>
+    <script src="./javascript/navbar.js"></script>
+    <script src="./javascript/summary.js"></script>
+</body>
+
+</html>

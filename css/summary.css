@@ -1,0 +1,91 @@
+/* SUMMARY */
+
+.summaryPageContent{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.summaryBoxes{
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    border-radius: 30px;
+    background-color: white;
+}
+
+.summaryPageHeading{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 29px;
+}
+
+main h1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.headingBorder{
+    height: 59px;
+    border: 3px solid #29ABE2;
+
+}
+
+main h2 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.summaryPageTasksContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 560px;
+}
+
+.summaryToDosGeneral{
+    display:flex;
+    justify-content: space-between;
+}
+
+.summaryToDosContainer{
+    display: flex;
+    align-items: center;
+    padding: 38px 58px;
+    height: 168px;
+    gap: 24px;
+}
+
+.summaryToDosContainerText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summaryToDosNumber{
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.summaryUrgentToDos{
+    display: flex;
+    height: 168px;
+}
+
+.summaryCurrentTasksOverview{
+    display: flex;
+    justify-content: space-between;
+}
+
+.summaryTasksBox{
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 168px;
+    width: 168px;
+}
+
+.summaryTextDescription{
+    font-size: 20px;
+    text-align: center;
+}

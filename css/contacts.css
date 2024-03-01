@@ -72,3 +72,63 @@ main {
     padding: 12px;
     color: white;
 }
+
+.contactPage{
+    margin-left: 35%;
+    margin-top: 8%;
+}
+
+.contactsHeading {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.headingBorder {
+    height: 59px;
+    border: 3px solid var(--secondarycolor);
+}
+
+.contactCardMainInfos{
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.contactProfileBadgeBig{
+    font-size: 47px;
+    color: white;
+    background-color: orange;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #FFFFFF;
+    border-radius: 70px; 
+}
+
+.contactNameBig {
+    font-size: 47px;
+}
+
+.contactFunctionsContainer{
+    display: flex;
+    gap: 18px;
+}
+
+.contactFunctions{
+    display: flex;
+    align-items: center;
+    gap:8px;
+}
+
+.contactFunctions:hover{
+    cursor: pointer;
+    font-weight: 700;
+    filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
+}
+
+.contactFunctionsIcons{
+    width: 18px;
+}

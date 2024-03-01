@@ -33,6 +33,16 @@ main {
     padding-top: 206px;
 }
 
+main h1 {
+    font-size: 61px;
+    font-weight: 700;
+}
+
+main h2 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
 /* HEADER */
 header {
     width: 100%;

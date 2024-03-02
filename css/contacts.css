@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 main {
     padding-left: 232px !important;
     padding-top: 96px !important;
@@ -196,7 +200,7 @@ main {
     color: #007CEE;
 }
 
-/* EDIT CONTACT */
+/* EDIT / ADD CONTACT */
 
 .contactActionsOverlay {
     position: fixed;
@@ -213,8 +217,6 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-
     box-shadow: 0px 0px 4px 0px #0000001A;
     height: 592px;
     display: flex;
@@ -226,7 +228,7 @@ main {
 .contactActionDetails {
     background-color: var(--maincolor);
     height: 100%;
-    width: 453px;
+    width: 475px;
     padding: 154px 46px 252px;
     display: flex;
     flex-direction: column;
@@ -240,10 +242,21 @@ main {
 }
 
 .actionHeadline {
-    font-size: 59px;
+    font-size: 61px;
     line-height: 73.5px;
     font-weight: 700;
     color: #FFF;
+}
+
+.actionSubTitle{
+    font-size: 27px;
+    color: #FFF;
+    margin: 8px 0;
+}
+
+.actionContainerSeparationLine{
+    border: 3px solid #29ABE2;
+    width: 90px;
 }
 
 .contactActionFields {
@@ -278,18 +291,27 @@ main {
     background-color: #D1D1D1;
 }
 
-.editContactForm {
+.contactActionForm {
     display: flex;
     flex-direction: column;
     gap: 32px;
 }
 
-.editContactInput {
+.inputContainer {
+    display: flex;
+    align-items: center;
+}
+
+.contactActionInput {
     width: 422px;
     padding: 13px 21px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     font-size: 20px;
+}
+
+.inputSmallIcon{
+    margin-left: -36px;
 }
 
 .formButtonsContainer {

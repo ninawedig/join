@@ -1,4 +1,7 @@
 const smallMenu = document.getElementById('smallMenu');
+const contactActionsOverlay = document.getElementById('contactActionsOverlay');
+const editContactContainer = document.getElementById('editContactContainer');
+const addContactContainer = document.getElementById('addContactContainer');
 
 function init(){
     renderHeader();
@@ -20,11 +23,21 @@ function showContact(){
 }
 
 function editContact(){
-    document.getElementById('contactActionsOverlay').classList.remove('noDisplay');
-    document.getElementById('editContactContainer').classList.remove('noDisplay');
+    contactActionsOverlay.classList.remove('noDisplay');
+    editContactContainer.classList.remove('noDisplay');
 }
 
 function closeEditContact(){
-    document.getElementById('contactActionsOverlay').classList.add('noDisplay');
-    document.getElementById('editContactContainer').classList.add('noDisplay');
+    contactActionsOverlay.classList.add('noDisplay');
+    editContactContainer.classList.add('noDisplay');
+}
+
+function addContact(){
+    contactActionsOverlay.classList.remove('noDisplay');
+    addContactContainer.classList.remove('noDisplay');
+}
+
+function closeAddContact(){
+    contactActionsOverlay.classList.add('noDisplay');
+    addContactContainer.classList.add('noDisplay');
 }

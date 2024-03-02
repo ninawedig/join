@@ -1,4 +1,3 @@
-const activeUserButton = document.getElementById('activeUserButton');
 const smallMenu = document.getElementById('smallMenu');
 
 function init(){

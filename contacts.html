@@ -25,7 +25,7 @@
                 <div class="contactLetter">A</div>
                 <div class="contactsSeparationLine"></div>
                 <div class="contactsGroup">
-                    <div class="contactField">
+                    <div onclick="selectContact('contact1')" class="contactField" id="contact1">
                         <div class="contactProfileBadge">AM</div>
                         <div class="contactDetails">
                             <div class="contactName">Anton Mayer</div>
@@ -104,13 +104,13 @@
                 </div>
             </div>
         </div>
-        <div class="contactPage">
+        <div id="contactPage" class="contactPage">
             <div class="contactsHeading">
                 <h1>Contacts</h1>
                 <div class="headingBorder"></div>
                 <h2>Better with a team</h2>
             </div>
-            <div class="contactCard">
+            <div class="contactCard" id="contactCard">
                 <div class="contactCardMainInfos">
                     <div class="contactProfileBadgeBig">AM</div>
                     <div class="contactNameBigContainer">
@@ -121,8 +121,17 @@
                         </div>
                     </div>
                 </div>
-                <div></div>
-                <div></div>
+                <div class="contactCardSubHead">Contact Information</div>
+                <div class="contactCardDetails">
+                    <div class="contactCardContactInformations">
+                        <div class="contactMethod">Email</div>
+                        <div class="contactDetails contactEmail">wolf@gmail.com</div>
+                    </div>
+                    <div class="contactCardContactInformations">
+                        <div class="contactMethod">Phone</div>
+                        <div class="contactDetails contactPhone">+49 2222 222 22 2</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

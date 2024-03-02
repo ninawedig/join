@@ -1,13 +1,13 @@
 main {
     padding-left: 232px !important;
     padding-top: 96px !important;
+    display: flex;
 }
 
 .contactsFrame {
     background-color: white;
     width: 456px;
     height: calc(100vh - 96px);
-    position: fixed;
     box-shadow: 4px 0px 6px 0px #00000014;
     padding: 32px 24px 32px 48px;
     overflow-y: scroll;
@@ -51,10 +51,15 @@ main {
     padding: 17px 36px;
     font-size: 20px;
     line-height: 24px;
+    margin-bottom: 8px;
 }
 
 .contactsSeparationLine {
     border: 1px solid #D1D1D1;
+}
+
+.contactsGroup{
+    margin-top: 8px;
 }
 
 .contactField{
@@ -62,6 +67,24 @@ main {
     align-items: center;
     gap: 35px;
     padding: 15px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contactField:hover {
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+}
+
+.contactFieldActive {
+    background-color: var(--maincolor);
+}
+
+.contactFieldActive:hover {
+    background: var(--maincolor);
+}
+
+.contactFieldActive .contactName{
+    color: white;
 }
 
 .contactProfileBadge{
@@ -74,8 +97,9 @@ main {
 }
 
 .contactPage{
-    margin-left: 35%;
-    margin-top: 8%;
+    margin-left: 65px;
+    margin-top: 110px;
+    
 }
 
 .contactsHeading {
@@ -89,10 +113,23 @@ main {
     border: 3px solid var(--secondarycolor);
 }
 
+.contactCard{
+    position: relative;
+    top: 0;
+    left: 300%;
+    transition: left 0.1s ease;
+}
+
+.contactCardActive{
+    display: block;
+    left: 0;
+}
+
 .contactCardMainInfos{
     display: flex;
     align-items: center;
     gap: 54px;
+    margin-top: 32px;
 }
 
 .contactProfileBadgeBig{
@@ -131,4 +168,30 @@ main {
 
 .contactFunctionsIcons{
     width: 18px;
+}
+
+.contactCardSubHead{
+    margin: 21px 0;
+    font-size: 20px;
+    padding: 27px 0;
+}
+
+.contactCardDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contactCardContactInformations{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contactMethod {
+    font-weight: 700;
+}
+
+.contactEmail {
+    color: #007CEE;
 }

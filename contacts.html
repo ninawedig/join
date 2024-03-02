@@ -116,8 +116,10 @@
                     <div class="contactNameBigContainer">
                         <div class="contactNameBig">Anton Mayer</div>
                         <div class="contactFunctionsContainer">
-                            <div class="contactFunctions"><img class="contactFunctionsIcons" src="./img/contacts/edit.svg" alt="">Edit</div>
-                            <div class="contactFunctions"><img class="contactFunctionsIcons" src="./img/contacts/delete.svg" alt="">Delete</div>
+                            <div class="contactFunctions" onclick="editContact()"><img class="contactFunctionsIcons"
+                                    src="./img/contacts/edit.svg" alt="">Edit</div>
+                            <div class="contactFunctions"><img class="contactFunctionsIcons"
+                                    src="./img/contacts/delete.svg" alt="">Delete</div>
                         </div>
                     </div>
                 </div>
@@ -133,6 +135,29 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="contactActionsOverlay" onclick="closeEditContact()" class="contactActionsOverlay noDisplay" ></div>
+        <div id="editContactContainer" class="contactActionsContainer noDisplay">
+            <div class="contactActionDetails">
+                <div><img class="contactActionLogo" src="./img/nav/logo.png" alt=""></div>
+                <div class="actionHeadline">Edit Contact</div>
+                <div></div>
+            </div>
+            <div class="contactActionFields">
+                <div class="contactProfileBadgeBig">AM</div>
+                <form class="editContactForm">
+                    <div class="closeIconContainer" onclick="closeEditContact()"><img class="closeIcon" src="./img/contacts/close.svg" alt=""></div>
+                    <input class="editContactInput" type="text" placeholder="Name">
+                    <input class="editContactInput" type="email" placeholder="Email">
+                    <input class="editContactInput" type="tel" placeholder="Phone">
+                    <div class="formButtonsContainer">
+                        <button class="formButton deleteButton">Delete</button>
+                        <button class="formButton saveButton">Save <img src="./img/contacts/check.svg" alt=""></button>
+                    </div>
+                </form>
+
+            </div>
+
         </div>
     </main>
 

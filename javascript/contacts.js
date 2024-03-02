@@ -18,3 +18,13 @@ function selectContact(contact){
 function showContact(){
     document.getElementById('contactCard').classList.toggle('contactCardActive');
 }
+
+function editContact(){
+    document.getElementById('contactActionsOverlay').classList.remove('noDisplay');
+    document.getElementById('editContactContainer').classList.remove('noDisplay');
+}
+
+function closeEditContact(){
+    document.getElementById('contactActionsOverlay').classList.add('noDisplay');
+    document.getElementById('editContactContainer').classList.add('noDisplay');
+}

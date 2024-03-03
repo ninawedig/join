@@ -14,9 +14,28 @@
     <header id="header">
     </header>
     <div id="smallMenu" class="smallMenu noDisplay">
-    </div>    
+    </div>
     <nav id="navbar">
     </nav>
+
+    <div class="smallNav">
+        <a class="smallNavElement smallNavLinkActive" href="summary.html">
+            <img src="./img/nav/summaryIcon.svg" class="smallNavImg" alt="">
+            <div class="smallNavText">Summary</div>
+        </a>
+        <a class="smallNavElement" href="board.html">
+            <img src="./img/nav/boardIcon.svg" class="smallNavImg" alt="">
+            <div class="smallNavText">Board</div>
+        </a>
+        <a class="smallNavElement" href="addtask.html">
+            <img src="./img/nav/editSquareIcon.svg" class="smallNavImg" alt="">
+            <div class="smallNavText">Add Tasks</div>
+        </a>
+        <a class="smallNavElement" href="contacts.html">
+            <img src="./img/nav/contactIcon.svg" class="smallNavImg" alt="">
+            <div class="smallNavText">Contacts</div>
+        </a>
+    </div>
 
     <main>
         <div class="summaryPageHeading">
@@ -26,7 +45,7 @@
         </div>
         <div class="summaryPageContent">
             <div class="summaryPageTasksContainer">
-                <div class="summaryToDosGeneral">
+                <div class="summaryPageTasksRow tasksRowTop">
                     <div class="summaryToDosContainer summaryBoxes">
                         <img class="toDoIcon" src="./img/summary/pen.svg" alt="">
                         <div class="summaryToDosContainerText">
@@ -42,18 +61,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="summaryUrgentToDos summaryBoxes">
-                    <div class="summaryUrgentToDosLeft">
-                        <div><img src="./img/summary/urgent.svg" alt=""></div>
-                        <div class="summaryToDosNumber">1</div>
-                    </div>
-                    <div class="urgentToDosSeparation"></div>
-                    <div class="summaryUrgentToDosRight">
-                        <div class="urgentToDoDate">October 16, 2022</div>
-                        <div class="urgentToDoInfo">Upcoming Deadline</div>
+                <div class="summaryPageTasksRow">
+                    <div class="summaryUrgentToDos summaryBoxes">
+                        <div class="summaryUrgentToDosLeft">
+                            <div><img class="urgentToDoIcon" src="./img/summary/urgent.svg" alt=""></div>
+                            <div class="summaryToDosContainerText">
+                                <div class="summaryToDosNumber">1</div>
+                                <div class="summaryTextDescription urgentText">Urgent</div>
+                            </div>
+                        </div>
+                        <div class="urgentToDosSeparation"></div>
+                        <div class="summaryUrgentToDosRight">
+                            <div class="urgentToDoDate">October 16, 2022</div>
+                            <div class="urgentToDoInfo">Upcoming Deadline</div>
+                        </div>
                     </div>
                 </div>
-                <div class="summaryCurrentTasksOverview">
+                <div class="summaryPageTasksRow tasksRowBottom">
                     <div class="summaryBoxes summaryTasksBox">
                         <div class="summaryToDosNumber">5</div>
                         <div class="summaryTextDescription">Tasks in<br>Board</div>
@@ -77,7 +101,7 @@
     <script src="./javascript/summary.js"></script>
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>
-    
+
 </body>
 
 </html>

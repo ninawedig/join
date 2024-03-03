@@ -1,7 +1,55 @@
+.smallNav{
+    position: fixed;
+    background-color: var(--maincolor);
+    width: 100%;
+    bottom:0;
+    height: 80px;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
+    padding: 2px 16px;
+    display: none;
+}
+
+.smallNavElement{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 80px;
+    height: 76px;
+    border-radius: 16px;
+}
+
+.smallNavImg{
+    height: 24px;
+    
+}
+
+.smallNavText{
+    color: #CDCDCD;
+    font-family: 'open sans';
+    line-height: 16.8px;
+    font-size: 14px;
+}
+
+.smallNavLinkActive {
+    background-color: #091931;
+}
+
+.smallNavLinkActive img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(101%) contrast(104%);
+}
+
+.smallNavLinkActive *{
+    color: white !important;
+}
+
 .summaryPageContent {
     display: flex;
     align-items: center;
-    gap: 100px;
+    gap: 80px;
 }
 
 .summaryBoxes {
@@ -39,21 +87,29 @@
 .summaryPageTasksContainer {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 560px;
+    gap: 28px;
 }
 
-.summaryToDosGeneral {
+.summaryPageTasksRow {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tasksRowTop {
+    gap: 32px;
 }
 
 .summaryToDosContainer {
+    position: relative;
+    flex: 1;
+    max-width: 264px;
+    height: 168px;
     display: flex;
     align-items: center;
-    padding: 38px 58px;
-    height: 168px;
-    gap: 24px;
+    justify-content: center;
+    gap: 18px;
 }
 
 .summaryToDosContainerText {
@@ -68,12 +124,13 @@
 }
 
 .summaryUrgentToDos {
+    position: relative;
+    flex: 1;
+    width: 560px;
+    height: 168px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 61px;
-    height: 168px;
-    padding: 28px 48px;
 }
 
 .summaryUrgentToDosLeft {
@@ -82,9 +139,14 @@
     gap: 18px;
 }
 
+.urgentText {
+    display: none;
+}
+
 .urgentToDosSeparation {
     height: 100px;
     border: 2px solid #D1D1D1;
+    margin: 0 61px;
 }
 
 .summaryUrgentToDosRight {
@@ -102,18 +164,19 @@
     font-size: 16px;
 }
 
-.summaryCurrentTasksOverview {
-    display: flex;
-    justify-content: space-between;
+.tasksRowBottom {
+    gap: 28px;
 }
 
 .summaryTasksBox {
-    padding: 25px 0;
+    position: relative;
+    flex: 1;
+    max-width: 168px;
+    height: 168px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 168px;
-    width: 168px;
+    justify-content: center;
 }
 
 .summaryTextDescription {
@@ -124,7 +187,6 @@
 .summaryPageGreeting {
     display: flex;
     flex-direction: column;
-    gap: 3px;
 }
 
 .greetingMessage {
@@ -139,4 +201,213 @@
     font-weight: 700;
     line-height: 76.8px;
     color: var(--secondarycolor);
+}
+
+@media (max-width: 1170px) {
+    .summaryPageContent {
+        gap: 24px;
+    }
+
+    .greetingMessage {
+        font-size: 36px;
+        line-height: 35px;
+        margin-bottom: 8px;
+    }
+
+    .greetingName {
+        font-size: 48px;
+        line-height: 50px;
+    }
+
+    nav {
+        width: 20% !important;
+    }
+
+    .sidenavLinks a {
+        padding: 8px 41px !important;
+    }
+
+    main {
+        padding-left: 230px !important;
+        padding-top: 130px !important;
+    }
+
+    .summaryBoxes:hover {
+        scale: 1.04;
+    }
+}
+
+@media (max-width: 1000px) {
+    nav {
+        width: 20% !important;
+    }
+
+    .sidenavLinks a {
+        padding: 8px 32px !important;
+    }
+}
+
+@media (max-width: 965px) {
+    .greetingMessage {
+        display: none;
+    }
+
+    .greetingName {
+        display: none;
+    }
+}
+
+@media (max-width: 867px) {
+    .smallNav{
+        display: flex;
+    }
+
+    nav {
+        display: none !important;
+    }
+
+    header {
+        padding: 20px 16px !important;
+        height: 80px !important;
+    }
+
+    main {
+        padding: 128px 16px !important;
+    }
+
+    main h1 {
+        font-size: 47px !important;
+    }
+
+    main h2 {
+        font-size: 20px !important;
+    }
+
+    .summaryPageHeading {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 0;
+    }
+
+    .headingBorder {
+        transform: rotate(-90deg);
+        order: 1;
+        height: 90px;
+        margin-top: -41px;
+        margin-left: 44px;
+    }
+
+
+}
+
+@media (max-width: 600px) {
+    .helpIcon {
+        display: none;
+    }
+
+    .summaryPageTasksContainer {
+        gap: 18px;
+    }
+
+    .tasksRowTop {
+        gap: 24px;
+        margin-bottom: 12px;
+    }
+
+    .summaryToDosContainer {
+        gap: 10px;
+        height: 110px;
+        max-width: 186px;
+    }
+
+    .summaryToDosNumber {
+        font-size: 47px;
+    }
+
+    .summaryTextDescription {
+        font-size: 14px;
+    }
+
+    .urgentText {
+        display: block;
+    }
+
+    .toDoIcon {
+        height: 40px;
+    }
+
+    .summaryUrgentToDos {
+        width: 396px;
+        height: 110px;
+    }
+
+    .urgentToDoIcon {
+        height: 40px;
+    }
+
+    .urgentToDosSeparation {
+        margin: 0 20px;
+        height: 68px;
+    }
+
+    .summaryUrgentToDosRight {
+        gap: 8px;
+    }
+
+    .urgentToDoDate {
+        font-size: 16px;
+    }
+
+    .urgentToDoInfo {
+        font-size: 17px;
+    }
+
+    .tasksRowBottom {
+        gap: 24px;
+    }
+
+    .summaryTasksBox {
+        height: 116px;
+    }
+}
+
+@media (max-width: 420px) {
+    main {
+        padding: 85px 6px !important;
+    }
+
+    .summaryUrgentToDos {
+        width: 310px;
+        padding: 2px;
+    }
+
+    .tasksRowTop {
+        gap: 12px;
+    }
+
+    .tasksRowBottom {
+        gap: 12px;
+    }
+
+    .summaryTextDescription {
+        font-size: 12px;
+    }
+
+    .summaryBoxes:hover {
+        scale: 1.03;
+    }
+
+    .summaryToDosContainer {
+        height: 95px;
+    }
+
+    .summaryUrgentToDos {
+        height: 95px;
+    }
+
+    .summaryTasksBox {
+        height: 95px;
+        width: 95px;
+    }
 }

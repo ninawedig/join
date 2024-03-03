@@ -11,6 +11,11 @@
 }
 
 @font-face {
+    font-family: 'open sans';
+    src: url(./../fonts/opensans/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
     font-family: inter;
     src: url(./../fonts/inter/Inter-VariableFont_slnt\,wght.ttf);
 }

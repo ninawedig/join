@@ -1,0 +1,206 @@
+
+.button{
+    width: 160px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px;
+    padding: 8px 16px 8px 16px;
+    background-color: var(--maincolor);
+    color: white;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 25.2px;
+    transition: 100ms all ease-in-out;
+}
+.button:hover{
+    background-color: var(--secondarycolor);
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid transparent;
+}
+
+.boardHeading{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    Width: 1208px;
+    Height: 180px;
+    Top: 96px;
+    Left: 232px;
+}
+
+.boardPageHeading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    width: 1056px;
+}
+
+.taskActivities{
+    display: flex;
+    width: 504px;
+    height: 48px;
+    gap: 32px;
+}
+.findTask{
+    width: 312px;
+    height: 48px;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #A8A8A8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+.findTaskTextarea{
+    box-sizing: border-box;
+    resize: none; /* Verhindert das Ändern der Größe durch Benutzer */
+    border: none; /* Entfernt die Standardrahmen der Textarea */
+    outline: none;
+    padding: 8px 16px 8px 16px;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    border-radius: 10px;
+    display: flex;
+}
+.findTaskButton{
+    width: 48px;
+    height: 32px;
+    padding-left: 16px;
+    border: 0;
+    background-color: white;
+    border-left: 1px solid #D1D1D1;
+    margin-right: 16px;
+}
+
+/*Board*/
+
+.boardHeader{
+    display: flex;
+    gap: 35px;
+    color: #42526E;
+    font: 700;
+    width: 1208px;
+    height: 24px;
+
+}
+
+.boardCategory{
+    display: flex;
+    justify-content: space-between;
+    width: 244px;
+    height: 26px;
+}
+.boardCategory svg:hover{
+    fill: var(--secondarycolor);
+}
+
+.board{
+    display: flex;
+    width: 1208px;
+    height: 688px;
+    gap: 24px;
+    padding-right:64px;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    width: 252px;
+    height: 688px;
+    row-gap: 24px;
+}
+.taskCard{
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    background-color: white;
+    height: fit-content;
+    width: 252px;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 0 10px 5px rgb(0 0 0 0.2);
+    
+    }
+
+.taskCategory{
+    padding: 4px 16px 4px 16px;
+    background-color: #0038FF;
+    height: 27px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;;
+    line-height: 19.2px;
+    width: fit-content;
+}
+.taskInfo{
+    gap: 8px;
+}
+.taskTitle{
+    font-weight: 700;
+    color: #2A3647;
+}
+.taskDescription{
+    font-weight: 400;
+    color: #A8A8A8;
+}
+.taskSubtasks{
+    display: flex;
+    font-size: 12px;
+    line-height: 14.4px;
+    font-weight: 400;
+    color: black;
+    align-items: center;
+}
+.progressBar{
+    background-color: #F4F4F4;
+    height: 8px;
+    width: 128px;
+    border-radius: 8px;
+}
+.progress{
+    background-color: #4589FF;
+    height: 8px;
+    width: 50%;
+    border-radius: 8px;
+}
+
+.taskMembers{
+    display: flex;
+
+}
+.taskMember{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    border-radius: 45px;
+    background-color: #FF7A00;
+    border: solid 1px white;
+    color: white;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.noTaskCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    height: 48px;
+    background-color: #E7E7E7;
+    border: 1px dashed #A8A8A8;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 0.16);
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #A8A8A8;
+    font-weight: 400;
+}

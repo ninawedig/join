@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/templates.css">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+</head>
+
+<body onload="init()">
+    <header id="header">
+    </header>
+    <div id="smallMenu" class="smallMenu noDisplay">
+    </div>    
+    <nav id="navbar">
+    </nav>
+
+    <main style="padding-right: 96px;">
+        <div class="boardHeading">
+            <div class="boardPageHeading">
+                <h1>Board</h1>
+                <div class="taskActivities">
+                    <form class="findTask" action="">
+                        <textarea class="findTaskTextarea" placeholder="Find Task" name="" id="" cols="30" rows="10"></textarea>
+                        <button class="findTaskButton"> 
+                            <svg class="" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="mask0_146316_5742" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                            <rect width="32" height="32" fill="#D9D9D9"/>
+                            </mask>
+                            <g mask="url(#mask0_146316_5742)">
+                            <path d="M13.7118 20.2137C11.8946 20.2137 10.3567 19.5843 9.098 18.3256C7.83931 17.0669 7.20996 15.529 7.20996 13.7118C7.20996 11.8946 7.83931 10.3567 9.098 9.098C10.3567 7.83931 11.8946 7.20996 13.7118 7.20996C15.529 7.20996 17.0669 7.83931 18.3256 9.098C19.5843 10.3567 20.2137 11.8946 20.2137 13.7118C20.2137 14.4454 20.097 15.1372 19.8636 15.7874C19.6302 16.4376 19.3134 17.0127 18.9133 17.5129L24.5149 23.1145C24.6983 23.2979 24.79 23.5313 24.79 23.8147C24.79 24.0981 24.6983 24.3315 24.5149 24.5149C24.3315 24.6983 24.0981 24.79 23.8147 24.79C23.5313 24.79 23.2979 24.6983 23.1145 24.5149L17.5129 18.9133C17.0127 19.3134 16.4376 19.6302 15.7874 19.8636C15.1372 20.097 14.4454 20.2137 13.7118 20.2137ZM13.7118 18.2131C14.9622 18.2131 16.025 17.7755 16.9002 16.9002C17.7755 16.025 18.2131 14.9622 18.2131 13.7118C18.2131 12.4615 17.7755 11.3987 16.9002 10.5234C16.025 9.64815 14.9622 9.21053 13.7118 9.21053C12.4615 9.21053 11.3987 9.64815 10.5234 10.5234C9.64815 11.3987 9.21053 12.4615 9.21053 13.7118C9.21053 14.9622 9.64815 16.025 10.5234 16.9002C11.3987 17.7755 12.4615 18.2131 13.7118 18.2131Z" fill="#2A3647"/>
+                            </g>
+                            </svg>
+                        </button>
+                    </form>
+                    <button class="addTaskonBoard button">Add tasks <span style="height: 32px; width: 32px;">&#43;</span></button>
+                </div>
+            </div>
+            <div class="boardHeader">
+                <div class="boardCategory">
+                    <h3>To Do</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    </svg>    
+                </div>
+                <div class="boardCategory">
+                    <h3>In progress</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    </svg>    
+                </div>
+                <div class="boardCategory">
+                    <h3>Await feedback</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    </svg>    
+                </div>
+                <div class="boardCategory">
+                    <h3>Done</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                </svg>    
+                </div>
+            </div>
+        </div>
+        <div class="board">
+            <div class="category">
+                <div class="noTaskCard">No tasks To do</div>
+            </div>
+            <div class="category">
+                <div class="taskCard">
+                    <div class="taskCategory">User Story</div>
+                    <div class="taskInfo">
+                        <div class="taskTitle">Kochwelt Page & Recipe Recommender</div>
+                        <div class="taskDescription">Build start page with recipe recommendation...</div>
+                    </div>
+                    <div class="taskSubtasks">
+                        <div class="progressBar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="progressInfo"> 1/2 Subtasks</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="taskMembers">
+                            <div class="taskMember" style="z-index: 1;">KH</div>
+                            <div class="taskMember" style="background-color: #1FD7C1; margin-left: -10%; z-index: 1;">NW</div>
+                            <div class="taskMember" style="background-color: #FF4646; margin-left: -10%; z-index: 2;">AE</div>
+                        </div>
+                        <div> 
+                            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_146349_2583)">
+                                <path d="M16.5685 7.16658L1.43151 7.16658C1.18446 7.16658 0.947523 7.06773 0.772832 6.89177C0.598141 6.71581 0.5 6.47716 0.5 6.22831C0.5 5.97947 0.598141 5.74081 0.772832 5.56485C0.947523 5.38889 1.18446 5.29004 1.43151 5.29004L16.5685 5.29004C16.8155 5.29004 17.0525 5.38889 17.2272 5.56485C17.4019 5.74081 17.5 5.97947 17.5 6.22831C17.5 6.47716 17.4019 6.71581 17.2272 6.89177C17.0525 7.06773 16.8155 7.16658 16.5685 7.16658Z" fill="#FFA800"/>
+                                <path d="M16.5685 2.7098L1.43151 2.7098C1.18446 2.7098 0.947523 2.61094 0.772832 2.43498C0.598141 2.25902 0.5 2.02037 0.5 1.77152C0.5 1.52268 0.598141 1.28403 0.772832 1.10807C0.947523 0.932105 1.18446 0.833252 1.43151 0.833252L16.5685 0.833252C16.8155 0.833252 17.0525 0.932105 17.2272 1.10807C17.4019 1.28403 17.5 1.52268 17.5 1.77152C17.5 2.02037 17.4019 2.25902 17.2272 2.43498C17.0525 2.61094 16.8155 2.7098 16.5685 2.7098Z" fill="#FFA800"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_146349_2583">
+                                <rect width="17" height="6.33333" fill="white" transform="translate(0.5 0.833252)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category">
+                <div class="taskCard">
+                    <div class="taskCategory">User Story</div>
+                    <div class="taskInfo">
+                        <div class="taskTitle">Kochwelt Page & Recipe Recommender</div>
+                        <div class="taskDescription">Build start page with recipe recommendation...</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="taskMembers">
+                            <div class="taskMember" style="z-index: 1;">KH</div>
+                            <div class="taskMember" style="background-color: #1FD7C1; margin-left: -10%; z-index: 1;">NW</div>
+                            <div class="taskMember" style="background-color: #FF4646; margin-left: -10%; z-index: 2;">AE</div>
+                        </div>
+                        <div> 
+                            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_146349_2583)">
+                                <path d="M16.5685 7.16658L1.43151 7.16658C1.18446 7.16658 0.947523 7.06773 0.772832 6.89177C0.598141 6.71581 0.5 6.47716 0.5 6.22831C0.5 5.97947 0.598141 5.74081 0.772832 5.56485C0.947523 5.38889 1.18446 5.29004 1.43151 5.29004L16.5685 5.29004C16.8155 5.29004 17.0525 5.38889 17.2272 5.56485C17.4019 5.74081 17.5 5.97947 17.5 6.22831C17.5 6.47716 17.4019 6.71581 17.2272 6.89177C17.0525 7.06773 16.8155 7.16658 16.5685 7.16658Z" fill="#FFA800"/>
+                                <path d="M16.5685 2.7098L1.43151 2.7098C1.18446 2.7098 0.947523 2.61094 0.772832 2.43498C0.598141 2.25902 0.5 2.02037 0.5 1.77152C0.5 1.52268 0.598141 1.28403 0.772832 1.10807C0.947523 0.932105 1.18446 0.833252 1.43151 0.833252L16.5685 0.833252C16.8155 0.833252 17.0525 0.932105 17.2272 1.10807C17.4019 1.28403 17.5 1.52268 17.5 1.77152C17.5 2.02037 17.4019 2.25902 17.2272 2.43498C17.0525 2.61094 16.8155 2.7098 16.5685 2.7098Z" fill="#FFA800"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_146349_2583">
+                                <rect width="17" height="6.33333" fill="white" transform="translate(0.5 0.833252)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                            </div>
+                    </div>
+                </div>
+                <div class="taskCard">
+                    <div class="taskCategory">User Story</div>
+                    <div class="taskInfo">
+                        <div class="taskTitle">Kochwelt Page & Recipe Recommender</div>
+                        <div class="taskDescription">Build start page with recipe recommendation...</div>
+                    </div>
+                    <div class="taskSubtasks">
+                        <div class="progressBar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="progressInfo"> 1/2 Subtasks</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="taskMembers">
+                            <div class="taskMember" style="z-index: 1;">KH</div>
+                            <div class="taskMember" style="background-color: #1FD7C1; margin-left: -10%; z-index: 1;">NW</div>
+                            <div class="taskMember" style="background-color: #FF4646; margin-left: -10%; z-index: 2;">AE</div>
+                        </div>
+                        <div> 
+                            <svg width="18" height="8" viewBox="0 0 18 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_146349_2583)">
+                                <path d="M16.5685 7.16658L1.43151 7.16658C1.18446 7.16658 0.947523 7.06773 0.772832 6.89177C0.598141 6.71581 0.5 6.47716 0.5 6.22831C0.5 5.97947 0.598141 5.74081 0.772832 5.56485C0.947523 5.38889 1.18446 5.29004 1.43151 5.29004L16.5685 5.29004C16.8155 5.29004 17.0525 5.38889 17.2272 5.56485C17.4019 5.74081 17.5 5.97947 17.5 6.22831C17.5 6.47716 17.4019 6.71581 17.2272 6.89177C17.0525 7.06773 16.8155 7.16658 16.5685 7.16658Z" fill="#FFA800"/>
+                                <path d="M16.5685 2.7098L1.43151 2.7098C1.18446 2.7098 0.947523 2.61094 0.772832 2.43498C0.598141 2.25902 0.5 2.02037 0.5 1.77152C0.5 1.52268 0.598141 1.28403 0.772832 1.10807C0.947523 0.932105 1.18446 0.833252 1.43151 0.833252L16.5685 0.833252C16.8155 0.833252 17.0525 0.932105 17.2272 1.10807C17.4019 1.28403 17.5 1.52268 17.5 1.77152C17.5 2.02037 17.4019 2.25902 17.2272 2.43498C17.0525 2.61094 16.8155 2.7098 16.5685 2.7098Z" fill="#FFA800"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_146349_2583">
+                                <rect width="17" height="6.33333" fill="white" transform="translate(0.5 0.833252)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category">
+                <div class="taskCard"></div>
+                <div class="taskCard"></div>
+                <div class="taskCard"></div>
+            </div>
+        </div>
+    </main>
+    <script src="./javascript/summary.js"></script>
+    <script src="./javascript/header.js"></script>
+    <script src="./javascript/navbar.js"></script>
+    
+</body>
+
+</html>

@@ -295,8 +295,11 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: white;
     box-shadow: 0px 0px 4px 0px #0000001A;
     height: 592px;
+    width: 1212px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -305,13 +308,13 @@ main {
 
 .contactActionDetails {
     background-color: var(--maincolor);
-    height: 100%;
-    width: 475px;
     padding: 154px 46px 252px;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    width: 100%;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .contactActionLogo {
@@ -341,12 +344,7 @@ main {
     display: flex;
     align-items: center;
     gap: 72px;
-    background-color: white;
-    height: 100%;
-    width: 759px;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding: 137px 48px 270px 97px;
+    padding: 137px 48px 135px 97px;
 }
 
 .closeIconContainer {
@@ -358,10 +356,14 @@ main {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    position: absolute;
+    top: 48px;
+    right: 48px;
 }
 
 .closeIcon {
     height: 13px;
+    
 }
 
 .closeIconContainer:hover {
@@ -511,6 +513,10 @@ main {
     header {
         padding: 20px 16px !important;
         height: 80px !important;
+    }
+
+    .smallMenu {
+        top: 81px !important;
     }
 
     main {

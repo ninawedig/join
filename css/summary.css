@@ -269,6 +269,10 @@
         height: 80px !important;
     }
 
+    .smallMenu {
+        top: 81px !important;
+    }
+
     main {
         padding: 128px 16px !important;
     }

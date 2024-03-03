@@ -1,3 +1,5 @@
+/* SMALL NAV */
+
 .smallNav{
     position: fixed;
     background-color: var(--maincolor);
@@ -238,10 +240,6 @@
 }
 
 @media (max-width: 1000px) {
-    nav {
-        width: 20% !important;
-    }
-
     .sidenavLinks a {
         padding: 8px 32px !important;
     }
@@ -301,10 +299,14 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 740px){
     .helpIcon {
         display: none;
     }
+}
+
+@media (max-width: 600px) {
+    
 
     .summaryPageTasksContainer {
         gap: 18px;

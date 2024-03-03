@@ -8,6 +8,56 @@ main {
     display: flex;
 }
 
+/* SMALL NAV */
+
+.smallNav {
+    position: fixed;
+    background-color: var(--maincolor);
+    width: 100%;
+    bottom: 0;
+    height: 80px;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
+    padding: 2px 16px;
+    display: none;
+}
+
+.smallNavElement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 80px;
+    height: 76px;
+    border-radius: 16px;
+}
+
+.smallNavImg {
+    height: 24px;
+
+}
+
+.smallNavText {
+    color: #CDCDCD;
+    font-family: 'open sans';
+    line-height: 16.8px;
+    font-size: 14px;
+}
+
+.smallNavLinkActive {
+    background-color: #091931;
+}
+
+.smallNavLinkActive img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(101%) contrast(104%);
+}
+
+.smallNavLinkActive * {
+    color: white !important;
+}
+
 .contactsFrame {
     background-color: white;
     width: 456px;
@@ -151,6 +201,7 @@ main {
 
 .contactNameBig {
     font-size: 47px;
+    font-weight: 700;
 }
 
 .contactFunctionsContainer {
@@ -200,6 +251,33 @@ main {
     color: #007CEE;
 }
 
+.contactOptionsIconContainer {
+    height: 56px;
+    width: 56px;
+    background-color: var(--maincolor);
+    justify-content: center;
+    align-items: center;
+    border-radius: 56px;
+    border: 1px solid var(--maincolor);
+    box-shadow: 0px 4px 4px 0px #00000040;
+    position: absolute;
+    display: flex;
+    right: 16px;
+    bottom: 112px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.contactOptionsIconContainer:active{
+    background-color: var(--secondarycolor);
+    border: 1px solid transparent;
+}
+
+.arrowLeftContainer{
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
+}
 /* EDIT / ADD CONTACT */
 
 .contactActionsOverlay {
@@ -248,13 +326,13 @@ main {
     color: #FFF;
 }
 
-.actionSubTitle{
+.actionSubTitle {
     font-size: 27px;
     color: #FFF;
     margin: 8px 0;
 }
 
-.actionContainerSeparationLine{
+.actionContainerSeparationLine {
     border: 3px solid #29ABE2;
     width: 90px;
 }
@@ -284,10 +362,9 @@ main {
 
 .closeIcon {
     height: 13px;
-   
 }
 
-.closeIconContainer:hover{
+.closeIconContainer:hover {
     background-color: #D1D1D1;
 }
 
@@ -310,7 +387,7 @@ main {
     font-size: 20px;
 }
 
-.inputSmallIcon{
+.inputSmallIcon {
     margin-left: -36px;
 }
 
@@ -351,4 +428,132 @@ main {
 
 .saveButton:hover {
     background-color: var(--secondarycolor);
+}
+
+@media (max-width: 1340px) {
+    main h1 {
+        font-size: 47px !important;
+    }
+
+    main h2 {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 1240px) {
+    .contactCardMainInfos {
+        margin-top: 7px;
+        gap: 20px;
+    }
+
+    .contactProfileBadgeBig {
+        height: 80px;
+        width: 80px;
+        font-size: 27px;
+    }
+
+    .contactNameBig {
+        font-size: 36px;
+    }
+
+    .contactPage {
+        margin-left: 16px;
+        margin-top: 48px;
+    }
+}
+
+@media (max-width: 1170px) {
+    nav {
+        width: 200px !important;
+    }
+
+    .sidenavLinks a {
+        padding: 8px 41px !important;
+    }
+
+    main {
+        padding-left: 200px !important;
+    }
+
+    .contactsHeading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .headingBorder {
+        transform: rotate(-90deg);
+        order: 1;
+        height: 90px;
+        margin-top: -41px;
+        margin-left: 44px;
+    }
+
+    .contactsFrame {
+        width: 380px;
+    }
+
+
+    .sidenavLinks a {
+        padding: 8px 32px !important;
+    }
+}
+
+@media (max-width: 940px) {
+    .smallNav {
+        display: flex;
+    }
+
+    nav {
+        display: none !important;
+    }
+
+    header {
+        padding: 20px 16px !important;
+        height: 80px !important;
+    }
+
+    main {
+        padding: 80px 0px !important;
+    }
+}
+
+@media (min-width: 741px){
+    .contactOptionsIconContainer{
+        display: none;
+    }
+
+    .arrowLeftContainer{
+        display: none;
+    }
+}
+
+@media (max-width: 740px) {
+    .contactActionsContainer {
+        flex-direction: column;
+    }
+
+    .contactActionDetails{
+        height: 351px;
+    }
+
+    .helpIcon {
+        display: none;
+    }
+
+    .contactPage{
+        display: none;
+    }
+
+    .contactsFrame {
+        width: 100%;
+    }
+
+    .contactFunctionsContainer{
+        display: none;
+    }
+
+    .newContactButton{
+        display: none;
+    }
 }

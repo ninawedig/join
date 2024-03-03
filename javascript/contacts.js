@@ -2,42 +2,69 @@ const smallMenu = document.getElementById('smallMenu');
 const contactActionsOverlay = document.getElementById('contactActionsOverlay');
 const editContactContainer = document.getElementById('editContactContainer');
 const addContactContainer = document.getElementById('addContactContainer');
+const contactPage = document.getElementById('contactPage');
+const contactsFrame = document.getElementById('contactsFrame');
+const addPersonIcon = document.getElementById('addPersonIcon');
+const editContactIcon = document.getElementById('editContactIcon');
+const contactCard = document.getElementById('contactCard');
 
-function init(){
+function init() {
     renderHeader();
     renderNavbar();
     makeNavbarActive('contacts');
 }
 
-function showSmallMenu(){
+function showSmallMenu() {
     smallMenu.classList.toggle('noDisplay');
 }
 
-function selectContact(contact){
+function selectContact(contact) {
     document.getElementById(contact).classList.toggle('contactFieldActive');
+    if (window.innerWidth <= 740) {
+        openContactPage();
+    }
     showContact();
 }
 
-function showContact(){
-    document.getElementById('contactCard').classList.toggle('contactCardActive');
+function openContactPage() {
+    contactsFrame.classList.toggle('noDisplay');
+    contactPage.style.display = 'block';
+    
+
+    addPersonIcon.classList.toggle('noDisplay');
+    editContactIcon.classList.toggle('noDisplay');
 }
 
-function editContact(){
+function closeContactPage(){
+    contactsFrame.classList.toggle('noDisplay');
+    contactPage.style.display = 'none';
+    contactCard.classList.toggle('contactCardActive');
+    
+
+    addPersonIcon.classList.toggle('noDisplay');
+    editContactIcon.classList.toggle('noDisplay');
+}
+
+function showContact() {
+    contactCard.classList.toggle('contactCardActive');
+}
+
+function editContact() {
     contactActionsOverlay.classList.remove('noDisplay');
     editContactContainer.classList.remove('noDisplay');
 }
 
-function closeEditContact(){
+function closeEditContact() {
     contactActionsOverlay.classList.add('noDisplay');
     editContactContainer.classList.add('noDisplay');
 }
 
-function addContact(){
+function addContact() {
     contactActionsOverlay.classList.remove('noDisplay');
     addContactContainer.classList.remove('noDisplay');
 }
 
-function closeAddContact(){
+function closeAddContact() {
     contactActionsOverlay.classList.add('noDisplay');
     addContactContainer.classList.add('noDisplay');
 }

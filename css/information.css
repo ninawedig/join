@@ -1,0 +1,19 @@
+.informationHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1014px;
+}
+.informationText{
+    width: 1014px;
+}
+h3{
+   font-size: 27px;
+   font-weight: 700;
+   line-height: 32.4px; 
+}
+h4{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 19.2px;
+}

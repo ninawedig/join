@@ -12,6 +12,7 @@ function init() {
     renderHeader();
     renderNavbar();
     makeNavbarActive('contacts');
+    makeSmallNavbarActive('contactsSmall');
 }
 
 function showSmallMenu() {

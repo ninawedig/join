@@ -4,6 +4,7 @@ function init(){
     renderHeader();
     renderNavbar();
     makeNavbarActive('summary');
+    makeSmallNavbarActive('summarySmall');
 }
 
 function showSmallMenu(){

@@ -8,56 +8,6 @@ main {
     display: flex;
 }
 
-/* SMALL NAV */
-
-.smallNav {
-    position: fixed;
-    background-color: var(--maincolor);
-    width: 100%;
-    bottom: 0;
-    height: 80px;
-    justify-content: center;
-    gap: 25px;
-    align-items: center;
-    padding: 2px 16px;
-    display: none;
-}
-
-.smallNavElement {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 80px;
-    height: 76px;
-    border-radius: 16px;
-}
-
-.smallNavImg {
-    height: 24px;
-
-}
-
-.smallNavText {
-    color: #CDCDCD;
-    font-family: 'open sans';
-    line-height: 16.8px;
-    font-size: 14px;
-}
-
-.smallNavLinkActive {
-    background-color: #091931;
-}
-
-.smallNavLinkActive img {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(101%) contrast(104%);
-}
-
-.smallNavLinkActive * {
-    color: white !important;
-}
-
 .contactsFrame {
     background-color: white;
     width: 456px;
@@ -268,16 +218,17 @@ main {
     cursor: pointer;
 }
 
-.contactOptionsIconContainer:active{
+.contactOptionsIconContainer:active {
     background-color: var(--secondarycolor);
     border: 1px solid transparent;
 }
 
-.arrowLeftContainer{
+.arrowLeftContainer {
     position: absolute;
     right: 16px;
     cursor: pointer;
 }
+
 /* EDIT / ADD CONTACT */
 
 .contactActionsOverlay {
@@ -363,7 +314,7 @@ main {
 
 .closeIcon {
     height: 13px;
-    
+
 }
 
 .closeIconContainer:hover {
@@ -465,14 +416,6 @@ main {
 }
 
 @media (max-width: 1170px) {
-    nav {
-        width: 200px !important;
-    }
-
-    .sidenavLinks a {
-        padding: 8px 41px !important;
-    }
-
     main {
         padding-left: 200px !important;
     }
@@ -494,42 +437,20 @@ main {
     .contactsFrame {
         width: 380px;
     }
-
-
-    .sidenavLinks a {
-        padding: 8px 32px !important;
-    }
 }
 
 @media (max-width: 940px) {
-    .smallNav {
-        display: flex;
-    }
-
-    nav {
-        display: none !important;
-    }
-
-    header {
-        padding: 20px 16px !important;
-        height: 80px !important;
-    }
-
-    .smallMenu {
-        top: 81px !important;
-    }
-
     main {
         padding: 80px 0px !important;
     }
 }
 
-@media (min-width: 741px){
-    .contactOptionsIconContainer{
+@media (min-width: 741px) {
+    .contactOptionsIconContainer {
         display: none;
     }
 
-    .arrowLeftContainer{
+    .arrowLeftContainer {
         display: none;
     }
 }
@@ -539,15 +460,11 @@ main {
         flex-direction: column;
     }
 
-    .contactActionDetails{
+    .contactActionDetails {
         height: 351px;
     }
 
-    .helpIcon {
-        display: none;
-    }
-
-    .contactPage{
+    .contactPage {
         display: none;
     }
 
@@ -555,11 +472,11 @@ main {
         width: 100%;
     }
 
-    .contactFunctionsContainer{
+    .contactFunctionsContainer {
         display: none;
     }
 
-    .newContactButton{
+    .newContactButton {
         display: none;
     }
 }

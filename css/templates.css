@@ -1,6 +1,6 @@
-:root{
- --maincolor: #2A3647;
- --secondarycolor: #29ABE2;
+:root {
+    --maincolor: #2A3647;
+    --secondarycolor: #29ABE2;
 }
 
 * {
@@ -28,7 +28,7 @@ body {
     background-color: #F6F7F8;
 }
 
-.noDisplay{
+.noDisplay {
     display: none !important;
 }
 
@@ -59,6 +59,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.headerLogo img {
+    width: 32px;
+    display: none;
 }
 
 .headerTitle {
@@ -147,9 +152,13 @@ nav {
     z-index: 1;
 }
 
+.sidenavLogoContainer {
+    flex: 1;
+}
+
 .logo {
     height: 121px;
-    width: 100px;
+
 }
 
 .sidenavLinks {
@@ -157,6 +166,7 @@ nav {
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    flex: 1;
 }
 
 .sidenavLinks a {
@@ -194,7 +204,7 @@ nav {
     justify-content: flex-end;
     gap: 8px;
     padding: 243px, 0px, 0px, 52px;
-    height: 317px;
+    flex: 1;
 }
 
 .sidenavLegalLinks a {
@@ -205,4 +215,124 @@ nav {
 .sidenavLegalLinks a:hover {
     font-weight: 700;
     color: var(--secondarycolor);
+}
+
+/* SMALL NAV */
+
+.smallNav {
+    position: fixed;
+    background-color: var(--maincolor);
+    width: 100%;
+    bottom: 0;
+    height: 80px;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
+    padding: 2px 16px;
+    display: none;
+}
+
+.smallNavElement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 80px;
+    height: 76px;
+    border-radius: 16px;
+}
+
+.smallNavImg {
+    height: 24px;
+
+}
+
+.smallNavText {
+    color: #CDCDCD;
+    font-family: 'open sans';
+    line-height: 16.8px;
+    font-size: 14px;
+}
+
+.smallNavLinkActive {
+    background-color: #091931;
+}
+
+.smallNavLinkActive img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(101%) contrast(104%);
+}
+
+.smallNavLinkActive * {
+    color: white !important;
+}
+
+@media (max-width: 1170px) {
+    nav {
+        width: 200px;
+    }
+
+    .sidenavLinks a {
+        padding: 8px 41px;
+    }
+
+    main {
+        padding-left: 230px;
+        padding-top: 130px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .sidenavLinks a {
+        padding: 8px 32px;
+    }
+}
+
+@media (max-width: 940px) {
+    .smallNav {
+        display: flex;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .helpIcon {
+        display: none;
+    }
+
+    header {
+        padding: 20px 16px;
+        height: 80px;
+    }
+
+    .headerLogo img {
+        display: block;
+    }
+
+    .headerTitle {
+        display: none;
+    }
+
+    .smallMenu {
+        top: 81px;
+    }
+
+    main {
+        padding: 85px 32px;
+    }
+
+    main h1 {
+        font-size: 47px !important;
+    }
+
+    main h2 {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 440px) {
+    main {
+        padding: 85px 6px !important;
+    }
 }

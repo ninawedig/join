@@ -1,53 +1,3 @@
-/* SMALL NAV */
-
-.smallNav{
-    position: fixed;
-    background-color: var(--maincolor);
-    width: 100%;
-    bottom:0;
-    height: 80px;
-    justify-content: center;
-    gap: 25px;
-    align-items: center;
-    padding: 2px 16px;
-    display: none;
-}
-
-.smallNavElement{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    width: 80px;
-    height: 76px;
-    border-radius: 16px;
-}
-
-.smallNavImg{
-    height: 24px;
-    
-}
-
-.smallNavText{
-    color: #CDCDCD;
-    font-family: 'open sans';
-    line-height: 16.8px;
-    font-size: 14px;
-}
-
-.smallNavLinkActive {
-    background-color: #091931;
-}
-
-.smallNavLinkActive img {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(51deg) brightness(101%) contrast(104%);
-}
-
-.smallNavLinkActive *{
-    color: white !important;
-}
-
 .summaryPageContent {
     display: flex;
     align-items: center;
@@ -221,27 +171,8 @@
         line-height: 50px;
     }
 
-    nav {
-        width: 20% !important;
-    }
-
-    .sidenavLinks a {
-        padding: 8px 41px !important;
-    }
-
-    main {
-        padding-left: 230px !important;
-        padding-top: 130px !important;
-    }
-
     .summaryBoxes:hover {
         scale: 1.04;
-    }
-}
-
-@media (max-width: 1000px) {
-    .sidenavLinks a {
-        padding: 8px 32px !important;
     }
 }
 
@@ -255,36 +186,7 @@
     }
 }
 
-@media (max-width: 867px) {
-    .smallNav{
-        display: flex;
-    }
-
-    nav {
-        display: none !important;
-    }
-
-    header {
-        padding: 20px 16px !important;
-        height: 80px !important;
-    }
-
-    .smallMenu {
-        top: 81px !important;
-    }
-
-    main {
-        padding: 128px 16px !important;
-    }
-
-    main h1 {
-        font-size: 47px !important;
-    }
-
-    main h2 {
-        font-size: 20px !important;
-    }
-
+@media (max-width: 940px){
     .summaryPageHeading {
         flex-direction: column;
         gap: 16px;
@@ -299,19 +201,9 @@
         margin-top: -41px;
         margin-left: 44px;
     }
-
-
-}
-
-@media (max-width: 740px){
-    .helpIcon {
-        display: none;
-    }
 }
 
 @media (max-width: 600px) {
-    
-
     .summaryPageTasksContainer {
         gap: 18px;
     }
@@ -379,11 +271,7 @@
 }
 
 @media (max-width: 420px) {
-    main {
-        padding: 85px 6px !important;
-    }
-
-    .summaryUrgentToDos {
+     .summaryUrgentToDos {
         width: 310px;
         padding: 2px;
     }

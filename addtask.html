@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/templates.css">
+    <link rel="stylesheet" href="./css/addtask.css">
+
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+</head>
+
+<body onload="init()">
+    <header id="header">
+    </header>
+    <div id="smallMenu" class="smallMenu noDisplay">
+    </div>
+    <nav id="navbar">
+    </nav>
+
+    <main>
+        <h1>Add Task</h1>
+        <div class="mainContainer">
+            <div class="mainSection">
+                <form action="" class="sectionLeft">
+                    <div class="title inputBox">
+                        <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span></div>
+                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" required>
+                    </div>
+                    <div class="description inputBox">
+                        <span class="typo">Description</span>
+                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description">
+                    </div>
+                    <div class="assigned inputBox">
+                        <span class="typo">Assigned to</span>
+                        <select class="inputAssigned inputField" id="contacts">
+                            <option value="x">Select contacts to assign</option> 
+                            <option value="x">x</option>
+                            <option value="x">x</option>
+                            <option value="x">x</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="border"></div>
+
+                <div class="sectionRight">
+                    <form action="">
+                        <div class="inputBox date">
+                            <div class="titleStar">
+                                <span class="typo">Due date</span><span class="typo typoRed">*</span>
+                            </div>
+                            <input class="inputField inputDate" type="date" id="datePicker" required>
+                        </div>
+                        <div class="prioBox prio">
+                            <span class="typo">Prio</span>
+                            <div class="prioButtonBox">
+                                <button class="prioButton typo prioButtonUrgent">Urgent <img class="iconPrio"
+                                        src="./img/addtask/Prio alta.svg" alt=""></button>
+                                <button class="prioButton typo prioButtonMedium">Medium <img class="iconMedium"
+                                        src="./img/addtask/Prio media_orange.svg" alt=""></button>
+                                <button class="prioButton typo prioButtonLow">Low <img class="iconPrio"
+                                        src="./img/addtask/Prio baja.svg" alt=""></button>
+                            </div>
+                        </div>
+
+                        <div class="inputBox category">
+                            <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
+                            </div>
+                            <select class="inputAssigned inputField" id="" required>
+                                <option value="x">Select task category</option>
+                                <option value="x">Technical Task</option>
+                                <option value="x">User Story</option>
+                            </select>
+                        </div>
+                        <div class="inputBox subtask">
+                            <span class="typo">Subtasks</span>
+                            <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="lowerSection">
+                <div>
+                    <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
+                </div>
+                <div class="buttonsRight">
+                    <button class="buttonClear">Clear <img class="icon" src="./img/addtask/iconoir_cancel.svg"
+                            alt=""></button>
+                    <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg"
+                            alt=""></button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script src="./javascript/summary.js"></script>
+    <script src="./javascript/header.js"></script>
+    <script src="./javascript/navbar.js"></script>
+    <script src="./javascript/addtask.js"></script>
+
+</body>
+
+</html>

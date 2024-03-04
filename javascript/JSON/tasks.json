@@ -11,12 +11,12 @@
         {
           "number": 1,
           "description": "Unteraufgabe 1 für Aufgabe 1",
-          "status": "to do"
+          "status": "To Do"
         },
         {
           "number": 2,
           "description": "Unteraufgabe 2 für Aufgabe 1",
-          "status": "done"
+          "status": "Done"
         }
       ]
     },
@@ -32,7 +32,7 @@
         {
           "number": 1,
           "description": "Unteraufgabe 1 für Aufgabe 2",
-          "status": "Erledigt"
+          "status": "To Do"
         }
       ]
     },

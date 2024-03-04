@@ -112,8 +112,8 @@
                 <h1>Contacts</h1>
                 <div class="headingBorder"></div>
                 <h2>Better with a team</h2>
-                <a class="arrowLeftContainer" onclick="closeContactPage()"><img src="./img/contacts/arrowleft.svg"
-                        alt=""></a>
+                <a class="arrowLeftContainer" onclick="closeContactPage('contact1')"><img
+                        src="./img/contacts/arrowleft.svg" alt=""></a>
             </div>
             <div class="contactCard" id="contactCard">
                 <div class="contactCardMainInfos">
@@ -143,8 +143,8 @@
         </div>
         <div class="contactOptionsIconContainer addPersonIcon" onclick="addContact()" id="addPersonIcon"><img
                 src="./img/contacts/smalladdperson.svg" alt=""></div>
-        <div class="contactOptionsIconContainer editContactIcon noDisplay" id="editContactIcon"><img
-                src="./img/contacts/contactoptions.svg" alt=""></div>
+        <div onclick="openSmallEditMenu()" class="contactOptionsIconContainer editContactIcon noDisplay"
+            id="editContactIcon"><img src="./img/contacts/contactoptions.svg" alt=""></div>
         <div id="contactActionsOverlay" onclick="closeEditContact(); closeAddContact()"
             class="contactActionsOverlay noDisplay"></div>
         <div id="editContactContainer" class="contactActionsContainer noDisplay">
@@ -154,7 +154,7 @@
                 <div class="actionContainerSeparationLine"></div>
             </div>
             <div class="contactActionFields">
-                <div class="contactProfileBadgeBig">AM</div>
+                <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">AM</div>
                 <form class="contactActionForm">
                     <div class="closeIconContainer" onclick="closeEditContact()"><img class="closeIcon"
                             src="./img/contacts/close.svg" alt=""></div>
@@ -176,7 +176,8 @@
                 <div class="actionContainerSeparationLine"></div>
             </div>
             <div class="contactActionFields">
-                <div class="contactProfileBadgeBig"><img src="./img/contacts/newcontact.svg"></div>
+                <div class="contactProfileBadgeBig contactActionProfileBadgeBig"><img
+                        src="./img/contacts/newcontact.svg"></div>
                 <form class="contactActionForm">
                     <div class="closeIconContainer" onclick="closeAddContact()"><img class="closeIcon"
                             src="./img/contacts/close.svg" alt=""></div>
@@ -196,7 +197,11 @@
 
             </div>
         </div>
-
+        <div id="smallEditMenuOverlay" onclick="closeSmallEditMenu()" class="smallEditMenuOverlay noDisplay"></div>
+        <div id="smallEditMenu" class="smallEditMenu noDisplay">
+            <div class="smallEditMenuButton" onclick="editContact()"><img src="./img/contacts/editsmall.svg">Edit</div>
+            <div class="smallEditMenuButton"><img src="./img/contacts/deletesmall.svg">Delete</div>
+        </div>
     </main>
 
     <script src="./javascript/contacts.js"></script>

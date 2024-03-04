@@ -7,6 +7,7 @@ const contactsFrame = document.getElementById('contactsFrame');
 const addPersonIcon = document.getElementById('addPersonIcon');
 const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
+const smallEditMenu = document.getElementById('smallEditMenu');
 
 function init() {
     renderHeader();
@@ -30,17 +31,18 @@ function selectContact(contact) {
 function openContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'block';
-    
+
 
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
 }
 
-function closeContactPage(){
+function closeContactPage(contact) {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'none';
     contactCard.classList.toggle('contactCardActive');
-    
+    document.getElementById(contact).classList.toggle('contactFieldActive');
+
 
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
@@ -53,6 +55,8 @@ function showContact() {
 function editContact() {
     contactActionsOverlay.classList.remove('noDisplay');
     editContactContainer.classList.remove('noDisplay');
+
+    closeSmallEditMenu();
 }
 
 function closeEditContact() {
@@ -68,4 +72,16 @@ function addContact() {
 function closeAddContact() {
     contactActionsOverlay.classList.add('noDisplay');
     addContactContainer.classList.add('noDisplay');
+}
+
+function openSmallEditMenu() {
+    document.getElementById('smallEditMenuOverlay').classList.remove('noDisplay');
+    smallEditMenu.classList.add('smallEditMenuOpened');
+    smallEditMenu.classList.remove('noDisplay');
+}
+
+function closeSmallEditMenu() {
+    document.getElementById('smallEditMenuOverlay').classList.add('noDisplay');
+    smallEditMenu.classList.remove('smallEditMenuOpened');
+    smallEditMenu.classList.add('noDisplay');
 }

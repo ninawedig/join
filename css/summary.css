@@ -270,7 +270,11 @@
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 435px) {
+    main{
+        margin-left: 16px;
+    }
+
      .summaryUrgentToDos {
         width: 310px;
         padding: 2px;
@@ -303,5 +307,9 @@
     .summaryTasksBox {
         height: 95px;
         width: 95px;
+    }
+
+    .summaryPageTasksContainer{
+        gap: 12px;
     }
 }

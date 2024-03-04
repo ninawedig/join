@@ -1,0 +1,49 @@
+[
+    {
+      "title": "Aufgabe 1",
+      "description": "Beschreibung für Aufgabe 1",
+      "status": "Await feedback",
+      "assign_to": "Max Mustermann",
+      "due_date": "2024-03-10",
+      "prio": "urgent",
+      "category": "User Story",
+      "subtasks": [
+        {
+          "number": 1,
+          "description": "Unteraufgabe 1 für Aufgabe 1",
+          "status": "to do"
+        },
+        {
+          "number": 2,
+          "description": "Unteraufgabe 2 für Aufgabe 1",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "title": "Aufgabe 2",
+      "description": "Beschreibung für Aufgabe 2",
+      "status": "In progress",
+      "assign_to": "Erika Musterfrau",
+      "due_date": "2024-03-15",
+      "prio": "medium",
+      "category": "User Story",
+      "subtasks": [
+        {
+          "number": 1,
+          "description": "Unteraufgabe 1 für Aufgabe 2",
+          "status": "Erledigt"
+        }
+      ]
+    },
+    {
+      "title": "Aufgabe 3",
+      "description": "Beschreibung für Aufgabe 3",
+      "status": "Done",
+      "assign_to": "John Doe",
+      "due_date": "2024-03-20",
+      "prio": "low",
+      "category": "Technical Task",
+      "subtasks": []
+    }
+  ]

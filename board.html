@@ -11,21 +11,20 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body onload="init()">
+<body onload="init('board')">
     <header id="header">
     </header>
     <div id="smallMenu" class="smallMenu noDisplay">
     </div>    
     <nav id="navbar">
     </nav>
-
-    <main style="padding-right: 96px;">
+    <main>
         <div class="boardHeading">
             <div class="boardPageHeading">
                 <h1>Board</h1>
                 <div class="taskActivities">
                     <form class="findTask" action="">
-                        <textarea class="findTaskTextarea" placeholder="Find Task" name="" id="" cols="30" rows="10"></textarea>
+                        <input type="text" placeholder="Find Task" class="findTaskTextarea">
                         <button class="findTaskButton"> 
                             <svg class="" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_146316_5742" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -40,7 +39,9 @@
                     <button class="addTaskonBoard button">Add tasks <span style="height: 32px; width: 32px;">&#43;</span></button>
                 </div>
             </div>
-            <div class="boardHeader">
+        </div>
+        <div class="board">
+            <div class="category">
                 <div class="boardCategory">
                     <h3>To Do</h3>
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,6 +50,9 @@
                         <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>    
                 </div>
+                <div class="noTaskCard">No tasks To do</div>
+            </div>
+            <div class="category">
                 <div class="boardCategory">
                     <h3>In progress</h3>
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,29 +61,6 @@
                         <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>    
                 </div>
-                <div class="boardCategory">
-                    <h3>Await feedback</h3>
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                    </svg>    
-                </div>
-                <div class="boardCategory">
-                    <h3>Done</h3>
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                </svg>    
-                </div>
-            </div>
-        </div>
-        <div class="board">
-            <div class="category">
-                <div class="noTaskCard">No tasks To do</div>
-            </div>
-            <div class="category">
                 <div class="taskCard" id="taskCard0" onclick="showCardDetail()">
                     <div class="taskCategory">User Story</div>
                     <div class="taskInfo">
@@ -115,6 +96,14 @@
                 </div>
             </div>
             <div class="category">
+                <div class="boardCategory">
+                    <h3>Await feedback</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    </svg>    
+                </div>
                 <div class="taskCard">
                     <div class="taskCategory">User Story</div>
                     <div class="taskInfo">
@@ -177,15 +166,28 @@
                 </div>
             </div>
             <div class="category">
+                <div class="boardCategory">
+                    <h3>Done</h3>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    </svg> 
+                </div>
                 <div class="taskCard"></div>
                 <div class="taskCard"></div>
                 <div class="taskCard"></div>
             </div>
         </div>
     </main>
-    <div id="cardContainer" onclick="closeCardDetail()">
+    <div id="cardContainerBackground" onclick="closeCardDetail()"></div>
+    <div id="cardContainer">
         <div id="cardDetail">
-            <div class="taskCategory">User Story</div>
+            <div class="cardDetailHeader">
+                <div class="taskCategory">User Story</div>
+                <div class="closeIconContainer" onclick="closeCardDetail()"><img class="closeIcon"
+                    src="./img/contacts/close.svg" alt=""></div>                    
+            </div>
             <div class="taskInfoDetail">
                 <div class="taskTitleDetail">Kochwelt Page & Recipe Recommender</div>
                 <p class="taskDescriptionDetail">Build start page with recipe recommendation...</p>
@@ -212,7 +214,7 @@
                         </td>
                     </tr>                                            
                 </table>
-                <div>Assigned to:</div>
+                <table><th>Assign to:</th></table>
                 <ul>
                     <li>
                         <div class="taskMember" style="z-index: 1;">KH</div>
@@ -227,8 +229,33 @@
                         <p>Alex Eremie</p>
                     </li>
                 </ul>
+                <table><th>Subtasks</th></table>
+                <ul>
+                    <li>
+                        <div id="subtask0">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.6821 8.39673V14.3967C17.6821 16.0536 16.339 17.3967 14.6821 17.3967H4.68213C3.02527 17.3967 1.68213 16.0536 1.68213 14.3967V4.39673C1.68213 2.73987 3.02527 1.39673 4.68213 1.39673H12.6821" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>                        
+                        <p>Implement Recipe Reccommendation</p>    
+                    </li>
+                    <li>
+                        <div id="subtask1">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="1.68213" y="1.39673" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p>Start page layout</p>    
+                    </li>
+                </ul>
             </div>
-            <div>Subtasks</div>
+            <div class="taskFunctionsContainer">
+                <div class="taskFunctions"><img class="taskFunctionsIcons"
+                        src="./img/contacts/edit.svg" alt="">Edit</div>
+                <div class="taskFunctions" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
+                        src="./img/contacts/delete.svg" alt="">Delete</div>
+            </div>
         </div>
     </div>
     <script src="./javascript/summary.js"></script>

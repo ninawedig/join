@@ -23,7 +23,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 16px;
-    Width: 1208px;
+
     Height: 180px;
     Top: 96px;
     Left: 232px;
@@ -69,7 +69,11 @@
     border-radius: 10px;
     display: flex;
 }
+.findTaskTextarea:focus{
+    outline: 1px solid var(--secondarycolor);
+}
 .findTaskButton{
+    margin-left: -100px; ;
     width: 48px;
     height: 32px;
     padding-left: 16px;
@@ -78,41 +82,38 @@
     border-left: 1px solid #D1D1D1;
     margin-right: 16px;
 }
+.findTaskButton svg{
+    border-radius: 50%;
+    
+}
+.findTaskButton svg:hover{
+    background-color: #D1D1D1;
+    
+}
 
 /*Board*/
-
-.boardHeader{
-    display: flex;
-    gap: 35px;
-    color: #42526E;
-    font: 700;
-    width: 1208px;
-    height: 24px;
-
-}
 
 .boardCategory{
     display: flex;
     justify-content: space-between;
-    width: 244px;
     height: 26px;
+    padding-left: 8px;
 }
 .boardCategory svg:hover{
-    fill: var(--secondarycolor);
+    cursor: pointer;
+    filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
 }
 
 .board{
     display: flex;
-    width: 1208px;
-    height: 688px;
     gap: 24px;
-    padding-right:64px;
+
 }
 .category{
     display: flex;
     flex-direction: column;
     width: 252px;
-    height: 688px;
+
     row-gap: 24px;
 }
 
@@ -125,14 +126,13 @@
     height: fit-content;
     width: 252px;
     border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 0 10px 5px rgb(0 0 0 0.2);
+    padding: 16px;
+    box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.08);
     cursor: pointer;
     }
 
 .taskCategory{
     padding: 4px 16px 4px 16px;
-    background-color: #0038FF;
     height: 27px;
     border-radius: 8px;
     color: white;
@@ -159,6 +159,7 @@
     font-weight: 400;
     color: black;
     align-items: center;
+    justify-content: space-between;
 }
 .progressBar{
     background-color: #F4F4F4;
@@ -175,7 +176,6 @@
 
 .taskMembers{
     display: flex;
-
 }
 .taskMember{
     display: flex;
@@ -197,6 +197,7 @@
     align-items: center;
     width: 100%;
     border-radius: 10px;
+    width: 252px;
     height: 48px;
     background-color: #E7E7E7;
     border: 1px dashed #A8A8A8;
@@ -208,16 +209,23 @@
 }
 
 /*CardDetail*/
-
-#cardContainer{
+#cardContainerBackground{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba( 0, 0, 0, 0.2);
-    z-index: 5;
-    display: flex;
+    z-index: 10;
+    display: none;
+}
+#cardContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -230,7 +238,33 @@
     display: flex;
     flex-direction: column;
     row-gap: 24px;
+    z-index: 11;
 }
+.cardDetailHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.closeIconContainer {
+    align-self: flex-end;
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.closeIcon {
+    height: 13px;
+
+}
+
+.closeIconContainer:hover {
+    background-color: #D1D1D1;
+}
+
 .taskInfoDetail{
     display: flex;
     flex-direction: column;
@@ -239,8 +273,19 @@
 .taskInfoDetail li{
     display: flex;
     align-items: center;
+    align-items: center;
     gap: 8px;
+    padding: 8px;
 }
+.taskInfoDetail li:hover{
+    background-color: #F4F4F4;
+    border-radius: 12px;
+}
+.taskInfoDetail li div{
+    display: flex;
+    align-items: center;
+}
+
 .taskInfoDetail th{
     text-align: left;
     font-weight: 400;
@@ -255,5 +300,27 @@
 }
 .taskInfoDetail p{
     font-size: 20px;
-
 }
+
+.taskFunctionsContainer {
+    display: flex;
+    gap: 18px;
+    justify-content: right;
+}
+
+.taskFunctions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.taskFunctions:hover {
+    cursor: pointer;
+    font-weight: 700;
+    filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
+}
+
+.taskFunctionsIcons {
+    width: 18px;
+}
+

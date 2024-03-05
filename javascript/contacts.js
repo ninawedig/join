@@ -1,4 +1,3 @@
-const smallMenu = document.getElementById('smallMenu');
 const contactActionsOverlay = document.getElementById('contactActionsOverlay');
 const editContactContainer = document.getElementById('editContactContainer');
 const addContactContainer = document.getElementById('addContactContainer');
@@ -9,19 +8,34 @@ const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
 
+let contacts = [
+    {
+        "name": "Anton Schulz",
+        "email": "wolf@gmail.de",
+        "phone": "+49 2222 222 22 2"
+    },
+    {
+        "name": "Anja Schulz",
+        "email": "schulz@hotmail.com",
+        "phone": "+49 1111 111 11 1"
+    }
+];11
+
 function init() {
     renderHeader();
     renderNavbar();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
+    showContacts();
 }
 
 function showSmallMenu() {
+    const smallMenu = document.getElementById('smallMenu');
     smallMenu.classList.toggle('noDisplay');
 }
 
-function selectContact(contact) {
-    document.getElementById(contact).classList.toggle('contactFieldActive');
+function selectContact(contactNumber) {
+    document.getElementById(contactNumber).classList.toggle('contactFieldActive');
     if (window.innerWidth <= 740) {
         openContactPage();
     }
@@ -32,16 +46,15 @@ function openContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'block';
 
-
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
 }
 
-function closeContactPage(contact) {
+function closeContactPage(contactNumber) {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'none';
     contactCard.classList.toggle('contactCardActive');
-    document.getElementById(contact).classList.toggle('contactFieldActive');
+    document.getElementById(contactNumber).classList.toggle('contactFieldActive');
 
 
     addPersonIcon.classList.toggle('noDisplay');
@@ -64,7 +77,7 @@ function closeEditContact() {
     editContactContainer.classList.add('noDisplay');
 }
 
-function addContact() {
+function openAddContact() {
     contactActionsOverlay.classList.remove('noDisplay');
     addContactContainer.classList.remove('noDisplay');
 }
@@ -84,4 +97,46 @@ function closeSmallEditMenu() {
     document.getElementById('smallEditMenuOverlay').classList.add('noDisplay');
     smallEditMenu.classList.remove('smallEditMenuOpened');
     smallEditMenu.classList.add('noDisplay');
+}
+
+function addContact() {
+    event.preventDefault();
+
+    let newContactName = document.getElementById('newContactName');
+    let newContactEmail = document.getElementById('newContactEmail');
+    let newContactPhone = document.getElementById('newContactPhone')
+
+
+    let newContact = {
+        "contactName": newContactName.value,
+        "contactEmail": newContactEmail.value,
+        "contactPhone": newContactPhone.value
+    };
+    contacts.push(newContact);
+    console.log("your contacts are: ");
+    console.log(contacts);
+
+    newContactName.value = "";
+    newContactEmail.value = "";
+    newContactPhone.value = "";
+}
+
+function showContacts() {
+    const contactsList = document.getElementById('contactsList');
+
+    contactsList.innerHTML += ``;
+
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+
+        contactsList.innerHTML += `
+            <div onclick="selectContact('contact${i}')" class="contactField" id="contact${i}">
+            <div class="contactProfileBadge">AM</div>
+            <div class="contactDetails">
+                <div class="contactName">${contacts[i]['name']}</div>
+                <div class="contactEmail">${contacts[i]['email']}</div>
+            </div>
+        </div>
+`;
+    }
 }

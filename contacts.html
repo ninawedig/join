@@ -22,13 +22,13 @@
 
     <main>
         <div class="contactsFrame" id="contactsFrame">
-            <button class="newContactButton" onclick="addContact()">Add new contact <img
+            <button class="newContactButton" onclick="openAddContact()">Add new contact <img
                     src="./img/contacts/personadd.svg" alt=""></button>
-            <div class="contactsList">
+            <div id="contactsList" class="contactsList">
                 <div class="contactLetter">A</div>
                 <div class="contactsSeparationLine"></div>
                 <div class="contactsGroup">
-                    <div onclick="selectContact('contact1')" class="contactField" id="contact1">
+                    <!-- <div onclick="selectContact('contact1')" class="contactField">
                         <div class="contactProfileBadge">AM</div>
                         <div class="contactDetails">
                             <div class="contactName">Anton Mayer</div>
@@ -41,9 +41,9 @@
                             <div class="contactName">Anja Schulz</div>
                             <div class="contactEmail">schulz@hotmail.com</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="contactLetter">B</div>
+                <!-- <div class="contactLetter">B</div>
                 <div class="contactsSeparationLine"></div>
                 <div class="contactsGroup">
                     <div class="contactField">
@@ -104,7 +104,7 @@
                             <div class="contactEmail">wolf@gmail.com</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div id="contactPage" class="contactPage" id="contactPage">
@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-        <div class="contactOptionsIconContainer addPersonIcon" onclick="addContact()" id="addPersonIcon"><img
+        <div class="contactOptionsIconContainer addPersonIcon" onclick="openAddContact()" id="addPersonIcon"><img
                 src="./img/contacts/smalladdperson.svg" alt=""></div>
         <div onclick="openSmallEditMenu()" class="contactOptionsIconContainer editContactIcon noDisplay"
             id="editContactIcon"><img src="./img/contacts/contactoptions.svg" alt=""></div>
@@ -178,23 +178,22 @@
             <div class="contactActionFields">
                 <div class="contactProfileBadgeBig contactActionProfileBadgeBig"><img
                         src="./img/contacts/newcontact.svg"></div>
-                <form class="contactActionForm">
+                <form class="contactActionForm" onsubmit="addContact()">
                     <div class="closeIconContainer" onclick="closeAddContact()"><img class="closeIcon"
                             src="./img/contacts/close.svg" alt=""></div>
-                    <div class="inputContainer"><input class="contactActionInput" type="text" placeholder="Name"><img
-                            class="inputSmallIcon" src="./img/contacts/person.svg"></div>
-                    <div class="inputContainer"><input class="contactActionInput" type="email" placeholder="Email"><img
-                            class="inputSmallIcon" src="./img/contacts/mail.svg" alt=""></div>
-                    <div class="inputContainer"><input class="contactActionInput" type="tel" placeholder="Phone"><img
-                            class="inputSmallIcon" src="./img/contacts/call.svg" alt=""></div>
+                    <div class="inputContainer"><input id="newContactName" class="contactActionInput" type="text"
+                            placeholder="Name"><img class="inputSmallIcon" src="./img/contacts/person.svg"></div>
+                    <div class="inputContainer"><input id="newContactEmail" class="contactActionInput" type="email"
+                            placeholder="Email"><img class="inputSmallIcon" src="./img/contacts/mail.svg" alt=""></div>
+                    <div class="inputContainer"><input id="newContactPhone" class="contactActionInput" type="tel"
+                            placeholder="Phone"><img class="inputSmallIcon" src="./img/contacts/call.svg" alt=""></div>
                     <div class="formButtonsContainer">
                         <button class="formButton deleteButton" onclick="closeAddContact()">Cancel <img
                                 src="./img/contacts/cancel.svg"></button>
-                        <button class="formButton saveButton">Create contact <img src="./img/contacts/check.svg"
-                                alt=""></button>
+                        <button type="submit" class="formButton saveButton">Create contact <img
+                                src="./img/contacts/check.svg" alt=""></button>
                     </div>
                 </form>
-
             </div>
         </div>
         <div id="smallEditMenuOverlay" onclick="closeSmallEditMenu()" class="smallEditMenuOverlay noDisplay"></div>

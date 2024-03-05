@@ -264,7 +264,6 @@
 }
 
 .successButtonHide {
-    top: -7197px;
-    left: 4284px;
+   display: none;
 
 }

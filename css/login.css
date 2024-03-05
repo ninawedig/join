@@ -47,18 +47,22 @@
     letter-spacing: 0em;
     text-align: left;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttonSignup:hover {
     background-color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .loginSection {
     width: 652px;
     height: 493px;
-    margin-top: 58.5px;
-    margin-left: 394px;
+    margin-top: 30%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
     padding: 48px 115px 48px 115px;
     border-radius: 30px;
     gap: 32px;
@@ -123,14 +127,14 @@
 .inputMail {
     background-image: url(/img/login/mail.svg);
     background-repeat: no-repeat;
-    background-position: 370px;
+    background-position: 95%;
     background-size: 24px 24px;
 }
 
 .inputPassword {
     background-image: url(/img/login/lock.svg);
     background-repeat: no-repeat;
-    background-position: 370px;
+    background-position: 95%;
     background-size: 24px 24px;
 }
 
@@ -188,7 +192,7 @@
 
 .buttonLogin:hover {
     background-color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .buttonGuest {
@@ -214,7 +218,7 @@
 .buttonGuest:hover {
     border: 2px solid #29ABE2;
     color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     padding: 15px 21px 15px 21px;
 }
 
@@ -222,19 +226,20 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    width: 246px;
-    height: 35px;
-    margin-top: 190.5px;
-    margin-left: 597px;
-    gap: 16px;
+    justify-content: center;
+  
+    margin-top: 0px;
+    margin-left: 50%;
+    margin-bottom: 50px;
+    transform: translate(-50%, -50%);
+    gap: 20px;
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0em;
     text-align: left;
     color: #A8A8A8;
-    margin-bottom: 50px;
+   
 }
 
 .privacyPolicy {
@@ -256,7 +261,7 @@
 }
 
 
-.logoStartscreen{
+.logoStartscreen {
     position: absolute;
     width: 274px;
     height: 334.07px;
@@ -283,7 +288,15 @@
     animation-duration: 1.5s;
     animation-delay: 1s;
     opacity: 1;
-    
+
+}
+
+.logoStartscreenResponsive {
+    display: none;
+}
+
+.headerResponsive {
+    display: none;
 }
 
 @keyframes logo-animation {
@@ -311,7 +324,206 @@
     }
 
     to {
-       opacity: 0;
-       display: none;
+        opacity: 0;
+        display: none;
     }
+}
+
+@media (max-width: 1200px) {
+    .startscreen {
+        background-color: #2A3647;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .loginSection {
+        margin-top: 400px;
+
+    }
+}
+
+
+
+@media (max-width: 1000px) {
+    .loginSection {
+        margin-top: 515px;
+
+    }
+
+    .header {
+        display: none;
+    }
+
+    .headerResponsive {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }
+
+    .registerSection {
+        width: 279px;
+        height: 49px;
+        gap: 35px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0px;
+        margin-right: 0%;
+    }
+    
+}
+
+@media (max-width: 800px) {
+
+    .loginSection {
+        width: 550px;
+        height: 493px;
+        padding-left: 5%;
+        padding-right: 5%;
+       
+    }
+    .input {
+        width: 100%;
+
+    }
+   
+    .inputFields {
+        width: 100%;
+        
+    }
+    .inputMail {
+        background-position: 95%;
+    }
+    
+    .inputPassword {
+        background-position: 95%;
+    }
+    .loginButtons {
+        gap: 20px;
+    }
+    
+}
+
+@media (max-width: 600px) { 
+    .loginSection {
+        width: 396px;
+        height: 515px;
+     
+       margin-top: 520px;
+       padding: 32px 16px 32px 16px;
+
+
+    }
+
+    .headlineLogin {
+   
+        font-size: 47px;
+
+        line-height: 56px;
+       
+    }
+ 
+    .borderLogin {
+        width: 88px;
+        height: 3px;
+   
+    }
+
+
+.headlineSection {
+    gap: 0px;
+
+}
+
+.inputFields {
+    width: 364px;
+    height: 152px;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.remember {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.loginButtons {
+   
+    flex-direction: column;
+    height: 123px;
+    width: 180px;
+    gap: 21px;
+    margin-top: 32px;
+    margin-left: 92px;
+    margin-right: 92px;
+}
+
+.buttonLogin {
+    width: 180px;
+    height: 51px;
+    padding: 4px 0px 4px 0px;
+
+
+    font-size: 16px;
+    line-height: 19.2px;
+   
+}
+
+.buttonGuest {
+    width: 180px;
+    height: 51px;
+    padding: 4px 0px 4px 0px;
+    font-size: 16px;
+    line-height: 19.2px;
+  
+}
+
+.headerResponsive {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 216px;
+    
+    margin-top: 57.5px;
+    width: 396px;
+height: 49px;
+gap: 35px;
+
+}
+
+.buttonSignup {
+    width: 104px;
+}
+
+.registerSection {
+    width: 279px;
+    height: 49px;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 57.5px;
+   
+}
+
+.policies {
+  
+    width: 279px;
+    height: 35px;
+    margin-top: 42.5px;
+    margin-left: 216px;
+    gap:24px;
+    justify-content: center;
+   
+}
+
 }

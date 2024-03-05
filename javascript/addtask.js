@@ -1,6 +1,13 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-$(document).ready(function() {
-    $('#calendarIcon').click(function() {
-        $('#datePicker').focus();
-    });
-});
+const smallMenu = document.getElementById('smallMenu');
+
+function init(){
+    renderHeader();
+    renderNavbar();
+    makeNavbarActive('addtask');
+    makeSmallNavbarActive('addtaskSmall');
+}
+
+function showSmallMenu(){
+    smallMenu.classList.toggle('noDisplay');
+}
+

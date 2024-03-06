@@ -21,43 +21,35 @@ function renderBoard(){
     let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
     for (let i = 0; i < allStatus.length; i++) {
-        const element1 = allStatus[i];
+        const status = allStatus[i];
+        let filterTask = tasks.filter(t => t['status'] == status);
         
-        let filter = tasks.filter(t => t['status'] == element1);
+        document.getElementById(`${status}`).innerHTML = '';
 
-        document.getElementById(`${element1}`).innerHTML = '';
-
-        if (filter == 0) {
-            document.getElementById(`${element1}`).innerHTML =/*html*/`
-                <div class="boardTasks" id="toDo">
-                    <div class="noTaskCard">No tasks To do</div>
-                </div>`;
+        if (filterTask == 0) {
+            document.getElementById(`${status}`).innerHTML =/*html*/`
+                <div class="noTaskCard">No tasks ${status}</div>`;
         }
-    
-
-        for (let index = 0; index < filter.length; index++) {
-            const element2 = filter[index];
-            document.getElementById(`${element1}`).innerHTML += generateCard(element2);
-        
-    }
-    }
-    
-    
+        for (let index = 0; index < filterTask.length; index++) {
+            const filterTasks = filterTask[index];
+            document.getElementById(`${status}`).innerHTML += generateCard(filterTasks);  
+        }
+    }  
 }
 
 function generateCard(element){
     return /*html*/`
         <div class="taskCard">
-            <div class="taskCategory">User Story</div>
+            <div class="taskCategory ${element['category']}">${element['category']}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
-                <div class="taskDescription">Build start page with recipe recommendation...</div>
+                <div class="taskDescription">${element['description']}</div>
             </div>
             <div class="taskSubtasks">
                 <div class="progressBar">
                     <div class="progress"></div>
                 </div>
-                <div class="progressInfo"> 1/2 Subtasks</div>
+                <div class="progressInfo">1/2 Subtasks</div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="taskMembers">
@@ -80,4 +72,15 @@ function generateCard(element){
                     </div>
             </div>
         </div>`;
+}
+
+function renderSubtasks(){
+    let done = tasks.filter(t => t['subtasks']['status'] == 'done'); 
+    let toDo = tasks.filter(t => t['subtasks']['status'] == 'toDo');
+    
+    document.getElementById(`${status}`).innerHTML = '';
+}
+
+function renderAssignTo(){
+    
 }

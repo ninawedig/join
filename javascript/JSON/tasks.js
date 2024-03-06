@@ -7,7 +7,7 @@ let tasks = [
     'assign_to': 'Max Mustermann',
     'due_date': '2024-03-10',
     'prio': 'urgent',
-    'category': 'User Story',
+    'category': 'userStory',
     'subtasks': [
       {
         'id': 0,
@@ -29,16 +29,18 @@ let tasks = [
     'assign_to': [
       {
         'id': 0,
-        'member': 'Erika Musterfrau'
+        'member': 'Erika Musterfrau',
+        'code': 'EM'
       },
       {
         'id': 1,
-        'member': 'Max Mustermann'
+        'member': 'Max Mustermann',
+        'code': 'MM'
       }
     ],
     'due_date': '2024-03-15',
     'prio': 'medium',
-    'category': 'User Story',
+    'category': 'userStory',
     'subtasks': [
       {
         'id': 0,
@@ -52,10 +54,16 @@ let tasks = [
     'title': 'Aufgabe 3',
     'description': 'Beschreibung für Aufgabe 3',
     'status': 'awaitFeedback',
-    'assign_to': 'John Doe',
+    'assign_to': [
+      {
+        'id': 0,
+        'member': 'John Doe',
+        'code': 'JD'
+      }
+    ],
     'due_date': '2024-03-20',
     'prio': 'low',
-    'category': 'Technical Task',
+    'category': 'technicalTask',
     'subtasks': []
   }
 ]

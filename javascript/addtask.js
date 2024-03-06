@@ -3,8 +3,8 @@ const smallMenu = document.getElementById('smallMenu');
 function init(){
     renderHeader();
     renderNavbar();
-    makeNavbarActive('addtask');
-    makeSmallNavbarActive('addtaskSmall');
+    makeNavbarActive('addTask');
+    makeSmallNavbarActive('addTaskSmall');
 }
 
 function showSmallMenu(){

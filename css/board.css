@@ -22,9 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 16px;
-
-    Height: 180px;
+    padding-bottom: 48px;
     Top: 96px;
     Left: 232px;
 }
@@ -34,7 +32,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    width: 1056px;
+}
+.mobileBoardPageHeading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
 }
 
 .taskActivities{
@@ -42,6 +45,9 @@
     width: 504px;
     height: 48px;
     gap: 32px;
+}
+.mobileTaskActivities{
+    display: none;
 }
 .findTask{
     width: 312px;
@@ -99,6 +105,11 @@
     height: 26px;
     padding-left: 8px;
 }
+.boardTasks{
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
 .boardCategory svg:hover{
     cursor: pointer;
     filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
@@ -107,13 +118,19 @@
 .board{
     display: flex;
     gap: 24px;
+    flex-wrap: wrap;
 
+}
+.board2{
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-grow: 1;
+    flex-wrap: wrap;
 }
 .category{
     display: flex;
     flex-direction: column;
-    width: 252px;
-
     row-gap: 24px;
 }
 
@@ -140,6 +157,7 @@
     font-weight: 400;;
     line-height: 19.2px;
     width: fit-content;
+    background-color: #0038FF;
 }
 .taskInfo{
     gap: 8px;
@@ -322,5 +340,35 @@
 
 .taskFunctionsIcons {
     width: 18px;
+}
+
+
+
+
+
+@media (max-width: 940px) {
+.addTaskonBoard{
+    display: none;
+}
+.mobileTaskActivities{
+    display: flex;
+}
+.boardPageHeading{
+    display: block;
+}
+.category{
+    flex-grow: 1;
+}
+.findTask{
+    margin-top: 40px;
+    width: 396px;
+}
+}
+
+@media (max-width: 600px) {
+.boardTasks{
+    flex-direction: row;
+    gap: 24px;
+}
 }
 

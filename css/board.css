@@ -254,7 +254,7 @@
 }
 #cardDetail{
     background-color: white;
-    box-shadow: 0 0 4 0 rgba(0 0 0 0.16);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     width: 525px;
     padding: 48px 40px 48px 40px;
@@ -352,6 +352,7 @@
 
 
 @media (max-width: 940px) {
+
 .addTaskonBoard{
     display: none;
 }
@@ -375,5 +376,15 @@
     flex-direction: row;
     gap: 24px;
 }
+#cardDetail{
+        width: 396px;
+    }
+.taskInfoDetail{
+    font-size: 16px;
 }
+.taskTitleDetail{
+    font-size: 36px;
+}
+}
+
 

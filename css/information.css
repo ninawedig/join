@@ -2,28 +2,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1014px;
+    max-width: 1014px;
 }
 .informationHeader svg{
     padding: 1px;
 }
 .informationHeader svg:hover{
-    background-color: #CDCDCD;
+    background-color: #D1D1D1;
     border-radius: 45px;
     height: 26px;
     width: 26px;
-    padding: 1px;
+    padding: 4px;
 }
 .informationText{
-    width: 1014px;
+    max-width: 1014px;
 }
 h3{
    font-size: 27px;
    font-weight: 700;
    line-height: 32.4px; 
+   padding-bottom: 8px;
 }
 h4{
     font-weight: 700;
     font-size: 20px;
     line-height: 19.2px;
+    padding-top: 16px;
+    padding-bottom: 8px;
 }

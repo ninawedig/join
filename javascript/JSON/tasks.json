@@ -1,5 +1,6 @@
 [
     {
+      "id": "0",
       "title": "Aufgabe 1",
       "description": "Beschreibung für Aufgabe 1",
       "status": "Await feedback",
@@ -9,18 +10,19 @@
       "category": "User Story",
       "subtasks": [
         {
-          "number": 1,
+          "id": 1,
           "description": "Unteraufgabe 1 für Aufgabe 1",
           "status": "To Do"
         },
         {
-          "number": 2,
+          "id": 2,
           "description": "Unteraufgabe 2 für Aufgabe 1",
           "status": "Done"
         }
       ]
     },
     {
+      "id": "1",
       "title": "Aufgabe 2",
       "description": "Beschreibung für Aufgabe 2",
       "status": "In progress",
@@ -30,13 +32,14 @@
       "category": "User Story",
       "subtasks": [
         {
-          "number": 1,
+          "id": 1,
           "description": "Unteraufgabe 1 für Aufgabe 2",
           "status": "To Do"
         }
       ]
     },
     {
+      "id": "2",
       "title": "Aufgabe 3",
       "description": "Beschreibung für Aufgabe 3",
       "status": "Done",

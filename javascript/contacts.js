@@ -48,14 +48,27 @@ function selectContact(i) {
     clickedContact.classList.toggle('contactFieldActive');
     deselectContacts(clickedContact);
 
+    let contactFields = document.querySelectorAll('.contactField');
+    let isActive = false;
+
+    contactFields.forEach(element => {
+        if (element.classList.contains('contactFieldActive')){
+            isActive = true;
+            console.log('isActive')
+        }
+    })
+
+    if(isActive){
+        showContact();
+    } else {
+        hideContact();
+    }
+    
+
 
     if (window.innerWidth <= 740) { //doesnt work yet
         openContactPage();
-    }
-
-   
-    showContact();
-    renderContactCard(i);
+    }    renderContactCard(i);
 }
 
 /**
@@ -72,7 +85,11 @@ function deselectContacts(clickedContact) {
 }
 
 function showContact() {
-    contactCard.classList.toggle('contactCardActive');
+    contactCard.classList.add('contactCardActive');
+}
+
+function hideContact() {
+    contactCard.classList.remove('contactCardActive');
 }
 
 function renderContactCard(i) {

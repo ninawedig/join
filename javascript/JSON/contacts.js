@@ -1,4 +1,4 @@
-[
+let contacts = [
     {
       "name": "Max Mustermann",
       "code": "MM",

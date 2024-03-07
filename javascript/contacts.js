@@ -122,9 +122,10 @@ function hideContact() {
  * @param {*} i is the number of the card in the JSON.
  */
 function renderContactCard(i) {
+    let nameInitials = getInitials(contacts[i]['name']);
     contactCard.innerHTML = `
             <div class="contactCardMainInfos">
-                <div class="contactProfileBadgeBig">AM</div>
+                <div class="contactProfileBadgeBig">${nameInitials}</div>
                 <div class="contactNameBigContainer">
                     <div class="contactNameBig">${contacts[i]['name']}</div>
                     <div class="contactFunctionsContainer">
@@ -225,16 +226,18 @@ function deleteContactSmallScreen(currentContact){
  */
 function renderContacts() {
     const contactsList = document.getElementById('contactsList');
+    
 
     contactsList.innerHTML = ``;
     contactsList.innerHTML = ``;
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
+        let nameInitials = getInitials(contacts[i]['name']);
 
         contactsList.innerHTML += `
             <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
-                <div class="contactProfileBadge">AM</div>
+                <div class="contactProfileBadge">${nameInitials}</div>
                 <div class="contactDetails">
                     <div class="contactName">${contacts[i]['name']}</div>
                     <div class="contactEmail">${contacts[i]['email']}</div>
@@ -302,9 +305,10 @@ function closeContactEditor() {
  */
 function renderContactEditor(i){
     let editContactForm = document.getElementById('editContactForm');
+    let nameInitials = getInitials(contacts[i]['name']);
 
     editContactForm.innerHTML = `
-            <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">AM</div>
+            <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>
                 <form class="contactActionForm">
                     <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
                         src="./img/contacts/close.svg" alt=""></div>
@@ -338,5 +342,5 @@ function editContact() {
 }
 
 function getInitials(name){
-    return name.match(/(\b\S)?/g).join("");
+    return name.match(/(\b\S)?/g).join("").slice(0, 2);;
 }

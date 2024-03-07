@@ -227,7 +227,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-  
+
     margin-top: 0px;
     margin-left: 50%;
     margin-bottom: 50px;
@@ -239,7 +239,7 @@
     letter-spacing: 0em;
     text-align: left;
     color: #A8A8A8;
-   
+
 }
 
 .privacyPolicy {
@@ -377,7 +377,7 @@
         margin-top: 0px;
         margin-right: 0%;
     }
-    
+
 }
 
 @media (max-width: 800px) {
@@ -387,143 +387,127 @@
         height: 493px;
         padding-left: 5%;
         padding-right: 5%;
-       
+
     }
+
     .input {
         width: 100%;
 
     }
-   
+
     .inputFields {
         width: 100%;
-        
+
     }
+
     .inputMail {
         background-position: 95%;
     }
-    
+
     .inputPassword {
         background-position: 95%;
     }
+
     .loginButtons {
         gap: 20px;
     }
-    
+
 }
 
-@media (max-width: 600px) { 
+@media (max-width: 600px) {
     .loginSection {
         width: 396px;
         height: 515px;
-     
-       margin-top: 520px;
-       padding: 32px 16px 32px 16px;
+
+        margin-top: 520px;
+        padding: 32px 16px 32px 16px;
 
 
     }
 
     .headlineLogin {
-   
+
         font-size: 47px;
 
         line-height: 56px;
-       
+
     }
- 
+
     .borderLogin {
         width: 88px;
         height: 3px;
-   
+
     }
 
 
-.headlineSection {
-    gap: 0px;
+    .headlineSection {
+        gap: 0px;
 
-}
+    }
 
-.inputFields {
-    width: 364px;
-    height: 152px;
-    gap: 16px;
-    margin-top: 32px;
-}
+    .inputFields {
+        width: 364px;
+        height: 152px;
+        gap: 16px;
+        margin-top: 32px;
+    }
 
-.remember {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
+    .remember {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
-.loginButtons {
-   
-    flex-direction: column;
-    height: 123px;
-    width: 180px;
-    gap: 21px;
-    margin-top: 32px;
-    margin-left: 92px;
-    margin-right: 92px;
-}
+    .loginButtons {
+        flex-direction: column;
+        height: 123px;
+        width: 180px;
+        gap: 21px;
+        margin-top: 32px;
+        margin-left: 92px;
+        margin-right: 92px;
+    }
 
-.buttonLogin {
-    width: 180px;
-    height: 51px;
-    padding: 4px 0px 4px 0px;
+    .buttonLogin {
+        width: 180px;
+        height: 51px;
+        padding: 4px 0px 4px 0px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
 
+    .buttonGuest {
+        width: 180px;
+        height: 51px;
+        padding: 4px 0px 4px 0px;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
 
-    font-size: 16px;
-    line-height: 19.2px;
-   
-}
+    .headerResponsive {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 216px;
+        margin-top: 57.5px;
+        width: 396px;
+        height: 49px;
+        gap: 35px;
 
-.buttonGuest {
-    width: 180px;
-    height: 51px;
-    padding: 4px 0px 4px 0px;
-    font-size: 16px;
-    line-height: 19.2px;
-  
-}
+    }
 
-.headerResponsive {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-left: 216px;
-    
-    margin-top: 57.5px;
-    width: 396px;
-height: 49px;
-gap: 35px;
+    .buttonSignup {
+        width: 104px;
+    }
 
-}
+    .policies {
 
-.buttonSignup {
-    width: 104px;
-}
+        width: 279px;
+        height: 35px;
+        margin-top: 0px;
+        gap: 24px;
+        justify-content: center;
 
-.registerSection {
-    width: 279px;
-    height: 49px;
-    gap: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-top: 57.5px;
-   
-}
-
-.policies {
-  
-    width: 279px;
-    height: 35px;
-    margin-top: 42.5px;
-    margin-left: 216px;
-    gap:24px;
-    justify-content: center;
-   
-}
+    }
 
 }

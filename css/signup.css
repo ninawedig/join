@@ -19,8 +19,9 @@
 .signupSection {
     width: 598px;
     height: 630px;
-    margin-top: 58.5px;
-    margin-left: 421px;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 30%;
     border-radius: 30px;
     gap: 32px;
     background: #FFFFFF;
@@ -45,7 +46,7 @@
     justify-content: center;
     flex-direction: column;
     width: 422px;
-   
+
 }
 
 .arrow {
@@ -62,7 +63,7 @@
     width: 35px;
     background-color: #F6F7F8;
     border-radius: 50%;
-  
+
 }
 
 .borderSignup {
@@ -116,21 +117,21 @@
 .inputName {
     background-image: url(/img/register/person.svg);
     background-repeat: no-repeat;
-    background-position: 370px;
+    background-position: 95%;
     background-size: 24px 24px;
 }
 
 .inputMail {
     background-image: url(/img/login/mail.svg);
     background-repeat: no-repeat;
-    background-position: 370px;
+    background-position: 95%;
     background-size: 24px 24px;
 }
 
 .inputPassword {
     background-image: url(/img/login/lock.svg);
     background-repeat: no-repeat;
-    background-position: 370px;
+    background-position: 95%;
     background-size: 24px 24px;
 }
 
@@ -154,20 +155,18 @@
     cursor: pointer;
 }
 
-.checkbox:hover {
-
-}
+.checkbox:hover {}
 
 .policyTypo {
     color: #29ABE2;
     cursor: pointer;
- 
+
 }
 
 .policyTypo:hover {
     text-decoration: underline;
     font-weight: 500;
-    
+
 }
 
 .signupButtonDiv {
@@ -199,27 +198,29 @@
 
 .buttonSignup:hover {
     background-color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
+
 
 
 .policies {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    width: 246px;
-    height: 35px;
-    margin-top: 190.5px;
-    margin-left: 597px;
-    gap: 16px;
+    justify-content: center;
+
+    margin-top: 0px;
+    margin-left: 50%;
+    margin-bottom: 50px;
+    transform: translate(-50%, -50%);
+    gap: 20px;
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0em;
     text-align: left;
     color: #A8A8A8;
-    margin-bottom: 50px;
+
 }
 
 .privacyPolicy {
@@ -264,6 +265,102 @@
 }
 
 .successButtonHide {
-   display: none;
+    display: none;
 
+}
+
+
+@media (max-width: 1200px) {
+    .signupSection {
+        margin-top: 400px;
+
+    }
+}
+
+
+
+@media (max-width: 1000px) {
+    .signupSection {
+        margin-top: 515px;
+
+    }
+}
+
+
+@media (max-width: 600px) {
+    .signupSection {
+        width: 396px;
+        height: 595px;
+
+        margin-top: 520px;
+        padding: 32px 16px 32px 16px;
+
+
+    }
+
+
+.input {
+    width: 100%;
+    height: 50px;
+    gap: 8px;
+}
+
+.inputFields {
+    width: 100%;
+    height: 296px;
+    gap: 24px;
+    
+}
+
+.form {
+    padding:32px 0px 48px 0px;
+}
+
+.accept {
+    margin-top: 20px;
+    padding-left: 0px;
+}
+
+
+    .policies {
+
+        width: 279px;
+        height: 35px;
+        margin-top: 0px;
+        gap: 24px;
+        justify-content: center;
+
+    }
+
+    .arrow {
+        top: 50px;
+        left: 40px;
+    }
+
+    .headlineSectionDiv {
+        padding-top: 0px;
+    }
+
+    .headlineSignup {
+        width: 315px;
+        height: 73px;
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 73px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: black;
+    }
+
+    .buttonSignup { 
+        width: 180px;
+    height: 51px;
+    padding: 4px 0px 4px 0px;
+    font-size: 16px;
+    line-height: 19.2px;
+    }
+
+    .signupButtonDiv {
+        margin-top: 20px;
+    }
 }

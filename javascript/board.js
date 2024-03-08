@@ -181,3 +181,26 @@ function renderCardDetail(){
                         src="./img/contacts/delete.svg" alt="">Delete</div>
             </div>`;
 }
+
+/**
+ * This function show the Card to add a task.
+ */
+function showAddTask(){
+    renderCardAddTask();
+    document.getElementById('cardAddTask').style = "display: flex";
+    document.getElementById('cardContainerBackground').style = "display: flex";
+}
+
+/**
+ * This function close the Card to add a task.
+ */
+function closeAddTask(){
+    document.getElementById('cardAddTask').style = "display: none";
+    document.getElementById('cardContainerBackground').style = "display: none";
+}
+
+
+function renderCardAddTask(){
+    document.getElementById('cardAddTask').innerHTML ='';
+    document.getElementById('cardAddTask').innerHTML = /*html*/``;
+}

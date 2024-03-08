@@ -5,6 +5,9 @@ function init(x){
     makeSmallNavbarActive(x);
 }
 
+/**
+ * This function show the detailcard of a task.
+ */
 function showCardDetail(){
     renderCardDetail();
     document.getElementById('cardContainer').style = "display: flex";
@@ -12,12 +15,17 @@ function showCardDetail(){
     
 }
 
+/**
+ * This function close the detailcard of a task.
+ */
 function closeCardDetail(){
     document.getElementById('cardContainer').style = "display: none";
     document.getElementById('cardContainerBackground').style = "display: none";
 }
 
-
+/**
+ * This function render the task in the board in the right category.
+ */
 function renderBoard(){
     let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
@@ -38,6 +46,11 @@ function renderBoard(){
     }  
 }
 
+/**
+ * This function render the HTML of the card in the board.
+ * @param {string} element - the string for the array of tasks per category
+ * @returns 
+ */
 function generateCard(element){
     return /*html*/`
         <div class="taskCard" onclick="showCardDetail()">
@@ -86,6 +99,10 @@ function renderAssignTo(){
     
 }
 
+
+/**
+ * This function render the HTML of the detailcard.
+ */
 function renderCardDetail(){
 
     document.getElementById('cardDetail').innerHTML ='';

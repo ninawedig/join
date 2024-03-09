@@ -7,20 +7,9 @@ const addPersonIcon = document.getElementById('addPersonIcon');
 const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
-let contacts = [
-    {
-        "name": "Anton Schulz",
-        "email": "wolf@gmail.de",
-        "phone": "+49 2222 222 22 2"
-    },
-    {
-        "name": "Anja Schulz",
-        "email": "schulz@hotmail.com",
-        "phone": "+49 1111 111 11 1"
-    }
-];
-
+const JSON_PATH = './JSON/contacts.json'
 let currentContact;
+let firstLetters = [];
 
 /**
  * This function is used to render HTML Text (The header, navbar, the small navbar on smaller resolution and the contacts).
@@ -70,8 +59,8 @@ function selectContact(i) {
     if (window.innerWidth <= 740) {
         openContactPage();
         updateContact(i);
-    } 
-    
+    }
+
     renderContactCard(i);
 
     let isActive = checkIfActive();
@@ -86,7 +75,7 @@ function selectContact(i) {
  * This function updates the contact that is shown on small screens when opened.
  * @param {*} i 
  */
-function updateContact(i){
+function updateContact(i) {
     currentContact = i;
 }
 
@@ -199,7 +188,7 @@ function addContact() {
     renderContacts();
 }
 
-function clearValues(input1, input2, input3){
+function clearValues(input1, input2, input3) {
     input1.value = "";
     input2.value = "";
     input3.value = "";
@@ -208,13 +197,13 @@ function clearValues(input1, input2, input3){
 /**
  * This function deletes a contact 
  */
-function deleteContact(i){
+function deleteContact(i) {
     contacts.splice(i, 1);
     hideContact();
     renderContacts();
 }
 
-function deleteContactSmallScreen(currentContact){
+function deleteContactSmallScreen(currentContact) {
     contacts.splice(currentContact, 1);
     console.log('Deleted contact number' + currentContact);
     renderContacts();
@@ -225,26 +214,51 @@ function deleteContactSmallScreen(currentContact){
  * This function renders the contacts to the page
  */
 function renderContacts() {
-    const contactsList = document.getElementById('contactsList');
-    
-
-    contactsList.innerHTML = ``;
-    contactsList.innerHTML = ``;
-
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        let nameInitials = getInitials(contacts[i]['name']);
+        let nameInitials = getInitials(contact['name']);
 
-        contactsList.innerHTML += `
+        const firstLetter = contact['name'].charAt(0);
+        if (!firstLetters.includes(firstLetter)) {
+            firstLetters.push(firstLetter);
+        }
+        renderLetters();
+
+        for (let x = 0; x < firstLetters.length; x++) {
+            let category = firstLetters[x];
+            console.log(category);
+            if (category === firstLetter) {
+                document.getElementById(`contactsList${category}`).innerHTML += `
             <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
                 <div class="contactProfileBadge">${nameInitials}</div>
                 <div class="contactDetails">
                     <div class="contactName">${contacts[i]['name']}</div>
                     <div class="contactEmail">${contacts[i]['email']}</div>
                 </div>
-            </div>
+            </div>       
 `;
+            }
+        }
+
     }
+}
+
+function renderLetters() {
+    const contactsAgenda = document.getElementById('contactsAgenda');
+    firstLetters.sort();
+    contactsAgenda.innerHTML = '';
+    for (let j = 0; j < firstLetters.length; j++) {
+        const firstLetter = firstLetters[j];
+        contactsAgenda.innerHTML += `
+        <div class="contactLetter">${firstLetter}</div>
+            <div class="contactsSeparationLine"></div>
+            <div class="contactsGroup" id="contactsList${firstLetter}">
+                    <!-- RENDER JS-->
+            </div>
+        `;
+
+    }
+
 }
 
 /**
@@ -303,7 +317,7 @@ function closeContactEditor() {
  * This function renders the form to edit the contacts
  * @param {*} i 
  */
-function renderContactEditor(i){
+function renderContactEditor(i) {
     let editContactForm = document.getElementById('editContactForm');
     let nameInitials = getInitials(contacts[i]['name']);
 
@@ -341,6 +355,6 @@ function editContact() {
     closeContactEditor();
 }
 
-function getInitials(name){
+function getInitials(name) {
     return name.match(/(\b\S)?/g).join("").slice(0, 2);;
 }

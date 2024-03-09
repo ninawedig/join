@@ -24,12 +24,8 @@
         <div class="contactsFrame" id="contactsFrame">
             <button class="newContactButton" onclick="openAddContact()">Add new contact <img
                     src="./img/contacts/personadd.svg" alt=""></button>
-            <div class="contactsList">
-                <div class="contactLetter">A</div>
-                <div class="contactsSeparationLine"></div>
-                <div class="contactsGroup" id="contactsList">
-                    <!-- RENDER JS-->
-                </div>
+            <div id="contactsAgenda" class="contactsList">
+                <!-- RENDER JS-->
             </div>
         </div>
 
@@ -54,7 +50,7 @@
         <div onclick="openSmallEditMenu()" class="contactOptionsIconContainer editContactIcon noDisplay"
             id="editContactIcon"><img src="./img/contacts/contactoptions.svg" alt=""></div>
 
-        <div id="contactActionsOverlay" onclick="closeContactEdditor(); closeAddContact()"
+        <div id="contactActionsOverlay" onclick="closeContactEditor(); closeAddContact()"
             class="contactActionsOverlay noDisplay"></div>
 
         <div id="editContactContainer" class="contactActionsContainer noDisplay">
@@ -107,6 +103,7 @@
     </main>
 
     <script src="./javascript/contacts.js"></script>
+    <script src="./javascript/JSON/contactlist.js"></script>
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>
 </body>

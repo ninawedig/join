@@ -16,12 +16,18 @@
     padding: 32px 88px 48px 88px;
 }
 
+.signupSectionDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 122px;
+}
+
 .signupSection {
     width: 598px;
     height: 630px;
-    margin-left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 30%;
+
     border-radius: 30px;
     gap: 32px;
     background: #FFFFFF;
@@ -113,7 +119,6 @@
 
 }
 
-
 .inputName {
     background-image: url(/img/register/person.svg);
     background-repeat: no-repeat;
@@ -160,13 +165,11 @@
 .policyTypo {
     color: #29ABE2;
     cursor: pointer;
-
 }
 
 .policyTypo:hover {
     text-decoration: underline;
     font-weight: 500;
-
 }
 
 .signupButtonDiv {
@@ -201,17 +204,14 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-
-
 .policies {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     margin-top: 0px;
     margin-left: 50%;
-    margin-bottom: 50px;
+    margin-bottom: 99px;
     transform: translate(-50%, -50%);
     gap: 20px;
     font-size: 16px;
@@ -244,14 +244,9 @@
 .successButtonShow {
     width: 312px;
     height: 74px;
-    position: absolute;
-    right: 10%;
-    top: 67px;
     border: none;
     box-shadow: 0px 0px 4px 0px #0000001A;
     color: white;
-    animation-delay: 800ms;
-    animation-duration: 0ms;
     background-color: #2A3647;
     border-radius: 10px;
     font-size: 20px;
@@ -262,69 +257,90 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateY(0);
+ 
+}
+
+.successBackground {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.successBackgroundHide {
+    display: none;
 }
 
 .successButtonHide {
-    display: none;
-
+    transform: translateY(100%);
+    transition: transform 2s ease-in;
+ 
 }
 
 
 @media (max-width: 1200px) {
-    .signupSection {
-        margin-top: 400px;
+    .signupSectionDiv {
+        margin-top: 63.5px;
 
     }
 }
 
+@media (max-width: 620px) {
+    body {
+        width: fit-content;
 
-
-@media (max-width: 1000px) {
-    .signupSection {
-        margin-top: 515px;
 
     }
-}
 
+    .signupSectionDiv {
+        margin-top: 50.47px;
+        margin-bottom: 108.5px;
+    }
 
-@media (max-width: 600px) {
+    .logoLogin {
+        height: 78px;
+        width: 64px;
+        margin-top: 37px;
+        margin-left: 38px;
+    }
+
     .signupSection {
-        width: 396px;
+        width: 90%;
         height: 595px;
-
-        margin-top: 520px;
         padding: 32px 16px 32px 16px;
+    }
 
+    .input {
+        width: 100%;
+
+        gap: 8px;
+    }
+
+    .inputFields {
+        width: 100%;
+        height: 296px;
+        gap: 24px;
 
     }
 
+    .form {
+        padding: 32px 0px 48px 0px;
+    }
 
-.input {
-    width: 100%;
-    height: 50px;
-    gap: 8px;
-}
-
-.inputFields {
-    width: 100%;
-    height: 296px;
-    gap: 24px;
-    
-}
-
-.form {
-    padding:32px 0px 48px 0px;
-}
-
-.accept {
-    margin-top: 20px;
-    padding-left: 0px;
-}
-
+    .accept {
+        margin-top: 20px;
+        padding-left: 0px;
+    }
 
     .policies {
-
-        width: 279px;
+        width: 100%;
         height: 35px;
         margin-top: 0px;
         gap: 24px;
@@ -333,34 +349,35 @@
     }
 
     .arrow {
-        top: 50px;
-        left: 40px;
+        top: 60px;
+        left: 16px;
     }
 
     .headlineSectionDiv {
         padding-top: 0px;
     }
 
-    .headlineSignup {
-        width: 315px;
-        height: 73px;
-        font-size: 47px;
-        font-weight: 700;
-        line-height: 73px;
-        letter-spacing: 0em;
-        text-align: center;
-        color: black;
+    .headlineSection {
+        gap: 5px;
+
     }
 
-    .buttonSignup { 
+    .headlineSignup {
+        font-size: 47px;
+
+
+    }
+
+    .buttonSignup {
         width: 180px;
-    height: 51px;
-    padding: 4px 0px 4px 0px;
-    font-size: 16px;
-    line-height: 19.2px;
+        height: 51px;
+        padding: 4px 0px 4px 0px;
+        font-size: 16px;
+        line-height: 19.2px;
     }
 
     .signupButtonDiv {
         margin-top: 20px;
     }
+
 }

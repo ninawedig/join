@@ -1,3 +1,9 @@
+
+let currentDraggedElement;
+
+
+
+
 function init(){
     renderHeader();
     renderNavbar();
@@ -9,8 +15,11 @@ function init(){
 /**
  * This function render the task in the board in the right category.
  */
+
+let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
+
+
 function renderBoard(){
-    let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
     for (let i = 0; i < allStatus.length; i++) {
         const status = allStatus[i];
@@ -39,7 +48,7 @@ function renderBoard(){
  */
 function generateCardHTML(element){
     return /*html*/`
-        <div class="taskCard" onclick="showCardDetail(${element['id']})" id="task${element['id']}">
+        <div draggable="true" ondragstart="startDragging(${element['id']})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${element['id']}">
             <div class="taskCategory ${element['category']}">${element['category']}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
@@ -265,4 +274,19 @@ function renderLowHTML(){
             <path d="M10.2485 15.2547C10.0139 15.2551 9.7854 15.1802 9.59655 15.0412L0.693448 8.47142C0.459502 8.29863 0.30383 8.04005 0.260675 7.75257C0.217521 7.46509 0.290421 7.17225 0.463337 6.93848C0.636253 6.70471 0.895021 6.54915 1.18272 6.50603C1.47041 6.46291 1.76347 6.53575 1.99741 6.70854L10.2485 12.791L18.4997 6.70854C18.7336 6.53575 19.0267 6.46291 19.3144 6.50603C19.602 6.54915 19.8608 6.70471 20.0337 6.93848C20.2066 7.17225 20.2795 7.46509 20.2364 7.75257C20.1932 8.04005 20.0376 8.29863 19.8036 8.47142L10.9005 15.0412C10.7117 15.1802 10.4831 15.2551 10.2485 15.2547Z" fill="#7AE229"/>
         </svg>
     </div>`;
+}
+
+function startDragging(id){
+    currentDraggedElement = id;
+    document.getElementById(`task${element['id']}`).style ="background-color: green;"
+}
+
+function allowDrop(ev){
+    ev.preventDefault();
+}
+
+function moveTo(status){
+    tasks[currentDraggedElement]['status'] = status;
+
+    renderBoard();
 }

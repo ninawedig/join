@@ -138,6 +138,9 @@
     flex-grow: 1;
 }
 
+/*Drag and Drop*/
+
+
 /*TaskCard*/
 .taskCard{
     display: flex;

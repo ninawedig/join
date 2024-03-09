@@ -1,3 +1,6 @@
+body {
+    height: 100vh !important;
+}
 .header {
     display: flex;
     flex-direction: row;
@@ -227,7 +230,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     margin-top: 0px;
     margin-left: 50%;
     margin-bottom: 50px;
@@ -272,16 +274,21 @@
     animation-name: logo-animation;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
-    animation-duration: 1s;
+    animation-duration: 700ms;
     animation-delay: 1s;
 }
 
 .startscreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     z-index: 1;
     background-color: #F6F7F8;
     position: fixed;
+    top: 0px;
+    right: 0px;
     animation-name: background-animation;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
@@ -291,12 +298,13 @@
 
 }
 
-.logoStartscreenResponsive {
+.logoStartscreenWhite {
     display: none;
 }
 
 .headerResponsive {
     display: none;
+    overflow-x: hidden;
 }
 
 @keyframes logo-animation {
@@ -330,19 +338,12 @@
 }
 
 @media (max-width: 1200px) {
-    .startscreen {
-        background-color: #2A3647;
-    }
 
-}
-
-@media (max-width: 1200px) {
     .loginSection {
         margin-top: 400px;
 
     }
 }
-
 
 
 @media (max-width: 1000px) {
@@ -356,7 +357,6 @@
     }
 
     .headerResponsive {
-        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -369,7 +369,7 @@
     .registerSection {
         width: 279px;
         height: 49px;
-        gap: 35px;
+        gap: 20px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -414,39 +414,88 @@
 
 }
 
-@media (max-width: 600px) {
-    .loginSection {
-        width: 396px;
-        height: 515px;
-
-        margin-top: 520px;
-        padding: 32px 16px 32px 16px;
-
+@media (max-width: 620px) {
+    body {
+        width: fit-content;
 
     }
 
+    .logoStartscreen {
+        display: none;
+    }
+
+    .logoStartscreenWhite {
+        display: flex;
+        width: 100.03px;
+        height: 121.97px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 99;
+        transform: translate(-50%, -50%);
+        animation-name: logo-animation;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+        animation-duration: 700ms;
+        animation-delay: 1s;
+        background-image: url(/img/login/logo_white.svg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+
+    }
+
+    @keyframes logo-animation {
+        from {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100.03px;
+            height: 121.97px;
+            position: fixed;
+        }
+
+        to {
+            top: 37px;
+            left: 38px;
+            transform: none;
+            width: 64px;
+            height: 78px;
+            background-image: url(/img/login/Capa\ 2.svg);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+    }
+
+    .startscreen {
+        background-color: #2A3647;
+    }
+
+    .loginSection {
+        width: 90%;
+        height: 515px;
+        margin-top: 460px;
+        padding: 32px 16px 32px 16px;
+    }
+
     .headlineLogin {
-
         font-size: 47px;
-
         line-height: 56px;
-
     }
 
     .borderLogin {
         width: 88px;
         height: 3px;
-
     }
-
 
     .headlineSection {
         gap: 0px;
-
     }
 
     .inputFields {
-        width: 364px;
+        width: 100%;
         height: 152px;
         gap: 16px;
         margin-top: 32px;
@@ -458,13 +507,17 @@
     }
 
     .loginButtons {
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
         height: 123px;
         width: 180px;
         gap: 21px;
         margin-top: 32px;
-        margin-left: 92px;
-        margin-right: 92px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+
     }
 
     .buttonLogin {
@@ -483,31 +536,15 @@
         line-height: 19.2px;
     }
 
-    .headerResponsive {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-left: 216px;
-        margin-top: 57.5px;
-        width: 396px;
-        height: 49px;
-        gap: 35px;
-
-    }
-
     .buttonSignup {
         width: 104px;
     }
 
     .policies {
-
         width: 279px;
         height: 35px;
         margin-top: 0px;
         gap: 24px;
         justify-content: center;
-
     }
-
 }

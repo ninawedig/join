@@ -42,7 +42,6 @@
 
 .taskActivities{
     display: flex;
-    width: 504px;
     height: 48px;
     gap: 32px;
 }
@@ -108,7 +107,7 @@
 .boardTasks{
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
+
 }
 .boardCategory svg:hover{
     cursor: pointer;
@@ -132,6 +131,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 24px;
+    flex-grow: 1;
 }
 
 /*TaskCard*/
@@ -146,6 +146,7 @@
     padding: 16px;
     box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.08);
     cursor: pointer;
+    margin-bottom: 24px;
     }
 
 .taskCategory{
@@ -229,6 +230,7 @@
     line-height: 19.2px;
     color: #A8A8A8;
     font-weight: 400;
+    margin-bottom: 24px;
 }
 
 /*CardDetail*/
@@ -236,8 +238,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba( 0, 0, 0, 0.2);
     z-index: 10;
     display: none;
@@ -246,8 +248,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: none;
     justify-content: center;
     align-items: center;
@@ -257,6 +259,8 @@
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     width: 525px;
+    max-height: 90vh;
+    overflow-y: auto;
     padding: 48px 40px 48px 40px;
     display: flex;
     flex-direction: column;
@@ -372,9 +376,21 @@
 }
 
 @media (max-width: 600px) {
+
 .boardTasks{
     flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    width: 85vw;
     gap: 24px;
+}
+
+.boardTasks::-webkit-scrollbar {
+    display: none;
+  }
+.taskCard{
+    
 }
 #cardDetail{
         width: 396px;
@@ -385,6 +401,7 @@
 .taskTitleDetail{
     font-size: 36px;
 }
+
 }
 
 

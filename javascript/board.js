@@ -5,6 +5,9 @@ function init(x){
     makeSmallNavbarActive(x);
 }
 
+/**
+ * This function show the detailcard of a task.
+ */
 function showCardDetail(){
     renderCardDetail();
     document.getElementById('cardContainer').style = "display: flex";
@@ -12,12 +15,17 @@ function showCardDetail(){
     
 }
 
+/**
+ * This function close the detailcard of a task.
+ */
 function closeCardDetail(){
     document.getElementById('cardContainer').style = "display: none";
     document.getElementById('cardContainerBackground').style = "display: none";
 }
 
-
+/**
+ * This function render the task in the board in the right category.
+ */
 function renderBoard(){
     let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
@@ -38,6 +46,11 @@ function renderBoard(){
     }  
 }
 
+/**
+ * This function render the HTML of the card in the board.
+ * @param {string} element - the string for the array of tasks per category
+ * @returns 
+ */
 function generateCard(element){
     return /*html*/`
         <div class="taskCard" onclick="showCardDetail()">
@@ -86,6 +99,10 @@ function renderAssignTo(){
     
 }
 
+
+/**
+ * This function render the HTML of the detailcard.
+ */
 function renderCardDetail(){
 
     document.getElementById('cardDetail').innerHTML ='';
@@ -163,4 +180,27 @@ function renderCardDetail(){
                 <div class="taskFunctions" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
                         src="./img/contacts/delete.svg" alt="">Delete</div>
             </div>`;
+}
+
+/**
+ * This function show the Card to add a task.
+ */
+function showAddTask(){
+    renderCardAddTask();
+    document.getElementById('cardAddTask').style = "display: flex";
+    document.getElementById('cardContainerBackground').style = "display: flex";
+}
+
+/**
+ * This function close the Card to add a task.
+ */
+function closeAddTask(){
+    document.getElementById('cardAddTask').style = "display: none";
+    document.getElementById('cardContainerBackground').style = "display: none";
+}
+
+
+function renderCardAddTask(){
+    document.getElementById('cardAddTask').innerHTML ='';
+    document.getElementById('cardAddTask').innerHTML = /*html*/``;
 }

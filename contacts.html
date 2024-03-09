@@ -38,7 +38,7 @@
                 <h1>Contacts</h1>
                 <div class="headingBorder"></div>
                 <h2>Better with a team</h2>
-                <a class="arrowLeftContainer" onclick="closeContactPage('contact1')">
+                <a class="arrowLeftContainer" onclick="closeContactPage()">
                     <img src="./img/contacts/arrowleft.svg" alt="">
                 </a>
             </div>
@@ -63,19 +63,8 @@
                 <div class="actionHeadline">Edit Contact</div>
                 <div class="actionContainerSeparationLine"></div>
             </div>
-            <div class="contactActionFields">
-                <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">AM</div>
-                <form class="contactActionForm">
-                    <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
-                            src="./img/contacts/close.svg" alt=""></div>
-                    <input id="editNameInput" class="contactActionInput" type="text" placeholder="Name">
-                    <input id="editEmailInput" class="contactActionInput" type="email" placeholder="Email">
-                    <input id="editPhoneInput" class="contactActionInput" type="tel" placeholder="Phone">
-                    <div class="formButtonsContainer">
-                        <button class="formButton deleteButton">Delete</button>
-                        <button class="formButton saveButton" onclick="saveChanges()">Save <img src="./img/contacts/check.svg" alt=""></button>
-                    </div>
-                </form>
+            <div id="editContactForm" class="contactActionFields">
+                
             </div>
         </div>
 
@@ -99,7 +88,7 @@
                     <div class="inputContainer"><input id="newContactPhone" class="contactActionInput" type="tel"
                             placeholder="Phone"><img class="inputSmallIcon" src="./img/contacts/call.svg" alt=""></div>
                     <div class="formButtonsContainer">
-                        <button class="formButton deleteButton" onclick="closeAddContact()">Cancel <img
+                        <button type="button" class="formButton deleteButton" onclick="closeAddContact()">Cancel <img
                                 src="./img/contacts/cancel.svg"></button>
                         <button type="submit" class="formButton saveButton">Create contact <img
                                 src="./img/contacts/check.svg" alt=""></button>
@@ -112,7 +101,7 @@
 
         <div id="smallEditMenu" class="smallEditMenu noDisplay">
             <div class="smallEditMenuButton" onclick="openContactEditor()"><img src="./img/contacts/editsmall.svg">Edit</div>
-            <div class="smallEditMenuButton"><img src="./img/contacts/deletesmall.svg">Delete</div>
+            <div class="smallEditMenuButton" onclick="deleteContactSmallScreen(currentContact)"><img src="./img/contacts/deletesmall.svg">Delete</div>
         </div>
 
     </main>

@@ -20,6 +20,8 @@ let contacts = [
     }
 ];
 
+let currentContact;
+
 /**
  * This function is used to render HTML Text (The header, navbar, the small navbar on smaller resolution and the contacts).
  */
@@ -40,35 +42,52 @@ function showSmallMenu() {
 }
 
 /**
+ * This function checks if a contact is clicked.
+ * @returns wheter it's active or not. True/false.
+ */
+function checkIfActive() {
+    let contactFields = document.querySelectorAll('.contactField');
+    let isActive = false;
+
+    contactFields.forEach(element => {
+        if (element.classList.contains('contactFieldActive')) {
+            isActive = true;
+        }
+    })
+    return isActive;
+}
+
+/**
  * This function selects a contact and shows more details about it.
  * @param {*} i is the number of the contact we want to select.
  */
 function selectContact(i) {
     let clickedContact = document.getElementById('contact' + i);
+    currentContact = i;
     clickedContact.classList.toggle('contactFieldActive');
     deselectContacts(clickedContact);
 
-    let contactFields = document.querySelectorAll('.contactField');
-    let isActive = false;
+    if (window.innerWidth <= 740) {
+        openContactPage();
+        updateContact(i);
+    } 
+    
+    renderContactCard(i);
 
-    contactFields.forEach(element => {
-        if (element.classList.contains('contactFieldActive')){
-            isActive = true;
-            console.log('isActive')
-        }
-    })
-
-    if(isActive){
+    let isActive = checkIfActive();
+    if (isActive) {
         showContact();
     } else {
         hideContact();
     }
-    
+}
 
-
-    if (window.innerWidth <= 740) { //doesnt work yet
-        openContactPage();
-    }    renderContactCard(i);
+/**
+ * This function updates the contact that is shown on small screens when opened.
+ * @param {*} i 
+ */
+function updateContact(i){
+    currentContact = i;
 }
 
 /**
@@ -84,96 +103,58 @@ function deselectContacts(clickedContact) {
     }
 }
 
+/**
+ * This function shows a contact on the right side of the screen.
+ */
 function showContact() {
     contactCard.classList.add('contactCardActive');
 }
 
+/**
+ * This function hides a contact from the right side of the screen.
+ */
 function hideContact() {
     contactCard.classList.remove('contactCardActive');
 }
 
+/**
+ * This function renders the contact.
+ * @param {*} i is the number of the card in the JSON.
+ */
 function renderContactCard(i) {
+    let nameInitials = getInitials(contacts[i]['name']);
     contactCard.innerHTML = `
-    <div class="contactCardMainInfos">
-        <div class="contactProfileBadgeBig">AM</div>
-        <div class="contactNameBigContainer">
-            <div class="contactNameBig">${contacts[i]['name']}</div>
-            <div class="contactFunctionsContainer">
-                <div class="contactFunctions" onclick="openContactEditor()"><img class="contactFunctionsIcons"
-                        src="./img/contacts/edit.svg" alt="">Edit</div>
-                <div class="contactFunctions"><img class="contactFunctionsIcons"
-                        src="./img/contacts/delete.svg" alt="">Delete</div>
-            </div>
-        </div>
-    </div>
-    <div class="contactCardSubHead">Contact Information</div>
-    <div class="contactCardDetails">
-        <div class="contactCardContactInformations">
-            <div class="contactMethod">Email</div>
-            <div class="contactDetails contactEmail">${contacts[i]['email']}</div>
-        </div>
-        <div class="contactCardContactInformations">
-            <div class="contactMethod">Phone</div>
-            <div class="contactDetails contactPhone">${contacts[i]['phone']}</div>
-        </div>
-    </div>
-    `;
-}
-
-/**
- * This function adds a new contact to the array and then renders
- */
-function addContact() {
-    event.preventDefault();
-
-    let newContactName = document.getElementById('newContactName');
-    let newContactEmail = document.getElementById('newContactEmail');
-    let newContactPhone = document.getElementById('newContactPhone')
-
-
-    let newContact = {
-        "name": newContactName.value,
-        "email": newContactEmail.value,
-        "phone": newContactPhone.value
-    };
-    contacts.push(newContact);
-
-    newContactName.value = "";
-    newContactEmail.value = "";
-    newContactPhone.value = "";
-    closeAddContact();
-
-    renderContacts();
-}
-
-/**
- * This function renders the contacts to the page
- */
-function renderContacts() {
-    const contactsList = document.getElementById('contactsList');
-
-    contactsList.innerHTML = ``;
-    contactsList.innerHTML = ``;
-
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-
-        contactsList.innerHTML += `
-            <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
-                <div class="contactProfileBadge">AM</div>
-                <div class="contactDetails">
-                    <div class="contactName">${contacts[i]['name']}</div>
-                    <div class="contactEmail">${contacts[i]['email']}</div>
+            <div class="contactCardMainInfos">
+                <div class="contactProfileBadgeBig">${nameInitials}</div>
+                <div class="contactNameBigContainer">
+                    <div class="contactNameBig">${contacts[i]['name']}</div>
+                    <div class="contactFunctionsContainer">
+                        <div class="contactFunctions" onclick="openContactEditor(${i})"><img class="contactFunctionsIcons"
+                                src="./img/contacts/edit.svg" alt="">Edit</div>
+                        <div onclick="deleteContact(${i})" class="contactFunctions"><img class="contactFunctionsIcons"
+                                src="./img/contacts/delete.svg" alt="">Delete</div>
+                    </div>
                 </div>
             </div>
-`;
-    }
+            <div class="contactCardSubHead">Contact Information</div>
+            <div class="contactCardDetails">
+                <div class="contactCardContactInformations">
+                    <div class="contactMethod">Email</div>
+                    <div class="contactDetails contactEmail">${contacts[i]['email']}</div>
+                </div>
+                <div class="contactCardContactInformations">
+                    <div class="contactMethod">Phone</div>
+                    <div class="contactDetails contactPhone">${contacts[i]['phone']}</div>
+                </div>
+            </div>
+    `;
 }
 
 /**
  * This function opens the contact page on full screen if the screen width is smaller/equal 740px
  */
 function openContactPage() { //doesnt work yet
+    console.log('yes');
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'block';
 
@@ -184,11 +165,15 @@ function openContactPage() { //doesnt work yet
 /**
  * This function closes the contact page on full screen if the screen width is smaller/equal 740px
  */
-function closeContactPage(contactNumber) {
+function closeContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'none';
     contactCard.classList.toggle('contactCardActive');
-    document.getElementById(contactNumber).classList.toggle('contactFieldActive');
+
+    let contactFields = document.querySelectorAll('.contactField');
+    contactFields.forEach(contactField => {
+        contactField.classList.remove('contactFieldActive')
+    });
 
 
     addPersonIcon.classList.toggle('noDisplay');
@@ -196,21 +181,70 @@ function closeContactPage(contactNumber) {
 }
 
 /**
- * This function opens the contact editor
+ * This function adds a new contact to the array and then renders
  */
-function openContactEditor() {
-    contactActionsOverlay.classList.remove('noDisplay');
-    editContactContainer.classList.remove('noDisplay');
+function addContact() {
+    event.preventDefault();
+    let newContactName = document.getElementById('newContactName');
+    let newContactEmail = document.getElementById('newContactEmail');
+    let newContactPhone = document.getElementById('newContactPhone')
+    let newContact = {
+        "name": newContactName.value,
+        "email": newContactEmail.value,
+        "phone": newContactPhone.value
+    };
+    contacts.push(newContact);
+    clearValues(newContactName, newContactEmail, newContactPhone);
+    closeAddContact();
+    renderContacts();
+}
 
-    closeSmallEditMenu();
+function clearValues(input1, input2, input3){
+    input1.value = "";
+    input2.value = "";
+    input3.value = "";
 }
 
 /**
- * This function closes the contact editor
+ * This function deletes a contact 
  */
-function closeContactEditor() {
-    contactActionsOverlay.classList.add('noDisplay');
-    editContactContainer.classList.add('noDisplay');
+function deleteContact(i){
+    contacts.splice(i, 1);
+    hideContact();
+    renderContacts();
+}
+
+function deleteContactSmallScreen(currentContact){
+    contacts.splice(currentContact, 1);
+    console.log('Deleted contact number' + currentContact);
+    renderContacts();
+    closeContactPage();
+}
+
+/**
+ * This function renders the contacts to the page
+ */
+function renderContacts() {
+    const contactsList = document.getElementById('contactsList');
+    
+
+    contactsList.innerHTML = ``;
+    contactsList.innerHTML = ``;
+
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        let nameInitials = getInitials(contacts[i]['name']);
+
+        contactsList.innerHTML += `
+            <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
+                <div class="contactProfileBadge">${nameInitials}</div>
+                <div class="contactDetails">
+                    <div class="contactName">${contacts[i]['name']}</div>
+                    <div class="contactEmail">${contacts[i]['email']}</div>
+                </div>
+            </div>
+`;
+    }
 }
 
 /**
@@ -248,51 +282,65 @@ function closeSmallEditMenu() {
 }
 
 /**
- * This function opens the contact page on full screen if the screen width is smaller/equal 740px
+ * This function opens the contact editor
  */
-function openContactPage() {
-    contactsFrame.classList.toggle('noDisplay');
-    contactPage.style.display = 'block';
-
-    addPersonIcon.classList.toggle('noDisplay');
-    editContactIcon.classList.toggle('noDisplay');
+function openContactEditor() {
+    contactActionsOverlay.classList.remove('noDisplay');
+    editContactContainer.classList.remove('noDisplay');
+    renderContactEditor(currentContact);
+    closeSmallEditMenu();
 }
 
 /**
- * This function closes the contact page on full screen if the screen width is smaller/equal 740px
+ * This function closes the contact editor
  */
-function closeContactPage(contactNumber) {
-    contactsFrame.classList.toggle('noDisplay');
-    contactPage.style.display = 'none';
-    contactCard.classList.toggle('contactCardActive');
-    document.getElementById(contactNumber).classList.toggle('contactFieldActive');
-
-
-    addPersonIcon.classList.toggle('noDisplay');
-    editContactIcon.classList.toggle('noDisplay');
+function closeContactEditor() {
+    contactActionsOverlay.classList.add('noDisplay');
+    editContactContainer.classList.add('noDisplay');
 }
 
 /**
- * On small screens, this function opens a menu with the options edit/delete contact
+ * This function renders the form to edit the contacts
+ * @param {*} i 
  */
-function openSmallEditMenu() {
-    document.getElementById('smallEditMenuOverlay').classList.remove('noDisplay');
-    smallEditMenu.classList.add('smallEditMenuOpened');
-    smallEditMenu.classList.remove('noDisplay');
+function renderContactEditor(i){
+    let editContactForm = document.getElementById('editContactForm');
+    let nameInitials = getInitials(contacts[i]['name']);
+
+    editContactForm.innerHTML = `
+            <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>
+                <form class="contactActionForm">
+                    <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
+                        src="./img/contacts/close.svg" alt=""></div>
+                    <input id="editNameInput" class="contactActionInput" type="text" value="${contacts[i]['name']}">
+                    <input id="editEmailInput" class="contactActionInput" type="email" value="${contacts[i]['email']}">
+                    <input id="editPhoneInput" class="contactActionInput" type="tel" value="${contacts[i]['phone']}">
+                    <div class="formButtonsContainer">
+                        <button onclick="deleteContact(${i})" class="formButton deleteButton">Delete</button>
+                        <button class="formButton saveButton" onclick="editContact()">Save <img src="./img/contacts/check.svg" alt=""></button>
+                    </div>
+                </form>
+    `;
 }
 
 /**
- * On small screens, this function closes a menu with the options edit/delete contact
+ * This function edits the contact.
  */
-function closeSmallEditMenu() {
-    document.getElementById('smallEditMenuOverlay').classList.add('noDisplay');
-    smallEditMenu.classList.remove('smallEditMenuOpened');
-    smallEditMenu.classList.add('noDisplay');
-}
-
-
-function editContact(){
+function editContact() {
+    event.preventDefault();
     let editNameInput = document.getElementById('editNameInput');
     let editEmailInput = document.getElementById('editEmailInput');
     let editPhoneInput = document.getElementById('editPhoneInput');
+
+    contacts[currentContact]['name'] = editNameInput.value;
+    contacts[currentContact]['email'] = editEmailInput.value;
+    contacts[currentContact]['phone'] = editPhoneInput.value;
+    console.log(contacts);
+    renderContacts();
+    renderContactCard(currentContact);
+    closeContactEditor();
+}
+
+function getInitials(name){
+    return name.match(/(\b\S)?/g).join("").slice(0, 2);;
 }

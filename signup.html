@@ -14,7 +14,7 @@
     <div class="header">
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
     </div>
-    <div>
+    <div class="signupSectionDiv">
     <div class="signupSection">
         <div class="headlineSectionDiv">
             <img class="arrow" src="./img/register/arrow-left-line.svg" alt="">
@@ -35,7 +35,7 @@
                 <span>I accept the</span><span class="policyTypo">Privacy policy</span>
             </div>
             <div class="signupButtonDiv">
-                <button class="buttonSignup">Sign up</button>
+                <button onclick="showSuccess(event)" class="buttonSignup">Sign up</button>
             </div>
         </form>
     </div>
@@ -47,9 +47,11 @@
     </div>
 </div>
 
-    <div>
-        <button class="successButtonHide">You Signed Up successfully</button>
+    <div id="successBackgroud" class="successBackgroundHide">
+        <button id="successButton" class="successButtonHide">You Signed Up successfully</button>
     </div>
+
+    <script src="./javascript/signup.js"></script>
 
 </body>
 

@@ -7,9 +7,10 @@ const addPersonIcon = document.getElementById('addPersonIcon');
 const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
-const JSON_PATH = './JSON/contacts.json'
+const JSON_PATH = './JSON/contacts.json';
 let currentContact;
-let firstLetters = [];
+let firstLetters = ['A', 'B', 'C'];
+firstLetters.sort();
 
 /**
  * This function is used to render HTML Text (The header, navbar, the small navbar on smaller resolution and the contacts).
@@ -19,7 +20,7 @@ function init() {
     renderNavbar();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
-    renderContacts();
+    renderContactAgenda();
 }
 
 /**
@@ -213,42 +214,53 @@ function deleteContactSmallScreen(currentContact) {
 /**
  * This function renders the contacts to the page
  */
+let shouldRenderContacts = true;
+
 function renderContacts() {
+    renderLetters();
+
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        let nameInitials = getInitials(contact['name']);
-
-        const firstLetter = contact['name'].charAt(0);
-        if (!firstLetters.includes(firstLetter)) {
-            firstLetters.push(firstLetter);
+        let firstLetter = contact['name'].charAt(0);
+        
+        if(firstLetters.includes(firstLetter)){
+            let nameInitials = getInitials(contact['name']);
+            renderContactUnderCategory(firstLetter, i, nameInitials, contact);
+        } else {
+            createNewCategory(firstLetter);
         }
-        renderLetters();
-
-        for (let x = 0; x < firstLetters.length; x++) {
-            let category = firstLetters[x];
-            console.log(category);
-            if (category === firstLetter) {
-                document.getElementById(`contactsList${category}`).innerHTML += `
-            <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
-                <div class="contactProfileBadge">${nameInitials}</div>
-                <div class="contactDetails">
-                    <div class="contactName">${contacts[i]['name']}</div>
-                    <div class="contactEmail">${contacts[i]['email']}</div>
-                </div>
-            </div>       
-`;
-            }
-        }
-
     }
+}
+
+function createNewCategory(firstLetter){
+    firstLetters.push(firstLetter);
+    firstLetters.sort();
+    renderContacts();
+}
+
+function renderContactAgenda(){
+    renderLetters();
+    renderContacts();
+}
+
+function renderContactUnderCategory(firstLetter, i, nameInitials, contact){
+    document.getElementById(`contactsList${firstLetter}`).innerHTML += `
+                    <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
+                        <div class="contactProfileBadge">${nameInitials}</div>
+                        <div class="contactDetails">
+                            <div class="contactName">${contact['name']}</div>
+                            <div class="contactEmail">${contact['email']}</div>
+                        </div>
+                    </div>       
+                `;
 }
 
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
-    firstLetters.sort();
     contactsAgenda.innerHTML = '';
-    for (let j = 0; j < firstLetters.length; j++) {
-        const firstLetter = firstLetters[j];
+    
+    for (let i = 0; i < firstLetters.length; i++) {
+        const firstLetter = firstLetters[i];
         contactsAgenda.innerHTML += `
         <div class="contactLetter">${firstLetter}</div>
             <div class="contactsSeparationLine"></div>
@@ -256,9 +268,7 @@ function renderLetters() {
                     <!-- RENDER JS-->
             </div>
         `;
-
     }
-
 }
 
 /**

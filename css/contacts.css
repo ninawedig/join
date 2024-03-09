@@ -93,11 +93,15 @@ main {
 
 .contactProfileBadge {
     font-size: 12px;
-    background-color: #9327FF;
     border-radius: 50%;
     border: 2px solid white;
     padding: 12px;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    min-height: 42px;
 }
 
 .contactPage {

@@ -9,7 +9,7 @@ const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
 const JSON_PATH = './JSON/contacts.json';
 let currentContact;
-let firstLetters = [];
+let firstLetters = ['A', 'B', 'C'];
 firstLetters.sort();
 
 /**
@@ -20,7 +20,7 @@ function init() {
     renderNavbar();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
-    renderContacts();
+    renderContactAgenda();
 }
 
 /**
@@ -214,15 +214,17 @@ function deleteContactSmallScreen(currentContact) {
 /**
  * This function renders the contacts to the page
  */
+let shouldRenderContacts = true;
+
 function renderContacts() {
     renderLetters();
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        let nameInitials = getInitials(contact['name']);
         let firstLetter = contact['name'].charAt(0);
         
         if(firstLetters.includes(firstLetter)){
+            let nameInitials = getInitials(contact['name']);
             renderContactUnderCategory(firstLetter, i, nameInitials, contact);
         } else {
             createNewCategory(firstLetter);
@@ -233,6 +235,11 @@ function renderContacts() {
 function createNewCategory(firstLetter){
     firstLetters.push(firstLetter);
     firstLetters.sort();
+    renderContacts();
+}
+
+function renderContactAgenda(){
+    renderLetters();
     renderContacts();
 }
 
@@ -251,6 +258,7 @@ function renderContactUnderCategory(firstLetter, i, nameInitials, contact){
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
     contactsAgenda.innerHTML = '';
+    
     for (let i = 0; i < firstLetters.length; i++) {
         const firstLetter = firstLetters[i];
         contactsAgenda.innerHTML += `

@@ -92,8 +92,13 @@
     
 }
 .findTaskButton svg:hover{
-    background-color: #D1D1D1;
-    
+    background-color: #D1D1D1;   
+}
+
+.addTaskonBoard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /*Board*/
@@ -130,7 +135,6 @@
 .category{
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
     flex-grow: 1;
 }
 
@@ -146,7 +150,10 @@
     padding: 16px;
     box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.08);
     cursor: pointer;
-    margin-bottom: 24px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+
     }
 
 .taskCategory{
@@ -266,7 +273,12 @@
     flex-direction: column;
     row-gap: 24px;
     z-index: 11;
+    -ms-overflow-style: none;
 }
+#cardDetail::-webkit-scrollbar {
+    display: none;
+  }
+
 .cardDetailHeader{
     display: flex;
     justify-content: space-between;
@@ -381,17 +393,15 @@
     flex-direction: row;
     overflow-x: auto;
     white-space: nowrap;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; /*No Scrollbar*/
     width: 85vw;
     gap: 24px;
 }
-
+/*No Scrollbar*/
 .boardTasks::-webkit-scrollbar {
     display: none;
   }
-.taskCard{
-    
-}
+
 #cardDetail{
         width: 396px;
     }

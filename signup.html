@@ -10,40 +10,40 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body>
+<body onload="init()">
     <div class="header">
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
     </div>
     <div class="signupSectionDiv">
         <div class="signupSection">
             <div class="headlineSectionDiv">
-                <img class="arrow" src="./img/register/arrow-left-line.svg" alt="">
+                <img class="arrow" src="./img/register/arrow-left-line.svg" alt="" onclick="openLoginPage()">
                 <div class="headlineSection">
                     <div class="headlineSignup">Sign up</div>
                     <div class="borderSignup"></div>
                 </div>
             </div>
-            <div class="form">
+            <form class="form" onsubmit="addUser();return false;">
                 <div class="inputFields">
-                    <input class="input inputName" type="text" placeholder="Name">
-                    <input class="input inputMail" type="email" placeholder="Email">
-                    <input class="input inputPassword" type="password" placeholder="Password">
-                    <input class="input inputPassword" type="password" placeholder="Confirm Password">
+                    <input class="input inputName" type="text" placeholder="Name" id="name" required>
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" required>
+                    <input class="input inputPassword" type="password" placeholder="Password" id="password" required>
+                    <input class="input inputPassword" type="password" placeholder="Confirm Password" id="confirmpassword" required>
                 </div>
                 <div class="accept">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" class="checkbox" required>
                     <span>I accept the</span><span class="policyTypo">Privacy policy</span>
                 </div>
                 <div class="signupButtonDiv">
                     <button onclick="showSuccess(event)" class="buttonSignup">Sign up</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div>
         <div class="policies">
-            <span class="privacyPolicy">Privacy Policy</span>
-            <span class="legalNotice">Legal notice</span>
+            <span class="privacyPolicy" onclick="openPrivacyPolicyPage()">Privacy Policy</span>
+            <span class="legalNotice" onclick="openLegalNoticePage()">Legal notice</span>
         </div>
     </div>
 

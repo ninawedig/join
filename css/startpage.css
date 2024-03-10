@@ -8,9 +8,8 @@
 .logoLogin {
     height: 122px;
     width: 100px;
-    top: 80px;
-    left: 77px;
-    position: absolute;
+    margin-top: 80px;
+    margin-left: 77px;
 
 }
 
@@ -272,7 +271,40 @@
 }
 
 
+.logoStartscreen {
+    position: absolute;
+    width: 274px;
+    height: 334.07px;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    transform: translate(-50%, -50%);
+    animation-name: logo-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 700ms;
+    animation-delay: 1s;
+}
 
+.startscreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #F6F7F8;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    animation-name: background-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.5s;
+    animation-delay: 1s;
+    opacity: 1;
+
+}
 
 .logoStartscreenWhite {
     display: none;
@@ -283,6 +315,40 @@
     overflow-x: hidden;
 }
 
+
+
+
+@keyframes logo-animation {
+    from {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 274px;
+        height: 334.07px;
+    }
+
+    to {
+        top: 80px;
+        left: 77px;
+        transform: none;
+        width: 100px;
+        height: 122px;
+    }
+}
+
+@keyframes background-animation {
+    from {
+        opacity: 1;
+        position: fixed;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {}
 
 
 @media (max-width: 1000px) {
@@ -366,15 +432,60 @@
         margin-bottom: 57.5px;
     }
 
-    .logoLogin {
-        position: absolute;
-        top: 37px;
-        left: 38px;
-        width: 64px;
-        height: 78px
+
+    .logoStartscreen {
+        display: none;
     }
 
-    
+    .logoStartscreenWhite {
+        display: flex;
+        width: 100.03px;
+        height: 121.97px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 99;
+        transform: translate(-50%, -50%);
+        animation-name: logo-animation;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+        animation-duration: 700ms;
+        animation-delay: 1s;
+        background-image: url(/img/login/logo_white.svg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+
+    }
+
+    @keyframes logo-animation {
+        from {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100.03px;
+            height: 121.97px;
+            position: fixed;
+        }
+
+        to {
+            top: 37px;
+            left: 38px;
+            transform: none;
+            width: 64px;
+            height: 78px;
+            background-image: url(/img/login/Capa\ 2.svg);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+    }
+
+    .startscreen {
+        background-color: #2A3647;
+    }
+
     .loginSection {
         width: 90%;
         height: 515px;

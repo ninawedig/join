@@ -249,8 +249,6 @@
 
 .successButtonHide {
    display: none;
-   
-
 }
 
 .successBackgroundShow {
@@ -268,33 +266,24 @@
     animation-fill-mode: inherit;
     animation-timing-function: ease-in-out;
     animation-duration: 1s;
-  
-    
 }
 
 .successBackgroundHide {
     display: none;
 }
 .successButtonDiv {
-
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
     animation-name: logo-animation;
-    animation-fill-mode: inherit;
+    animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
-    animation-duration: 1s;
-  
-
+    animation-duration: 2s;
 }
 
 .successButtonShow {
-    display: flex;
-
- 
-
     width: 312px;
     height: 74px;
     border: none;
@@ -306,21 +295,22 @@
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    
+   
 }
 
 @keyframes logo-animation {
     from {
         margin-bottom: -200%;
+   
     }
 
     to {
-     margin-bottom: 0%;
+        margin-bottom: 0%;
+        
     }
 }
 

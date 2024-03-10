@@ -10,21 +10,31 @@ function openLegalNoticePage() {
     window.location.href = "legalnotice.html";
 }
 
-users = [
-    {'e-mail': 'ninawedig@yahoo.de', 'password': 'passwort123' } // soll nicht wie hier im Frontend gespeichert sein, sondern im Backend
-]
-users = [
-    {'e-mail': 'ninawedig@yahoo.de', 'password': 'passwort123' } // soll nicht wie hier im Frontend gespeichert sein, sondern im Backend
-]
+// Definieren der Benutzerdaten
+const users = [
+    { 'email': 'ninawedig@yahoo.de', 'password': 'passwort123' }
+];
 
+// Login-Funktion
 function login() {
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    let user = users.find(u => u.email == email.value && u.password ==  password.value);
-    console.log(user);
-    if(user) {
-        console.log('User gefunden');
+    let emailInput = document.getElementById('email');
+    let passwordInput = document.getElementById('password');
+    let messageBox = document.getElementById('messagebox');
+    if (emailInput.value && passwordInput.value) {
+        let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
+        if (user) {
+            openSummaryPage();
+        } else {
+            messageBox.textContent = "Wrong password Ups! Try again.";
+        }
+    } else {
+        messageBox.textContent = "Please fill in all fields.";
     }
 }
+function openSummaryPage() {
+    window.location.href = "summary.html";
+}
+
+
 
 

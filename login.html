@@ -33,14 +33,14 @@
                 <div class="inputFields">
                     <input class="input inputMail" type="email" placeholder="Email" id="email" required>
                     <input class="input inputPassword" type="password" placeholder="Password" id="password" required>
-                    <div id="messagebox"></div>
+                    <div id="messagebox" class="messagebox"></div>
                 </div>
                 <div class="remember">
                     <input class="checkbox" type="checkbox" required>
                     <span>Remember me</span>
                 </div>
                 <div class="loginButtons">
-                    <button class="buttonLogin" onclick="openSummary()">Log In</button>
+                    <button class="buttonLogin">Log In</button>
                     <button class="buttonGuest">Guest Log In</button>
                 </div>
             </form>
@@ -48,7 +48,7 @@
     </div>
     <div class="headerResponsive">
         <div class="registerSection"><span class="typoRegister">Not a Join user?</span>
-            <button class="buttonSignup">Sign up</button>
+            <button class="buttonSignup" onclick="openSignUpPage()">Sign up</button>
         </div>
     </div>
     <div class="policies">

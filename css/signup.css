@@ -249,6 +249,7 @@
 
 .successButtonHide {
    display: none;
+
 }
 
 .successBackgroundShow {
@@ -265,11 +266,12 @@
     animation-name: background-animation;
     animation-fill-mode: inherit;
     animation-timing-function: ease-in-out;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
 }
 
 .successBackgroundHide {
     display: none;
+   
 }
 .successButtonDiv {
     display: flex;
@@ -280,7 +282,7 @@
     animation-name: logo-animation;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
-    animation-duration: 2s;
+    animation-duration: 0.5s;
 }
 
 .successButtonShow {

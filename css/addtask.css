@@ -1,3 +1,10 @@
+main{
+    max-width: 1305px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 .mainContainer {
     display: flex;
     flex-direction: column;
@@ -38,7 +45,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    width: 977.25px;
     margin-top: 146px;
     margin-bottom: 50px;
 }

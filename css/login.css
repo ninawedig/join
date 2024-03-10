@@ -126,6 +126,11 @@
     cursor: pointer;
 }
 
+.input:focus{
+    border: 1px solid #29ABE2 !important;
+}
+
+
 ::placeholder {
     color: #D1D1D1;
 }

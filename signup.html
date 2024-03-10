@@ -15,40 +15,42 @@
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
     </div>
     <div class="signupSectionDiv">
-    <div class="signupSection">
-        <div class="headlineSectionDiv">
-            <img class="arrow" src="./img/register/arrow-left-line.svg" alt="">
-            <div class="headlineSection">
-                <div class="headlineSignup">Sign up</div>
-                <div class="borderSignup"></div>
+        <div class="signupSection">
+            <div class="headlineSectionDiv">
+                <img class="arrow" src="./img/register/arrow-left-line.svg" alt="">
+                <div class="headlineSection">
+                    <div class="headlineSignup">Sign up</div>
+                    <div class="borderSignup"></div>
+                </div>
+            </div>
+            <div class="form">
+                <div class="inputFields">
+                    <input class="input inputName" type="text" placeholder="Name">
+                    <input class="input inputMail" type="email" placeholder="Email">
+                    <input class="input inputPassword" type="password" placeholder="Password">
+                    <input class="input inputPassword" type="password" placeholder="Confirm Password">
+                </div>
+                <div class="accept">
+                    <input type="checkbox" class="checkbox">
+                    <span>I accept the</span><span class="policyTypo">Privacy policy</span>
+                </div>
+                <div class="signupButtonDiv">
+                    <button onclick="showSuccess(event)" class="buttonSignup">Sign up</button>
+                </div>
             </div>
         </div>
-        <form class="form">
-            <div class="inputFields">
-                <input class="input inputName" type="text" placeholder="Name">
-                <input class="input inputMail" type="email" placeholder="Email">
-                <input class="input inputPassword" type="password" placeholder="Password">
-                <input class="input inputPassword" type="password" placeholder="Confirm Password">
-            </div>
-            <div class="accept">
-                <input type="checkbox" class="checkbox">
-                <span>I accept the</span><span class="policyTypo">Privacy policy</span>
-            </div>
-            <div class="signupButtonDiv">
-                <button onclick="showSuccess(event)" class="buttonSignup">Sign up</button>
-            </div>
-        </form>
     </div>
-</div>
     <div>
-    <div class="policies">
-        <span class="privacyPolicy">Privacy Policy</span>
-        <span class="legalNotice">Legal notice</span>
+        <div class="policies">
+            <span class="privacyPolicy">Privacy Policy</span>
+            <span class="legalNotice">Legal notice</span>
+        </div>
     </div>
-</div>
 
     <div id="successBackgroud" class="successBackgroundHide">
-        <button id="successButton" class="successButtonHide">You Signed Up successfully</button>
+        <div class="successButtonDiv">
+            <button id="successButton" class="successButtonHide">You Signed Up successfully</button>
+        </div>
     </div>
 
     <script src="./javascript/signup.js"></script>

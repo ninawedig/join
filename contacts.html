@@ -28,7 +28,6 @@
                 <!-- RENDER JS-->
             </div>
         </div>
-
         <div id="contactPage" class="contactPage">
             <div class="contactsHeading">
                 <h1>Contacts</h1>
@@ -42,8 +41,6 @@
                 <!-- RENDER JS-->
             </div>
         </div>
-
-
         <div class="contactOptionsIconContainer addPersonIcon" onclick="openAddContact()" id="addPersonIcon"><img
                 src="./img/contacts/smalladdperson.svg" alt=""></div>
 
@@ -63,7 +60,6 @@
                 
             </div>
         </div>
-
         <div id="addContactContainer" class="contactActionsContainer noDisplay">
             <div class="contactActionDetails">
                 <div><img class="contactActionLogo" src="./img/nav/logo.png" alt=""></div>
@@ -77,11 +73,11 @@
                 <form class="contactActionForm" onsubmit="addContact()">
                     <div class="closeIconContainer" onclick="closeAddContact()"><img class="closeIcon"
                             src="./img/contacts/close.svg" alt=""></div>
-                    <div class="inputContainer"><input id="newContactName" class="contactActionInput" type="text"
+                    <div class="inputContainer"><input required id="newContactName" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3" class="contactActionInput" type="text"
                             placeholder="Name"><img class="inputSmallIcon" src="./img/contacts/person.svg"></div>
-                    <div class="inputContainer"><input id="newContactEmail" class="contactActionInput" type="email"
+                    <div class="inputContainer"><input required id="newContactEmail" class="contactActionInput" type="email"
                             placeholder="Email"><img class="inputSmallIcon" src="./img/contacts/mail.svg" alt=""></div>
-                    <div class="inputContainer"><input id="newContactPhone" class="contactActionInput" type="tel"
+                    <div class="inputContainer"><input required id="newContactPhone" class="contactActionInput" type="tel" pattern="\d+"
                             placeholder="Phone"><img class="inputSmallIcon" src="./img/contacts/call.svg" alt=""></div>
                     <div class="formButtonsContainer">
                         <button type="button" class="formButton deleteButton" onclick="closeAddContact()">Cancel <img
@@ -92,14 +88,12 @@
                 </form>
             </div>
         </div>
-
         <div id="smallEditMenuOverlay" onclick="closeSmallEditMenu()" class="smallEditMenuOverlay noDisplay"></div>
 
         <div id="smallEditMenu" class="smallEditMenu noDisplay">
             <div class="smallEditMenuButton" onclick="openContactEditor()"><img src="./img/contacts/editsmall.svg">Edit</div>
             <div class="smallEditMenuButton" onclick="deleteContactSmallScreen(currentContact)"><img src="./img/contacts/deletesmall.svg">Delete</div>
         </div>
-
     </main>
 
     <script src="./javascript/contacts.js"></script>

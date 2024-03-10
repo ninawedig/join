@@ -7,7 +7,6 @@ const addPersonIcon = document.getElementById('addPersonIcon');
 const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
-const JSON_PATH = './JSON/contacts.json';
 let currentContact;
 let firstLetters = ['A', 'B', 'C'];
 firstLetters.sort();
@@ -113,31 +112,11 @@ function hideContact() {
  */
 function renderContactCard(i) {
     let nameInitials = getInitials(contacts[i]['name']);
-    contactCard.innerHTML = `
-            <div class="contactCardMainInfos">
-                <div class="contactProfileBadgeBig">${nameInitials}</div>
-                <div class="contactNameBigContainer">
-                    <div class="contactNameBig">${contacts[i]['name']}</div>
-                    <div class="contactFunctionsContainer">
-                        <div class="contactFunctions" onclick="openContactEditor(${i})"><img class="contactFunctionsIcons"
-                                src="./img/contacts/edit.svg" alt="">Edit</div>
-                        <div onclick="deleteContact(${i})" class="contactFunctions"><img class="contactFunctionsIcons"
-                                src="./img/contacts/delete.svg" alt="">Delete</div>
-                    </div>
-                </div>
-            </div>
-            <div class="contactCardSubHead">Contact Information</div>
-            <div class="contactCardDetails">
-                <div class="contactCardContactInformations">
-                    <div class="contactMethod">Email</div>
-                    <div class="contactDetails contactEmail">${contacts[i]['email']}</div>
-                </div>
-                <div class="contactCardContactInformations">
-                    <div class="contactMethod">Phone</div>
-                    <div class="contactDetails contactPhone">${contacts[i]['phone']}</div>
-                </div>
-            </div>
-    `;
+    // Array of color choices
+    const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
+    // Get a random color from the array
+    const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
+    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, randomColor);
 }
 
 /**
@@ -165,7 +144,6 @@ function closeContactPage() {
         contactField.classList.remove('contactFieldActive')
     });
 
-
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
 }
@@ -179,7 +157,7 @@ function addContact() {
     let newContactEmail = document.getElementById('newContactEmail');
     let newContactPhone = document.getElementById('newContactPhone')
     let newContact = {
-        "name": newContactName.value,
+        "name": newContactName.value.charAt(0).toUpperCase() + newContactName.value.slice(1),
         "email": newContactEmail.value,
         "phone": newContactPhone.value
     };
@@ -196,7 +174,7 @@ function clearValues(input1, input2, input3) {
 }
 
 /**
- * This function deletes a contact 
+ * This function deletes a contact. 
  */
 function deleteContact(i) {
     contacts.splice(i, 1);
@@ -204,6 +182,10 @@ function deleteContact(i) {
     renderContacts();
 }
 
+/**
+ * This function delets a contact on a small screen.
+ * @param {} currentContact 
+ */
 function deleteContactSmallScreen(currentContact) {
     contacts.splice(currentContact, 1);
     console.log('Deleted contact number' + currentContact);
@@ -212,62 +194,46 @@ function deleteContactSmallScreen(currentContact) {
 }
 
 /**
- * This function renders the contacts to the page
+ * This function renders the contacts to the page.
  */
-let shouldRenderContacts = true;
-
 function renderContacts() {
     renderLetters();
-
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let firstLetter = contact['name'].charAt(0);
-        
-        if(firstLetters.includes(firstLetter)){
+
+        if (firstLetters.includes(firstLetter)) {
             let nameInitials = getInitials(contact['name']);
-            renderContactUnderCategory(firstLetter, i, nameInitials, contact);
+            // Array of color choices
+            const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
+            // Get a random color from the array
+            const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
+            renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor);
         } else {
             createNewCategory(firstLetter);
         }
     }
 }
 
-function createNewCategory(firstLetter){
+function createNewCategory(firstLetter) {
     firstLetters.push(firstLetter);
     firstLetters.sort();
     renderContacts();
 }
 
-function renderContactAgenda(){
+function renderContactAgenda() {
     renderLetters();
     renderContacts();
-}
-
-function renderContactUnderCategory(firstLetter, i, nameInitials, contact){
-    document.getElementById(`contactsList${firstLetter}`).innerHTML += `
-                    <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
-                        <div class="contactProfileBadge">${nameInitials}</div>
-                        <div class="contactDetails">
-                            <div class="contactName">${contact['name']}</div>
-                            <div class="contactEmail">${contact['email']}</div>
-                        </div>
-                    </div>       
-                `;
 }
 
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
     contactsAgenda.innerHTML = '';
-    
+
     for (let i = 0; i < firstLetters.length; i++) {
         const firstLetter = firstLetters[i];
-        contactsAgenda.innerHTML += `
-        <div class="contactLetter">${firstLetter}</div>
-            <div class="contactsSeparationLine"></div>
-            <div class="contactsGroup" id="contactsList${firstLetter}">
-                    <!-- RENDER JS-->
-            </div>
-        `;
+        contactsAgenda.innerHTML += generateLettersCategoriesHTML(firstLetter);
+
     }
 }
 
@@ -331,20 +297,7 @@ function renderContactEditor(i) {
     let editContactForm = document.getElementById('editContactForm');
     let nameInitials = getInitials(contacts[i]['name']);
 
-    editContactForm.innerHTML = `
-            <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>
-                <form class="contactActionForm">
-                    <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
-                        src="./img/contacts/close.svg" alt=""></div>
-                    <input id="editNameInput" class="contactActionInput" type="text" value="${contacts[i]['name']}">
-                    <input id="editEmailInput" class="contactActionInput" type="email" value="${contacts[i]['email']}">
-                    <input id="editPhoneInput" class="contactActionInput" type="tel" value="${contacts[i]['phone']}">
-                    <div class="formButtonsContainer">
-                        <button onclick="deleteContact(${i})" class="formButton deleteButton">Delete</button>
-                        <button class="formButton saveButton" onclick="editContact()">Save <img src="./img/contacts/check.svg" alt=""></button>
-                    </div>
-                </form>
-    `;
+    editContactForm.innerHTML = generateContactFormHTML(nameInitials, i);
 }
 
 /**
@@ -367,4 +320,68 @@ function editContact() {
 
 function getInitials(name) {
     return name.match(/(\b\S)?/g).join("").slice(0, 2);;
+}
+
+function generateLettersCategoriesHTML(firstLetter) {
+    return /*HTML*/ `
+                    <div class="contactLetter">${firstLetter}</div>
+                    <div class="contactsSeparationLine"></div>
+                    <div class="contactsGroup" id="contactsList${firstLetter}">
+                            <!-- RENDER JS-->
+                    </div>`;
+}
+
+function renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor) {
+    document.getElementById(`contactsList${firstLetter}`).innerHTML += /*HTML*/`
+                    <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
+                        <div class="contactProfileBadge" style="background-color: ${randomColor};">${nameInitials}</div>
+                        <div class="contactDetails">
+                            <div class="contactName">${contact['name']}</div>
+                            <div class="contactEmail">${contact['email']}</div>
+                        </div>
+                    </div>       
+                `;
+}
+
+function generateContactCardHTML(nameInitials, i, randomColor) {
+    return /*HTML*/`
+                    <div class="contactCardMainInfos">
+                        <div class="contactProfileBadgeBig" style="background-color: ${randomColor};">${nameInitials}</div>
+                        <div class="contactNameBigContainer">
+                            <div class="contactNameBig">${contacts[i]['name']}</div>
+                            <div class="contactFunctionsContainer">
+                                <div class="contactFunctions" onclick="openContactEditor(${i})"><img class="contactFunctionsIcons" src="./img/contacts/edit.svg" alt="">Edit</div>
+                                <div onclick="deleteContact(${i})" class="contactFunctions"><img class="contactFunctionsIcons" src="./img/contacts/delete.svg" alt="">Delete</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contactCardSubHead">Contact Information</div>
+                    <div class="contactCardDetails">
+                        <div class="contactCardContactInformations">
+                            <div class="contactMethod">Email</div>
+                            <div class="contactDetails contactEmail">${contacts[i]['email']}</div>
+                        </div>
+                        <div class="contactCardContactInformations">
+                            <div class="contactMethod">Phone</div>
+                            <div class="contactDetails contactPhone">${contacts[i]['phone']}</div>
+                        </div>
+                    </div>
+    `;
+}
+
+function generateContactFormHTML(nameInitials, i) {
+    return /*HTML*/`
+                    <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>
+                    <form class="contactActionForm">
+                        <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
+                            src="./img/contacts/close.svg" alt=""></div>
+                        <input id="editNameInput" class="contactActionInput" type="text" value="${contacts[i]['name']}">
+                        <input id="editEmailInput" class="contactActionInput" type="email" value="${contacts[i]['email']}">
+                        <input id="editPhoneInput" class="contactActionInput" type="tel" value="${contacts[i]['phone']}">
+                        <div class="formButtonsContainer">
+                            <button onclick="deleteContact(${i})" class="formButton deleteButton">Delete</button>
+                            <button class="formButton saveButton" onclick="editContact()">Save <img src="./img/contacts/check.svg" alt=""></button>
+                        </div>
+                    </form>
+    `;
 }

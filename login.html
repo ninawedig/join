@@ -12,9 +12,7 @@
 
 <body>
     <div>
-       
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
-        
     </div>
 
     <div class="header">
@@ -31,9 +29,11 @@
             </div>
             <form onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" required>
-                    <input class="input inputPassword" type="password" placeholder="Password" id="password" required>
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off">
                     <div id="messagebox" class="messagebox"></div>
+                    <input class="input inputPassword" type="password" placeholder="Password" id="password"
+                        autocomplete="off">
+                    <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">
                     <input class="checkbox" type="checkbox" required>
@@ -60,5 +60,4 @@
     <script src="./javascript/login.js"></script>
 
 </body>
-
 </html>

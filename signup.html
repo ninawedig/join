@@ -25,17 +25,21 @@
             </div>
             <form class="form" onsubmit="addUser();return false;">
                 <div class="inputFields">
-                    <input class="input inputName" type="text" placeholder="Name" id="name" required>
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" required>
-                    <input class="input inputPassword" type="password" placeholder="Password" id="password" required>
-                    <input class="input inputPassword" type="password" placeholder="Confirm Password" id="confirmpassword" required>
-                </div>
+                    <input class="input inputName" type="text" placeholder="Name" id="name" autocomplete="off">
+                    <div class="messagebox" id="messageboxName"></div>
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off">
+                    <div class="messagebox" id="messageboxEmail"></div>
+                    <input class="input inputPassword" type="password" placeholder="Password" id="password" autocomplete="off">
+                    <div class="messagebox" id="messageboxPassword"></div>
+                    <input class="input inputPassword" type="password" placeholder="Confirm Password" id="confirmpassword" autocomplete="off">
+                    <div class="messagebox" id="messageboxPasswordConfirmed"></div>
+                </div>            
                 <div class="accept">
                     <input type="checkbox" class="checkbox" required>
                     <span>I accept the</span><span class="policyTypo">Privacy policy</span>
                 </div>
                 <div class="signupButtonDiv">
-                    <button onclick="showSuccess(event)" class="buttonSignup">Sign up</button>
+                    <button type="submit" class="buttonSignup">Sign up</button>
                 </div>
             </form>
         </div>

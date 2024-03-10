@@ -31,9 +31,10 @@
             </div>
             <form onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" required>
-                    <input class="input inputPassword" type="password" placeholder="Password" id="password" required>
-                    <div id="messagebox"></div>
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" >
+                    <div id="messagebox" class="messagebox"></div>
+                    <input class="input inputPassword" type="password" placeholder="Password" id="password" autocomplete="off">
+                    <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">
                     <input class="checkbox" type="checkbox" required>

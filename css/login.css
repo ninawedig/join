@@ -123,8 +123,9 @@
     letter-spacing: 0em;
     text-align: left;
     color: black;
-    margin-bottom: 32px;
+    margin-bottom: 0px;
     cursor: pointer;
+    
 }
 
 
@@ -285,7 +286,9 @@
     font-size: 10px;
     font-weight: 400;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 17px;
+    height: 10px;
+    margin-left: 5px;
 
 }
 

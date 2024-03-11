@@ -4,7 +4,13 @@ let tasks = [
     'title': 'Aufgabe 1',
     'description': 'Beschreibung für Aufgabe 1',
     'status': 'awaitFeedback',
-    'assign_to': 'Max Mustermann',
+    'assign_to': [
+      {
+        'id': 0,
+        'member': 'Peter Konrads',
+        'code': 'PK'
+      }
+    ],
     'due_date': '2024-03-10',
     'prio': 'urgent',
     'category': 'userStory',

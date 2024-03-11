@@ -35,7 +35,9 @@ function renderBoard(){
             const filterTasks = filterTask[index];
             
             document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks); 
-            renderPrio(filterTasks); //Funtioniert noch nicht?!
+            renderPrio(filterTasks);
+            renderTaskMember(filterTasks);
+
         }
         
     }  
@@ -61,7 +63,7 @@ function generateCardHTML(element){
                 <div class="progressInfo">1/2 Subtasks</div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="taskMembers">
+                <div class="taskMembers" id="taskMemberCard${element['id']}">
                     <div class="taskMember" style="z-index: 1;">KH</div>
                     <div class="taskMember" style="background-color: #1FD7C1; margin-left: -10%; z-index: 1;">NW</div>
                     <div class="taskMember" style="background-color: #FF4646; margin-left: -10%; z-index: 2;">AE</div>
@@ -134,40 +136,9 @@ function generateCardDetailHTML(task){
                 </tr>                                            
             </table>
             <table><th>Assign to:</th></table>
-            <ul id="taskMember">
-                <li>
-                    <div class="taskMember" style="z-index: 1;">KH</div>
-                    <p>Kai Heimerich</p>
-                </li>
-                <li>
-                    <div class="taskMember" style="background-color: #1FD7C1;">NW</div>
-                    <p>Nina Wedig</p>
-                </li>
-                <li>
-                    <div class="taskMember" style="background-color: #FF4646;">AE</div>
-                    <p>Alex Eremie</p>
-                </li>
-            </ul>
+            <ul id="taskMemberDetail"></ul>
             <table><th>Subtasks</th></table>
-            <ul id="taskSubtasks">
-                <li>
-                    <div id="subtask0">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.6821 8.39673V14.3967C17.6821 16.0536 16.339 17.3967 14.6821 17.3967H4.68213C3.02527 17.3967 1.68213 16.0536 1.68213 14.3967V4.39673C1.68213 2.73987 3.02527 1.39673 4.68213 1.39673H12.6821" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>                        
-                    <p>Implement Recipe Reccommendation</p>    
-                </li>
-                <li>
-                    <div id="subtask1">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1.68213" y="1.39673" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <p>Start page layout</p>    
-                </li>
-            </ul>
+            <ul id="taskSubtasks"></ul>
         </div>
         <div class="taskFunctionsContainer">
             <div class="taskFunctions"><img class="taskFunctionsIcons"
@@ -238,6 +209,36 @@ function changeSubtaskStatus(i, takenTask){
 }
 
 function renderTaskMember(task){
+    let member = task['assign_to'];
+    let id = task['id'];
+
+    let checkId = document.getElementById('taskMemberDetail');
+    if(checkId !== null){checkId.innerHTML = '';}
+
+    document.getElementById(`taskMemberCard${id}`).innerHTML = '';
+
+    for (let i = 0; i < member.length; i++) {
+        const element = member[i];
+        let zIndex = 1;
+        if(checkId){
+            document.getElementById('taskMemberDetail').innerHTML +=/*html*/ `
+            <li>
+                <div class="taskMember">${element['code']}</div>
+                <p>${element['member']}</p>
+            </li>`;
+        }
+        if(i==0){
+            document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
+        <div class="taskMember" style="z-index: ${zIndex};">${element['code']}</div>`;
+        }else{
+            document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
+            <div class="taskMember" style="z-index: ${zIndex};  margin-left: -10%;">${element['code']}</div>`;
+        }
+
+        zIndex++;
+    }
+       
+
 
 
 }

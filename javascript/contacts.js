@@ -335,16 +335,16 @@ function renderContactEditor(i) {
 /**
  * This function edits the contact.
  */
-function editContact() {
+async function editContact() {
     event.preventDefault();
     let editNameInput = document.getElementById('editNameInput');
     let editEmailInput = document.getElementById('editEmailInput');
     let editPhoneInput = document.getElementById('editPhoneInput');
-
     contacts[currentContact]['name'] = editNameInput.value;
     contacts[currentContact]['email'] = editEmailInput.value;
     contacts[currentContact]['phone'] = editPhoneInput.value;
-    console.log(contacts);
+    await setItem('contacts', contacts);
+    await setItem('firstLetters', firstLetters);
     renderContacts();
     renderContactCard(currentContact);
     closeContactEditor();

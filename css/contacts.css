@@ -546,6 +546,10 @@ main {
         padding: 80px 0px !important;
     }
 
+    .contactsFrame {
+        padding-bottom: 80px;
+    }
+
     .contactActionsContainer {
         flex-direction: column;
         width: 396px;

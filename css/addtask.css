@@ -1,4 +1,4 @@
-main{
+main {
     max-width: 1305px;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@ main{
     justify-content: flex-start;
     width: 440px;
     height: 376px;
-    
+
 }
 
 .sectionRight {
@@ -37,7 +37,7 @@ main{
     justify-content: flex-start;
     width: 440px;
     height: 416px;
-   
+
 }
 
 .lowerSection {
@@ -47,6 +47,7 @@ main{
     align-items: flex-end;
     margin-top: 146px;
     margin-bottom: 50px;
+
 }
 
 .title {
@@ -84,14 +85,15 @@ main{
     resize: none;
     position: relative;
     width: 100%;
+
 }
 
 
 
 ::placeholder {
     color: #D1D1D1;
-    position: absolute; 
-    top: 12px; 
+    position: absolute;
+    top: 12px;
     left: 21px;
 }
 
@@ -116,7 +118,7 @@ main{
     background-size: 24px 24px;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;     
+    appearance: none;
 }
 
 .inputDate {
@@ -128,20 +130,25 @@ main{
     background-position: 95%;
     background-size: 24px 24px;
 }
+
 .inputDate::-webkit-calendar-picker-indicator {
-    display: none; /* Versteckt das Standard-Kalender-Symbol für Chrome */
+    display: none;
+    /* Versteckt das Standard-Kalender-Symbol für Chrome */
 }
 
 .inputDate::-webkit-inner-spin-button {
-    display: none; /* Versteckt die Spin-Buttons für Chrome */
+    display: none;
+    /* Versteckt die Spin-Buttons für Chrome */
 }
 
 .inputDate::-webkit-clear-button {
-    display: none; /* Versteckt die Clear-Button für Chrome */
+    display: none;
+    /* Versteckt die Clear-Button für Chrome */
 }
 
 .inputDate::-moz-calendar-picker-indicator {
-    display: none; /* Versteckt das Standard-Kalender-Symbol für Firefox */
+    display: none;
+    /* Versteckt das Standard-Kalender-Symbol für Firefox */
 }
 
 
@@ -231,18 +238,19 @@ main{
 .prioButtonLow:hover {
     background-color: #7AE229 !important;
     color: #F6F7F8 !important;
-    border: solid 1px #7AE229  !important;
+    border: solid 1px #7AE229 !important;
 }
 
 .prioButtonMedium:hover .iconMedium {
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1);
 }
+
 .prioButtonUrgent:hover .iconPrio {
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1);
 }
 
 .prioButtonLow:hover .iconPrio {
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1);
 }
 
 
@@ -288,7 +296,7 @@ main{
 .buttonClear:hover {
     border: 2px solid #29ABE2;
     color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .buttonClear:hover .iconCross {
@@ -316,12 +324,14 @@ main{
 
 .buttonCreate:hover {
     background-color: #29ABE2;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
+
 .icon {
     height: 24px;
     width: 24px;
 }
+
 .iconCross {
     height: 24px;
     width: 24px;
@@ -339,6 +349,7 @@ main{
     height: 7.45px;
     width: 20px;
 }
+
 .buttonsRight {
     display: flex;
     flex-direction: row;
@@ -354,32 +365,80 @@ main{
     display: none;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1400px) {
 
-   
-.mainSection {
-    display: none;
-    
+
+    .mainSection {
+        display: none;
+
+    }
+
+    .mainSectionResponsive {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 32px;
+        width: 100%;
+
+    }
+
+    .inputBox {
+        margin-right: 24px;
+    }
+
+    .lowerSection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+
+        margin-top: 46px;
+    }
 }
 
-.mainSectionResponsive {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 32px;
-    width: 100%;
-}
+@media (max-width: 500px) {
+    .mainSectionResponsive {
+        margin-top: 112px;
+        margin-bottom: 100px;
+    }
 
-.lowerSection {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    .buttonClear {
+        display: none;
+    }
 
-}
-}
+    .lowerSection {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
 
-@media (max-width: 940px) {
+        position: fixed;
+        bottom: 76px;
+        left: 0px;
+        right: 0px;
+        padding: 16px 24px 16px 24px;
+        background-color: #F6F7F8;
+        height: 88px;
+        margin: 0px 0px 0px 0px;
+    }
 
-    
+    .buttonsRight {
+        width: fit-content;
+        gap: 0px;
+    }
+
+    main h1 {
+        position: fixed !important;
+        top: 80px;
+        left: 0px;
+        padding-left: 24px;
+        background-color: #F6F7F8;
+        z-index: 1;
+        width: 100%;
+        height: 112px;
+
+    }
+
+    header {
+        z-index: 100;
+    }
 }

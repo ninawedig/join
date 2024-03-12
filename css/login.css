@@ -128,7 +128,14 @@
     
 }
 
+input:focus{
+    outline: 1px solid var(--secondarycolor);
+ }
 
+ .inputEmpty{
+    outline: 1px solid red;
+ }
+ 
 
 ::placeholder {
     color: #D1D1D1;
@@ -146,6 +153,10 @@
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 24px 24px;
+}
+
+.inputPassword:focus {
+    background-image: url(/img/login/visibility_off.svg);
 }
 
 .remember {

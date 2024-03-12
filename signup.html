@@ -25,18 +25,25 @@
             </div>
             <form class="form" onsubmit="addUser();return false;">
                 <div class="inputFields">
-                    <input class="input inputName" type="text" placeholder="Name" id="name" autocomplete="off">
+                    <input class="input inputName" type="text" placeholder="Name" id="name" autocomplete="off" oninput="resetOutline('name')">
                     <div class="messagebox" id="messageboxName"></div>
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off">
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutline('email')">
                     <div class="messagebox" id="messageboxEmail"></div>
-                    <input class="input inputPassword" type="password" placeholder="Password" id="password" autocomplete="off">
+                    <input class="input inputPassword" type="password" placeholder="Password" id="password"
+                        autocomplete="off" oninput="resetOutline('password')">
                     <div class="messagebox" id="messageboxPassword"></div>
-                    <input class="input inputPassword" type="password" placeholder="Confirm Password" id="confirmpassword" autocomplete="off">
+                    <input class="input inputPassword" type="password" placeholder="Confirm Password"
+                        id="confirmpassword" autocomplete="off" oninput="resetOutline('confirmpassword')">
                     <div class="messagebox" id="messageboxPasswordConfirmed"></div>
-                </div>            
-                <div class="accept">
-                    <input type="checkbox" class="checkbox" required>
-                    <span>I accept the</span><span class="policyTypo">Privacy policy</span>
+                </div>
+                <div>
+                    <div class="accept">
+                        <input type="checkbox" class="checkbox" id="checkbox">
+                        <span>I accept the</span><span class="policyTypo">Privacy policy</span>
+                    </div>
+                    <div class="messageboxDiv">
+                        <div class="messageboxSmall" id="messageboxPolicy"></div>
+                    </div>
                 </div>
                 <div class="signupButtonDiv">
                     <button type="submit" class="buttonSignup">Sign up</button>
@@ -57,7 +64,7 @@
         </div>
     </div>
 
-    <script src="./javascript/signup.js"></script>
+    <script src="./javascript/login.js"></script>
 
 </body>
 

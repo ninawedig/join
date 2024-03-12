@@ -33,14 +33,14 @@
                     <div class="summaryToDosContainer summaryBoxes">
                         <img class="toDoIcon" src="./img/summary/pen.svg" alt="">
                         <div class="summaryToDosContainerText">
-                            <div class="summaryToDosNumber">1</div>
+                            <div id="summaryToDos" class="summaryToDosNumber"></div>
                             <div class="summaryTextDescription">To-do</div>
                         </div>
                     </div>
                     <div class="summaryToDosContainer summaryBoxes">
                         <img class="toDoIcon" src="./img/summary/tick.svg" alt="">
                         <div class="summaryToDosContainerText">
-                            <div class="summaryToDosNumber">1</div>
+                            <div id="summaryDone" class="summaryToDosNumber"></div>
                             <div class="summaryTextDescription">Done</div>
                         </div>
                     </div>
@@ -50,38 +50,41 @@
                         <div class="summaryUrgentToDosLeft">
                             <div><img class="urgentToDoIcon" src="./img/summary/urgent.svg" alt=""></div>
                             <div class="summaryToDosContainerText">
-                                <div class="summaryToDosNumber">1</div>
+                                <div id="summaryUrgentTasks" class="summaryToDosNumber"></div>
                                 <div class="summaryTextDescription urgentText">Urgent</div>
                             </div>
                         </div>
                         <div class="urgentToDosSeparation"></div>
                         <div class="summaryUrgentToDosRight">
-                            <div class="urgentToDoDate">October 16, 2022</div>
+                            <div id="summaryUrgentDueDate" class="urgentToDoDate">October 16, 2022</div>
                             <div class="urgentToDoInfo">Upcoming Deadline</div>
                         </div>
                     </div>
                 </div>
                 <div class="summaryPageTasksRow tasksRowBottom">
                     <div class="summaryBoxes summaryTasksBox">
-                        <div class="summaryToDosNumber">5</div>
+                        <div id="summaryTasksInBoard" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Tasks in<br>Board</div>
                     </div>
                     <div class="summaryBoxes summaryTasksBox">
-                        <div class="summaryToDosNumber">2</div>
+                        <div id="summaryTasksInProgress" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Tasks in<br>Progress</div>
                     </div>
                     <div class="summaryBoxes summaryTasksBox">
-                        <div class="summaryToDosNumber">2</div>
+                        <div id="summaryAwaitingFeedback" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Awaiting<br>Feedback</div>
                     </div>
                 </div>
             </div>
             <div class="summaryPageGreeting">
-                <div class="greetingMessage">Good morning,</div>
-                <div class="greetingName">Sofia Müller</div>
+                <div id="greetingMessageText" class="greetingMessage">Good morning,</div>
+                <div id="greetingName" class="greetingName">Sofia Müller</div>
             </div>
         </div>
     </main>
+    <script src="./javascript/signup.js"></script>
+    <script src="./javascript/board.js"></script>
+    <script src="./javascript/JSON/tasks.js"></script>
     <script src="./javascript/summary.js"></script>
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>

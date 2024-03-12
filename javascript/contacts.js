@@ -8,18 +8,32 @@ const editContactIcon = document.getElementById('editContactIcon');
 const contactCard = document.getElementById('contactCard');
 const smallEditMenu = document.getElementById('smallEditMenu');
 let currentContact;
-let firstLetters = ['A', 'B', 'C'];
+let firstLetters = [];
+let contacts = [];
 firstLetters.sort();
 
 /**
  * This function is used to render HTML Text (The header, navbar, the small navbar on smaller resolution and the contacts).
  */
-function init() {
+async function init() {
+    await loadContacts();
     renderHeader();
     renderNavbar();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
     renderContactAgenda();
+}
+
+/**
+ * This function is used to load the contacts from the remote storage.
+ */
+async function loadContacts() {
+    firstLetters = await getItem('firstLetters')
+        .then(response => JSON.parse(response.data.value));
+    console.log('the first letters are', firstLetters);
+    contacts = await getItem('contacts')
+        .then(response => JSON.parse(response.data.value));
+    console.log('the contacts are', contacts);
 }
 
 /**
@@ -112,11 +126,15 @@ function hideContact() {
  */
 function renderContactCard(i) {
     let nameInitials = getInitials(contacts[i]['name']);
-    // Array of color choices
+    let firstLetter = contacts[i]['name'].charAt(0);
+    let randomColor = getRandomColor();
+    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, randomColor, firstLetter);
+}
+
+function getRandomColor(){
     const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
-    // Get a random color from the array
     const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
-    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, randomColor);
+    return randomColor;
 }
 
 /**
@@ -151,7 +169,7 @@ function closeContactPage() {
 /**
  * This function adds a new contact to the array and then renders
  */
-function addContact() {
+async function addContact() {
     event.preventDefault();
     let newContactName = document.getElementById('newContactName');
     let newContactEmail = document.getElementById('newContactEmail');
@@ -162,11 +180,19 @@ function addContact() {
         "phone": newContactPhone.value
     };
     contacts.push(newContact);
+    await setItem('contacts', contacts);
+    await setItem('firstLetters', firstLetters);
     clearValues(newContactName, newContactEmail, newContactPhone);
     closeAddContact();
     renderContacts();
 }
 
+/**
+ * This function clears the inputs after adding a contact.
+ * @param {*} input1 is the name
+ * @param {*} input2 is the email
+ * @param {*} input3 is the phone
+ */
 function clearValues(input1, input2, input3) {
     input1.value = "";
     input2.value = "";
@@ -176,21 +202,43 @@ function clearValues(input1, input2, input3) {
 /**
  * This function deletes a contact. 
  */
-function deleteContact(i) {
+async function deleteContact(i) {
+    let firstLetter = contacts[i]['name'].charAt(0);
     contacts.splice(i, 1);
+    await setItem('contacts', contacts);
     hideContact();
     renderContacts();
+    checkIfCategoryExists(firstLetter);
+    await setItem('firstLetters', firstLetters);
+}
+
+/**
+ * This function checks to see if there are any contacts starting with a letter left after deleting a contact. If not, the category will be deleted.
+ * @param {*} firstLetter 
+ */
+function checkIfCategoryExists(firstLetter) {
+    let hasContacts = document.getElementById(`contactsList${firstLetter}`).querySelector("div");
+    if (hasContacts === null) {
+        let letterToRemove = `${firstLetter}`;
+        let indexOfLetter = firstLetters.indexOf(letterToRemove);
+        firstLetters.splice(indexOfLetter, 1);
+        console.log(firstLetters);
+        renderContacts();
+    }
 }
 
 /**
  * This function delets a contact on a small screen.
  * @param {} currentContact 
  */
-function deleteContactSmallScreen(currentContact) {
+async function deleteContactSmallScreen(currentContact) {
+    let firstLetter = contacts[currentContact]['name'].charAt(0);
     contacts.splice(currentContact, 1);
-    console.log('Deleted contact number' + currentContact);
+    await setItem('contacts', contacts);
     renderContacts();
     closeContactPage();
+    checkIfCategoryExists(firstLetter);
+    await setItem('firstLetters', firstLetters);
 }
 
 /**
@@ -204,10 +252,7 @@ function renderContacts() {
 
         if (firstLetters.includes(firstLetter)) {
             let nameInitials = getInitials(contact['name']);
-            // Array of color choices
-            const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
-            // Get a random color from the array
-            const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
+            let randomColor = getRandomColor();
             renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor);
         } else {
             createNewCategory(firstLetter);
@@ -215,17 +260,26 @@ function renderContacts() {
     }
 }
 
+/**
+ * This function creates a new category with a new letter.
+ */
 function createNewCategory(firstLetter) {
     firstLetters.push(firstLetter);
     firstLetters.sort();
     renderContacts();
 }
 
+/**
+ * This function renders the categories and the contacts.
+ */
 function renderContactAgenda() {
     renderLetters();
     renderContacts();
 }
 
+/**
+ * This function renders the categories.
+ */
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
     contactsAgenda.innerHTML = '';
@@ -291,7 +345,7 @@ function closeContactEditor() {
 
 /**
  * This function renders the form to edit the contacts
- * @param {*} i 
+ * @param {*} i is the index of the contact to be edited.
  */
 function renderContactEditor(i) {
     let editContactForm = document.getElementById('editContactForm');
@@ -303,34 +357,55 @@ function renderContactEditor(i) {
 /**
  * This function edits the contact.
  */
-function editContact() {
+async function editContact() {
     event.preventDefault();
     let editNameInput = document.getElementById('editNameInput');
     let editEmailInput = document.getElementById('editEmailInput');
     let editPhoneInput = document.getElementById('editPhoneInput');
-
     contacts[currentContact]['name'] = editNameInput.value;
     contacts[currentContact]['email'] = editEmailInput.value;
     contacts[currentContact]['phone'] = editPhoneInput.value;
-    console.log(contacts);
+    await setItem('contacts', contacts);
+    await setItem('firstLetters', firstLetters);
     renderContacts();
     renderContactCard(currentContact);
     closeContactEditor();
 }
 
+/**
+ * This function gets the initials of a name.
+ * @param {*} name is the name we want the initials of
+ * @returns the initials.
+ */
 function getInitials(name) {
     return name.match(/(\b\S)?/g).join("").slice(0, 2);;
 }
 
+/**
+ * This generates the HTML text for the categories.
+ * @param {*} firstLetter is the category name
+ * @returns 
+ */
 function generateLettersCategoriesHTML(firstLetter) {
     return /*HTML*/ `
-                    <div class="contactLetter">${firstLetter}</div>
-                    <div class="contactsSeparationLine"></div>
-                    <div class="contactsGroup" id="contactsList${firstLetter}">
-                            <!-- RENDER JS-->
-                    </div>`;
+                    <div id="container${firstLetter}">
+                        <div class="contactLetter">${firstLetter}</div>
+                        <div class="contactsSeparationLine"></div>
+                        <div class="contactsGroup" id="contactsList${firstLetter}">
+                                <!-- RENDER JS-->
+                        </div>
+                    </div>
+                    `;
 }
 
+/**
+ * This function renders the contacts HTML under each category.
+ * @param {*} firstLetter is the category name
+ * @param {*} i is the index of the contact
+ * @param {*} nameInitials are the initials of the name
+ * @param {*} contact is the element of the array contacts
+ * @param {*} randomColor this is a random color for the badge background
+ */
 function renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor) {
     document.getElementById(`contactsList${firstLetter}`).innerHTML += /*HTML*/`
                     <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
@@ -343,6 +418,13 @@ function renderContactUnderCategory(firstLetter, i, nameInitials, contact, rando
                 `;
 }
 
+/**
+ * This function generates the HTML for the contact card.
+ * @param {*} nameInitials are the initials of the name
+ * @param {*} i is the index of the contact
+ * @param {*} randomColor is a random color for the badge background
+ * @returns 
+ */
 function generateContactCardHTML(nameInitials, i, randomColor) {
     return /*HTML*/`
                     <div class="contactCardMainInfos">
@@ -369,6 +451,12 @@ function generateContactCardHTML(nameInitials, i, randomColor) {
     `;
 }
 
+/**
+ * This function generates the edit contact form
+ * @param {*} nameInitials are the initials of the contact
+ * @param {*} i is the index of the contact
+ * @returns the edited contact
+ */
 function generateContactFormHTML(nameInitials, i) {
     return /*HTML*/`
                     <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>

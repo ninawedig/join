@@ -46,14 +46,14 @@ function addUser() {
     let messageBoxName = document.getElementById('messageboxName');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
-    let messageBoxPasswordConfirmed = document.getElementById('messageboxPasswordConfirmed');
+    let messageboxConfirmpassword = document.getElementById('messageboxConfirmpassword');
     let messageBoxPolicy = document.getElementById('messageboxPolicy');
 
     if (name && email && password && confirmPassword && policy) {
 
         if (password !== confirmPassword) {
 
-            messageBoxPasswordConfirmed.textContent = "Ups! Your password don`t match";
+            messageboxConfirmpassword.textContent = "Ups! Your password don`t match";
             document.getElementById('confirmpassword').classList.add('inputEmpty');
             return;
         } else {
@@ -87,7 +87,7 @@ function addUser() {
             
         }
         if (!confirmPassword) {
-            messageBoxPasswordConfirmed.textContent = "Please fill out this field.";
+            messageboxConfirmpassword.textContent = "Please fill out this field.";
             document.getElementById('confirmpassword').classList.add('inputEmpty');
         } else {
             messageBoxPassword.textContent = "";
@@ -108,7 +108,16 @@ function addUser() {
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
+    let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
+    console.log(idBigFirstLetter);
+    document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
+}
 
+function checkPolicy(){
+    let checkbox = document.querySelector('.checkbox');
+    if(checkbox.checked){
+        document.getElementById('messageboxPolicy').textContent = "";
+    }
 }
 
 

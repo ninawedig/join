@@ -37,12 +37,16 @@
                     </div>
                     <div class="assigned inputBox dropdown">
                         <span class="typo">Assigned to</span>
-                        <select class="inputAssigned inputField" id="contacts">
-                            <option value="x">Select contacts to assign</option>
-                            <option value="x">x</option>
-                            <option value="x">x</option>
-                            <option value="x">x</option>
-                        </select>
+                        <div onclick="openContactsDropDown()" class="inputAssigned inputField"><span>Select task
+                                category</span><img onclick="closeContactsDropDown()" id="categoryDropDownArrow"
+                                class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
+                        <div id="contactsDropDownMenuContainer" class="dropDownAssignedOpened inputField noDisplay">
+                            <input type="text" class="dropDownOption searchContactField"><img
+                                onclick="closeContactsDropDown()" id="categoryDropDownArrow" class="dropDownMenuArrow"
+                                src="./img/addtask/arrow_drop_downaa.svg">
+                            <div id="contactsList" class="contactsDropDownMenu">
+                            </div>
+                        </div>
                     </div>
                 </form>
 
@@ -67,15 +71,17 @@
                                         src="./img/addtask/Prio baja.svg" alt=""></button>
                             </div>
                         </div>
-
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
-                            <select class="inputAssigned inputField" id="" required>
-                                <option value="x">Select task category</option>
-                                <option value="x">Technical Task</option>
-                                <option value="x">User Story</option>
-                            </select>
+                            <div class="inputAssigned inputField" onclick="toggleDropDownMenu()"><span>Select task
+                                    category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
+                                    src="./img/addtask/arrow_drop_downaa.svg"></div>
+                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
+                                <div class="dropDownOption">Select task category</div>
+                                <div class="dropDownOption">Technical Task</div>
+                                <div class="dropDownOption">User Story</div>
+                            </div>
                         </div>
                         <div class="inputBox subtask">
                             <span class="typo">Subtasks</span>
@@ -91,12 +97,14 @@
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
                         </div>
-                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" id="title" oninput="resetOutline('title')">
+                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" id="title"
+                            oninput="resetOutline('title')">
                         <div class="messagebox" id="messageboxTitle"></div>
                     </div>
                     <div class="description inputBox">
                         <span class="typo">Description</span>
-                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description" id="description">
+                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description"
+                            id="description">
                     </div>
                     <div class="prioBox prio">
                         <span class="typo">Prio</span>
@@ -152,8 +160,8 @@
                 <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
             </div>
             <div class="buttonsRight">
-                <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                        alt="" onclick="clearFields()"></button>
+                <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg" alt=""
+                        onclick="clearFields()"></button>
                 <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg"
                         alt=""></button>
             </div>
@@ -161,10 +169,12 @@
         </div>
 
     </main>
+    <script src="./javascript/storage.js"></script>
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>
     <script src="./javascript/addtask.js"></script>
     <script src="./javascript/signup.js"></script>
+
 
 </body>
 

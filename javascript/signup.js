@@ -105,12 +105,17 @@ function addUser() {
             messageBoxPolicy.textContent = "";
           
         }
+       
     }
+  
+    
 }
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
+
 }
+
 
 function resetOutlineLogin(id) {
     document.getElementById(id).classList.remove('inputEmpty');

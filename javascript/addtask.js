@@ -21,29 +21,29 @@ function addtask() {
 
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
-        title.classList.add('inputEmpty'); // Hinzufügen der Klasse für visuelle Markierung
-        return; // Beenden der Funktion, da ein Fehler vorliegt
+        title.classList.add('inputEmpty'); 
+        return; 
     } else {
-        messageBoxTitle.textContent = ""; // Rücksetzen der Fehlermeldung
+        messageBoxTitle.textContent = "";
     }
 
     if (!duedate.value) {
         messageBoxDuedate.textContent = "Please fill out this field.";
-        duedate.classList.add('inputEmpty'); // Hinzufügen der Klasse für visuelle Markierung
-        return; // Beenden der Funktion, da ein Fehler vorliegt
+        duedate.classList.add('inputEmpty');  
+        return; 
     } else {
-        messageBoxDuedate.textContent = ""; // Rücksetzen der Fehlermeldung
+        messageBoxDuedate.textContent = ""; 
     }
 
-    if (category.value === 'x') { // Überprüfen, ob eine Kategorie ausgewählt wurde
+    if (category.value === 'x') { 
         messageBoxCategory.textContent = "Please select a category.";
-        category.classList.add('inputEmpty'); // Hinzufügen der Klasse für visuelle Markierung
-        return; // Beenden der Funktion, da ein Fehler vorliegt
+        category.classList.add('inputEmpty'); 
+        return; 
     } else {
-        messageBoxCategory.textContent = ""; // Rücksetzen der Fehlermeldung
+        messageBoxCategory.textContent = ""; 
     }
 
-    // Wenn alle Felder ausgefüllt sind und die Validierung erfolgreich ist, können Sie hier weitere Aktionen ausführen, z.B. das Formular absenden.
+    
 }
 
 function resetOutline(id) {

@@ -1,8 +1,3 @@
-
-let users = [
-    { 'name': 'Nina', 'email': 'ninawedig@yahoo.de', 'password': 'passwort123' }
-];
-
 function login() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
@@ -40,7 +35,7 @@ function openSummaryPage() {
 
 
 function addUser() {
-
+ 
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;

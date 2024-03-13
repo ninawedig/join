@@ -1,3 +1,7 @@
+let users = [
+    { 'name': 'Nina', 'email': 'ninawedig@yahoo.de', 'password': 'passwort123' }
+];
+
 function login() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');

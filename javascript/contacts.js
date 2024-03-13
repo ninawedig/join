@@ -180,8 +180,8 @@ async function addContact() {
         "phone": newContactPhone.value
     };
     contacts.push(newContact);
-    await setItem('contacts', contacts);
-    await setItem('firstLetters', firstLetters);
+    await setItem('contacts', JSON.stringify(contacts));
+    await setItem('firstLetters', JSON.stringify(firstLetters));
     clearValues(newContactName, newContactEmail, newContactPhone);
     closeAddContact();
     renderContacts();
@@ -205,11 +205,11 @@ function clearValues(input1, input2, input3) {
 async function deleteContact(i) {
     let firstLetter = contacts[i]['name'].charAt(0);
     contacts.splice(i, 1);
-    await setItem('contacts', contacts);
+    await setItem('contacts', JSON.stringify(contacts));
     hideContact();
     renderContacts();
     checkIfCategoryExists(firstLetter);
-    await setItem('firstLetters', firstLetters);
+    await setItem('firstLetters', JSON.stringify(firstLetters));
 }
 
 /**
@@ -234,11 +234,11 @@ function checkIfCategoryExists(firstLetter) {
 async function deleteContactSmallScreen(currentContact) {
     let firstLetter = contacts[currentContact]['name'].charAt(0);
     contacts.splice(currentContact, 1);
-    await setItem('contacts', contacts);
+    await setItem('contacts', JSON.stringify(contacts));
     renderContacts();
     closeContactPage();
     checkIfCategoryExists(firstLetter);
-    await setItem('firstLetters', firstLetters);
+    await setItem('firstLetters', JSON.stringify(firstLetters));
 }
 
 /**
@@ -365,8 +365,8 @@ async function editContact() {
     contacts[currentContact]['name'] = editNameInput.value;
     contacts[currentContact]['email'] = editEmailInput.value;
     contacts[currentContact]['phone'] = editPhoneInput.value;
-    await setItem('contacts', contacts);
-    await setItem('firstLetters', firstLetters);
+    await setItem('contacts', JSON.stringify(contacts));
+    await setItem('firstLetters', JSON.stringify(firstLetters));
     renderContacts();
     renderContactCard(currentContact);
     closeContactEditor();

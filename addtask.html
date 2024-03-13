@@ -87,15 +87,16 @@
 
 
             <div class="mainSectionResponsive">
-                <form action="">
+                <form onsubmit="addtask();return false;">
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
                         </div>
-                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" required>
+                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" id="title" oninput="resetOutline('title')">
+                        <div class="messagebox" id="messageboxTitle"></div>
                     </div>
                     <div class="description inputBox">
                         <span class="typo">Description</span>
-                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description">
+                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description" id="description">
                     </div>
                     <div class="prioBox prio">
                         <span class="typo">Prio</span>
@@ -113,18 +114,20 @@
                         <div class="titleStar">
                             <span class="typo">Due date</span><span class="typo typoRed">*</span>
                         </div>
-                        <input class="inputField inputDate" type="date" id="datePicker" required>
+                        <input class="inputField inputDate" type="date" id="duedate" oninput="resetOutline('duedate')">
+                        <div class="messagebox" id="messageboxDuedate"></div>
                     </div>
 
 
                     <div class="inputBox category">
                         <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                         </div>
-                        <select class="inputAssigned inputField" id="" required>
+                        <select class="inputAssigned inputField" id="category" oninput="resetOutline('category')">
                             <option value="x">Select task category</option>
                             <option value="x">Technical Task</option>
                             <option value="x">User Story</option>
                         </select>
+                        <div class="messagebox" id="messageboxCategory"></div>
                     </div>
 
                     <div class="assigned inputBox dropdown">
@@ -138,7 +141,7 @@
                     </div>
                     <div class="inputBox subtask">
                         <span class="typo">Subtasks</span>
-                        <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
+                        <input class="inputSubtask inputField" type="text" placeholder="Add new subtask" id="subtasks">
                     </div>
                 </form>
             </div>
@@ -149,8 +152,8 @@
                 <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
             </div>
             <div class="buttonsRight">
-                <button class="buttonClear">Clear <img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                        alt=""></button>
+                <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
+                        alt="" onclick="clearFields()"></button>
                 <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg"
                         alt=""></button>
             </div>

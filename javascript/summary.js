@@ -74,9 +74,9 @@ function getGreeting() {
     let currentHour = currentTime.getHours();
     let greetingMessage;
     if (currentHour >= 5 && currentHour < 12) {
-        greetingMessage = "Good Morning,"
+        greetingMessage = "Good morning,"
     } else if (currentHour >= 12 && currentHour < 18) {
-        greetingMessage = "Hello,"
+        greetingMessage = "Good ffternoon,"
     } else {
         greetingMessage = "Good evening,"
     }

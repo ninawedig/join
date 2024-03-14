@@ -82,20 +82,11 @@ async function loadContacts() {
 
 function renderContacts() {
     let contactsList = document.getElementById('contactsList');
-    
+
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let randomColor = getRandomColor();
-        contactsList.innerHTML += `
-                                <div class="dropDownContact">
-                                    <div class="contactDetails">
-                                        <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
-                                        <div class="contactName">${contact.name}</div>
-                                    </div>
-                                    <img src="./img/addtask/rectangle.svg" class="checkbox">
-                                </div>
-                                
-    `;
+        contactsList.innerHTML += getContactsListHTML(contact, randomColor);
     }
 }
 
@@ -113,4 +104,32 @@ function getRandomColor() {
     const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
     const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
     return randomColor;
+}
+
+function filterContactNames() {
+    let search = document.getElementById('searchContact').value;
+    search = search.toLowerCase();
+
+    let contactsList = document.getElementById('contactsList');
+    contactsList.innerHTML = '';
+
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        let randomColor = getRandomColor();
+        if (contact['name'].toLowerCase().includes(search)) {
+            contactsList.innerHTML += getContactsListHTML(contact, randomColor);
+        }
+    }
+}
+
+function getContactsListHTML(contact, randomColor) {
+    return /*HTML*/ `
+                    <div class="dropDownContact">
+                        <div class="contactDetails">
+                            <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
+                            <div class="contactName">${contact.name}</div>
+                        </div>
+                        <img src="./img/addtask/rectangle.svg" class="checkbox">
+                    </div>
+                    `
 }

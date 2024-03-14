@@ -212,6 +212,7 @@ async function deleteContact(i) {
     renderContacts();
     checkIfCategoryExists(firstLetter);
     await setItem('firstLetters', JSON.stringify(firstLetters));
+    closeContactEditor();
 }
 
 /**
@@ -367,6 +368,7 @@ async function editContact() {
     contacts[currentContact]['name'] = editNameInput.value;
     contacts[currentContact]['email'] = editEmailInput.value;
     contacts[currentContact]['phone'] = editPhoneInput.value;
+    contacts[currentContact]['initials'] = getInitials(contacts[currentContact]['name']);
     await setItem('contacts', JSON.stringify(contacts));
     await setItem('firstLetters', JSON.stringify(firstLetters));
     renderContacts();
@@ -469,7 +471,7 @@ function generateContactFormHTML(nameInitials, i) {
                         <input id="editEmailInput" class="contactActionInput" type="email" value="${contacts[i]['email']}">
                         <input id="editPhoneInput" class="contactActionInput" type="tel" value="${contacts[i]['phone']}">
                         <div class="formButtonsContainer">
-                            <button onclick="deleteContact(${i})" class="formButton deleteButton">Delete</button>
+                            <button onclick="deleteContact(${i});return false;" class="formButton deleteButton">Delete</button>
                             <button class="formButton saveButton" onclick="editContact()">Save <img src="./img/contacts/check.svg" alt=""></button>
                         </div>
                     </form>

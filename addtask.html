@@ -43,11 +43,11 @@
 
                     <div class="assigned inputBox dropdown">
                         <span class="typo">Assigned to</span>
-                        <div onclick="openContactsDropDown()" class="inputAssigned inputField"><span>Select task
-                                category</span><img onclick="closeContactsDropDown()" id="assignedDropDownArrow"
+                        <div onclick="openContactsDropDown()" class="inputAssigned inputField"><span>Select contacts
+                                to asign</span><img onclick="closeContactsDropDown()" id="assignedDropDownArrow"
                                 class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
                         <div id="contactsDropDownMenuContainer" class="dropDownAssignedOpened inputField noDisplay">
-                            <input type="text" class="dropDownOption searchContactField"><img
+                            <input onkeyup="filterContactNames()" id="searchContact" type="text" class="dropDownOption searchContactField"><img
                                 onclick="closeContactsDropDown()" id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
                                 src="./img/addtask/arrow_drop_downaa.svg">
 
@@ -94,7 +94,7 @@
                                 <div class="dropDownOption">Technical Task</div>
                                 <div class="dropDownOption">User Story</div>
                             </div>
-                            <div class="messagebox" id="messageboxCategory"></div>
+                            <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>
 
                         <div class="inputBox subtask">
@@ -105,71 +105,6 @@
                     </form>
                 </div>
             </div>
-
-
-            <!-- <div class="mainSectionResponsive">
-                <form onsubmit="addtask();return false;">
-                    <div class="title inputBox">
-                        <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
-                        </div>
-                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" id="title"
-                            oninput="resetOutline('title')">
-                        <div class="messagebox" id="messageboxTitle"></div>
-                    </div>
-                    <div class="description inputBox">
-                        <span class="typo">Description</span>
-                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description"
-                            id="description">
-                    </div>
-                    <div class="prioBox prio">
-                        <span class="typo">Prio</span>
-                        <div class="prioButtonBox">
-                            <button class="prioButton typo prioButtonUrgent">Urgent <img class="iconPrio"
-                                    src="./img/addtask/Prio alta.svg" alt=""></button>
-                            <button class="prioButton typo prioButtonMedium">Medium <img class="iconMedium"
-                                    src="./img/addtask/Prio media_orange.svg" alt=""></button>
-                            <button class="prioButton typo prioButtonLow">Low <img class="iconPrio"
-                                    src="./img/addtask/Prio baja.svg" alt=""></button>
-                        </div>
-                    </div>
-
-                    <div class="inputBox date">
-                        <div class="titleStar">
-                            <span class="typo">Due date</span><span class="typo typoRed">*</span>
-                        </div>
-                        <input class="inputField inputDate" type="date" id="duedate" oninput="resetOutline('duedate')">
-                        <div class="messagebox" id="messageboxDuedate"></div>
-                    </div>
-
-
-                    <div class="inputBox category">
-                        <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
-                        </div>
-                        <select class="inputAssigned inputField" id="category" oninput="resetOutline('category')">
-                            <option value="x">Select task category</option>
-                            <option value="x">Technical Task</option>
-                            <option value="x">User Story</option>
-                        </select>
-                        <div class="messagebox" id="messageboxCategory"></div>
-                    </div>
-
-                    <div class="assigned inputBox dropdown">
-                        <span class="typo">Assigned to</span>
-                        <select class="inputAssigned inputField" id="contacts">
-                            <option value="x">Select contacts to assign</option>
-                            <option value="x">x</option>
-                            <option value="x">x</option>
-                            <option value="x">x</option>
-                        </select>
-                    </div>
-                    <div class="inputBox subtask">
-                        <span class="typo">Subtasks</span>
-                        <input class="inputSubtask inputField" type="text" placeholder="Add new subtask" id="subtasks">
-                    </div>
-                </form>
-            </div>
-        </div> -->
-
             <div class="lowerSection">
                 <div>
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>

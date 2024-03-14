@@ -26,15 +26,19 @@
         <div class="mainContainer">
             <div class="mainSection">
                 <form action="" class="sectionLeft">
+
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
                         </div>
-                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" required>
+                        <input class="inputTitle inputField" type="text" placeholder="Enter a title" id="title" oninput="resetOutlineAddtask('title')">
+                        <div class="messagebox" id="messageboxTitle"></div>
                     </div>
+
                     <div class="description inputBox">
                         <span class="typo">Description</span>
-                        <input class="inputDescription inputField" type="text" placeholder="Enter a Description">
+                        <input class="inputDescription inputField" type="text" id="description" placeholder="Enter a Description" autocomplete="off">
                     </div>
+
                     <div class="assigned inputBox dropdown">
                         <span class="typo">Assigned to</span>
                         <div onclick="openContactsDropDown()" class="inputAssigned inputField"><span>Select task
@@ -58,8 +62,10 @@
                             <div class="titleStar">
                                 <span class="typo">Due date</span><span class="typo typoRed">*</span>
                             </div>
-                            <input class="inputField inputDate" type="date" id="datePicker" required>
+                            <input class="inputField inputDate" type="date" id="duedate" oninput="resetOutlineAddtask('duedate')">
+                            <div class="messagebox" id="messageboxDuedate"></div>
                         </div>
+
                         <div class="prioBox prio">
                             <span class="typo">Prio</span>
                             <div class="prioButtonBox">
@@ -71,28 +77,32 @@
                                         src="./img/addtask/Prio baja.svg" alt=""></button>
                             </div>
                         </div>
+
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
                             <div class="inputAssigned inputField" onclick="toggleDropDownMenu()"><span>Select task
                                     category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
-                                    src="./img/addtask/arrow_drop_downaa.svg"></div>
-                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
+                                    src="./img/addtask/arrow_drop_downaa.svg" ></div>
+                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay" oninput="resetOutlineAddtask('dropDownCategory')">
                                 <div class="dropDownOption">Select task category</div>
                                 <div class="dropDownOption">Technical Task</div>
                                 <div class="dropDownOption">User Story</div>
                             </div>
+                            <div class="messagebox" id="messageboxCategory"></div>
                         </div>
+
                         <div class="inputBox subtask">
                             <span class="typo">Subtasks</span>
                             <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
                         </div>
+
                     </form>
                 </div>
             </div>
 
 
-            <div class="mainSectionResponsive">
+            <!-- <div class="mainSectionResponsive">
                 <form onsubmit="addtask();return false;">
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
@@ -153,7 +163,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <div class="lowerSection">
             <div>
@@ -163,7 +173,7 @@
                 <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg" alt=""
                         onclick="clearFields()"></button>
                 <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg"
-                        alt=""></button>
+                        alt="" onclick="addtask()"></button>
             </div>
         </div>
         </div>

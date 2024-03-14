@@ -17,7 +17,7 @@ function showSmallMenu() {
 function addtask() {
     let title = document.getElementById('title');
     let duedate = document.getElementById('duedate');
-    let category = document.getElementById('category');
+    let category = document.getElementById('dropDownCategory');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
@@ -25,7 +25,7 @@ function addtask() {
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
         title.classList.add('inputEmpty');
-        return;
+        
     } else {
         messageBoxTitle.textContent = "";
     }
@@ -33,7 +33,7 @@ function addtask() {
     if (!duedate.value) {
         messageBoxDuedate.textContent = "Please fill out this field.";
         duedate.classList.add('inputEmpty');
-        return;
+        
     } else {
         messageBoxDuedate.textContent = "";
     }
@@ -41,26 +41,26 @@ function addtask() {
     if (category.value === 'x') {
         messageBoxCategory.textContent = "Please select a category.";
         category.classList.add('inputEmpty');
-        return;
+        
     } else {
         messageBoxCategory.textContent = "";
     }
+    if (title.value && duedate.value && category.value !== 'x') {
 
-
+        window.location.href = "board.html";
+    }
 }
 
-function resetOutline(id) {
+function resetOutlineAddtask(id) {
     document.getElementById(id).classList.remove('inputEmpty');
+    let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
+    console.log(idBigFirstLetter);
+    document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
-
 
 function clearFields() {
     document.getElementById('title').value = "";
-    document.getElementById('description').value = "";
-    document.getElementById('duedate').value = "";
-    document.getElementById('category').value = "";
-    document.getElementById('contacts').value = "";
-    document.getElementById('subtasks').value = "";
+
 }
 
 function toggleDropDownMenu() {

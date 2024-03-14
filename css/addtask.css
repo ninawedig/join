@@ -139,10 +139,6 @@ main {
 
 }
 
-
- 
-
-
 .inputField:focus {
     outline: 1px solid var(--secondarycolor);
 }
@@ -196,6 +192,8 @@ main {
     justify-content: space-between;
     z-index: 2;
 }
+
+
 
 .inputDate {
     color: #D1D1D1 !important;
@@ -501,7 +499,7 @@ main {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-
+gap:0px;
         position: fixed;
         bottom: 76px;
         left: 0px;
@@ -531,5 +529,9 @@ main {
 
     header {
         z-index: 100;
+    }
+
+    .typoSmall {
+        font-size: 12px;
     }
 }

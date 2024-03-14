@@ -66,7 +66,7 @@
                         </svg>   
                     </div> 
                 </div>
-                <div class="boardTasks" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
+                <div class="boardTasks" id="toDo" ondrag="moveFrom('toDo')" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
             </div>
             <div class="category">
                 <div class="boardCategory">
@@ -77,7 +77,7 @@
                         <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>    
                 </div>
-                <div class="boardTasks" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
+                <div class="boardTasks" id="inProgress" ondrag="moveFrom('inProgress')" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
             </div>
             <div class="category">
                 <div class="boardCategory">
@@ -88,13 +88,13 @@
                         <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                     </svg>    
                 </div>
-                <div class="boardTasks" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+                <div class="boardTasks" id="awaitFeedback" ondrag="moveFrom('awaitFeedback')" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
             </div>
             <div class="category">
                 <div class="boardCategory">
                     <h3>Done</h3>
                 </div>
-                <div class="boardTasks" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+                <div class="boardTasks" id="done" ondrag="moveFrom('done')" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
             </div>
         </div>
     </main>

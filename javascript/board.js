@@ -1,5 +1,6 @@
 
 let currentDraggedElement;
+let alreadyExecuted = false;
 
 
 
@@ -334,9 +335,10 @@ function renderLowHTML(){
     </div>`;
 }
 
+//Drag and Drop of the boadcards
+
 function startDragging(id){
     currentDraggedElement = id;
-    document.getElementById(`task${element['id']}`).style ="background-color: green;"
 }
 
 function allowDrop(ev){
@@ -345,7 +347,44 @@ function allowDrop(ev){
 
 function moveTo(status){
     tasks[currentDraggedElement]['status'] = status;
-
+    alreadyExecuted = false;
     renderBoard();
+
 }
+
+function moveFrom(fromCategory){
+    if(!alreadyExecuted){
+        if(fromCategory == 'toDo'){
+            showDropZone('inProgress');
+        }if(fromCategory == 'inProgress'){
+            showDropZone('awaitFeedback');
+            showDropZone('toDo');
+            showDropZone('done');
+        }if(fromCategory == 'awaitFeedback'){
+            showDropZone('toDo');
+            showDropZone('inProgress');
+            showDropZone('done');
+        }if(fromCategory == 'done'){
+            showDropZone('toDo');
+            showDropZone('inProgress');
+            showDropZone('awaitFeedback');
+        }
+        alreadyExecuted = true;
+    }
+          
+}
+
+
+function showDropZone(inCategory){
+    var cardHeight = document.getElementById(`task${currentDraggedElement}`).offsetHeight;
+    
+    let elements = document.querySelectorAll('.noTaskCard');
+    elements.forEach(function(element) {
+        element.classList.add('hidden');
+    });
+  
+    document.getElementById(inCategory).innerHTML += /*html*/`
+    <div class="dragCard" style="background-color: transparent; border-radius: 24px; height: ${cardHeight}px"></div>`;
+  
+    }
 

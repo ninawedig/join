@@ -29,14 +29,14 @@
             </div>
             <form onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutlineLogin('email')">
-                    <div id="messagebox" class="messagebox"></div>
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutline('email')">
+                    <div id="messageboxEmail" class="messagebox"></div>
                     <input class="input inputPassword" type="password" placeholder="Password" id="password"
-                        autocomplete="off" oninput="resetOutlineLogin('password')">
+                        autocomplete="off" oninput="resetOutline('password')">
                     <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">
-                    <input class="checkbox" type="checkbox">
+                    <input class="checkbox" type="checkbox" id="checkbox" onclick="rememberMe()">
                     <span>Remember me</span>
                 </div>
                 <div class="loginButtons">
@@ -58,7 +58,7 @@
 
 
     <script src="./javascript/login.js"></script>
-    <script src="./javascript/signup.js"></script>
+
 
 </body>
 </html>

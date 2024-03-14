@@ -25,7 +25,7 @@ function addtask() {
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
         title.classList.add('inputEmpty');
-        
+
     } else {
         messageBoxTitle.textContent = "";
     }
@@ -33,7 +33,7 @@ function addtask() {
     if (!duedate.value) {
         messageBoxDuedate.textContent = "Please fill out this field.";
         duedate.classList.add('inputEmpty');
-        
+
     } else {
         messageBoxDuedate.textContent = "";
     }
@@ -41,7 +41,7 @@ function addtask() {
     if (category.value === 'x') {
         messageBoxCategory.textContent = "Please select a category.";
         category.classList.add('inputEmpty');
-        
+
     } else {
         messageBoxCategory.textContent = "";
     }
@@ -82,13 +82,14 @@ async function loadContacts() {
 
 function renderContacts() {
     let contactsList = document.getElementById('contactsList');
+    
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-
+        let randomColor = getRandomColor();
         contactsList.innerHTML += `
                                 <div class="dropDownContact">
                                     <div class="contactDetails">
-                                        <div class="contactProfileBadge">SM</div>
+                                        <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
                                         <div class="contactName">${contact.name}</div>
                                     </div>
                                     <img src="./img/addtask/rectangle.svg" class="checkbox">
@@ -98,12 +99,18 @@ function renderContacts() {
     }
 }
 
-function openContactsDropDown(){
+function openContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
     dropDownMenu.classList.remove('noDisplay');
 }
 
-function closeContactsDropDown(){
+function closeContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
     dropDownMenu.classList.add('noDisplay');
+}
+
+function getRandomColor() {
+    const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
+    const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
+    return randomColor;
 }

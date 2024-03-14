@@ -125,7 +125,7 @@ function hideContact() {
  * @param {*} i is the number of the card in the JSON.
  */
 function renderContactCard(i) {
-    let nameInitials = getInitials(contacts[i]['name']);
+    let nameInitials = contacts[i].initials;
     let firstLetter = contacts[i]['name'].charAt(0);
     let randomColor = getRandomColor();
     contactCard.innerHTML = generateContactCardHTML(nameInitials, i, randomColor, firstLetter);
@@ -173,11 +173,13 @@ async function addContact() {
     event.preventDefault();
     let newContactName = document.getElementById('newContactName');
     let newContactEmail = document.getElementById('newContactEmail');
-    let newContactPhone = document.getElementById('newContactPhone')
+    let newContactPhone = document.getElementById('newContactPhone');
+    let newContactInitials = getInitials(newContactName.value);
     let newContact = {
         "name": newContactName.value.charAt(0).toUpperCase() + newContactName.value.slice(1),
         "email": newContactEmail.value,
-        "phone": newContactPhone.value
+        "phone": newContactPhone.value,
+        "initials": newContactInitials
     };
     contacts.push(newContact);
     await setItem('contacts', JSON.stringify(contacts));
@@ -251,7 +253,7 @@ function renderContacts() {
         let firstLetter = contact['name'].charAt(0);
 
         if (firstLetters.includes(firstLetter)) {
-            let nameInitials = getInitials(contact['name']);
+            let nameInitials = contacts[i].initials;
             let randomColor = getRandomColor();
             renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor);
         } else {
@@ -349,7 +351,7 @@ function closeContactEditor() {
  */
 function renderContactEditor(i) {
     let editContactForm = document.getElementById('editContactForm');
-    let nameInitials = getInitials(contacts[i]['name']);
+    let nameInitials = contacts[i].initials;
 
     editContactForm.innerHTML = generateContactFormHTML(nameInitials, i);
 }

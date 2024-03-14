@@ -70,7 +70,9 @@ main {
 
 .searchContactField{
     border: 1px solid var(--secondarycolor);
+    display: flex;
 }
+
 
 .contactsDropDownMenu{
     display: flex;
@@ -329,6 +331,10 @@ main {
 
 .dropDownMenuArrow {
     border-radius: 50px;
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    z-index: 999;
 }
 
 .dropDownMenuArrow:hover {

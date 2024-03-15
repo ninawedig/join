@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body>
+<body onload="renderUsers()">
     <div>
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
     </div>
@@ -27,7 +27,7 @@
                 <div class="headlineLogin">Login</div>
                 <div class="borderLogin"></div>
             </div>
-            <form onsubmit="login(); return false;">
+            <form id="loginForm" onsubmit="login(); return false;">
                 <div class="inputFields">
                     <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutline('email')">
                     <div id="messageboxEmail" class="messagebox"></div>
@@ -40,8 +40,8 @@
                     <span>Remember me</span>
                 </div>
                 <div class="loginButtons">
-                    <button class="buttonLogin">Log In</button>
-                    <button class="buttonGuest">Guest Log In</button>
+                    <button type="submit" class="buttonLogin">Log In</button>
+                    <button type="button" class="buttonGuest" id="loginButton" onclick="guestLogin()">Guest Log In</button>
                 </div>
             </form>
         </div>
@@ -56,9 +56,10 @@
         <span class="legalNotice" onclick="openLegalNoticePage()">Legal notice</span>
     </div>
 
-
+    <script src="./javascript/storage.js"></script>
+    <script src="./javascript/signup.js"></script>
     <script src="./javascript/login.js"></script>
-
+    
 
 </body>
 </html>

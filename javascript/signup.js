@@ -1,13 +1,31 @@
-let users = [
-    { 'name': 'Nina', 'email': 'ninawedig@yahoo.de', 'password': 'passwort123' }
-];
+let users = [];
 
-function addUser() {
+function renderUsers() {
+    loadUsers();
+}
+
+async function loadUsers() {
+    try {
+        users = JSON.parse(await getItem('users'))
+    }
+    catch (e) {
+        console.info('Could not load users')
+    }
+}
+
+async function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmpassword').value;
     let policy = document.querySelector('.checkbox').checked;
+    let user = {
+        'name': name,
+        'email': email,
+        'password': password,
+
+    }
+
 
     let messageBoxName = document.getElementById('messageboxName');
     let messageBoxEmail = document.getElementById('messageboxEmail');
@@ -24,7 +42,9 @@ function addUser() {
             messageBoxPassword.textContent = "";
         }
 
-        users.push({ 'name': name, 'email': email, 'password': password });
+
+        users.push(user);
+        await setItem('users', JSON.stringify(users));
         showSuccess();
     } else {
         if (!name) {
@@ -74,11 +94,8 @@ function addUser() {
 //         document.getElementById(id).classList.add('inputEmpty');
 //         let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
 //         console.log(idBigFirstLetter);
-//         document.getElementById(`messagebox${idBigFirstLetter}`).textContent = ""; 
+//         document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "Please fill out this field"; 
 //     }
-//     else
-// {
-//     resetOutline(field);
 // }
 // }
 

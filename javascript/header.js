@@ -16,7 +16,7 @@ function renderHeader() {
 }
 
 function renderInitials() {
-    let userInitials = getInitials(users[0]['name']);
+    let userInitials = getInitials('Test');
     document.getElementById('activeUserButton').innerHTML = userInitials;
 }
 

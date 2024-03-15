@@ -1,5 +1,6 @@
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
+let selectedContacts = [];
 
 async function init() {
     renderHeader();
@@ -86,7 +87,7 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let randomColor = getRandomColor();
-        contactsList.innerHTML += getContactsListHTML(contact, randomColor);
+        contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
     }
 }
 
@@ -117,19 +118,46 @@ function filterContactNames() {
         const contact = contacts[i];
         let randomColor = getRandomColor();
         if (contact['name'].toLowerCase().includes(search)) {
-            contactsList.innerHTML += getContactsListHTML(contact, randomColor);
+            contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
         }
     }
 }
 
-function getContactsListHTML(contact, randomColor) {
+function getContactsListHTML(contact, randomColor, i) {
     return /*HTML*/ `
-                    <div class="dropDownContact">
+                    <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}')">
                         <div class="contactDetails">
                             <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
                             <div class="contactName">${contact.name}</div>
                         </div>
-                        <img src="./img/addtask/rectangle.svg" class="checkbox">
+                        <img id="checkboxNo${i}" src="./img/addtask/rectangle.svg" class="checkbox">
                     </div>
                     `
+}
+
+function selectContact(i, contactName){
+    let contact = document.getElementById(`contactNo${i}`);
+    let checkbox = document.getElementById(`checkboxNo${i}`);
+    
+    contact.classList.toggle('contactSelected');
+    let isSelected = contact.classList.contains('contactSelected');
+
+
+    if(isSelected){
+        checkbox.src = "./../img/addtask/checked.svg";
+        let selectedIndex = selectedContacts.push(contacts[i]) - 1;
+    } else {
+        checkbox.src = "./../img/addtask/rectangle.svg";
+        findSelectedIndex(contactName);
+        console.log(contactName);
+    }
+    console.log(selectedContacts);
+}
+
+function findSelectedIndex(contactName){
+    return selectedContacts.findIndex(contact => contact['name'] === contactName);
+}
+
+function selectCategory(){
+
 }

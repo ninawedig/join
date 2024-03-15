@@ -182,6 +182,7 @@ async function addContact() {
         "initials": newContactInitials
     };
     contacts.push(newContact);
+    contacts.sort();
     await setItem('contacts', JSON.stringify(contacts));
     await setItem('firstLetters', JSON.stringify(firstLetters));
     clearValues(newContactName, newContactEmail, newContactPhone);

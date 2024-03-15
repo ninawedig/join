@@ -118,7 +118,7 @@ function filterContactNames() {
         let randomColor = getRandomColor();
         if (contact['name'].toLowerCase().includes(search)) {
             let isSelected = isSelectedContact(contact);
-            
+
             contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
               
             if(isSelected){
@@ -173,5 +173,8 @@ function findSelectedIndex(contactName){
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
 
-function selectCategory(){
+function selectCategory(category){
+    let selectCategory = document.getElementById('selectTaskCategory');
+    selectCategory.innerHTML = category;
+    toggleDropDownMenu();
 }

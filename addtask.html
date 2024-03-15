@@ -85,14 +85,14 @@
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
-                            <div class="inputAssigned inputField" onclick="toggleDropDownMenu()"><span>Select task
+                            <div class="inputAssigned inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
                                     category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
                                     src="./img/addtask/arrow_drop_downaa.svg"></div>
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
                                 oninput="resetOutlineAddtask('dropDownCategory')">
                                 <div class="dropDownOption">Select task category</div>
-                                <div class="dropDownOption">Technical Task</div>
-                                <div class="dropDownOption">User Story</div>
+                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task</div>
+                                <div onclick="selectCategory('User Story')" class="dropDownOption">User Story</div>
                             </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>

@@ -155,8 +155,6 @@
     cursor: pointer;
     margin-top: 12px;
     margin-bottom: 12px;
-
-
     }
 
 .taskCategory{
@@ -204,7 +202,6 @@
 .progress{
     background-color: #4589FF;
     height: 8px;
-
     border-radius: 8px;
 }
 

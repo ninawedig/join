@@ -35,7 +35,17 @@ function renderBoard(){
         for (let index = 0; index < filterTask.length; index++) {
             const filterTasks = filterTask[index];
             
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks); 
+         
+            let category;
+            if(filterTasks['category'] == 'userStory'){
+                category = 'User Story';
+            } if(filterTasks['category'] == 'technicalTask'){
+                category = 'Technical Task';
+            }
+
+
+
+            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category); 
             renderPrio(filterTasks);
             renderTaskMember(filterTasks);
             renderSubtaskBar(filterTasks);
@@ -50,16 +60,16 @@ function renderBoard(){
  * @param {string} element - the string for the array of tasks per category
  * @returns 
  */
-function generateCardHTML(element){
+function generateCardHTML(element, category){
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${element['id']})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${element['id']}">
-            <div class="taskCategory ${element['category']}">${element['category']}</div>
+            <div class="taskCategory ${element['category']}">${category}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
                 <div class="taskDescription">${element['description']}</div>
             </div>
-            <div class="taskSubtasks">
-                <div class="progressBar">
+            <div class="taskSubtasks" id="taskSubtasks${element['id']}">
+                <div class="progressBar" id="progressBar">
                     <div class="progress" id="progressBar${element['id']}"></div>
                 </div>
                 <div class="progressInfo" id="progressInfo${element['id']}"></div>
@@ -100,9 +110,15 @@ function closeCardDetail(){
  */
 function renderCardDetail(taskId){
     let task = tasks[taskId];
+    let category;
+    if(task['category'] == 'userStory'){
+        category = 'User Story';
+    } if(task['category'] == 'technicalTask'){
+        category = 'Technical Task';
+    }
 
     document.getElementById('cardDetail').innerHTML ='';
-    document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task);
+    document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category);
     
     
     renderPrio(task);
@@ -115,10 +131,10 @@ function renderCardDetail(taskId){
  * @param {Array} task - the array and id of the choosen detailcard
  * @returns returns the HTML of the detailcard
  */
-function generateCardDetailHTML(task){
+function generateCardDetailHTML(task, category){
     return /*html*/`
         <div class="cardDetailHeader">
-            <div class="taskCategory ${task['category']}">${task['category']}</div>
+            <div class="taskCategory ${task['category']}">${category}</div>
             <div class="closeIconContainer" onclick="closeCardDetail()">
                 <img class="closeIcon" src="./img/contacts/close.svg" alt="">
             </div>                    
@@ -171,18 +187,21 @@ function renderSubtasks(task){
 }
 
 function renderSubtaskBar(task){
+    let number = task['id'];
     let subtaskArray = task['subtasks'];
     let filterTask = subtaskArray.filter(t => t['status'] == 'toDo');
     let subtaskToDo = filterTask.length;
     let totalSubtasks =subtaskArray.length;
     let taskNumber = task['id'];
-    let barProgress = 100;
+    let barProgress = 0;
 
-    if(totalSubtasks != taskNumber){
+    if(totalSubtasks >= taskNumber){
         barProgress = (subtaskToDo/totalSubtasks)*100;
     }
     
-
+    if(totalSubtasks == 0){
+        document.getElementById(`taskSubtasks${number}`).style = "display: none;";
+    }
     document.getElementById(`progressBar${taskNumber}`).style = `width: ${barProgress}%;`;
 
     document.getElementById(`progressInfo${taskNumber}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
@@ -224,8 +243,10 @@ function changeSubtaskStatus(i, takenTask){
     }
 
     renderSubtasks(task);
+    renderBoard();
     
 }
+
 
 function renderTaskMember(task){
     let member = task['assign_to'];
@@ -357,6 +378,7 @@ function renderLowHTML(){
 
 function startDragging(id){
     currentDraggedElement = id;
+    document.getElementById(id=`task${id}`).style = "transform: rotate(5deg);";
 }
 
 function allowDrop(ev){

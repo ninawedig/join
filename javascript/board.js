@@ -1,8 +1,17 @@
 
 let currentDraggedElement;
 let alreadyExecuted = false;
+let firstLetters =[];
+let contacts = [];
 
-
+async function loadContacts() {
+    firstLetters = await getItem('firstLetters')
+        .then(response => JSON.parse(response.data.value));
+    console.log('the first letters are', firstLetters);
+    contacts = await getItem('contacts')
+        .then(response => JSON.parse(response.data.value));
+    console.log('the contacts are', contacts);
+}
 
 
 function init(){
@@ -424,7 +433,7 @@ function showDropZone(inCategory){
     });
   
     document.getElementById(inCategory).innerHTML += /*html*/`
-    <div class="dragCard" style="background-color: transparent; border-radius: 24px; height: ${cardHeight}px"></div>`;
+    <div class="dragCard" style="background-color: transparent; border-radius: 24px; height: ${cardHeight}px;    margin-top: 12px;"></div>`;
   
     }
 

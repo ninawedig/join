@@ -38,6 +38,7 @@ function renderBoard(){
             document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks); 
             renderPrio(filterTasks);
             renderTaskMember(filterTasks);
+            renderSubtaskBar(filterTasks);
 
         }
         
@@ -59,9 +60,9 @@ function generateCardHTML(element){
             </div>
             <div class="taskSubtasks">
                 <div class="progressBar">
-                    <div class="progress"></div>
+                    <div class="progress" id="progressBar${element['id']}"></div>
                 </div>
-                <div class="progressInfo">1/2 Subtasks</div>
+                <div class="progressInfo" id="progressInfo${element['id']}"></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="taskMembers" id="taskMemberCard${element['id']}">
@@ -167,7 +168,24 @@ function renderSubtasks(task){
 
         
     }
+}
 
+function renderSubtaskBar(task){
+    let subtaskArray = task['subtasks'];
+    let filterTask = subtaskArray.filter(t => t['status'] == 'toDo');
+    let subtaskToDo = filterTask.length;
+    let totalSubtasks =subtaskArray.length;
+    let taskNumber = task['id'];
+    let barProgress = 100;
+
+    if(totalSubtasks != taskNumber){
+        barProgress = (subtaskToDo/totalSubtasks)*100;
+    }
+    
+
+    document.getElementById(`progressBar${taskNumber}`).style = `width: ${barProgress}%;`;
+
+    document.getElementById(`progressInfo${taskNumber}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
 }
 
 function renderSubtaskToDoSvg(i, element, takenTask){

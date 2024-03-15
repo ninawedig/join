@@ -198,7 +198,7 @@ function renderSubtasks(task){
 function renderSubtaskBar(task){
     let number = task['id'];
     let subtaskArray = task['subtasks'];
-    let filterTask = subtaskArray.filter(t => t['status'] == 'toDo');
+    let filterTask = subtaskArray.filter(t => t['status'] == 'done');
     let subtaskToDo = filterTask.length;
     let totalSubtasks =subtaskArray.length;
     let taskNumber = task['id'];

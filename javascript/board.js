@@ -106,6 +106,10 @@ function showCardDetail(taskId){
     
     document.getElementById('cardContainer').style = "display: flex";
     document.getElementById('cardContainerBackground').style = "display: flex";
+    let card =document.getElementById('cardDetail');
+    
+    card.style = "display: flex";
+
     
 }
 
@@ -115,6 +119,7 @@ function showCardDetail(taskId){
 function closeCardDetail(){
     document.getElementById('cardContainer').style = "display: none";
     document.getElementById('cardContainerBackground').style = "display: none";
+    document.getElementById('cardDetail').style = "display: none";
 }
 
 

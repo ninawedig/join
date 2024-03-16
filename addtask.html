@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summary</title>
-    <link rel="stylesheet" href="./css/summary.css">
+    <title>Add Task</title>
+    <!-- <link rel="stylesheet" href="./css/summary.css"> -->
     <link rel="stylesheet" href="./css/templates.css">
     <link rel="stylesheet" href="./css/addtask.css">
 
@@ -85,7 +85,7 @@
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
-                            <div class="inputAssigned inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
+                            <div class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
                                     category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
                                     src="./img/addtask/arrow_drop_downaa.svg"></div>
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
@@ -100,6 +100,10 @@
                         <div class="inputBox subtask">
                             <span class="typo">Subtasks</span>
                             <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
+                            <div><ul class="subTaskList" >
+                                <li>Subtask1<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
+                                <li>Subtask2<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
+                            </ul></div>
                         </div>
 
                     </form>

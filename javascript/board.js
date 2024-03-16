@@ -119,6 +119,8 @@ function closeCardDetail(){
 
 
 
+
+
 // Funktion zum Abrufen und Einsetzen der externen HTML-Datei
 async function renderAddTask(){
     const externalHtmlFile = 'addtask.html';
@@ -138,12 +140,7 @@ async function renderAddTask(){
             </div>                    
     </div>`;
     document.getElementById('cardDetail').innerHTML += desiredDiv.outerHTML;
-
-
-    // Füge das gewünschte Div in das DOM ein
-    // document.getElementById('cardDetail').innerHTML = desiredDiv.outerHTML;
-
-    // document.getElementById('cardDetail').innerHTML = htmlContent;   
+ 
 }
 
 /**

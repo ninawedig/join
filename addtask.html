@@ -21,11 +21,11 @@
     </nav>
     <div id="smallNav" class="smallNav">
     </div>
-    <main  id="addTaskMain">
+    <main>
         <h1>Add Task</h1>
-        <div class="mainContainer" id="addTaskMain">
+        <div class="mainContainer">
             <div class="mainSection">
-                <div action="" class="sectionLeft">
+                <form action="" class="sectionLeft">
 
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
@@ -55,12 +55,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <div class="border"></div>
 
                 <div class="sectionRight">
-                    <div action="">
+                    <form action="">
                         <div class="inputBox date">
                             <div class="titleStar">
                                 <span class="typo">Due date</span><span class="typo typoRed">*</span>
@@ -84,8 +84,8 @@
 
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
-                            </div> 
-                            <div id="category" class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
+                            </div>
+                            <div class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
                                     category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
                                     src="./img/addtask/arrow_drop_downaa.svg"></div>
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
@@ -106,7 +106,7 @@
                             </ul></div>
                         </div>
 
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="lowerSection">
@@ -114,10 +114,10 @@
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
                 </div>
                 <div class="buttonsRight">
-                    <button onclick="clearFields()" class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                            alt="" ></button>
-                    <button onclick="addtask()" class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
-                            ></button>
+                    <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
+                            alt="" onclick="clearFields()"></button>
+                    <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
+                            onclick="addtask()"></button>
                 </div>
             </div>
         </div>

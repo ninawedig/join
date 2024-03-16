@@ -112,7 +112,7 @@ main {
     gap: 16px;
 }
 
-.contactSelected{
+.contactSelected {
     background-color: #2A3647 !important;
     color: white;
 }
@@ -221,7 +221,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-size: 24px 24px;
 }
 
-
+.inputSubtaskContainer {
+    display: flex;
+    position: relative;
+}
 
 .inputSubtask {
     height: 48px;
@@ -229,46 +232,73 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    background-image: url(/img/addtask/Subtasks\ icons11.svg);
-    background-repeat: no-repeat;
-    background-position: 95%;
-    background-size: 24px 24px;
 }
 
-.subTaskList{
+.subtaskimg {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    right: 13px;
+    margin-top: 12px;
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.subtaskimg:hover {
+    background-color: #F9F9F9;
+}
+
+.subTaskList {
     list-style-position: inside;
+
 }
 
-.subTaskList li{
+.subTaskList li {
     margin-bottom: 8px;
     cursor: pointer;
-    padding: 4px 16px 4px 32px;
+    padding: 6.5px 16px 6.5px 32px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.subTasksImgContainer{
+.subTasksImgContainer {
     display: none;
-    align-items: center;
     gap: 4px;
+    float: right;
 }
 
-.subTaskList li:hover{
-    background-color: #D1D1D1;
+.subTaskList li:hover {
+    background-color: #eeeeee;
 }
 
-.subTaskList li:hover .subTasksImgContainer{
+.subTaskList li:hover .subTasksImgContainer {
+    display: inline-flex;
+}
+
+.editSubtasks {
     display: flex;
 }
 
+.editSubtasksContainer {
+    background-color: white;
+    padding: 6.5px 23px 6.5px 32px;
+    border: 1px solid var(--secondarycolor);
+    border-radius: 10px;
+}
 
-
-.subTaskVerticalLine{
+.subTaskVerticalLine {
     height: 24px;
     width: 1px;
     background-color: #A8A8A8;
+}
+
+.editSubtaskIcon {
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.editSubtaskIcon:hover {
+    background-color: #F9F9F9;
 }
 
 .typo {
@@ -368,7 +398,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .dropDownMenuArrow {
     border-radius: 50px;
     position: absolute;
-    right: 8px;
+    right: 13px;
     top: 10px;
     z-index: 999;
 }
@@ -498,6 +528,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .mainSection {
         flex-direction: column;
+        margin-bottom: 175px;
     }
 
     .border {
@@ -521,27 +552,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         bottom: 112px;
     }
 
-    .category{
+    .category {
         bottom: 112px;
     }
 
-    .assigned{
+    .assigned {
         position: relative;
         top: 336px;
     }
 
-    .inputAssigned{
+    .inputAssigned {
         z-index: 1;
+    }
+
+    .section-left {
+        align-items: flex-start;
     }
 }
 
-@media (max-width: 940px){
+@media (max-width: 940px) {
     main h1 {
         padding: 48px 0 8px 0px;
     }
+
     main {
         padding-left: 16px;
-        padding-right: 16px; 
+        padding-right: 16px;
     }
 }
 
@@ -549,10 +585,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .buttonClear {
         display: none;
     }
-    
-    .buttonsRight{
+
+    .buttonsRight {
         width: auto;
     }
+
     .lowerSection {
         z-index: 999;
     }
@@ -602,17 +639,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .typoSmall {
         font-size: 12px;
     }
-
-    .inputBox {
-        width: 300px;
-    }
 }
 
-@media (max-width: 480px){
-    .inputField {
-        max-width: 300px;
-    }
-
+@media (max-width: 480px) {
     .prioButtonBox {
         flex-direction: column;
         gap: 8px;
@@ -622,19 +651,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .prioButton {
         width: 200px;
     }
-}
 
-@media (max-width: 440px){
-    main h1 {
-        padding-left: 6px;
+    .assigned {
+        top: 472px;
     }
-}
 
-@media (max-width: 330px){
     .inputField {
         max-width: 295px;
     }
+
+    .sectionLeft {
+        width: auto;
+        align-items: flex-start;
+    }
+
     .inputBox {
-        width: 295px;
+        width: auto;
+    }
+}
+
+@media (max-width: 440px) {
+    main h1 {
+        padding-left: 6px;
     }
 }

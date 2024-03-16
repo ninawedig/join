@@ -47,8 +47,9 @@
                                 to asign</span><img onclick="closeContactsDropDown()" id="assignedDropDownArrow"
                                 class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
                         <div id="contactsDropDownMenuContainer" class="dropDownAssignedOpened inputField noDisplay">
-                            <input onkeyup="filterContactNames()" id="searchContact" type="text" class="dropDownOption searchContactField"><img
-                                onclick="closeContactsDropDown()" id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
+                            <input onkeyup="filterContactNames()" id="searchContact" type="text"
+                                class="dropDownOption searchContactField"><img onclick="closeContactsDropDown()"
+                                id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
                                 src="./img/addtask/arrow_drop_downaa.svg">
 
                             <div id="contactsList" class="contactsDropDownMenu">
@@ -85,13 +86,15 @@
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
-                            <div class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task
+                            <div class="inputCategory inputField" onclick="toggleDropDownMenu()"><span
+                                    id="selectTaskCategory">Select task
                                     category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
                                     src="./img/addtask/arrow_drop_downaa.svg"></div>
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
                                 oninput="resetOutlineAddtask('dropDownCategory')">
                                 <div class="dropDownOption">Select task category</div>
-                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task</div>
+                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task
+                                </div>
                                 <div onclick="selectCategory('User Story')" class="dropDownOption">User Story</div>
                             </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
@@ -99,11 +102,14 @@
 
                         <div class="inputBox subtask">
                             <span class="typo">Subtasks</span>
-                            <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
-                            <div><ul class="subTaskList" >
-                                <li>Subtask1<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
-                                <li>Subtask2<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
-                            </ul></div>
+                            <div class="inputSubtaskContainer"><input minlength="3" id="inputSubtask" class="inputSubtask inputField"
+                                    type="text" placeholder="Add new subtask"><img onclick="addSubtask()"
+                                    id="addSubtaskButton" class="subtaskimg" src="./img/addtask/addsubtask.svg" alt="">
+                            </div>
+                            <div>
+                                <ul id="subtaskList" class="subTaskList">
+                                </ul>
+                            </div>
                         </div>
 
                     </form>

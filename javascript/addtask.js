@@ -108,8 +108,7 @@ function getRandomColor() {
 }
 
 function filterContactNames() {
-    let search = document.getElementById('searchContact').value;
-    search = search.toLowerCase();
+    let search = document.getElementById('searchContact').value.toLowerCase();
 
     let contactsList = document.getElementById('contactsList');
     contactsList.innerHTML = '';
@@ -118,10 +117,23 @@ function filterContactNames() {
         const contact = contacts[i];
         let randomColor = getRandomColor();
         if (contact['name'].toLowerCase().includes(search)) {
+            let isSelected = isSelectedContact(contact);
+
             contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
+              
+            if(isSelected){
+                document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
+                document.getElementById(`contactNo${i}`).classList.toggle('contactSelected');
+            }
         }
     }
 }
+
+function isSelectedContact(contact) {
+    return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
+}
+
+
 
 function getContactsListHTML(contact, randomColor, i) {
     return /*HTML*/ `
@@ -145,19 +157,24 @@ function selectContact(i, contactName){
 
     if(isSelected){
         checkbox.src = "./../img/addtask/checked.svg";
-        let selectedIndex = selectedContacts.push(contacts[i]) - 1;
+        selectedContacts.push(contacts[i]) - 1;
+        console.log('you selected', selectedContacts);
     } else {
         checkbox.src = "./../img/addtask/rectangle.svg";
-        findSelectedIndex(contactName);
-        console.log(contactName);
+        let selectedContactIndex = findSelectedIndex(contactName);
+        selectedContacts.splice(selectedContactIndex, 1);
+        console.log(selectedContacts.length);
     }
-    console.log(selectedContacts);
 }
+
+
 
 function findSelectedIndex(contactName){
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
 
-function selectCategory(){
-
+function selectCategory(category){
+    let selectCategory = document.getElementById('selectTaskCategory');
+    selectCategory.innerHTML = category;
+    toggleDropDownMenu();
 }

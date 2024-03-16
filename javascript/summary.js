@@ -60,7 +60,7 @@ function renderDueDate() {
  * This function renders the greeting name
  */
 function renderGreetingName() {
-    let greetingName = users[0]['name'];
+    let greetingName = "CHANGE ME";
     let greetingNameText = document.getElementById('greetingName');
     greetingNameText.innerHTML = greetingName;
 }

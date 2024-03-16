@@ -29,10 +29,10 @@ async function init() {
  */
 async function loadContacts() {
     firstLetters = await getItem('firstLetters')
-        .then(response => JSON.parse(response.data.value));
+        .then(response => JSON.parse(response));
     console.log('the first letters are', firstLetters);
     contacts = await getItem('contacts')
-        .then(response => JSON.parse(response.data.value));
+        .then(response => JSON.parse(response));
     console.log('the contacts are', contacts);
 }
 

@@ -664,10 +664,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         width: auto;
         align-items: flex-start;
     }
-
-    .inputBox {
-        width: auto;
-    }
 }
 
 @media (max-width: 440px) {

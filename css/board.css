@@ -1,4 +1,7 @@
-
+h1{
+    font-size: 61px;
+    font-weight: 700;
+}
 .button{
     width: 160px;
     height: 48px;
@@ -11,6 +14,7 @@
     font-size: 21px;
     line-height: 25.2px;
     transition: 100ms all ease-in-out;
+    cursor: pointer;
 }
 .button:hover{
     background-color: var(--secondarycolor);
@@ -47,6 +51,7 @@
 }
 .mobileTaskActivities{
     display: none;
+    cursor: pointer;
 }
 .findTask{
     width: 312px;
@@ -132,7 +137,7 @@
     flex-grow: 1;
     flex-wrap: wrap;
 }
-.category{
+.categoryBoard{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -299,7 +304,6 @@
     align-items: center;
 }
 .closeIconContainer {
-    align-self: flex-end;
     cursor: pointer;
     height: 32px;
     width: 32px;
@@ -398,6 +402,9 @@
 .findTask{
     margin-top: 40px;
     width: 396px;
+}
+h1 {
+    font-size: 47px !important;
 }
 }
 

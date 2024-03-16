@@ -18,7 +18,7 @@ function showSmallMenu() {
 function addtask() {
     let title = document.getElementById('title');
     let duedate = document.getElementById('duedate');
-    let category = document.getElementById('dropDownCategory');
+    let category = document.getElementById('category');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
@@ -26,7 +26,6 @@ function addtask() {
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
         title.classList.add('inputEmpty');
-
     } else {
         messageBoxTitle.textContent = "";
     }
@@ -34,20 +33,18 @@ function addtask() {
     if (!duedate.value) {
         messageBoxDuedate.textContent = "Please fill out this field.";
         duedate.classList.add('inputEmpty');
-
     } else {
         messageBoxDuedate.textContent = "";
     }
 
-    if (category.value === 'x') {
+    if (category.value == 'Select task category') {
         messageBoxCategory.textContent = "Please select a category.";
         category.classList.add('inputEmpty');
-
     } else {
         messageBoxCategory.textContent = "";
     }
-    if (title.value && duedate.value && category.value !== 'x') {
 
+    if (title.value && duedate.value && category.value !== 'x') {
         window.location.href = "board.html";
     }
 }
@@ -61,7 +58,8 @@ function resetOutlineAddtask(id) {
 
 function clearFields() {
     document.getElementById('title').value = "";
-
+    document.getElementById('description').value = "";
+    document.getElementById('duedate').value = "";
 }
 
 function toggleDropDownMenu() {

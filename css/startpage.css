@@ -10,7 +10,6 @@
     width: 100px;
     margin-top: 80px;
     margin-left: 77px;
-
 }
 
 .registerSection {
@@ -57,23 +56,24 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.loginSection {
-    width: 652px;
-    height: 493px;
-
-    padding: 48px 115px 48px 115px;
-    border-radius: 30px;
-    gap: 32px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 14px 3px #0000000A;
-}
-
 .loginSectionDiv {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 149px;
     margin-bottom: 190px;
+    width: 100%;
+    margin-right: 0px;
+}
+
+.loginSection {
+    width: 652px;
+    height: 493px;
+    padding: 48px 115px 48px 115px;
+    border-radius: 30px;
+    gap: 32px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px #0000000A;
 }
 
 .headlineSection {
@@ -162,8 +162,6 @@ input[type=checkbox]:checked{
  .inputEmpty{
     outline: 1px solid red;
  }
- 
-
 
 ::placeholder {
     color: #D1D1D1;
@@ -187,6 +185,16 @@ input[type=checkbox]:checked{
     background-image: url(/img/login/visibility_off.svg);
 }
 
+.messagebox {
+    color: red;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 17px;
+    height: 10px;
+   margin-left: 5px;
+}
+
 .remember {
     height: 24px;
     width: 422px;
@@ -202,11 +210,6 @@ input[type=checkbox]:checked{
     align-items: center;
     justify-content: flex-start;
     margin-top: 20px;
-}
-
-
-.checkbox {
-    cursor: pointer;
 }
 
 .loginButtons {
@@ -287,7 +290,6 @@ input[type=checkbox]:checked{
     letter-spacing: 0em;
     text-align: left;
     color: #A8A8A8;
-
 }
 
 .privacyPolicy {
@@ -307,7 +309,6 @@ input[type=checkbox]:checked{
     color: #29ABE2;
     font-weight: 700;
 }
-
 
 .logoStartscreen {
     position: absolute;
@@ -341,7 +342,6 @@ input[type=checkbox]:checked{
     animation-duration: 1.5s;
     animation-delay: 1s;
     opacity: 1;
-
 }
 
 .logoStartscreenWhite {
@@ -352,17 +352,6 @@ input[type=checkbox]:checked{
     display: none;
     overflow-x: hidden;
 }
-
-.messagebox {
-    color: red;
-    font-size: 10px;
-    font-weight: 400;
-    margin-top: 5px;
-    margin-bottom: 17px;
-    height: 10px;
-   margin-left: 5px;
-}
-
 
 @keyframes logo-animation {
     from {
@@ -394,11 +383,7 @@ input[type=checkbox]:checked{
     }
 }
 
-@media (max-width: 1200px) {}
-
-
 @media (max-width: 1000px) {
-
     .loginSectionDiv {
         margin-top: 265.5px;
         margin-bottom: 148.5px;
@@ -415,7 +400,6 @@ input[type=checkbox]:checked{
         flex-direction: row;
         justify-content: center;
         align-items: center;
-
     }
 
     .registerSection {
@@ -428,29 +412,23 @@ input[type=checkbox]:checked{
         justify-content: center;
         margin-top: 0px;
         margin-right: 0%;
-    
     }
-
 }
 
 @media (max-width: 800px) {
-
     .loginSection {
         width: 550px;
         height: 493px;
         padding-left: 5%;
         padding-right: 5%;
-
     }
 
     .input {
         width: 100%;
-
     }
 
     .inputFields {
         width: 100%;
-
     }
 
     .inputMail {
@@ -464,20 +442,17 @@ input[type=checkbox]:checked{
     .loginButtons {
         gap: 20px;
     }
-
 }
 
 @media (max-width: 620px) {
     body {
-        width: fit-content;
-
+      margin: 0px;
     }
 
     .loginSectionDiv {
         margin-top: 205.5px;
         margin-bottom: 57.5px;
     }
-
 
     .logoStartscreen {
         display: none;
@@ -501,7 +476,6 @@ input[type=checkbox]:checked{
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-
     }
 
     @keyframes logo-animation {
@@ -530,6 +504,10 @@ input[type=checkbox]:checked{
 
     .startscreen {
         background-color: #2A3647;
+    }
+
+    .loginSectionDiv {
+        width: 100%;
     }
 
     .loginSection {
@@ -575,7 +553,6 @@ input[type=checkbox]:checked{
         margin-top: 32px;
         margin-left: 50%;
         transform: translateX(-50%);
-
     }
 
     .buttonLogin {

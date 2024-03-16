@@ -12,11 +12,8 @@
     margin-left: 77px
 }
 
-
 .form {
     padding: 32px 88px 48px 88px;
-    
-
 }
 
 .signupSectionDiv {
@@ -30,7 +27,6 @@
 .signupSection {
     width: 598px;
     height: 630px;
-
     border-radius: 30px;
     gap: 32px;
     background: #FFFFFF;
@@ -55,7 +51,17 @@
     justify-content: center;
     flex-direction: column;
     width: 422px;
+}
 
+.headlineSignup {
+    width: 315px;
+    height: 73px;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: black;
 }
 
 .arrow {
@@ -72,24 +78,12 @@
     width: 35px;
     background-color: #F6F7F8;
     border-radius: 50%;
-
 }
 
 .borderSignup {
     width: 150px;
     height: 3px;
     background-color: #29ABE2;
-}
-
-.headlineSignup {
-    width: 315px;
-    height: 73px;
-    font-size: 61px;
-    font-weight: 700;
-    line-height: 73px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: black;
 }
 
 .inputFields {
@@ -114,16 +108,14 @@
     color: black;
     margin-bottom: 0px;
     cursor: pointer;
-    
 }
 
- .inputEmpty{
+.inputEmpty {
     outline: 1px solid red;
- }
+}
 
 ::placeholder {
     color: #D1D1D1;
-
 }
 
 .inputName {
@@ -166,7 +158,7 @@
     margin-top: 165px;
 }
 
-input[type=checkbox]{
+input[type=checkbox] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -184,12 +176,12 @@ input[type=checkbox]:hover {
     background-color: #e5ebf2;
 }
 
-input[type=checkbox]:checked{
+input[type=checkbox]:checked {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background: url('/img/login/checked.svg') 0 0 no-repeat;
-    background-size: contain; 
+    background-size: contain;
     height: 16px;
     width: 16px;
     padding: 0;
@@ -241,6 +233,35 @@ input[type=checkbox]:checked{
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.messagebox {
+    color: red;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 17px;
+    display: block;
+    z-index: 100;
+    width: 100%;
+    height: 10px;
+    padding-left: 5px;
+}
+
+.messageboxSmall {
+    color: red;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    z-index: 100;
+    height: 10px;
+}
+
+.messageboxDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .policies {
     display: flex;
     flex-direction: row;
@@ -257,7 +278,6 @@ input[type=checkbox]:checked{
     letter-spacing: 0em;
     text-align: left;
     color: #A8A8A8;
-
 }
 
 .privacyPolicy {
@@ -279,8 +299,7 @@ input[type=checkbox]:checked{
 }
 
 .successButtonHide {
-   display: none;
-
+    display: none;
 }
 
 .successBackgroundShow {
@@ -302,8 +321,8 @@ input[type=checkbox]:checked{
 
 .successBackgroundHide {
     display: none;
-   
 }
+
 .successButtonDiv {
     display: flex;
     align-items: center;
@@ -332,49 +351,15 @@ input[type=checkbox]:checked{
     display: flex;
     align-items: center;
     justify-content: center;
-   
-}
-
-.messagebox {
-    color: red;
-    font-size: 10px;
-    font-weight: 400;
-    margin-top: 5px;
-    margin-bottom: 17px;
-    display: block;
-    z-index: 100;
-    width: 100%;
-    height: 10px;
-    padding-left: 5px;
-}
-
-.messageboxSmall {
-    color: red;
-    font-size: 10px;
-    font-weight: 400;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    
-    z-index: 100;
-   
-    height: 10px;
-}
-
-.messageboxDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 @keyframes logo-animation {
     from {
         margin-bottom: -200%;
-   
     }
 
     to {
         margin-bottom: 0%;
-        
     }
 }
 
@@ -384,24 +369,19 @@ input[type=checkbox]:checked{
     }
 
     to {
-     opacity: 1;
+        opacity: 1;
     }
 }
-
-
 
 @media (max-width: 1200px) {
     .signupSectionDiv {
         margin-top: 63.5px;
-
     }
 }
 
 @media (max-width: 620px) {
     body {
-        width: fit-content;
-
-
+        margin: 0px;
     }
 
     .signupSectionDiv {
@@ -427,8 +407,6 @@ input[type=checkbox]:checked{
         gap: 8px;
     }
 
-    
-
     .inputFields {
         width: 100%;
         height: 296px;
@@ -450,7 +428,6 @@ input[type=checkbox]:checked{
         margin-top: 0px;
         gap: 24px;
         justify-content: center;
-
     }
 
     .arrow {
@@ -464,13 +441,10 @@ input[type=checkbox]:checked{
 
     .headlineSection {
         gap: 5px;
-
     }
 
     .headlineSignup {
         font-size: 47px;
-
-
     }
 
     .buttonSignup {
@@ -484,5 +458,4 @@ input[type=checkbox]:checked{
     .signupButtonDiv {
         margin-top: 20px;
     }
-
 }

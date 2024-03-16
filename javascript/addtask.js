@@ -2,6 +2,7 @@ const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
 let selectedContacts = [];
 let subtasks = [];
+let assignedContacts = [];
 
 async function init() {
     renderHeader();
@@ -136,7 +137,7 @@ function isSelectedContact(contact) {
 
 function getContactsListHTML(contact, randomColor, i) {
     return /*HTML*/ `
-                    <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}')">
+                    <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
                         <div class="contactDetails">
                             <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
                             <div class="contactName">${contact.name}</div>
@@ -146,7 +147,7 @@ function getContactsListHTML(contact, randomColor, i) {
                     `
 }
 
-function selectContact(i, contactName) {
+function selectContact(i, contactName, contactInitials) {
     let contact = document.getElementById(`contactNo${i}`);
     let checkbox = document.getElementById(`checkboxNo${i}`);
 
@@ -158,11 +159,27 @@ function selectContact(i, contactName) {
         checkbox.src = "./../img/addtask/checked.svg";
         selectedContacts.push(contacts[i]) - 1;
         console.log('you selected', selectedContacts);
+        addToAssignedList(i, contactInitials);
     } else {
         checkbox.src = "./../img/addtask/rectangle.svg";
         let selectedContactIndex = findSelectedIndex(contactName);
         selectedContacts.splice(selectedContactIndex, 1);
         console.log(selectedContacts.length);
+    }
+}
+
+function addToAssignedList(i, contactInitials){
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    assignedContacts.push(contactInitials);
+    assignedContactsList.innerHTML = '';
+
+    for (let i = 0; i < assignedContacts.length; i++) {
+        const assignedContact = assignedContacts[i];
+        let randomColor = getRandomColor();
+        assignedContactsList.innerHTML += `
+        <div class="contactProfileBadge" style="background-color: ${randomColor}">${assignedContact}</div>
+        
+        `;
     }
 }
 
@@ -180,9 +197,11 @@ function selectCategory(category) {
 
 function addSubtask() {
     let inputSubtask = document.getElementById('inputSubtask');
-    subtasks.push(inputSubtask.value);
-    renderSubtasks();
-    inputSubtask.value = '';
+    if (inputSubtask.value) {
+        subtasks.push(inputSubtask.value);
+        renderSubtasks();
+        inputSubtask.value = '';
+    }
 }
 
 function renderSubtasks() {

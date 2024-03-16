@@ -65,6 +65,11 @@ main {
     padding-top: 0 !important;
 }
 
+.assignedContactsList{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .searchContactField {
     border: 1px solid var(--secondarycolor);
     display: flex;

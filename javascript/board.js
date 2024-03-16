@@ -484,5 +484,6 @@ function findTaskFunction(){
             searchArray.push(element);
         }
     }
+    event.preventDefault();
     renderBoard(searchArray);
 }

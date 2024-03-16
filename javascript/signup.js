@@ -19,14 +19,7 @@ async function addUser() {
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmpassword').value;
     let policy = document.querySelector('.checkbox').checked;
-    let user = {
-        'name': name,
-        'email': email,
-        'password': password,
-
-    }
-
-
+    let user = {'name': name,'email': email,'password': password}
     let messageBoxName = document.getElementById('messageboxName');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
@@ -41,8 +34,6 @@ async function addUser() {
         } else {
             messageBoxPassword.textContent = "";
         }
-
-
         users.push(user);
         await setItem('users', JSON.stringify(users));
         showSuccess();
@@ -52,53 +43,32 @@ async function addUser() {
             document.getElementById('name').classList.add('inputEmpty');
         } else {
             messageBoxName.textContent = "";
-
         }
         if (!email) {
             messageBoxEmail.textContent = "Please fill out this field.";
             document.getElementById('email').classList.add('inputEmpty');
         } else {
             messageBoxEmail.textContent = "";
-
         }
         if (!password) {
             messageBoxPassword.textContent = "Please fill out this field.";
             document.getElementById('password').classList.add('inputEmpty');
         } else {
             messageBoxPassword.textContent = "";
-
         }
         if (!confirmPassword) {
             messageboxConfirmpassword.textContent = "Please fill out this field.";
             document.getElementById('confirmpassword').classList.add('inputEmpty');
         } else {
             messageBoxPassword.textContent = "";
-
         }
         if (!policy) {
             messageBoxPolicy.textContent = "Please confirm the Privacy policy.";
-
         } else {
             messageBoxPolicy.textContent = "";
         }
     }
 }
-
-// checkField(name);
-// checkField(email);
-// checkField(password);
-// checkField(confirmPassword);
-
-// function checkField(field){
-//     if(!field) {
-//         document.getElementById(id).classList.add('inputEmpty');
-//         let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
-//         console.log(idBigFirstLetter);
-//         document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "Please fill out this field"; 
-//     }
-// }
-// }
-
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
@@ -111,6 +81,8 @@ function checkPolicy() {
     let checkbox = document.querySelector('.checkbox');
     if (checkbox.checked) {
         document.getElementById('messageboxPolicy').textContent = "";
+        document.getElementById('checkbox').classList.remove('input[type=checkbox]')
+        document.getElementById('checkbox').classList.add('input[type=checkbox]:checked')
     }
 }
 

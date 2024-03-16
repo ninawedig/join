@@ -1,10 +1,11 @@
-
+let storedLogins = [];
 
 function login() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
+    let checkbox = document.getElementById('checkbox');
 
     if (!emailInput.value) {
         messageBoxEmail.textContent = "Please fill out this field.";
@@ -12,20 +13,19 @@ function login() {
     } else {
         messageBoxEmail.textContent = "";
     }
-
     if (!passwordInput.value) {
         messageBoxPassword.textContent = "Please fill out this field.";
         document.getElementById('password').classList.add('inputEmpty');
     } else {
         messageBoxPassword.textContent = "";
     }
-
     if (emailInput.value && passwordInput.value) {
         let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
         if (user) {
             openSummaryPage();
             if (checkbox.checked) {
-                rememberMe();
+                saveToLocalStorage();
+                changeIcon();
             }
         } else {
             messageBoxPassword.textContent = "Wrong password. Please try again.";
@@ -34,12 +34,39 @@ function login() {
     }
 }
 
+function saveToLocalStorage() {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let loginData = {
+        'email': email,
+        'password': password,
+    }
+    storedLogins.push(loginData);
+    let storedLoginsAsString = JSON.stringify(storedLogins);
+    localStorage.setItem('key', storedLoginsAsString);
+}
+
+function loadLocalStorage() {
+    let storedLoginsAsString = localStorage.getItem('key');
+    storedLogins = JSON.parse(storedLoginsAsString);
+    if (storedLogins.length > 0) {
+        let lastLogin = storedLogins[storedLogins.length - 1];
+
+        document.getElementById('email').value = lastLogin.email;
+        document.getElementById('password').value = lastLogin.password;
+    }
+}
+
+function changeIcon() {
+    document.getElementById('checkbox').classList.remove('input[type=checkbox]')
+    document.getElementById('checkbox').classList.add('input[type=checkbox]:checked')
+}
+
 function guestLogin() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
-    
 
     if (!emailInput.value) {
         messageBoxEmail.textContent = "Please fill out this field.";
@@ -47,20 +74,17 @@ function guestLogin() {
     } else {
         messageBoxEmail.textContent = "";
     }
-
     if (!passwordInput.value) {
         messageBoxPassword.textContent = "Please fill out this field.";
         document.getElementById('password').classList.add('inputEmpty');
     } else {
         messageBoxPassword.textContent = "";
     }
-
     if (emailInput.value && passwordInput.value) {
-            openSummaryPage();
-       
-    }}
+        openSummaryPage();
 
-
+    }
+}
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
@@ -68,17 +92,6 @@ function resetOutline(id) {
     console.log(idBigFirstLetter);
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
-
-function rememberMe() {
-    let emailInput = document.getElementById('email');
-    let passwordInput = document.getElementById('password');
-    emailInput.style.autocomplete = 'on';
-    passwordInput.style.autocomplete = 'on';
-    localStorage.setItem('email', emailInput.value);
-    localStorage.setItem('password', passwordInput.value);
-}
-
-// Funktion, ob irgendwas im Local storage gespeichert ist, dann automatisch ausfüllen
 
 function openSummaryPage() {
     window.location.href = "summary.html";

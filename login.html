@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body onload="renderUsers()">
+<body onload="renderUsers();loadLocalStorage()">
     <div>
         <img class="logoLogin" src="./img/login/Capa 2.svg" alt="">
     </div>
@@ -29,19 +29,21 @@
             </div>
             <form id="loginForm" onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutline('email')">
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off"
+                        oninput="resetOutline('email')">
                     <div id="messageboxEmail" class="messagebox"></div>
                     <input class="input inputPassword" type="password" placeholder="Password" id="password"
                         autocomplete="off" oninput="resetOutline('password')">
                     <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">
-                    <input class="checkbox" type="checkbox" id="checkbox" onclick="rememberMe()">
+                    <input class="checkbox" type="checkbox" id="checkbox">
                     <span>Remember me</span>
                 </div>
                 <div class="loginButtons">
                     <button type="submit" class="buttonLogin">Log In</button>
-                    <button type="button" class="buttonGuest" id="loginButton" onclick="guestLogin()">Guest Log In</button>
+                    <button type="button" class="buttonGuest" id="loginButton" onclick="guestLogin()">Guest Log
+                        In</button>
                 </div>
             </form>
         </div>
@@ -59,7 +61,6 @@
     <script src="./javascript/storage.js"></script>
     <script src="./javascript/signup.js"></script>
     <script src="./javascript/login.js"></script>
-    
-
 </body>
+
 </html>

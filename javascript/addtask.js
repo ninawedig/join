@@ -1,3 +1,5 @@
+let tasks = [];
+
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
 let selectedContacts = [];
@@ -17,13 +19,28 @@ function showSmallMenu() {
     smallMenu.classList.toggle('noDisplay');
 }
 
-function addtask() {
+async function loadTasks() {
+    try {
+        tasks = JSON.parse(await getItem('tasks'))
+    }
+    catch (e) {
+        console.info('Could not load tasks')
+    }
+}
+
+async function addtask() {
     let title = document.getElementById('title');
     let duedate = document.getElementById('duedate');
+    let description = document.getElementById('description');
     let category = document.getElementById('selectTaskCategory');
+    let categoryframe = document.getElementById('category');
+    let subtask = document.getElementById('inputSubtask');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
+    let technicalTask = document.getElementById('technicalTask');
+    let userStory = document.getElementById('userStory');
+    let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
 
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
@@ -41,13 +58,16 @@ function addtask() {
 
     if (category.innerHTML == 'Select task category') {
         messageBoxCategory.textContent = "Please select a category.";
-        category.classList.add('inputEmpty');
+        categoryframe.classList.add('inputEmpty');
     } else {
         messageBoxCategory.textContent = "";
-        console.log(category.innerHTML)
+
     }
 
-    if (title.value && duedate.value && category.innerHTML !== 'x') {
+    if (title.value && duedate.value) {
+        
+        tasks.push(task);
+        await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";
     }
 }

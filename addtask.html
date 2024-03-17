@@ -88,12 +88,10 @@
                             </div> 
                             <div id="category" class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
                                     src="./img/addtask/arrow_drop_downaa.svg"></div>
-                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
-                                oninput="resetOutlineAddtask('dropDownCategory')">
+                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
                                 <div class="dropDownOption">Select task category</div>
-                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task
-                                </div>
-                                <div onclick="selectCategory('User Story')" class="dropDownOption">User Story</div>
+                                <div id="technicalTask" onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task</div>
+                                <div id="userStory" onclick="selectCategory('User Story')" class="dropDownOption">User Story</div>
                             </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>
@@ -119,10 +117,10 @@
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
                 </div>
                 <div class="buttonsRight">
-                    <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                            alt="" onclick="clearFields()"></button>
-                    <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
-                            onclick="addtask()"></button>
+                    <button onclick="clearFields()" class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
+                            alt="" ></button>
+                    <button onclick="addtask()" class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
+                            ></button>
                 </div>
             </div>
         </div>

@@ -63,6 +63,7 @@ h1{
     align-items: center;
     justify-content: space-between;
     background-color: white;
+    flex-direction: row !important;
 }
 .findTaskTextarea{
     box-sizing: border-box;

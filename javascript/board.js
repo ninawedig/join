@@ -2,17 +2,17 @@
 let currentDraggedElement;
 let alreadyExecuted = false;
 
-async function loadContacts() {
-    firstLetters = await getItem('firstLetters')
-        .then(response => JSON.parse(response.data.value));
-    console.log('the first letters are', firstLetters);
-    contacts = await getItem('contacts')
-        .then(response => JSON.parse(response.data.value));
-    console.log('the contacts are', contacts);
-}
+// async function loadContacts() {
+//     firstLetters = await getItem('firstLetters')
+//         .then(response => JSON.parse(response.data.value));
+//     console.log('the first letters are', firstLetters);
+//     contacts = await getItem('contacts')
+//         .then(response => JSON.parse(response.data.value));
+//     console.log('the contacts are', contacts);
+// }
 
 
-function init(){
+function init1(){
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -100,6 +100,7 @@ function generateCardHTML(element, category){
 function showCardDetail(taskId){
     if(taskId == 'addTask'){
         renderAddTask();
+        init();
     } if(taskId >= 0){
         renderCardDetail(taskId);
     }

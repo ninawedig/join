@@ -56,20 +56,26 @@ async function addtask() {
         messageBoxDuedate.textContent = "";
     }
 
-    if (category.innerHTML == 'Select task category') {
+    if (technicalTask.checked || userStory.checked) {
+        messageBoxCategory.textContent = "";
+       
+    } else {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
-    } else {
-        messageBoxCategory.textContent = "";
-
     }
 
-    if (title.value && duedate.value) {
-        
+
+    if (title.value && duedate.value && (technicalTask.checked || userStory.checked)) {
         tasks.push(task);
         await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";
     }
+}
+
+function selectCategory(category) {
+    let selectCategory = document.getElementById('selectTaskCategory');
+    selectCategory.innerHTML = category;
+    toggleDropDownMenu();
 }
 
 function resetOutlineAddtask(id) {
@@ -210,11 +216,6 @@ function findSelectedIndex(contactName) {
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
 
-function selectCategory(category) {
-    let selectCategory = document.getElementById('selectTaskCategory');
-    selectCategory.innerHTML = category;
-    toggleDropDownMenu();
-}
 
 function addSubtask() {
     let inputSubtask = document.getElementById('inputSubtask');

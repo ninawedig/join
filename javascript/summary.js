@@ -24,6 +24,7 @@ async function initSummary() {
     makeNavbarActive('summary');
     makeSmallNavbarActive('summarySmall');
     await loadUsers();
+    renderGreeting();
     renderHeader();
     getGreetingName();
 }
@@ -63,7 +64,7 @@ function getGreetingName(){
     console.log(activeUser.name);
     renderGreetingName(activeUser.name);
     } else{
-        renderGreetingName('guest');
+        renderGreetingName('');
     }
 }
 
@@ -80,15 +81,29 @@ function renderGreetingName(greetingName) {
  * @returns the greeting message
  */
 function getGreeting() {
+    const activeUser = users.find(user => user.active === true);
     let currentTime = new Date();
     let currentHour = currentTime.getHours();
     let greetingMessage;
     if (currentHour >= 5 && currentHour < 12) {
+        if (activeUser){
         greetingMessage = "Good morning,"
+        } else {
+        greetingMessage = "Good morning"
+        }
     } else if (currentHour >= 12 && currentHour < 18) {
-        greetingMessage = "Good afternoon,"
+        if (activeUser){
+            greetingMessage = "Good afternoon,"
+            } else {
+            greetingMessage = "Good afternoon"
+            }
+        
     } else {
-        greetingMessage = "Good evening,"
+        if (activeUser){
+            greetingMessage = "Good evening,"
+            } else {
+            greetingMessage = "Good evening"
+            }
     }
     return greetingMessage;
 }

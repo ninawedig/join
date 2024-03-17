@@ -19,7 +19,7 @@ async function addUser() {
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmpassword').value;
     let policy = document.querySelector('.checkbox').checked;
-    let user = {'name': name,'email': email,'password': password}
+    let user = {'name': name,'email': email,'password': password, active: false}
     let messageBoxName = document.getElementById('messageboxName');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
@@ -110,6 +110,11 @@ function openLoginPage() {
 
 function openSignUpPage() {
     window.location.href = "signup.html";
+}
+
+async function clearUsers(){
+    users = [];
+    await setItem('users', JSON.stringify(users));
 }
 
 

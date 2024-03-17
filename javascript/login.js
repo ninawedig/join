@@ -1,6 +1,6 @@
 let storedLogins = [];
 
-function login() {
+async function login() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     let messageBoxEmail = document.getElementById('messageboxEmail');
@@ -22,6 +22,8 @@ function login() {
     if (emailInput.value && passwordInput.value) {
         let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
         if (user) {
+            user.active = true;
+            await setItem('users', JSON.stringify(users));
             openSummaryPage();
             if (checkbox.checked) {
                 saveToLocalStorage();

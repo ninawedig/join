@@ -16,15 +16,16 @@ let summaryDueDates = tasks.map(task => task.due_date)
 /**
  * This function loads the page elements
  */
-function init() {
+async function initSummary() {
     renderHeader();
     renderNavbar();
     renderNumbers();
     renderDueDate();
     renderGreeting();
-    renderGreetingName();
     makeNavbarActive('summary');
     makeSmallNavbarActive('summarySmall');
+    await loadUsers();
+    getGreetingName();
 }
 
 /**
@@ -56,11 +57,16 @@ function renderDueDate() {
     urgentDueDateText.innerHTML = formattedDate;
 }
 
+function getGreetingName(){
+    const activeUser = users.find(user => user.active === true);
+    console.log(activeUser.name);
+    renderGreetingName(activeUser.name);
+}
+
 /**
  * This function renders the greeting name
  */
-function renderGreetingName() {
-    let greetingName = "CHANGE ME";
+function renderGreetingName(greetingName) {
     let greetingNameText = document.getElementById('greetingName');
     greetingNameText.innerHTML = greetingName;
 }
@@ -76,7 +82,7 @@ function getGreeting() {
     if (currentHour >= 5 && currentHour < 12) {
         greetingMessage = "Good morning,"
     } else if (currentHour >= 12 && currentHour < 18) {
-        greetingMessage = "Good ffternoon,"
+        greetingMessage = "Good afternoon,"
     } else {
         greetingMessage = "Good evening,"
     }

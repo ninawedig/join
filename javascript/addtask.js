@@ -65,7 +65,6 @@ async function addtask() {
     }
 
     if (title.value && duedate.value) {
-        
         tasks.push(task);
         await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";

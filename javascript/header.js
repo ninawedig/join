@@ -10,7 +10,7 @@ function renderHeader() {
     document.getElementById('smallMenu').innerHTML = `
     <a href="legalnotice.html">Legal Notice</a>
     <a href="privacypolicy.html">Privacy Policy</a>
-    <a href="#">Log out</a>
+    <a onclick="logout()" href="#">Log out</a>
 `;
     renderInitials()
 }
@@ -22,4 +22,11 @@ function renderInitials() {
 
 function getInitials(name) {
     return name.match(/(\b\S)?/g).join("").slice(0, 2);;
+}
+
+async function logout() {
+    let activeUser = users.find(user => user.active === true);
+    activeUser.active = false;
+    await setItem('users', JSON.stringify(users));
+    openLoginPage();
 }

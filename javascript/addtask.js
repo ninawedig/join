@@ -18,7 +18,7 @@ function showSmallMenu() {
 function addtask() {
     let title = document.getElementById('title');
     let duedate = document.getElementById('duedate');
-    let category = document.getElementById('category');
+    let category = document.getElementById('selectTaskCategory');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
@@ -37,14 +37,15 @@ function addtask() {
         messageBoxDuedate.textContent = "";
     }
 
-    if (category.value == 'Select task category') {
+    if (category.innerHTML == 'Select task category') {
         messageBoxCategory.textContent = "Please select a category.";
         category.classList.add('inputEmpty');
     } else {
         messageBoxCategory.textContent = "";
+        console.log(category.innerHTML)
     }
 
-    if (title.value && duedate.value && category.value !== 'x') {
+    if (title.value && duedate.value && category.innerHTML !== 'x') {
         window.location.href = "board.html";
     }
 }

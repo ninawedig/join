@@ -101,3 +101,7 @@ function renderGreeting() {
     let greetingMessageText = document.getElementById('greetingMessageText');
     greetingMessageText.innerHTML = greetingMessage;
 }
+
+function openBoard() {
+    window.location.href = "board.html";
+}

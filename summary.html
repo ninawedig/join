@@ -30,14 +30,14 @@
         <div class="summaryPageContent">
             <div class="summaryPageTasksContainer">
                 <div class="summaryPageTasksRow tasksRowTop">
-                    <div class="summaryToDosContainer summaryBoxes">
+                    <div onclick="openBoard()" class="summaryToDosContainer summaryBoxes">
                         <img class="toDoIcon" src="./img/summary/pen.svg" alt="">
                         <div class="summaryToDosContainerText">
                             <div id="summaryToDos" class="summaryToDosNumber"></div>
                             <div class="summaryTextDescription">To-do</div>
                         </div>
                     </div>
-                    <div class="summaryToDosContainer summaryBoxes">
+                    <div onclick="openBoard()" class="summaryToDosContainer summaryBoxes">
                         <img class="toDoIcon" src="./img/summary/tick.svg" alt="">
                         <div class="summaryToDosContainerText">
                             <div id="summaryDone" class="summaryToDosNumber"></div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="summaryPageTasksRow">
-                    <div class="summaryUrgentToDos summaryBoxes">
+                    <div onclick="openBoard()" class="summaryUrgentToDos summaryBoxes">
                         <div class="summaryUrgentToDosLeft">
                             <div><img class="urgentToDoIcon" src="./img/summary/urgent.svg" alt=""></div>
                             <div class="summaryToDosContainerText">
@@ -62,15 +62,15 @@
                     </div>
                 </div>
                 <div class="summaryPageTasksRow tasksRowBottom">
-                    <div class="summaryBoxes summaryTasksBox">
+                    <div onclick="openBoard()" class="summaryBoxes summaryTasksBox">
                         <div id="summaryTasksInBoard" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Tasks in<br>Board</div>
                     </div>
-                    <div class="summaryBoxes summaryTasksBox">
+                    <div onclick="openBoard()" class="summaryBoxes summaryTasksBox">
                         <div id="summaryTasksInProgress" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Tasks in<br>Progress</div>
                     </div>
-                    <div class="summaryBoxes summaryTasksBox">
+                    <div onclick="openBoard()" class="summaryBoxes summaryTasksBox">
                         <div id="summaryAwaitingFeedback" class="summaryToDosNumber"></div>
                         <div class="summaryTextDescription">Awaiting<br>Feedback</div>
                     </div>

@@ -115,6 +115,9 @@ header {
     background-color: #0C2E621F;
 }
 
+.guestLogo {
+    height: 24px;
+}
 /* SMALL MENU */
 
 .smallMenu {

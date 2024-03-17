@@ -59,8 +59,12 @@ function renderDueDate() {
 
 function getGreetingName(){
     const activeUser = users.find(user => user.active === true);
+    if(activeUser){
     console.log(activeUser.name);
     renderGreetingName(activeUser.name);
+    } else{
+        renderGreetingName('guest');
+    }
 }
 
 /**

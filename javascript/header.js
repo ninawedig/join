@@ -17,8 +17,14 @@ function renderHeader() {
 
 function renderInitials() {
     let activeUser = users.find(user => user.active === true);
+    if(activeUser){
     let userInitials = getInitials(activeUser.name);
     document.getElementById('activeUserButton').innerHTML = userInitials;
+    } else {
+        document.getElementById('activeUserButton').innerHTML = `
+        <img class="guestLogo" src="./../img/summary/logo.svg">
+        `;
+    }
 }
 
 function getInitials(name) {

@@ -1,8 +1,6 @@
 
 let currentDraggedElement;
 let alreadyExecuted = false;
-let firstLetters =[];
-let contacts = [];
 
 async function loadContacts() {
     firstLetters = await getItem('firstLetters')
@@ -19,7 +17,7 @@ function init(){
     renderNavbar();
     makeNavbarActive('board');
     makeSmallNavbarActive('board');
-    renderBoard();
+    renderBoard(tasks);
 }
 
 /**
@@ -29,11 +27,11 @@ function init(){
 let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
 
-function renderBoard(){
+function renderBoard(array){
 
     for (let i = 0; i < allStatus.length; i++) {
         const status = allStatus[i];
-        let filterTask = tasks.filter(t => t['status'] == status);
+        let filterTask = array.filter(t => t['status'] == status);
         
         document.getElementById(`${status}`).innerHTML = '';
 
@@ -97,25 +95,61 @@ function generateCardHTML(element, category){
 }
 
 /**
- * This function show the detailcard of a task.
+ * This function shows the detailcard of a task or addTask-container.
  */
 function showCardDetail(taskId){
-    renderCardDetail(taskId);
+    if(taskId == 'addTask'){
+        renderAddTask();
+    } if(taskId >= 0){
+        renderCardDetail(taskId);
+    }
+    
     document.getElementById('cardContainer').style = "display: flex";
     document.getElementById('cardContainerBackground').style = "display: flex";
+    let card =document.getElementById('cardDetail');
+    
+    card.style = "display: flex";
+
     
 }
 
 /**
- * This function close the detailcard of a task.
+ * This function closes the detailcard of a task.
  */
 function closeCardDetail(){
     document.getElementById('cardContainer').style = "display: none";
     document.getElementById('cardContainerBackground').style = "display: none";
+    document.getElementById('cardDetail').style = "display: none";
+}
+
+
+
+
+
+// Funktion zum Abrufen und Einsetzen der externen HTML-Datei
+async function renderAddTask(){
+    const externalHtmlFile = 'addtask.html';
+    const response = await fetch(externalHtmlFile);
+    const htmlContent = await response.text();
+
+    // Parse den HTML-Inhalt, um nur das gewünschte Div zu extrahieren
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const desiredDiv = tempDiv.querySelector('#addTaskMain');
+
+    document.getElementById('cardDetail').innerHTML = /*html */`
+    <div class="cardDetailHeader">
+            <h1>Add task</h1>
+            <div class="closeIconContainer" onclick="closeCardDetail()">
+                <img class="closeIcon" src="./img/contacts/close.svg" alt="">
+            </div>                    
+    </div>`;
+    document.getElementById('cardDetail').innerHTML += desiredDiv.outerHTML;
+ 
 }
 
 /**
- * This function render the HTML of the detailcard.
+ * This function renders the HTML of the detailcard.
  */
 function renderCardDetail(taskId){
     let task = tasks[taskId];
@@ -252,7 +286,7 @@ function changeSubtaskStatus(i, takenTask){
     }
 
     renderSubtasks(task);
-    renderBoard();
+    renderBoard(tasks);
     
 }
 
@@ -397,7 +431,7 @@ function allowDrop(ev){
 function moveTo(status){
     tasks[currentDraggedElement]['status'] = status;
     alreadyExecuted = false;
-    renderBoard();
+    renderBoard(tasks);
 
 }
 
@@ -437,3 +471,19 @@ function showDropZone(inCategory){
   
     }
 
+
+function findTaskFunction(){
+    let search = document.getElementById('findTask').value.toLowerCase();
+
+    let searchArray = [];
+
+    for (let i = 0; i < tasks.length; i++) {
+        const element = tasks[i];
+        
+        if (element['title'].toLowerCase().includes(search)|| element['description'].toLowerCase().includes(search)){
+            searchArray.push(element);
+        }
+    }
+    event.preventDefault();
+    renderBoard(searchArray);
+}

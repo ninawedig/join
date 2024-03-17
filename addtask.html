@@ -21,11 +21,11 @@
     </nav>
     <div id="smallNav" class="smallNav">
     </div>
-    <main  id="addTaskMain">
+    <main>
         <h1>Add Task</h1>
-        <div class="mainContainer">
+        <div class="mainContainer" id="addTaskMain">
             <div class="mainSection">
-                <div action="" class="sectionLeft">
+                <form action="" class="sectionLeft">
 
                     <div class="title inputBox">
                         <div class="titleStar"><span class="typo">Title</span><span class="typo typoRed">*</span>
@@ -47,20 +47,22 @@
                                 to asign</span><img onclick="closeContactsDropDown()" id="assignedDropDownArrow"
                                 class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
                         <div id="contactsDropDownMenuContainer" class="dropDownAssignedOpened inputField noDisplay">
-                            <input onkeyup="filterContactNames()" id="searchContact" type="text" class="dropDownOption searchContactField"><img
-                                onclick="closeContactsDropDown()" id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
+                            <input onkeyup="filterContactNames()" id="searchContact" type="text"
+                                class="dropDownOption searchContactField"><img onclick="closeContactsDropDown()"
+                                id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
                                 src="./img/addtask/arrow_drop_downaa.svg">
-
                             <div id="contactsList" class="contactsDropDownMenu">
                             </div>
                         </div>
+                        <div id="assignedContactsList" class="assignedContactsList">
+                        </div>
                     </div>
-                </div>
+                </form>
 
                 <div class="border"></div>
 
                 <div class="sectionRight">
-                    <div action="">
+                    <form action="">
                         <div class="inputBox date">
                             <div class="titleStar">
                                 <span class="typo">Due date</span><span class="typo typoRed">*</span>
@@ -90,7 +92,8 @@
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay"
                                 oninput="resetOutlineAddtask('dropDownCategory')">
                                 <div class="dropDownOption">Select task category</div>
-                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task</div>
+                                <div onclick="selectCategory('Technical Task')" class="dropDownOption">Technical Task
+                                </div>
                                 <div onclick="selectCategory('User Story')" class="dropDownOption">User Story</div>
                             </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
@@ -98,14 +101,18 @@
 
                         <div class="inputBox subtask">
                             <span class="typo">Subtasks</span>
-                            <input class="inputSubtask inputField" type="text" placeholder="Add new subtask">
-                            <div><ul class="subTaskList" >
-                                <li>Subtask1<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
-                                <li>Subtask2<div class="subTasksImgContainer"><img src="./img/addtask/editpen.svg" alt=""><div class="subTaskVerticalLine"></div><img src="./img/addtask/deleteicon.svg" alt=""></div></li>
-                            </ul></div>
+                            <div class="inputSubtaskContainer"><input minlength="3" id="inputSubtask"
+                                    class="inputSubtask inputField" type="text" placeholder="Add new subtask"><img
+                                    onclick="addSubtask()" id="addSubtaskButton" class="subtaskimg"
+                                    src="./img/addtask/addsubtask.svg" alt="">
+                            </div>
+                            <div>
+                                <ul id="subtaskList" class="subTaskList">
+                                </ul>
+                            </div>
                         </div>
 
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="lowerSection">
@@ -113,10 +120,10 @@
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
                 </div>
                 <div class="buttonsRight">
-                    <button onclick="clearFields()" class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                            alt="" ></button>
-                    <button onclick="addtask()" class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
-                            ></button>
+                    <button class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
+                            alt="" onclick="clearFields()"></button>
+                    <button class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
+                            onclick="addtask()"></button>
                 </div>
             </div>
         </div>

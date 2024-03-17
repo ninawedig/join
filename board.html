@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/summary.css">
     <link rel="stylesheet" href="./css/templates.css">
+    <link rel="stylesheet" href="./css/addtask.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
@@ -24,16 +25,16 @@
             <div class="boardPageHeading">
                 <div class="mobileBoardPageHeading">
                     <h1>Board</h1>
-                <svg class="mobileTaskActivities" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg onclick="showCardDetail('addTask')" class="mobileTaskActivities" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="40" height="40" rx="10" fill="#2A3647"/>
                     <path d="M20 10V30" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     <path d="M30 20L10.0005 20.138" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>                    
                 <div class="taskActivities">
-                    <form class="findTask" action="" onsubmit="findTask()">
+                    <form class="findTask" onsubmit="findTaskFunction()">
                         <input id="findTask" type="text" placeholder="Find Task" class="findTaskTextarea">
-                        <button class="findTaskButton"> 
+                        <button class="findTaskButton" type="button" onclick="findTaskFunction()"> 
                             <svg class="" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_146316_5742" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                             <rect width="32" height="32" fill="#D9D9D9"/>
@@ -44,8 +45,7 @@
                             </svg>
                         </button>
                     </form>
-                    <button class="addTaskonBoard button">Add tasks 
-                        
+                    <button class="addTaskonBoard button" onclick="showCardDetail('addTask')">Add tasks
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.66602 11.3327H0.666016V8.66602H8.66602V0.666016H11.3327V8.66602H19.3327V11.3327H11.3327V19.3327H8.66602V11.3327Z" fill="white"/>
                             </svg>
@@ -55,10 +55,10 @@
             </div>
         </div>
         <div class="board">
-            <div class="category">
+            <div class="categoryBoard">
                 <div class="boardCategory">
                     <h3>To Do</h3>
-                    <div onclick="showAddTask()">
+                    <div onclick="showCardDetail('addTask')">
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
                             <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -68,29 +68,33 @@
                 </div>
                 <div class="boardTasks" id="toDo" ondrag="moveFrom('toDo')" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
             </div>
-            <div class="category">
+            <div class="categoryBoard">
                 <div class="boardCategory">
                     <h3>In progress</h3>
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                    </svg>    
+                    <div onclick="showCardDetail('addTask')">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                            <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        </svg>   
+                    </div>   
                 </div>
                 <div class="boardTasks" id="inProgress" ondrag="moveFrom('inProgress')" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
             </div>
-            <div class="category">
+            <div class="categoryBoard">
                 <div class="boardCategory">
                     <h3>Await feedback</h3>
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                        <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                    </svg>    
+                    <div onclick="showCardDetail('addTask')">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1.5" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                            <path d="M12 8.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 12.5754L8 12.5754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                        </svg>   
+                    </div>   
                 </div>
                 <div class="boardTasks" id="awaitFeedback" ondrag="moveFrom('awaitFeedback')" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
             </div>
-            <div class="category">
+            <div class="categoryBoard">
                 <div class="boardCategory">
                     <h3>Done</h3>
                 </div>
@@ -99,17 +103,18 @@
         </div>
     </main>
     <div id="cardContainerBackground" onclick="closeCardDetail()"></div>
-    <div id="cardContainer">
-        <div id="cardAddTask"></div>
+    <div id="cardContainer">   
         <div id="cardDetail"></div>
     </div>
+    
     <script src="./javascript/signup.js"></script>
     <script src="./javascript/JSON/tasks.js"></script>
-    <!-- <script src="./javascript/summary.js"></script> -->
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>
+    <script src="./javascript/addtask.js"></script>
     <script src="./javascript/board.js"></script>
     <script src="./javascript/storage.js"></script>
+
 </body>
 
 </html>

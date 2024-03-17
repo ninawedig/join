@@ -1,6 +1,8 @@
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
 let selectedContacts = [];
+let subtasks = [];
+let assignedContacts = [];
 
 async function init() {
     renderHeader();
@@ -119,8 +121,8 @@ function filterContactNames() {
             let isSelected = isSelectedContact(contact);
 
             contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
-              
-            if(isSelected){
+
+            if (isSelected) {
                 document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
                 document.getElementById(`contactNo${i}`).classList.toggle('contactSelected');
             }
@@ -136,7 +138,7 @@ function isSelectedContact(contact) {
 
 function getContactsListHTML(contact, randomColor, i) {
     return /*HTML*/ `
-                    <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}')">
+                    <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
                         <div class="contactDetails">
                             <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
                             <div class="contactName">${contact.name}</div>
@@ -146,18 +148,19 @@ function getContactsListHTML(contact, randomColor, i) {
                     `
 }
 
-function selectContact(i, contactName){
+function selectContact(i, contactName, contactInitials) {
     let contact = document.getElementById(`contactNo${i}`);
     let checkbox = document.getElementById(`checkboxNo${i}`);
-    
+
     contact.classList.toggle('contactSelected');
     let isSelected = contact.classList.contains('contactSelected');
 
 
-    if(isSelected){
+    if (isSelected) {
         checkbox.src = "./../img/addtask/checked.svg";
         selectedContacts.push(contacts[i]) - 1;
         console.log('you selected', selectedContacts);
+        addToAssignedList(i, contactInitials);
     } else {
         checkbox.src = "./../img/addtask/rectangle.svg";
         let selectedContactIndex = findSelectedIndex(contactName);
@@ -166,14 +169,80 @@ function selectContact(i, contactName){
     }
 }
 
+function addToAssignedList(i, contactInitials){
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    assignedContacts.push(contactInitials);
+    assignedContactsList.innerHTML = '';
+
+    for (let i = 0; i < assignedContacts.length; i++) {
+        const assignedContact = assignedContacts[i];
+        let randomColor = getRandomColor();
+        assignedContactsList.innerHTML += `
+        <div class="contactProfileBadge" style="background-color: ${randomColor}">${assignedContact}</div>
+        
+        `;
+    }
+}
 
 
-function findSelectedIndex(contactName){
+
+function findSelectedIndex(contactName) {
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
 
-function selectCategory(category){
+function selectCategory(category) {
     let selectCategory = document.getElementById('selectTaskCategory');
     selectCategory.innerHTML = category;
     toggleDropDownMenu();
+}
+
+function addSubtask() {
+    let inputSubtask = document.getElementById('inputSubtask');
+    if (inputSubtask.value) {
+        subtasks.push(inputSubtask.value);
+        renderSubtasks();
+        inputSubtask.value = '';
+    }
+}
+
+function renderSubtasks() {
+    let subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = '';
+
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        subtaskList.innerHTML += `
+                    <li id="subtask">${subtask}
+                        <div class="subTasksImgContainer">
+                            <img onclick="editSubtask()" src="./img/addtask/editpen.svg" alt="">
+                            <div class="subTaskVerticalLine"></div>
+                            <img onclick="deleteSubtask(${i})" src="./img/addtask/deleteicon.svg" alt="">
+                        </div>
+                    </li>
+                    <div id="editSubtaskField" class="editSubtasksContainer noDisplay">${subtask}
+                        <div class="subTasksImgContainer editSubtasks">
+                            <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
+                            <div class="subTaskVerticalLine">
+                        </div>
+                        <img class="editSubtaskIcon" onclick="saveEditChanges()" src="./img/addtask/check2.svg" alt="">
+                    </div>
+    `;
+    }
+}
+
+function editSubtask() {
+    let subtask = document.getElementById('subtask');
+    let editSubtaskField = document.getElementById('editSubtaskField');
+
+    subtask.classList.toggle('noDisplay');
+    editSubtaskField.classList.toggle('noDisplay');
+}
+
+function saveEditChanges() {
+    editSubtask();
+}
+
+function deleteSubtask(i) {
+    subtasks.splice(i, 1);
+    renderSubtasks();
 }

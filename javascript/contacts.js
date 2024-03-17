@@ -127,8 +127,8 @@ function hideContact() {
 function renderContactCard(i) {
     let nameInitials = contacts[i].initials;
     let firstLetter = contacts[i]['name'].charAt(0);
-    let randomColor = getRandomColor();
-    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, randomColor, firstLetter);
+    let badgeColor = contacts[i].badgeColor;
+    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, badgeColor, firstLetter);
 }
 
 function getRandomColor(){
@@ -175,11 +175,13 @@ async function addContact() {
     let newContactEmail = document.getElementById('newContactEmail');
     let newContactPhone = document.getElementById('newContactPhone');
     let newContactInitials = getInitials(newContactName.value);
+    let newBadgeColor = getRandomColor()
     let newContact = {
         "name": newContactName.value.charAt(0).toUpperCase() + newContactName.value.slice(1),
         "email": newContactEmail.value,
         "phone": newContactPhone.value,
-        "initials": newContactInitials
+        "initials": newContactInitials,
+        "badgeColor": newBadgeColor
     };
     contacts.push(newContact);
     contacts.sort();
@@ -256,8 +258,8 @@ function renderContacts() {
 
         if (firstLetters.includes(firstLetter)) {
             let nameInitials = contacts[i].initials;
-            let randomColor = getRandomColor();
-            renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor);
+            let badgeColor = contacts[i].badgeColor;
+            renderContactUnderCategory(firstLetter, i, nameInitials, contact, badgeColor);
         } else {
             createNewCategory(firstLetter);
         }
@@ -409,12 +411,12 @@ function generateLettersCategoriesHTML(firstLetter) {
  * @param {*} i is the index of the contact
  * @param {*} nameInitials are the initials of the name
  * @param {*} contact is the element of the array contacts
- * @param {*} randomColor this is a random color for the badge background
+ * @param {*} badgeColor this is the random color for the badge background
  */
-function renderContactUnderCategory(firstLetter, i, nameInitials, contact, randomColor) {
+function renderContactUnderCategory(firstLetter, i, nameInitials, contact, badgeColor) {
     document.getElementById(`contactsList${firstLetter}`).innerHTML += /*HTML*/`
                     <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
-                        <div class="contactProfileBadge" style="background-color: ${randomColor};">${nameInitials}</div>
+                        <div class="contactProfileBadge" style="background-color: ${badgeColor};">${nameInitials}</div>
                         <div class="contactDetails">
                             <div class="contactName">${contact['name']}</div>
                             <div class="contactEmail">${contact['email']}</div>
@@ -427,13 +429,13 @@ function renderContactUnderCategory(firstLetter, i, nameInitials, contact, rando
  * This function generates the HTML for the contact card.
  * @param {*} nameInitials are the initials of the name
  * @param {*} i is the index of the contact
- * @param {*} randomColor is a random color for the badge background
+ * @param {*} badgeColor is a random color for the badge background
  * @returns 
  */
-function generateContactCardHTML(nameInitials, i, randomColor) {
+function generateContactCardHTML(nameInitials, i, badgeColor) {
     return /*HTML*/`
                     <div class="contactCardMainInfos">
-                        <div class="contactProfileBadgeBig" style="background-color: ${randomColor};">${nameInitials}</div>
+                        <div class="contactProfileBadgeBig" style="background-color: ${badgeColor};">${nameInitials}</div>
                         <div class="contactNameBigContainer">
                             <div class="contactNameBig">${contacts[i]['name']}</div>
                             <div class="contactFunctionsContainer">

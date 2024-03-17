@@ -107,8 +107,8 @@ function renderContacts() {
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        let randomColor = getRandomColor();
-        contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
+        let badgeColor = contacts[i].badgeColor;
+        contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
     }
 }
 
@@ -122,12 +122,6 @@ function closeContactsDropDown() {
     dropDownMenu.classList.add('noDisplay');
 }
 
-function getRandomColor() {
-    const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
-    const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
-    return randomColor;
-}
-
 function filterContactNames() {
     let search = document.getElementById('searchContact').value.toLowerCase();
 
@@ -136,11 +130,11 @@ function filterContactNames() {
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        let randomColor = getRandomColor();
+        let badgeColor = contact.badgeColor;
         if (contact['name'].toLowerCase().includes(search)) {
             let isSelected = isSelectedContact(contact);
 
-            contactsList.innerHTML += getContactsListHTML(contact, randomColor, i);
+            contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
 
             if (isSelected) {
                 document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
@@ -156,11 +150,11 @@ function isSelectedContact(contact) {
 
 
 
-function getContactsListHTML(contact, randomColor, i) {
+function getContactsListHTML(contact, badgeColor, i) {
     return /*HTML*/ `
                     <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
                         <div class="contactDetails">
-                            <div class="contactProfileBadge" style="background-color: ${randomColor};">${contact.initials}</div>
+                            <div class="contactProfileBadge" style="background-color: ${badgeColor};">${contact.initials}</div>
                             <div class="contactName">${contact.name}</div>
                         </div>
                         <img id="checkboxNo${i}" src="./img/addtask/rectangle.svg" class="checkbox">
@@ -180,26 +174,35 @@ function selectContact(i, contactName, contactInitials) {
         checkbox.src = "./../img/addtask/checked.svg";
         selectedContacts.push(contacts[i]) - 1;
         console.log('you selected', selectedContacts);
-        addToAssignedList(i, contactInitials);
+        addToAssignedList(i, contacts[i]);
     } else {
         checkbox.src = "./../img/addtask/rectangle.svg";
         let selectedContactIndex = findSelectedIndex(contactName);
         selectedContacts.splice(selectedContactIndex, 1);
-        console.log(selectedContacts.length);
+        removeFromAssignedList(selectedContactIndex);
     }
 }
 
-function addToAssignedList(i, contactInitials){
+function removeFromAssignedList(selectedContactIndex) {
     let assignedContactsList = document.getElementById('assignedContactsList');
-    assignedContacts.push(contactInitials);
+    assignedContacts.splice(selectedContactIndex, 1);
+    renderAssignedContactsList(assignedContactsList);
+}
+
+function addToAssignedList(i, contact) {
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    assignedContacts.push(contact);
+    renderAssignedContactsList(assignedContactsList);
+}
+
+function renderAssignedContactsList(assignedContactsList) {
     assignedContactsList.innerHTML = '';
 
     for (let i = 0; i < assignedContacts.length; i++) {
         const assignedContact = assignedContacts[i];
-        let randomColor = getRandomColor();
+        let badgeColor = assignedContact.badgeColor;
         assignedContactsList.innerHTML += `
-        <div class="contactProfileBadge" style="background-color: ${randomColor}">${assignedContact}</div>
-        
+        <div class="contactProfileBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
         `;
     }
 }

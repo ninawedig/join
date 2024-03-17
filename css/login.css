@@ -186,7 +186,6 @@ input[type=checkbox]:checked {
 
 .remember {
     height: 24px;
-    width: 422px;
     padding-left: 39px;
     gap: 8px;
     font-size: 16px;
@@ -377,10 +376,6 @@ input[type=checkbox]:checked {
 }
 
 @media (max-width: 620px) {
-    body {
-        width: fit-content;
-    }
-
     .loginSectionDiv {
         margin-top: 205.5px;
         margin-bottom: 57.5px;

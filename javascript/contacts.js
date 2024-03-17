@@ -16,12 +16,13 @@ firstLetters.sort();
  * This function is used to render HTML Text (The header, navbar, the small navbar on smaller resolution and the contacts).
  */
 async function init() {
-    await loadContacts();
-    renderHeader();
     renderNavbar();
+    await loadContacts();
+    await loadUsers();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
     renderContactAgenda();
+    renderHeader();
 }
 
 /**

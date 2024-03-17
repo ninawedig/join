@@ -17,7 +17,6 @@ let summaryDueDates = tasks.map(task => task.due_date)
  * This function loads the page elements
  */
 async function initSummary() {
-    renderHeader();
     renderNavbar();
     renderNumbers();
     renderDueDate();
@@ -25,6 +24,7 @@ async function initSummary() {
     makeNavbarActive('summary');
     makeSmallNavbarActive('summarySmall');
     await loadUsers();
+    renderHeader();
     getGreetingName();
 }
 

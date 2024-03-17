@@ -12,7 +12,8 @@ let alreadyExecuted = false;
 // }
 
 
-function init1(){
+async function init1(){
+    await loadUsers();
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');

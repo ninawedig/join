@@ -6,13 +6,14 @@ let selectedContacts = [];
 let subtasks = [];
 let assignedContacts = [];
 
-async function init() {
-    renderHeader();
+async function init() {  
     renderNavbar();
     makeNavbarActive('addTask');
     makeSmallNavbarActive('addTaskSmall');
     await loadContacts();
+    await loadUsers();
     renderContacts();
+    renderHeader();
 }
 
 function showSmallMenu() {

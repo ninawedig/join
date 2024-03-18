@@ -1,4 +1,4 @@
-let tasks = [];
+
 
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];

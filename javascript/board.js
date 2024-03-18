@@ -1,19 +1,12 @@
-
 let currentDraggedElement;
 let alreadyExecuted = false;
 
-// async function loadContacts() {
-//     firstLetters = await getItem('firstLetters')
-//         .then(response => JSON.parse(response.data.value));
-//     console.log('the first letters are', firstLetters);
-//     contacts = await getItem('contacts')
-//         .then(response => JSON.parse(response.data.value));
-//     console.log('the contacts are', contacts);
-// }
-
+let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
 async function init1(){
+
     await loadUsers();
+    // await loadtasks();  (Warum klappt das nicht?)
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -25,8 +18,16 @@ async function init1(){
  * This function render the task in the board in the right category.
  */
 
-let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
+                                                                    //siehe oben!
+// async function loadtasks() {
+    
+//     myTasks = await getItem('tasks')
+//         .then(response => JSON.parse(response));
+//     console.log('the tasks are', myTasks);
+
+//      tasks = myTasks;
+// }
 
 function renderBoard(array){
 
@@ -98,11 +99,17 @@ function generateCardHTML(element, category){
 /**
  * This function shows the detailcard of a task or addTask-container.
  */
-function showCardDetail(taskId){
+async function showCardDetail(taskId, id){
     if(taskId == 'addTask'){
         renderAddTask();
         init();
-    } if(taskId >= 0){
+    } if(taskId == 'editTask'){
+        await renderAddTask();
+        await init();
+        let p = id;
+        
+ 
+    }if(taskId >= 0){
         renderCardDetail(taskId);
     }
     
@@ -204,9 +211,9 @@ function generateCardDetailHTML(task, category){
             <ul id="taskSubtasks"></ul>
         </div>
         <div class="taskFunctionsContainer">
-            <div class="taskFunctions"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="showCardDetail('editTask', ${task['id']})"><img class="taskFunctionsIcons"
                     src="./img/contacts/edit.svg" alt="">Edit</div>
-            <div class="taskFunctions" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="deleteTask(${task['id']})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
                     src="./img/contacts/delete.svg" alt="">Delete</div>
         </div>`;
 }
@@ -489,3 +496,13 @@ function findTaskFunction(){
     event.preventDefault();
     renderBoard(searchArray);
 }
+
+
+async function deleteTask(task){
+    
+        tasks.splice(task, 1);
+        await setItem('contacts', JSON.stringify(contacts));
+        renderBoard(tasks);
+        console.log(tasks);
+        closeCardDetail();
+    }

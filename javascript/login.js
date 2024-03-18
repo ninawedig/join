@@ -75,37 +75,13 @@ function changeEye() {
     }
 }
 
-
 function changeImage() {
     document.getElementById('passwordimage').src = '/img/login/visibility_off.svg';
 }
 
-
-
-
 function guestLogin() {
-    let emailInput = document.getElementById('email');
-    let passwordInput = document.getElementById('password');
-    let messageBoxEmail = document.getElementById('messageboxEmail');
-    let messageBoxPassword = document.getElementById('messageboxPassword');
-
-    if (!emailInput.value) {
-        messageBoxEmail.textContent = "Please fill out this field.";
-        document.getElementById('email').classList.add('inputEmpty');
-    } else {
-        messageBoxEmail.textContent = "";
-    }
-    if (!passwordInput.value) {
-        messageBoxPassword.textContent = "Please fill out this field.";
-        document.getElementById('password').classList.add('inputEmpty');
-    } else {
-        messageBoxPassword.textContent = "";
-    }
-    if (emailInput.value && passwordInput.value) {
         openSummaryPage();
-
     }
-}
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');

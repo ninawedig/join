@@ -140,15 +140,14 @@
     background-size: 24px 24px;
 }
 
-.inputPassword {
-    background-image: url(/img/login/lock.svg);
-    background-repeat: no-repeat;
-    background-position: 95%;
-    background-size: 24px 24px;
+.inputContainer {
+    display: flex;
+    align-items: center;
 }
 
-.inputPassword:focus {
-    background-image: url(/img/login/visibility_off.svg);
+.inputSmallIcon {
+    margin-left: -36px;
+    cursor: pointer;
 }
 
 input[type=checkbox]{
@@ -419,6 +418,7 @@ input[type=checkbox]:checked {
     .remember {
         margin-top: 0px;
         margin-bottom: 0px;
+
     }
 
     .loginButtons {

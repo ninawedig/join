@@ -1,6 +1,6 @@
 let storedLogins = [];
 
-async function login() {
+function login() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     let messageBoxEmail = document.getElementById('messageboxEmail');
@@ -22,8 +22,6 @@ async function login() {
     if (emailInput.value && passwordInput.value) {
         let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
         if (user) {
-            user.active = true;
-            await setItem('users', JSON.stringify(users));
             openSummaryPage();
             if (checkbox.checked) {
                 saveToLocalStorage();
@@ -63,6 +61,27 @@ function changeIcon() {
     document.getElementById('checkbox').classList.remove('input[type=checkbox]')
     document.getElementById('checkbox').classList.add('input[type=checkbox]:checked')
 }
+
+function changeEye() {
+    let passwordInput = document.getElementById('password');
+    let passwordImage = document.getElementById('passwordimage');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordImage.src = '/img/login/visibility_on.svg';
+    } else {
+        passwordInput.type = 'password';
+        passwordImage.src = '/img/login/visibility_off.svg';
+    }
+}
+
+
+function changeImage() {
+    document.getElementById('passwordimage').src = '/img/login/visibility_off.svg';
+}
+
+
+
 
 function guestLogin() {
     let emailInput = document.getElementById('email');

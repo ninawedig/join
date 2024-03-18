@@ -77,6 +77,38 @@ function resetOutline(id) {
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
 
+function changeEye() {
+    let passwordInput = document.getElementById('password');
+    let passwordImage = document.getElementById('passwordimage');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordImage.src = '/img/login/visibility_on.svg';
+    } else {
+        passwordInput.type = 'password';
+        passwordImage.src = '/img/login/visibility_off.svg';
+    }
+}
+
+function changeEyeAtConfirmPassword() {
+    let passwordInput = document.getElementById('confirmpassword');
+    let passwordImage = document.getElementById('passwordimageConfirmed');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordImage.src = '/img/login/visibility_on.svg';
+    } else {
+        passwordInput.type = 'password';
+        passwordImage.src = '/img/login/visibility_off.svg';
+    }
+}
+
+function changeImage() {
+    document.getElementById('passwordimage').src = '/img/login/visibility_off.svg';
+}
+
+function changeImageAtConfirmPassword() {
+    document.getElementById('passwordimageConfirmed').src = '/img/login/visibility_off.svg';
+}
+
 function checkPolicy() {
     let checkbox = document.querySelector('.checkbox');
     if (checkbox.checked) {

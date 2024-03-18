@@ -30,10 +30,11 @@
             </div>
             <form id="loginForm" onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off" oninput="resetOutline('email')">
+                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off"
+                        oninput="resetOutline('email')">
                     <div id="messageboxEmail" class="messagebox"></div>
-                    <input class="input inputPassword" type="password" placeholder="Password" id="password"
-                        autocomplete="off" oninput="resetOutline('password')">
+                        <div class="inputContainer"><input autocomplete="off" oninput="resetOutline('password')" onfocus="changeImage()" id="password" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3" class="input" type="password"
+                            placeholder="Password"><img id="passwordimage" onclick="changeEye()" class="inputSmallIcon" src="./img/login/lock.svg"></div>
                     <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">
@@ -42,7 +43,8 @@
                 </div>
                 <div class="loginButtons">
                     <button type="submit" class="buttonLogin">Log In</button>
-                    <button type="button" class="buttonGuest" id="loginButton" onclick="guestLogin()">Guest Log In</button>
+                    <button type="button" class="buttonGuest" id="loginButton" onclick="guestLogin()">Guest Log
+                        In</button>
                 </div>
             </form>
         </div>
@@ -57,8 +59,10 @@
         <span class="legalNotice" onclick="openLegalNoticePage()">Legal notice</span>
     </div>
 
+    <script src="./javascript/JSON/tasks.js"></script>
     <script src="./javascript/storage.js"></script>
     <script src="./javascript/signup.js"></script>
     <script src="./javascript/login.js"></script>
+    <script src="./javascript/summary.js"></script>
 </body>
 </html>

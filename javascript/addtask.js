@@ -5,9 +5,9 @@ let selectedContacts = [];
 let subtasks = [];
 let assignedContacts = [];
 let taskId = 0;
-let prio;
+let prio = 'medium';
 
-async function init() {  
+async function init() {
     renderNavbar();
     makeNavbarActive('addTask');
     makeSmallNavbarActive('addTaskSmall');
@@ -37,7 +37,6 @@ async function addtask(status) {
     let description = document.getElementById('description');
     let duedate = document.getElementById('duedate');
     taskId = taskId++;
-    let subtask = document.getElementById('inputSubtask');
     let title = document.getElementById('title');
     // let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
     let task = {
@@ -47,11 +46,11 @@ async function addtask(status) {
         'due_date': duedate.value,
         'id': taskId,
         'prio': prio,
-        'subtask':subtasks,
+        'subtask': subtasks,
         'title': title.value,
         'status': status
     }
-    
+
 
     let categoryframe = document.getElementById('category');
     let messageBoxTitle = document.getElementById('messageboxTitle');
@@ -60,7 +59,7 @@ async function addtask(status) {
     let technicalTask = document.getElementById('technicalTask');
     let userStory = document.getElementById('userStory');
 
-    
+
 
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
@@ -77,7 +76,7 @@ async function addtask(status) {
     }
 
     if (technicalTask.checked || userStory.checked) {
-        messageBoxCategory.textContent = ""; 
+        messageBoxCategory.textContent = "";
     } else {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
@@ -295,7 +294,11 @@ function deleteSubtask(i) {
     renderSubtasks();
 }
 
-function setPrio(selectedPrio){
+function setPrio(selectedPrio) {
     event.preventDefault();
+    document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
+    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked'); 
+    document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     prio = selectedPrio;
+    document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);
 }

@@ -363,10 +363,40 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: solid 1px #FFA800 !important;
 }
 
+.mediumPrioButtonClicked {
+    background-color: #FFA800 !important;
+    color: #F6F7F8 !important;
+    border: solid 1px #FFA800 !important;
+}
+
+.mediumPrioButtonClicked .iconMedium {
+    filter: brightness(0) invert(1) !important;
+}
+
+.urgentPrioButtonClicked {
+    background-color: #FF3D00 !important;
+    color: #F6F7F8 !important;
+    border: solid 1px #FF3D00 !important;
+}
+
+.urgentPrioButtonClicked .iconPrio {
+    filter: brightness(0) invert(1);
+}
+
 .prioButtonUrgent:hover {
     background-color: #FF3D00 !important;
     color: #F6F7F8 !important;
     border: solid 1px #FF3D00 !important;
+}
+
+.lowPrioButtonClicked{
+    background-color: #7AE229 !important;
+    color: #F6F7F8 !important;
+    border: solid 1px #7AE229 !important;
+}
+
+.lowPrioButtonClicked .iconPrio {
+    filter: brightness(0) invert(1);
 }
 
 .prioButtonLow:hover {

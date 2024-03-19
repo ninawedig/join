@@ -209,6 +209,10 @@
     .greetingName {
         display: none;
     }
+
+    .summaryMain {
+        display: none;
+    }
 }
 
 @media (max-width: 940px){

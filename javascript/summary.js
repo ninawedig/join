@@ -6,8 +6,6 @@ let tasksInBoardNumber = document.getElementById('summaryTasksInBoard');
 let tasksInProgressNumber = document.getElementById('summaryTasksInProgress');
 let awaitingFeedbackNumber = document.getElementById('summaryAwaitingFeedback');
 let urgentDueDateText = document.getElementById('summaryUrgentDueDate');
-
-
 let screenWidth = window.innerWidth;
 
 /**
@@ -15,19 +13,24 @@ let screenWidth = window.innerWidth;
  */
 async function initSummary() {
     await loadtasks();
+    await loadUsers();
+    if (screenWidth < 982 && document.referrer.endsWith('login.html')) {
+        showGreetingPage();
+        
+    };
+    renderPage();
     renderNavbar();
     renderNumbers();
     renderDueDate();
     renderGreeting();
     makeNavbarActive('summary');
     makeSmallNavbarActive('summarySmall');
-    await loadUsers();
-    renderGreeting();
     renderHeader();
-    getGreetingName();
-    if (screenWidth < 982) {
-        showGreetingPage()
-    };
+}
+
+function renderPage(){
+    let summaryMain = document.getElementById('summaryMain');
+    summaryMain.style.display = "block";
 }
 
 /**
@@ -46,7 +49,7 @@ function renderNumbers() {
     let summaryUrgent = tasks.filter(task => task.prio === 'urgent');
     let summaryInProgress = tasks.filter(task => task.status === 'inProgress');
     let summaryAwaitingFeedback = tasks.filter(task => task.status === 'awaitFeedback');
-    
+
     toDosNumber.innerHTML = summaryToDos.length;
     doneTasksNumber.innerHTML = summaryDone.length;
     urgentTasksNumber.innerHTML = summaryUrgent.length;
@@ -68,20 +71,22 @@ function renderDueDate() {
 
 function getGreetingName() {
     const activeUser = users.find(user => user.active === true);
+    let greetingNameText;
     if (activeUser) {
         console.log(activeUser.name);
-        renderGreetingName(activeUser.name);
+        greetingNameText = activeUser.name;
     } else {
-        renderGreetingName('');
+        greetingNameText = '';
     }
+    return greetingNameText;
 }
 
 /**
  * This function renders the greeting name
  */
-function renderGreetingName(greetingName) {
+function renderGreetingName() {
     let greetingNameText = document.getElementById('greetingName');
-    greetingNameText.innerHTML = greetingName;
+    greetingNameText.innerHTML = getGreetingName();
 }
 
 /**
@@ -123,6 +128,7 @@ function renderGreeting() {
     let greetingMessage = getGreeting();
     let greetingMessageText = document.getElementById('greetingMessageText');
     greetingMessageText.innerHTML = greetingMessage;
+    renderGreetingName();
 }
 
 function openBoard() {
@@ -131,6 +137,9 @@ function openBoard() {
 
 function showGreetingPage() {
     let greetingPage = document.getElementById('greetingPage');
+    let summaryMain = document.getElementById('summaryMain');
+    renderGreetingOnSmallScreen();
+    summaryMain.style.display = 'none';
     greetingPage.style.display = 'flex';
     setTimeout(function () {
         greetingPage.style.opacity = '1';
@@ -139,6 +148,15 @@ function showGreetingPage() {
         greetingPage.style.opacity = '0';
     }, 3000);
     setTimeout(function () {
-        document.getElementById('greetingPage').style.display = 'none';
+        greetingPage.style.display = 'none';
+        summaryMain.style.display = 'block';
     }, 3500);
+}
+
+function renderGreetingOnSmallScreen() {
+    let greetingMessageSmallScreen = document.getElementById('greetingMessageSmallScreen');
+    let greetingNameSmallScreen = document.getElementById('greetingNameSmallScreen');
+
+    greetingMessageSmallScreen.innerHTML = getGreeting();
+    greetingNameSmallScreen.innerHTML = getGreetingName();
 }

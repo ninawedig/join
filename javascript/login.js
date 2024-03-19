@@ -24,6 +24,7 @@ async function login() {
         if (user) {
             user.active = true;
             await setItem('users', JSON.stringify(users));
+        
             openSummaryPage();
             if (checkbox.checked) {
                 saveToLocalStorage();

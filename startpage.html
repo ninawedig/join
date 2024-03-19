@@ -30,11 +30,14 @@
             </div>
             <form id="loginForm" onsubmit="login(); return false;">
                 <div class="inputFields">
-                    <input class="input inputMail" type="email" placeholder="Email" id="email" autocomplete="off"
-                        oninput="resetOutline('email')">
+                        <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('email')"
+                            id="email" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3"
+                            class="input" type="email" placeholder="Email"><img class="inputSmallIcon" src="./img/login/mail.svg"></div>
                     <div id="messageboxEmail" class="messagebox"></div>
-                        <div class="inputContainer"><input autocomplete="off" oninput="resetOutline('password')" onfocus="changeImage()" id="password" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3" class="input" type="password"
-                            placeholder="Password"><img id="passwordimage" onclick="changeEye()" class="inputSmallIcon" src="./img/login/lock.svg"></div>
+                    <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('password')"
+                            onfocus="changeImage()" id="password" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3"
+                            class="input" type="password" placeholder="Password"><img id="passwordimage"
+                            onclick="changeEye()" class="inputSmallIcon" src="./img/login/lock.svg"></div>
                     <div id="messageboxPassword" class="messagebox"></div>
                 </div>
                 <div class="remember">

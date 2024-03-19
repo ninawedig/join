@@ -126,6 +126,10 @@
     cursor: pointer;
 }
 
+input:focus {
+    outline: 1px solid #29ABE2;
+}
+
 input[type=checkbox]{
     appearance: none;
     -webkit-appearance: none;
@@ -165,13 +169,6 @@ input[type=checkbox]:checked{
 
 ::placeholder {
     color: #D1D1D1;
-}
-
-.inputMail {
-    background-image: url(/img/login/mail.svg);
-    background-repeat: no-repeat;
-    background-position: 95%;
-    background-size: 24px 24px;
 }
 
 .inputContainer {

@@ -11,13 +11,14 @@ let summaryDone = tasks.filter(task => task.status === 'done');
 let summaryUrgent = tasks.filter(task => task.prio === 'urgent');
 let summaryInProgress = tasks.filter(task => task.status === 'inProgress');
 let summaryAwaitingFeedback = tasks.filter(task => task.status === 'awaitFeedback');
-let summaryDueDates = tasks.map(task => task.due_date)
+
 let screenWidth = window.innerWidth;
 
 /**
  * This function loads the page elements
  */
 async function initSummary() {
+    await loadtasks();
     renderNavbar();
     renderNumbers();
     renderDueDate();
@@ -56,6 +57,7 @@ function renderNumbers() {
  * This function renders the date of the next urgent task
  */
 function renderDueDate() {
+    let summaryDueDates = tasks.map(task => task.due_date)
     let summaryDueDatesAsDates = summaryDueDates.map(dateString => new Date(dateString));
     summaryDueDatesAsDates.sort((a, b) => a - b);
     let formattedDate = summaryDueDatesAsDates[0].toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });

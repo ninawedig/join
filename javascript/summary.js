@@ -6,11 +6,7 @@ let tasksInBoardNumber = document.getElementById('summaryTasksInBoard');
 let tasksInProgressNumber = document.getElementById('summaryTasksInProgress');
 let awaitingFeedbackNumber = document.getElementById('summaryAwaitingFeedback');
 let urgentDueDateText = document.getElementById('summaryUrgentDueDate');
-let summaryToDos = tasks.filter(task => task.status === 'toDo');
-let summaryDone = tasks.filter(task => task.status === 'done');
-let summaryUrgent = tasks.filter(task => task.prio === 'urgent');
-let summaryInProgress = tasks.filter(task => task.status === 'inProgress');
-let summaryAwaitingFeedback = tasks.filter(task => task.status === 'awaitFeedback');
+
 
 let screenWidth = window.innerWidth;
 
@@ -29,7 +25,7 @@ async function initSummary() {
     renderGreeting();
     renderHeader();
     getGreetingName();
-    if(screenWidth < 982){
+    if (screenWidth < 982) {
         showGreetingPage()
     };
 }
@@ -45,6 +41,12 @@ function showSmallMenu() {
  * This function renders the numbers of the each category of tasks
  */
 function renderNumbers() {
+    let summaryToDos = tasks.filter(task => task.status === 'toDo');
+    let summaryDone = tasks.filter(task => task.status === 'done');
+    let summaryUrgent = tasks.filter(task => task.prio === 'urgent');
+    let summaryInProgress = tasks.filter(task => task.status === 'inProgress');
+    let summaryAwaitingFeedback = tasks.filter(task => task.status === 'awaitFeedback');
+    
     toDosNumber.innerHTML = summaryToDos.length;
     doneTasksNumber.innerHTML = summaryDone.length;
     urgentTasksNumber.innerHTML = summaryUrgent.length;
@@ -64,12 +66,12 @@ function renderDueDate() {
     urgentDueDateText.innerHTML = formattedDate;
 }
 
-function getGreetingName(){
+function getGreetingName() {
     const activeUser = users.find(user => user.active === true);
-    if(activeUser){
-    console.log(activeUser.name);
-    renderGreetingName(activeUser.name);
-    } else{
+    if (activeUser) {
+        console.log(activeUser.name);
+        renderGreetingName(activeUser.name);
+    } else {
         renderGreetingName('');
     }
 }
@@ -92,24 +94,24 @@ function getGreeting() {
     let currentHour = currentTime.getHours();
     let greetingMessage;
     if (currentHour >= 5 && currentHour < 12) {
-        if (activeUser){
-        greetingMessage = "Good morning,"
+        if (activeUser) {
+            greetingMessage = "Good morning,"
         } else {
-        greetingMessage = "Good morning"
+            greetingMessage = "Good morning"
         }
     } else if (currentHour >= 12 && currentHour < 18) {
-        if (activeUser){
+        if (activeUser) {
             greetingMessage = "Good afternoon,"
-            } else {
+        } else {
             greetingMessage = "Good afternoon"
-            }
-        
+        }
+
     } else {
-        if (activeUser){
+        if (activeUser) {
             greetingMessage = "Good evening,"
-            } else {
+        } else {
             greetingMessage = "Good evening"
-            }
+        }
     }
     return greetingMessage;
 }
@@ -127,16 +129,16 @@ function openBoard() {
     window.location.href = "board.html";
 }
 
-function showGreetingPage(){
+function showGreetingPage() {
     let greetingPage = document.getElementById('greetingPage');
     greetingPage.style.display = 'flex';
-    setTimeout(function(){
+    setTimeout(function () {
         greetingPage.style.opacity = '1';
     }, 10);
-    setTimeout(function(){
+    setTimeout(function () {
         greetingPage.style.opacity = '0';
     }, 3000);
-    setTimeout(function(){
+    setTimeout(function () {
         document.getElementById('greetingPage').style.display = 'none';
     }, 3500);
 }

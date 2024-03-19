@@ -4,6 +4,8 @@ let contacts = [];
 let selectedContacts = [];
 let subtasks = [];
 let assignedContacts = [];
+let taskId = 0;
+let prio;
 
 async function init() {  
     renderNavbar();
@@ -29,18 +31,35 @@ async function loadTasks() {
 }
 
 async function addtask() {
-    let title = document.getElementById('title');
-    let duedate = document.getElementById('duedate');
-    let description = document.getElementById('description');
+    let assign_to = assignedContacts;
     let category = document.getElementById('selectTaskCategory');
-    let categoryframe = document.getElementById('category');
+    let description = document.getElementById('description');
+    let duedate = document.getElementById('duedate');
+    taskId++;
     let subtask = document.getElementById('inputSubtask');
+    let title = document.getElementById('title');
+    // let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
+    let task = {
+        'assign_to': assign_to,
+        'category': category.innerHTML,
+        'description': description.value,
+        'due_date': duedate.value,
+        'id': taskId,
+        'prio': prio,
+        'subtask':subtasks,
+        'title': title.value,
+        'status': 'toDo'
+    }
+    
+
+    let categoryframe = document.getElementById('category');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
     let technicalTask = document.getElementById('technicalTask');
     let userStory = document.getElementById('userStory');
-    let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
+
+    
 
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
@@ -57,8 +76,7 @@ async function addtask() {
     }
 
     if (technicalTask.checked || userStory.checked) {
-        messageBoxCategory.textContent = "";
-       
+        messageBoxCategory.textContent = ""; 
     } else {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
@@ -67,6 +85,7 @@ async function addtask() {
 
     if (title.value && duedate.value && (technicalTask.checked || userStory.checked)) {
         tasks.push(task);
+        console.log('the new task is', task);
         await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";
     }
@@ -274,4 +293,9 @@ function saveEditChanges() {
 function deleteSubtask(i) {
     subtasks.splice(i, 1);
     renderSubtasks();
+}
+
+function setPrio(selectedPrio){
+    event.preventDefault();
+    prio = selectedPrio;
 }

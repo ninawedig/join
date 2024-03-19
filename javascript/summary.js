@@ -12,6 +12,7 @@ let summaryUrgent = tasks.filter(task => task.prio === 'urgent');
 let summaryInProgress = tasks.filter(task => task.status === 'inProgress');
 let summaryAwaitingFeedback = tasks.filter(task => task.status === 'awaitFeedback');
 let summaryDueDates = tasks.map(task => task.due_date)
+let screenWidth = window.innerWidth;
 
 /**
  * This function loads the page elements
@@ -27,6 +28,9 @@ async function initSummary() {
     renderGreeting();
     renderHeader();
     getGreetingName();
+    if(screenWidth < 982){
+        showGreetingPage()
+    };
 }
 
 /**
@@ -119,4 +123,18 @@ function renderGreeting() {
 
 function openBoard() {
     window.location.href = "board.html";
+}
+
+function showGreetingPage(){
+    let greetingPage = document.getElementById('greetingPage');
+    greetingPage.style.display = 'flex';
+    setTimeout(function(){
+        greetingPage.style.opacity = '1';
+    }, 10);
+    setTimeout(function(){
+        greetingPage.style.opacity = '0';
+    }, 3000);
+    setTimeout(function(){
+        document.getElementById('greetingPage').style.display = 'none';
+    }, 3500);
 }

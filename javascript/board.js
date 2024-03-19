@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let alreadyExecuted = false;
-
+let tasks = [];
 let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
 async function init1(){

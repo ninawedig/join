@@ -49,11 +49,13 @@ function saveToLocalStorage() {
 function loadLocalStorage() {
     let storedLoginsAsString = localStorage.getItem('key');
     storedLogins = JSON.parse(storedLoginsAsString);
-    if (storedLogins.length > 0) {
-        let lastLogin = storedLogins[storedLogins.length - 1];
+    if (storedLogins) {
+        if (storedLogins.length > 0) {
+            let lastLogin = storedLogins[storedLogins.length - 1];
 
-        document.getElementById('email').value = lastLogin.email;
-        document.getElementById('password').value = lastLogin.password;
+            document.getElementById('email').value = lastLogin.email;
+            document.getElementById('password').value = lastLogin.password;
+        }
     }
 }
 
@@ -80,8 +82,8 @@ function changeImage() {
 }
 
 function guestLogin() {
-        openSummaryPage();
-    }
+    openSummaryPage();
+}
 
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');

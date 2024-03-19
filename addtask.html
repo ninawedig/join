@@ -95,15 +95,12 @@
                                     class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
                             <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
                                 <div class="dropDownOption"></div>
-                                <input name="category" type="radio" id="selecttask" class="dropDownOption"
-                                    onclick="selectCategory('Select Task Category')">
+                                <input name="category" type="radio" id="selecttask" class="dropDownOption">
                                 <label for="selecttask">Select task category</label>
-                                <input name="category" type="radio" id="technicalTask" class="dropDownOption"
-                                    onclick="selectCategory('Technical Task')">
-                                <label for="technicalTask">Technical Task</label>
-                                <input name="category" type="radio" id="userStory" class="dropDownOption"
-                                    onclick="selectCategory('User Story')">
-                                <label for="userStory">User Story</label>
+                                <input name="category" type="radio" id="technicalTask" class="dropDownOption">
+                                <label onclick="selectCategory('Technical Task')" for="technicalTask">Technical Task</label>
+                                <input name="category" type="radio" id="userStory" class="dropDownOption">
+                                <label onclick="selectCategory('User Story')" for="userStory">User Story</label>
                             </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>

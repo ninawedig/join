@@ -239,7 +239,7 @@ function generateCardDetailHTML(task, category){
 
 function renderSubtasks(task){
     let takenTask = task['id'];
-    let subtasks =task['subtasks'];
+    let subtasks =task['subtask'];
 
     document.getElementById('taskSubtasks').innerHTML ='';
     for (let i = 0; i < subtasks.length; i++) {
@@ -259,7 +259,7 @@ function renderSubtasks(task){
 
 function renderSubtaskBar(task){
     let number = task['id'];
-    let subtaskArray = task['subtasks'];
+    let subtaskArray = task['subtask'];
     let filterTask = subtaskArray.filter(t => t['status'] == 'done');
     let subtaskToDo = filterTask.length;
     let totalSubtasks =subtaskArray.length;
@@ -460,7 +460,7 @@ function moveTo(status){
     tasks[currentDraggedElement]['status'] = status;
     alreadyExecuted = false;
     renderBoard(tasks);
-
+    setItem('tasks', tasks);
 }
 
 function moveFrom(fromCategory){

@@ -1,5 +1,4 @@
 
-
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
 let selectedContacts = [];
@@ -90,6 +89,19 @@ function clearFields() {
     document.getElementById('title').value = "";
     document.getElementById('description').value = "";
     document.getElementById('duedate').value = "";
+    document.getElementById('inputSubtask').value = "";
+    while (subtasks.length > 0) {
+        deleteSubtask(0);
+    }
+}
+
+function addSubtask() {
+    let inputSubtask = document.getElementById('inputSubtask');
+    if (inputSubtask.value) {
+        subtasks.push(inputSubtask.value);
+        renderSubtasks();
+        inputSubtask.value = '';
+    }
 }
 
 function toggleDropDownMenu() {
@@ -221,14 +233,6 @@ function findSelectedIndex(contactName) {
 }
 
 
-function addSubtask() {
-    let inputSubtask = document.getElementById('inputSubtask');
-    if (inputSubtask.value) {
-        subtasks.push(inputSubtask.value);
-        renderSubtasks();
-        inputSubtask.value = '';
-    }
-}
 
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtaskList');

@@ -37,7 +37,8 @@
 
                     <div class="description inputBox">
                         <span class="typo">Description</span>
-                        <textarea class="inputDescription inputField" name="" id="description" cols="30" rows="10" placeholder="Enter a Description" autocomplete="off"></textarea>
+                        <textarea class="inputDescription inputField" name="" id="description" cols="30" rows="10"
+                            placeholder="Enter a Description" autocomplete="off"></textarea>
                     </div>
 
                     <div class="assigned inputBox dropdown">
@@ -47,7 +48,7 @@
                                 class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
                         <div id="contactsDropDownMenuContainer" class="dropDownAssignedOpened inputField noDisplay">
                             <input onkeyup="filterContactNames()" id="searchContact" type="text"
-                                class="dropDownOption searchContactField"><img onclick="closeContactsDropDown()"
+                                class="searchContactField"><img onclick="closeContactsDropDown()"
                                 id="assignedDropDownArrowOpened" class="dropDownMenuArrow  rotated"
                                 src="./img/addtask/arrow_drop_downaa.svg">
                             <div id="contactsList" class="contactsDropDownMenu">
@@ -55,6 +56,7 @@
                         </div>
                         <div id="assignedContactsList" class="assignedContactsList">
                         </div>
+
                     </div>
                 </form>
 
@@ -74,33 +76,39 @@
                         <div class="prioBox prio">
                             <span class="typo">Prio</span>
                             <div class="prioButtonBox">
-                                <button id="urgentPrio" onclick="setPrio('urgent')" class="prioButton typo prioButtonUrgent">Urgent <img class="iconPrio"
+                                <button id="urgentPrio" onclick="setPrio('urgent')"
+                                    class="prioButton typo prioButtonUrgent">Urgent <img class="iconPrio"
                                         src="./img/addtask/Prio alta.svg" alt=""></button>
-                                <button id="mediumPrio" onclick="setPrio('medium')"  class="prioButton typo prioButtonMedium mediumPrioButtonClicked">Medium <img class="iconMedium"
-                                        src="./img/addtask/Prio media_orange.svg" alt=""></button>
-                                <button id="lowPrio" onclick="setPrio('low')" class="prioButton typo prioButtonLow">Low <img class="iconPrio"
-                                        src="./img/addtask/Prio baja.svg" alt=""></button>
+                                <button id="mediumPrio" onclick="setPrio('medium')"
+                                    class="prioButton typo prioButtonMedium mediumPrioButtonClicked">Medium <img
+                                        class="iconMedium" src="./img/addtask/Prio media_orange.svg" alt=""></button>
+                                <button id="lowPrio" onclick="setPrio('low')" class="prioButton typo prioButtonLow">Low
+                                    <img class="iconPrio" src="./img/addtask/Prio baja.svg" alt=""></button>
                             </div>
                         </div>
 
                         <div class="inputBox category">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
-                            </div> 
-                            <div id="category" class="inputCategory inputField" onclick="toggleDropDownMenu()"><span id="selectTaskCategory">Select task category</span><img id="categoryDropDownArrow" class="dropDownMenuArrow"
-                                    src="./img/addtask/arrow_drop_downaa.svg"></div>
-                                    <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
-                                        <div class="dropDownOption"></div>
-                                        <input name="category" type="radio" id="selecttask" class="dropDownOption" onclick="selectCategory('Select Task Category')"> 
-                                        <label for="selecttask">Select task category</label>
-                                        <input name="category" type="radio" id="technicalTask" class="dropDownOption" onclick="selectCategory('Technical Task')"> 
-                                        <label for="technicalTask">Technical Task</label>
-                                        <input name="category" type="radio" id="userStory" class="dropDownOption" onclick="selectCategory('User Story')"> 
-                                        <label for="userStory">User Story</label>
-                                    </div>
+                            </div>
+                            <div id="category" class="inputCategory inputField" onclick="toggleDropDownMenu()"><span
+                                    id="selectTaskCategory">Select task category</span><img id="categoryDropDownArrow"
+                                    class="dropDownMenuArrow" src="./img/addtask/arrow_drop_downaa.svg"></div>
+                            <div id="dropDownCategory" class="dropDownCategoryOpened inputField noDisplay">
+                                <div class="dropDownOption"></div>
+                                <input name="category" type="radio" id="selecttask" class="dropDownOption"
+                                    onclick="selectCategory('Select Task Category')">
+                                <label for="selecttask">Select task category</label>
+                                <input name="category" type="radio" id="technicalTask" class="dropDownOption"
+                                    onclick="selectCategory('Technical Task')">
+                                <label for="technicalTask">Technical Task</label>
+                                <input name="category" type="radio" id="userStory" class="dropDownOption"
+                                    onclick="selectCategory('User Story')">
+                                <label for="userStory">User Story</label>
+                            </div>
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>
 
-                        <div class="inputBox subtask">
+                        <div id="subtaskInput" class="inputBox subtask">
                             <span class="typo">Subtasks</span>
                             <div class="inputSubtaskContainer"><input minlength="3" id="inputSubtask"
                                     class="inputSubtask inputField" type="text" placeholder="Add new subtask"><img
@@ -121,10 +129,10 @@
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
                 </div>
                 <div class="buttonsRight">
-                    <button onclick="clearFields()" class="buttonClear">Clear<img class="iconCross" src="./img/addtask/iconoir_cancel.svg"
-                            alt="" ></button>
-                    <button onclick="addtask('toDo')" class="buttonCreate">Create Task <img class="icon" src="./img/addtask/check.svg" alt=""
-                            ></button>
+                    <button onclick="clearFields()" class="buttonClear">Clear<img class="iconCross"
+                            src="./img/addtask/iconoir_cancel.svg" alt=""></button>
+                    <button onclick="addtask('toDo')" class="buttonCreate">Create Task <img class="icon"
+                            src="./img/addtask/check.svg" alt=""></button>
                 </div>
             </div>
         </div>

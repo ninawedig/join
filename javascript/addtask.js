@@ -1,4 +1,3 @@
-
 const smallMenu = document.getElementById('smallMenu');
 let contacts = [];
 let selectedContacts = [];
@@ -51,15 +50,12 @@ async function addtask(status) {
         'status': status
     }
 
-
     let categoryframe = document.getElementById('category');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
     let technicalTask = document.getElementById('technicalTask');
     let userStory = document.getElementById('userStory');
-
-
 
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
@@ -81,7 +77,6 @@ async function addtask(status) {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
     }
-
 
     if (title.value && duedate.value && (technicalTask.checked || userStory.checked)) {
         tasks.push(task);
@@ -152,11 +147,13 @@ function renderContacts() {
 function openContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
     dropDownMenu.classList.remove('noDisplay');
+    document.getElementById('assignedContactsList').classList.add('noDisplay');
 }
 
 function closeContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
     dropDownMenu.classList.add('noDisplay');
+    document.getElementById('assignedContactsList').classList.remove('noDisplay');
 }
 
 function filterContactNames() {
@@ -205,7 +202,11 @@ function selectContact(i, contactName, contactInitials) {
 
     contact.classList.toggle('contactSelected');
     let isSelected = contact.classList.contains('contactSelected');
-
+    if (window.innerWidth <= 1400 && isSelected){
+        document.getElementById('subtaskInput').style.marginTop = '25px';
+    } else {
+        document.getElementById('subtaskInput').style.marginTop = '0';
+    }
 
     if (isSelected) {
         checkbox.src = "./../img/addtask/checked.svg";
@@ -245,12 +246,9 @@ function renderAssignedContactsList(assignedContactsList) {
 }
 
 
-
 function findSelectedIndex(contactName) {
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
-
-
 
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtaskList');

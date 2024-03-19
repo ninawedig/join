@@ -6,7 +6,7 @@ let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 async function init1(){
 
     await loadUsers();
-    // await loadtasks();  (Warum klappt das nicht?)
+    await loadtasks(); 
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -20,14 +20,14 @@ async function init1(){
 
 
                                                                     //siehe oben!
-// async function loadtasks() {
+async function loadtasks() {
     
-//     myTasks = await getItem('tasks')
-//         .then(response => JSON.parse(response));
-//     console.log('the tasks are', myTasks);
+    myTasks = await getItem('tasks')
+        .then(response => JSON.parse(response));
+    console.log('the tasks are', myTasks);
 
-//      tasks = myTasks;
-// }
+     tasks = myTasks;
+}
 
 function renderBoard(array){
 
@@ -43,6 +43,7 @@ function renderBoard(array){
         }
         for (let index = 0; index < filterTask.length; index++) {
             const filterTasks = filterTask[index];
+            let id =filterTask[index]['id'];
             
          
             let category;
@@ -54,7 +55,7 @@ function renderBoard(array){
 
 
 
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category); 
+            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id); 
             renderPrio(filterTasks);
             renderTaskMember(filterTasks);
             renderSubtaskBar(filterTasks);
@@ -69,9 +70,13 @@ function renderBoard(array){
  * @param {string} element - the string for the array of tasks per category
  * @returns 
  */
-function generateCardHTML(element, category){
+function generateCardHTML(element, category, id){
+
+    let index = getTaskIndex(id);
+    console.log(index);
+    console.log(element);
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${element['id']})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${element['id']}">
+        <div draggable="true" ondragstart="startDragging(${index})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${index}">
             <div class="taskCategory ${element['category']}">${category}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
@@ -84,11 +89,7 @@ function generateCardHTML(element, category){
                 <div class="progressInfo" id="progressInfo${element['id']}"></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="taskMembers" id="taskMemberCard${element['id']}">
-                    <div class="taskMember" style="z-index: 1;">KH</div>
-                    <div class="taskMember" style="background-color: #1FD7C1; margin-left: -10%; z-index: 1;">NW</div>
-                    <div class="taskMember" style="background-color: #FF4646; margin-left: -10%; z-index: 2;">AE</div>
-                </div>
+                <div class="taskMembers" id="taskMemberCard${element['id']}"></div>
                 <div id="tasksPrio${element['id']}"> 
                     
                     </div>
@@ -107,6 +108,7 @@ async function showCardDetail(taskId, id){
         await renderAddTask();
         await init();
         let p = id;
+        document.getElementById('cardDetailHeader').style = 'display: none;';
         
  
     }if(taskId >= 0){
@@ -147,7 +149,7 @@ async function renderAddTask(){
     const desiredDiv = tempDiv.querySelector('#addTaskMain');
 
     document.getElementById('cardDetail').innerHTML = /*html */`
-    <div class="cardDetailHeader">
+    <div id="cardDetailHeader">
             <h1>Add task</h1>
             <div class="closeIconContainer" onclick="closeCardDetail()">
                 <img class="closeIcon" src="./img/contacts/close.svg" alt="">
@@ -158,25 +160,42 @@ async function renderAddTask(){
 }
 
 /**
- * This function renders the HTML of the detailcard.
- */
+ * This function renders the HTML of the detailcard. let index = tasks.indexOf
+ */ 
+
 function renderCardDetail(taskId){
-    let task = tasks[taskId];
+
+    let task = tasks[getTaskIndex(taskId)];
     let category;
-    if(task['category'] == 'userStory'){
-        category = 'User Story';
-    } if(task['category'] == 'technicalTask'){
-        category = 'Technical Task';
+        if(task['category'] == 'userStory'){
+            category = 'User Story';
+        } else if(task['category'] == 'technicalTask'){
+            category = 'Technical Task';
+        }
+
+
+        document.getElementById('cardDetail').innerHTML ='';
+        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category);
+        
+        
+        renderPrio(task);
+        renderSubtasks(task);
+        renderTaskMember(task);
+
     }
 
-    document.getElementById('cardDetail').innerHTML ='';
-    document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category);
+    function getTaskIndex(taskId){
+        for (let i = 0; i < tasks.length; i++) {
+        
+            if(tasks[i]['id'] == taskId){
+                console.log(i);
+                return i;
+               }
+            }
+    }
+ 
     
     
-    renderPrio(task);
-    renderSubtasks(task);
-    renderTaskMember(task);
-}
 
 /**
  * This functoin returns the HTML of the detailcard
@@ -430,7 +449,7 @@ function renderLowHTML(){
 
 function startDragging(id){
     currentDraggedElement = id;
-    document.getElementById(id=`task${id}`).style = "transform: rotate(5deg);";
+    document.getElementById(`task${id}`).style = "transform: rotate(5deg);";
 }
 
 function allowDrop(ev){
@@ -468,7 +487,7 @@ function moveFrom(fromCategory){
 
 
 function showDropZone(inCategory){
-    var cardHeight = document.getElementById(`task${currentDraggedElement}`).offsetHeight;
+    let cardHeight = document.getElementById(`task${currentDraggedElement}`).offsetHeight;
     
     let elements = document.querySelectorAll('.noTaskCard');
     elements.forEach(function(element) {
@@ -501,7 +520,7 @@ function findTaskFunction(){
 async function deleteTask(task){
     
         tasks.splice(task, 1);
-        await setItem('contacts', JSON.stringify(contacts));
+        await setItem('tasks', JSON.stringify(tasks));
         renderBoard(tasks);
         console.log(tasks);
         closeCardDetail();

@@ -13,6 +13,7 @@ async function init() {
     makeSmallNavbarActive('addTaskSmall');
     await loadContacts();
     await loadUsers();
+    await loadTasks();
     renderContacts();
     renderHeader();
 }
@@ -30,12 +31,12 @@ async function loadTasks() {
     }
 }
 
-async function addtask() {
+async function addtask(status) {
     let assign_to = assignedContacts;
     let category = document.getElementById('selectTaskCategory');
     let description = document.getElementById('description');
     let duedate = document.getElementById('duedate');
-    taskId++;
+    taskId = taskId++;
     let subtask = document.getElementById('inputSubtask');
     let title = document.getElementById('title');
     // let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
@@ -48,7 +49,7 @@ async function addtask() {
         'prio': prio,
         'subtask':subtasks,
         'title': title.value,
-        'status': 'toDo'
+        'status': status
     }
     
 
@@ -85,7 +86,6 @@ async function addtask() {
 
     if (title.value && duedate.value && (technicalTask.checked || userStory.checked)) {
         tasks.push(task);
-        console.log('the new task is', task);
         await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";
     }

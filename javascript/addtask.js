@@ -37,7 +37,6 @@ async function addtask(status) {
     let duedate = document.getElementById('duedate');
     taskId = taskId++;
     let title = document.getElementById('title');
-    // let task= {'title': title,'duedate': duedate,'description': description,'subtask': subtask}
     let task = {
         'assign_to': assign_to,
         'category': category.innerHTML,
@@ -99,13 +98,54 @@ function resetOutlineAddtask(id) {
 }
 
 function clearFields() {
+    clearTitle();
+    clearDescription();
+    clearDueDate();
+    clearSubtasks();
+    clearPrio();
+    clearSelectedContacts();
+    clearCategory();
+}
+
+function clearTitle() {
     document.getElementById('title').value = "";
+}
+
+function clearDescription() {
     document.getElementById('description').value = "";
+}
+
+function clearDueDate() {
     document.getElementById('duedate').value = "";
+}
+
+function clearSubtasks() {
     document.getElementById('inputSubtask').value = "";
     while (subtasks.length > 0) {
         deleteSubtask(0);
     }
+}
+
+function clearPrio() {
+    setPrio('medium');
+}
+
+function clearSelectedContacts() {
+    assignedContacts = [];
+    selectedContacts = [];
+    renderAssignedContactsList(assignedContactsList);
+    document.querySelectorAll('.checkbox').forEach(function (checkbox) {
+        checkbox.src = "./../img/addtask/rectangle.svg";
+    });
+    document.querySelectorAll('.dropDownContact').forEach(function (dropDownContact) {
+        dropDownContact.classList.remove('contactSelected');
+    });
+    document.getElementById('subtaskInput').style.marginTop = '0';
+}
+
+function clearCategory() {
+    let selectCategory = document.getElementById('selectTaskCategory');
+    selectCategory.innerHTML = 'Select task category';
 }
 
 function addSubtask() {
@@ -206,7 +246,8 @@ function selectContact(i, contactName, contactInitials) {
 
     contact.classList.toggle('contactSelected');
     let isSelected = contact.classList.contains('contactSelected');
-    if (window.innerWidth <= 1400 && isSelected){
+
+    if (window.innerWidth <= 1400 && isSelected) {
         document.getElementById('subtaskInput').style.marginTop = '25px';
     } else {
         document.getElementById('subtaskInput').style.marginTop = '0';
@@ -215,14 +256,17 @@ function selectContact(i, contactName, contactInitials) {
     if (isSelected) {
         checkbox.src = "./../img/addtask/checked.svg";
         selectedContacts.push(contacts[i]) - 1;
-        console.log('you selected', selectedContacts);
         addToAssignedList(i, contacts[i]);
     } else {
-        checkbox.src = "./../img/addtask/rectangle.svg";
-        let selectedContactIndex = findSelectedIndex(contactName);
-        selectedContacts.splice(selectedContactIndex, 1);
-        removeFromAssignedList(selectedContactIndex);
+        deselectContacts(contactName, checkbox);
     }
+}
+
+function deselectContacts(contactName, checkbox) {
+    checkbox.src = "./../img/addtask/rectangle.svg";
+    let selectedContactIndex = findSelectedIndex(contactName);
+    selectedContacts.splice(selectedContactIndex, 1);
+    removeFromAssignedList(selectedContactIndex);
 }
 
 function removeFromAssignedList(selectedContactIndex) {
@@ -299,7 +343,7 @@ function deleteSubtask(i) {
 function setPrio(selectedPrio) {
     event.preventDefault();
     document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
-    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked'); 
+    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     prio = selectedPrio;
     document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);

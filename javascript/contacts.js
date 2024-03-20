@@ -243,6 +243,8 @@ function checkIfCategoryExists(firstLetter) {
  */
 async function deleteContactSmallScreen(currentContact) {
     let firstLetter = contacts[currentContact]['name'].charAt(0);
+    deleteAssignedContact(currentContact);
+    await setItem('tasks', JSON.stringify(tasks));
     contacts.splice(currentContact, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContacts();

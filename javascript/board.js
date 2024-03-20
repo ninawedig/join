@@ -10,7 +10,7 @@ async function initBoard(){
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
-    makeSmallNavbarActive('board');
+    makeSmallNavbarActive('boardSmall');
     renderBoard(tasks);
 }
 

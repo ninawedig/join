@@ -122,14 +122,22 @@ function generateCardHTML(element, category, id, categoryClass){
 async function showCardDetail(taskId, id){
     if(taskId == 'addTask'){
         renderAddTask();
-        init();
+        await loadContacts();
+        await loadUsers();
+        await loadTasks();
+        renderContacts();
+        renderHeader();
     } if(taskId == 'editTask'){
         await renderAddTask();
         
         document.getElementById('cardDetailHeaderH1').style = 'display: none;';
         document.getElementById('cardDetailHeader').style = 'justify-content: right;';
 
-        await init();
+        await loadContacts();
+        await loadUsers();
+        await loadTasks();
+        renderContacts();
+        renderHeader();;
 
         
  

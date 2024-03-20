@@ -111,7 +111,11 @@ function clearFields() {
 function addSubtask() {
     let inputSubtask = document.getElementById('inputSubtask');
     if (inputSubtask.value) {
-        subtasks.push(inputSubtask.value);
+        let subtask = {
+            'description': inputSubtask.value,
+            'status': 'toDo'
+        }
+        subtasks.push(subtask);
         renderSubtasks();
         inputSubtask.value = '';
     }
@@ -255,7 +259,7 @@ function renderSubtasks() {
     subtaskList.innerHTML = '';
 
     for (let i = 0; i < subtasks.length; i++) {
-        const subtask = subtasks[i];
+        const subtask = subtasks[i].description;
         subtaskList.innerHTML += `
                     <li id="subtask">${subtask}
                         <div class="subTasksImgContainer">

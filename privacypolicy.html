@@ -12,7 +12,7 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
 </head>
 
-<body onload="init()">
+<body onload="initBoard()">
     <header id="header">
     </header>
     <div id="smallMenu" class="smallMenu noDisplay">
@@ -23,27 +23,67 @@
     <main style="max-width: 1440px; padding-right: 64px;">
         <div class="informationHeader">
             <h1>Privacy Policy</h1>
-            <div>
+            <div onclick="goBack()">
                 <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.93725 8.66673H19.8333C20.5696 8.66673 21.1666 9.26368 21.1666 10.0001C21.1666 10.7364 20.5696 11.3334 19.8333 11.3334H4.93725L11.1466 17.5427C11.6672 18.0634 11.6672 18.9074 11.1466 19.4281C10.626 19.9487 9.78187 19.9487 9.26125 19.4281L1.24746 11.4143C0.466415 10.6332 0.466417 9.3669 1.24747 8.58585L9.26125 0.57206C9.78187 0.0514398 10.626 0.0514406 11.1466 0.572061C11.6672 1.09268 11.6672 1.93677 11.1466 2.45739L4.93725 8.66673Z" fill="#29ABE2"/>
                 </svg>
             </div>
         </div>
         <div class="informationText">
-            <br><h3>Subtitle</h3>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolorem ad dicta eligendi? Praesentium, eaque quam? Quas expedita officiis facilis cum, error reiciendis quisquam libero ea veniam, perferendis fugiat in..</p>
-            <br><br>
-            <h3>Subtitle</h3>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolorem ad dicta eligendi? Praesentium, eaque quam? Quas expedita officiis facilis cum, error reiciendis quisquam libero ea veniam, perferendis fugiat in.</p>
-            <br><br>
+            <p>Letzte Aktualisierung: 20.03.2024</p>
+
+            <h3>Verantwortlicher</h3>
+            
+            <p>Verantwortlicher für die Datenverarbeitung auf dieser Webseite im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+            
+            <p><li>Nina Wedig,Alex Eremie & Kai Heimerich</li></p>
+            <p><li>Tassiloplatz 25</li></p>
+            <p><li>81541 München</li></p>
+            
+            <h3>Datenerfassung auf unserer Webseite</h3>
+            
+            <h3>Server-Log-Dateien</h3>
+            
+            <p>Bei jedem Zugriff auf unsere Webseite werden automatisch Informationen durch unseren Hosting-Provider erfasst und in sogenannten Server-Log-Dateien gespeichert. Diese Daten beinhalten:</p>
+            
+            <ul>
+            <li>Browsertyp und Browserversion</li>
+            <li>Verwendetes Betriebssystem</li>
+            <li>Referrer URL</li>
+            <li>Hostname des zugreifenden Rechners</li>
+            <li>Uhrzeit der Serveranfrage</li>
+            <li>IP-Adresse</li>
+            </ul>
+            
+            <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
+            
+            <h3>Kontaktformular</h3>
+            
+            <p>Wenn Sie uns über das Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+            
+            <h3>Cookies</h3>
+            
+            <p>Unsere Webseite verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Endgerät abgelegt werden und die Ihr Browser speichert. Sie dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Einige Cookies sind "Session-Cookies", die nach Ende Ihrer Browser-Sitzung von selbst gelöscht werden. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browser aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Webseite eingeschränkt sein.</p>
+            
+            <h3>Ihre Rechte</h3>
+            
+            <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden.</p>
+            
+            <h3>Widerspruch gegen Werbe-Mails</h3>
+            
+            <p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.</p>
+            
+            <h3>Änderung der Datenschutzerklärung</h3>
+            
+            <p>Wir behalten uns vor, diese Datenschutzerklärung jederzeit zu ändern. Bitte informieren Sie sich daher regelmäßig über den aktuellen Stand.</p>
+            
         </div>
     </main>
     <script src="./javascript/signup.js"></script>
     <script src="./javascript/summary.js"></script>
     <script src="./javascript/header.js"></script>
     <script src="./javascript/navbar.js"></script>
+    <script src="./javascript/board.js"></script>
     
 </body>
 

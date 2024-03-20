@@ -3,10 +3,10 @@ let alreadyExecuted = false;
 let tasks = [];
 let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
-async function init1(){
+async function initBoard(){
 
-    await loadUsers();
-    await loadtasks(); 
+    // await loadUsers();
+    // await loadtasks(); 
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -23,7 +23,7 @@ async function init1(){
 async function loadtasks() {
     
     myTasks = await getItem('tasks')
-        .then(response => JSON.parse(response));
+    .then(response => JSON.parse(response));
     console.log('the tasks are', myTasks);
 
      tasks = myTasks;
@@ -45,17 +45,11 @@ function renderBoard(array){
             const filterTasks = filterTask[index];
             let id =filterTask[index]['id'];
             
-         
             let category;
-            if(filterTasks['category'] == 'userStory'){
-                category = 'User Story';
-            } if(filterTasks['category'] == 'technicalTask'){
-                category = 'Technical Task';
-            }
+            let categoryClass;
+            renameCategory(filterTasks, category);
 
-
-
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id); 
+            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id, categoryClass); 
             renderPrio(filterTasks);
             renderTaskMember(filterTasks);
             renderSubtaskBar(filterTasks);
@@ -65,19 +59,38 @@ function renderBoard(array){
     }  
 }
 
+function renameCategory(filterTasks, category){
+            if(filterTasks['category'] == 'User Story'){
+                category = 'User Story';
+                
+                categoryClass = category.replace(/\s/g, '');
+                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+                
+                
+               
+            } if(filterTasks['category'] == 'Technical Task'){
+                category = 'Technical Task';
+                console.log(category);
+                categoryClass = category.replace(/\s/g, '');
+                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+                console.log(categoryClass);
+                
+  
+                
+            }
+}
+
 /**
  * This function render the HTML of the card in the board.
  * @param {string} element - the string for the array of tasks per category
  * @returns 
  */
-function generateCardHTML(element, category, id){
+function generateCardHTML(element, category, id, categoryClass){
 
     let index = getTaskIndex(id);
-    console.log(index);
-    console.log(element);
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${index})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${index}">
-            <div class="taskCategory ${element['category']}">${category}</div>
+            <div class="taskCategory ${categoryClass}">${category}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
                 <div class="taskDescription">${element['description']}</div>
@@ -188,7 +201,6 @@ function renderCardDetail(taskId){
         for (let i = 0; i < tasks.length; i++) {
         
             if(tasks[i]['id'] == taskId){
-                console.log(i);
                 return i;
                }
             }
@@ -522,6 +534,11 @@ async function deleteTask(task){
         tasks.splice(task, 1);
         await setItem('tasks', JSON.stringify(tasks));
         renderBoard(tasks);
-        console.log(tasks);
+
         closeCardDetail();
     }
+
+
+    function goBack() {
+        window.history.back();
+      }

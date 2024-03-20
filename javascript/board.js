@@ -56,7 +56,7 @@ function renderBoard(array){
             }
 
             document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category,id, categoryClass); 
-            renderPrio(filterTasks);
+            renderPrio(filterTasks, id);
             renderTaskMember(filterTasks, id);
             renderSubtaskBar(filterTasks, id);
 
@@ -125,9 +125,12 @@ async function showCardDetail(taskId, id){
         init();
     } if(taskId == 'editTask'){
         await renderAddTask();
+        
+        document.getElementById('cardDetailHeaderH1').style = 'display: none;';
+        document.getElementById('cardDetailHeader').style = 'justify-content: right;';
+
         await init();
-        let p = id;
-        document.getElementById('cardDetailHeader').style = 'display: none;';
+
         
  
     }if(taskId >= 0){
@@ -169,7 +172,7 @@ async function renderAddTask(){
 
     document.getElementById('cardDetail').innerHTML = /*html */`
     <div id="cardDetailHeader">
-            <h1>Add task</h1>
+            <h1 id="cardDetailHeaderH1">Add task</h1>
             <div class="closeIconContainer" onclick="closeCardDetail()">
                 <img class="closeIcon" src="./img/contacts/close.svg" alt="">
             </div>                    
@@ -199,11 +202,11 @@ function renderCardDetail(id){
 
 
         document.getElementById('cardDetail').innerHTML ='';
-        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass);
+        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass, id);
         
         
-        renderPrio(task);
-        renderSubtasksBoard(task);
+        renderPrio(task, id);
+        renderSubtasksBoard(task, id);
         renderTaskMember(task, id);
 
     }
@@ -225,7 +228,7 @@ function renderCardDetail(id){
  * @param {Array} task - the array and id of the choosen detailcard
  * @returns returns the HTML of the detailcard
  */
-function generateCardDetailHTML(task, category, categoryClass){
+function generateCardDetailHTML(task, category, categoryClass, id){
     return /*html*/`
         <div id="cardDetailHeader">
             <div class="taskCategory ${categoryClass}">${category}</div>
@@ -253,15 +256,15 @@ function generateCardDetailHTML(task, category, categoryClass){
             <ul id="taskSubtasks"></ul>
         </div>
         <div class="taskFunctionsContainer">
-            <div class="taskFunctions" onclick="showCardDetail('editTask', ${task['id']})"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="showCardDetail('editTask', ${task[id]})"><img class="taskFunctionsIcons"
                     src="./img/contacts/edit.svg" alt="">Edit</div>
-            <div class="taskFunctions" onclick="deleteTask(${task['id']})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="deleteTask(${task[id]})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
                     src="./img/contacts/delete.svg" alt="">Delete</div>
         </div>`;
 }
 
-function renderSubtasksBoard(task){
-    let takenTask = task['id'];
+function renderSubtasksBoard(task, id){
+    let takenTask = tasks[id];
     let subtasks =task['subtask'];
 
     document.getElementById('taskSubtasks').innerHTML ='';
@@ -270,23 +273,19 @@ function renderSubtasksBoard(task){
         
         if (element['status'] == 'done'){
             
-            document.getElementById('taskSubtasks').innerHTML += renderSubtaskToDoSvg(i, element, takenTask);
+            document.getElementById('taskSubtasks').innerHTML += renderSubtaskToDoSvg(i, element, id);
         } else{
-            document.getElementById('taskSubtasks').innerHTML += renderSubtaskDoneSvg(i, element, takenTask);
-        }
-
-
-        
+            document.getElementById('taskSubtasks').innerHTML += renderSubtaskDoneSvg(i, element, id);
+        } 
     }
 }
 
 function renderSubtaskBar(task, id){
-    // let number = task[id];
     let subtaskToDo;
     let totalSubtasks;
     if(task['subtask']){
         let subtaskArray = task['subtask'];
-        let filterTask = subtaskArray.filter(t => t['status'] == 'toDo');
+        let filterTask = subtaskArray.filter(t => t['status'] == 'done');
         subtaskToDo = filterTask.length;
         totalSubtasks =subtaskArray.length;
     }
@@ -315,7 +314,7 @@ function renderSubtaskToDoSvg(i, element, takenTask){
                     <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>                        
-                <p>${element}</p>    
+                <p>${element['description']}</p>    
             </li>`; 
 }
 
@@ -327,7 +326,7 @@ function renderSubtaskDoneSvg(i, element, takenTask){
                 <rect x="1.68213" y="1.39673" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
             </svg>
         </div>                        
-        <p>${element}</p>    
+        <p>${element['description']}</p>    
     </li>`;
 }
 
@@ -341,7 +340,8 @@ function changeSubtaskStatus(i, takenTask){
         element['status'] = 'done'
     }
 
-    renderSubtasksBoard(task);
+    setItem('tasks', tasks);
+    renderSubtasksBoard(task, takenTask);
     renderBoard(tasks);
     
 }
@@ -387,9 +387,9 @@ function renderTaskMember(task, id){
  * @param {Array} task - the task in the array
  * @param {*} index - the id of the task
  */
-function renderPrio(task){
+function renderPrio(task, id){
     let prio =task['prio'];
-    let index = task['id'];
+    let index = tasks[id];
     let prioHTML;
     //chose the priority
     if (prio == 'urgent') {
@@ -411,8 +411,8 @@ function renderPrio(task){
     }
  
     //render HTML in the card in the Board
-    document.getElementById(`tasksPrio${index}`).innerHTML = '';
-    document.getElementById(`tasksPrio${index}`).innerHTML = /*html*/`
+    document.getElementById(`tasksPrio${id}`).innerHTML = '';
+    document.getElementById(`tasksPrio${id}`).innerHTML = /*html*/`
         ${prioHTML}`;
     
 }

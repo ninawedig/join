@@ -2,6 +2,10 @@
     font-size: 61px;
     font-weight: 700;
 }
+.mainSection{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
 .button{
     width: 160px;
     height: 48px;

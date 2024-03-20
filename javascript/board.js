@@ -5,8 +5,8 @@ let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
 
 async function initBoard(){
 
-    // await loadUsers();
-    // await loadtasks(); 
+    await loadUsers();
+    await loadtasks(); 
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -17,9 +17,6 @@ async function initBoard(){
 /**
  * This function render the task in the board in the right category.
  */
-
-
-                                                                    //siehe oben!
 async function loadtasks() {
     
     myTasks = await getItem('tasks')
@@ -43,15 +40,24 @@ function renderBoard(array){
         }
         for (let index = 0; index < filterTask.length; index++) {
             const filterTasks = filterTask[index];
-            let id =filterTask[index]['id'];
-            
+            let id = tasks.indexOf(filterTasks);
+
+            let task = tasks[id];
             let category;
             let categoryClass;
-            renameCategory(filterTasks, category);
+            if(task['category'] == 'User Story'){
+                category = 'User Story';
+                categoryClass = category.replace(/\s/g, '');
+                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+            } else if(task['category'] == 'Technical Task'){
+                category = 'Technical Task';
+                categoryClass = category.replace(/\s/g, '');
+                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+            }
 
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id, categoryClass); 
+            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category,id, categoryClass); 
             renderPrio(filterTasks);
-            renderTaskMember(filterTasks);
+            renderTaskMember(filterTasks, id);
             renderSubtaskBar(filterTasks);
 
         }
@@ -59,25 +65,26 @@ function renderBoard(array){
     }  
 }
 
-function renameCategory(filterTasks, category){
-            if(filterTasks['category'] == 'User Story'){
-                category = 'User Story';
+function renameCategory(id){
+    // let categoryClass;
+    //         if(filterTasks['category'] == 'User Story'){
+    //             category = 'User Story';
                 
-                categoryClass = category.replace(/\s/g, '');
-                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+    //             categoryClass = category.replace(/\s/g, '');
+    //             categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
                 
                 
                
-            } if(filterTasks['category'] == 'Technical Task'){
-                category = 'Technical Task';
-                console.log(category);
-                categoryClass = category.replace(/\s/g, '');
-                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-                console.log(categoryClass);
-                
-  
-                
-            }
+    //         } if(filterTasks['category'] == 'Technical Task'){
+    //             category = 'Technical Task';
+    //             console.log(category);
+    //             categoryClass = category.replace(/\s/g, '');
+    //             categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+    //             console.log(categoryClass);  
+    //         }
+    //         return category, categoryClass;
+    
+        
 }
 
 /**
@@ -86,24 +93,23 @@ function renameCategory(filterTasks, category){
  * @returns 
  */
 function generateCardHTML(element, category, id, categoryClass){
-
-    let index = getTaskIndex(id);
+    renameCategory(element, category);
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${index})" class="taskCard" onclick="showCardDetail(${element['id']})" id="task${index}">
+        <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" onclick="showCardDetail(${id})" id="task${id}">
             <div class="taskCategory ${categoryClass}">${category}</div>
             <div class="taskInfo">
                 <div class="taskTitle">${element['title']}</div>
                 <div class="taskDescription">${element['description']}</div>
             </div>
-            <div class="taskSubtasks" id="taskSubtasks${element['id']}">
+            <div class="taskSubtasks" id="taskSubtasks${id}">
                 <div class="progressBar" id="progressBar">
-                    <div class="progress" id="progressBar${element['id']}"></div>
+                    <div class="progress" id="progressBar${id}"></div>
                 </div>
-                <div class="progressInfo" id="progressInfo${element['id']}"></div>
+                <div class="progressInfo" id="progressInfo${id}"></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="taskMembers" id="taskMemberCard${element['id']}"></div>
-                <div id="tasksPrio${element['id']}"> 
+                <div class="taskMembers" id="taskMemberCard${id}"></div>
+                <div id="tasksPrio${id}"> 
                     
                     </div>
             </div>
@@ -176,35 +182,40 @@ async function renderAddTask(){
  * This function renders the HTML of the detailcard. let index = tasks.indexOf
  */ 
 
-function renderCardDetail(taskId){
+function renderCardDetail(id){
 
-    let task = tasks[getTaskIndex(taskId)];
+    let task = tasks[id];
     let category;
-        if(task['category'] == 'userStory'){
+    let categoryClass;
+        if(task['category'] == 'User Story'){
             category = 'User Story';
-        } else if(task['category'] == 'technicalTask'){
+            categoryClass = category.replace(/\s/g, '');
+            categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+        } else if(task['category'] == 'Technical Task'){
             category = 'Technical Task';
+            categoryClass = category.replace(/\s/g, '');
+            categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
         }
 
 
         document.getElementById('cardDetail').innerHTML ='';
-        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category);
+        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass);
         
         
         renderPrio(task);
-        renderSubtasks(task);
-        renderTaskMember(task);
+        renderSubtasksBoard(task);
+        renderTaskMember(task, id);
 
     }
 
-    function getTaskIndex(taskId){
-        for (let i = 0; i < tasks.length; i++) {
+    // function getTaskIndex(taskId){
+    //     for (let i = 0; i < tasks.length; i++) {
         
-            if(tasks[i]['id'] == taskId){
-                return i;
-               }
-            }
-    }
+    //         if(tasks[i]['id'] == taskId){
+    //             return i;
+    //            }
+    //         }
+    // }
  
     
     
@@ -214,10 +225,10 @@ function renderCardDetail(taskId){
  * @param {Array} task - the array and id of the choosen detailcard
  * @returns returns the HTML of the detailcard
  */
-function generateCardDetailHTML(task, category){
+function generateCardDetailHTML(task, category, categoryClass){
     return /*html*/`
-        <div class="cardDetailHeader">
-            <div class="taskCategory ${task['category']}">${category}</div>
+        <div id="cardDetailHeader">
+            <div class="taskCategory ${categoryClass}">${category}</div>
             <div class="closeIconContainer" onclick="closeCardDetail()">
                 <img class="closeIcon" src="./img/contacts/close.svg" alt="">
             </div>                    
@@ -249,7 +260,7 @@ function generateCardDetailHTML(task, category){
         </div>`;
 }
 
-function renderSubtasks(task){
+function renderSubtasksBoard(task){
     let takenTask = task['id'];
     let subtasks =task['subtask'];
 
@@ -271,10 +282,15 @@ function renderSubtasks(task){
 
 function renderSubtaskBar(task){
     let number = task['id'];
-    let subtaskArray = task['subtask'];
-    let filterTask = subtaskArray.filter(t => t['status'] == 'done');
-    let subtaskToDo = filterTask.length;
-    let totalSubtasks =subtaskArray.length;
+    let subtaskToDo;
+    let totalSubtasks;
+    if(task['subtask']){
+        let subtaskArray = task['subtask'];
+        let filterTask = subtaskArray.filter(t => t['status'] == 'done');
+        subtaskToDo = filterTask.length;
+        totalSubtasks =subtaskArray.length;
+    }
+    
     let taskNumber = task['id'];
     let barProgress = 0;
 
@@ -299,7 +315,7 @@ function renderSubtaskToDoSvg(i, element, takenTask){
                     <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>                        
-                <p>${element['description']}</p>    
+                <p>${element}</p>    
             </li>`; 
 }
 
@@ -311,13 +327,13 @@ function renderSubtaskDoneSvg(i, element, takenTask){
                 <rect x="1.68213" y="1.39673" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
             </svg>
         </div>                        
-        <p>${element['description']}</p>    
+        <p>${element}</p>    
     </li>`;
 }
 
 function changeSubtaskStatus(i, takenTask){
     let task = tasks[takenTask];
-    let element = task['subtasks'][i];
+    let element = task['subtask'][i];
 
     if (element['status'] == 'done'){
         element['status'] = 'toDo';
@@ -325,15 +341,15 @@ function changeSubtaskStatus(i, takenTask){
         element['status'] = 'done'
     }
 
-    renderSubtasks(task);
+    renderSubtasksBoard(task);
     renderBoard(tasks);
     
 }
 
 
-function renderTaskMember(task){
+function renderTaskMember(task, id){
     let member = task['assign_to'];
-    let id = task['id'];
+
 
     let checkId = document.getElementById('taskMemberDetail');
     if(checkId !== null){checkId.innerHTML = '';}
@@ -346,16 +362,16 @@ function renderTaskMember(task){
         if(checkId){
             document.getElementById('taskMemberDetail').innerHTML +=/*html*/ `
             <li>
-                <div class="taskMember">${element['code']}</div>
-                <p>${element['member']}</p>
+                <div class="taskMember" style="background-color: ${element['badgeColor']}"">${element['initials']}</div>
+                <p>${element['name']}</p>
             </li>`;
         }
         if(i==0){
             document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
-        <div class="taskMember" style="z-index: ${zIndex};">${element['code']}</div>`;
+        <div class="taskMember" style="z-index: ${zIndex}; background-color: ${element['badgeColor']}"">${element['initials']}</div>`;
         }else{
             document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
-            <div class="taskMember" style="z-index: ${zIndex};  margin-left: -10%;">${element['code']}</div>`;
+            <div class="taskMember" style="z-index: ${zIndex};  margin-left: -10%; background-color: ${element['badgeColor']}">${element['initials']}</div>`;
         }
 
         zIndex++;

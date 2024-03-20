@@ -110,6 +110,10 @@ function clearFields() {
 
 function addSubtask() {
     let inputSubtask = document.getElementById('inputSubtask');
+    // let subtaskArray =[{
+    //     'description': inputSubtask,
+    //     'status': 'toDo'
+    //   }]
     if (inputSubtask.value) {
         subtasks.push(inputSubtask.value);
         renderSubtasks();

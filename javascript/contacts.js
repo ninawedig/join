@@ -19,6 +19,7 @@ async function init() {
     renderNavbar();
     await loadContacts();
     await loadUsers();
+    await loadtasks();
     makeNavbarActive('contacts');
     makeSmallNavbarActive('contactsSmall');
     renderContactAgenda();
@@ -210,6 +211,8 @@ function clearValues(input1, input2, input3) {
  */
 async function deleteContact(i) {
     let firstLetter = contacts[i]['name'].charAt(0);
+    deleteAssignedContact(i);
+    await setItem('tasks', JSON.stringify(tasks));
     contacts.splice(i, 1);
     await setItem('contacts', JSON.stringify(contacts));
     hideContact();
@@ -480,4 +483,18 @@ function generateContactFormHTML(nameInitials, i) {
                         </div>
                     </form>
     `;
+}
+
+function deleteAssignedContact(i){
+    let contactName = contacts[i]['name'];
+    for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        for (let k = 0; k < task.assign_to.length; k++) {
+            const assignedContact = task.assign_to[k].name;
+            if(assignedContact === contactName){
+                console.log(task.assign_to[k].name);
+                task.assign_to.splice(k, 1);
+        }
+        }
+    }
 }

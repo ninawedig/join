@@ -58,7 +58,7 @@ function renderBoard(array){
             document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category,id, categoryClass); 
             renderPrio(filterTasks);
             renderTaskMember(filterTasks, id);
-            renderSubtaskBar(filterTasks);
+            renderSubtaskBar(filterTasks, id);
 
         }
         
@@ -280,30 +280,30 @@ function renderSubtasksBoard(task){
     }
 }
 
-function renderSubtaskBar(task){
-    let number = task['id'];
+function renderSubtaskBar(task, id){
+    // let number = task[id];
     let subtaskToDo;
     let totalSubtasks;
     if(task['subtask']){
         let subtaskArray = task['subtask'];
-        let filterTask = subtaskArray.filter(t => t['status'] == 'done');
+        let filterTask = subtaskArray.filter(t => t['status'] == 'toDo');
         subtaskToDo = filterTask.length;
         totalSubtasks =subtaskArray.length;
     }
     
-    let taskNumber = task['id'];
+
     let barProgress = 0;
 
-    if(totalSubtasks >= taskNumber){
+    if(totalSubtasks >= 1){
         barProgress = (subtaskToDo/totalSubtasks)*100;
     }
     
     if(totalSubtasks == 0){
-        document.getElementById(`taskSubtasks${number}`).style = "display: none;";
+        document.getElementById(`taskSubtasks${id}`).style = "display: none;";
     }
-    document.getElementById(`progressBar${taskNumber}`).style = `width: ${barProgress}%;`;
+    document.getElementById(`progressBar${id}`).style = `width: ${barProgress}%;`;
 
-    document.getElementById(`progressInfo${taskNumber}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
+    document.getElementById(`progressInfo${id}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
 }
 
 function renderSubtaskToDoSvg(i, element, takenTask){

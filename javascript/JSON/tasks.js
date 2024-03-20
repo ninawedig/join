@@ -16,7 +16,6 @@ let tasks = [
     'category': 'User Story',
     'subtask': [
       {
-        'id': 0,
         'description': 'Unteraufgabe 1 für Aufgabe 1',
         'status': 'toDo'
       },

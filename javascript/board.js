@@ -119,7 +119,7 @@ function generateCardHTML(element, category, id, categoryClass){
 /**
  * This function shows the detailcard of a task or addTask-container.
  */
-async function showCardDetail(taskId, id){
+async function showCardDetail(taskId){
     if(taskId == 'addTask'){
         renderAddTask();
         await loadContacts();
@@ -150,9 +150,60 @@ async function showCardDetail(taskId, id){
     let card =document.getElementById('cardDetail');
     
     card.style = "display: flex";
+}
+
+
+async function editTask(id){
+    await showCardDetail('editTask');
+    renderTaskinEdit(id);
+    document.getElementById('lowerSection').innerHTML ='';
+    document.getElementById('lowerSection').innerHTML =/*html*/`
+    <button class= "button" onclick="saveEdit(${id})">Ok</button>`;
 
     
 }
+
+
+
+async function renderTaskinEdit(id){
+    let title = document.getElementById('title');
+    let description = document.getElementById('description');
+    let duedate = document.getElementById('duedate');
+    let category = document.getElementById('selectTaskCategory');
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    let subtaskList = document.getElementById('subtaskList');
+    
+
+    let task = tasks[id];
+    subtasks = task['subtask'];
+    assignedContacts = task['assign_to'];
+    let prio = task['prio'];
+    let cat = task['category']
+    renderSubtasks();
+    renderAssignedContactsList(assignedContactsList);
+
+    title.value =`${task['title']}`;
+    description.value =`${task['description']}`;
+
+    duedate.value = `${task['due_date']}`;
+    selectCategory(cat);
+    task['category'] = cat;
+    // category.innerHTML = `${task['category']}`;
+    // category.value = `${task['category']}`;
+    // setPrio(task['prio']); funktioniert nicht aufgrund des event.preventDefault
+
+    document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
+    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked'); 
+    document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
+    document.getElementById(`${prio}Prio`).classList.add(`${prio}PrioButtonClicked`);
+
+}
+
+function saveEdit(id){
+
+    renderBoard(tasks);
+}
+
 
 /**
  * This function closes the detailcard of a task.
@@ -264,9 +315,9 @@ function generateCardDetailHTML(task, category, categoryClass, id){
             <ul id="taskSubtasks"></ul>
         </div>
         <div class="taskFunctionsContainer">
-            <div class="taskFunctions" onclick="showCardDetail('editTask', ${task[id]})"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="editTask(${id})"><img class="taskFunctionsIcons"
                     src="./img/contacts/edit.svg" alt="">Edit</div>
-            <div class="taskFunctions" onclick="deleteTask(${task[id]})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="deleteTask(${id})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
                     src="./img/contacts/delete.svg" alt="">Delete</div>
         </div>`;
 }

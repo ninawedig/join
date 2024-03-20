@@ -36,8 +36,7 @@ main {
     align-items: center;
     justify-content: flex-start;
 }
-
-.lowerSection {
+#lowerSection {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -569,7 +568,7 @@ label {
 }
 
 @media (max-width: 1400px) {
-    .lowerSection {
+    #lowerSection {
         margin-top: 46px;
     }
 
@@ -637,11 +636,11 @@ label {
         width: auto;
     }
 
-    .lowerSection {
+    #lowerSection {
         z-index: 999;
     }
 
-    .lowerSection {
+    #lowerSection {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;

@@ -150,19 +150,34 @@ async function renderTaskinEdit(id) {
     let category = document.getElementById('selectTaskCategory');
     let assignedContactsList = document.getElementById('assignedContactsList');
     let subtaskList = document.getElementById('subtaskList');
-
-
     let task = tasks[id];
     subtasks = task['subtask'];
     assignedContacts = task['assign_to'];
     let prioBoard = task['prio'];
     let cat = task['category']
     renderSubtasks();
+
+
+    if (window.innerWidth <= 1400) {
+        document.getElementById('subtaskInput').style.marginTop = '25px';
+    } else {
+        document.getElementById('subtaskInput').style.marginTop = '0';
+    }
+    let indexOfAssignedContact;
+    for (let j = 0; j < assignedContacts.length; j++) {
+        const assginedContactName = assignedContacts[j].name;
+        indexOfAssignedContact = findContactIndexByName(assginedContactName);
+        document.getElementById(`checkboxNo${indexOfAssignedContact}`).src = "./../img/addtask/checked.svg";
+        document.getElementById(`contactNo${indexOfAssignedContact}`).classList.add('contactSelected');
+        selectedContacts.push(contacts[indexOfAssignedContact]) - 1;
+    }
+
+
+
     renderAssignedContactsList(assignedContactsList);
 
     title.value = `${task['title']}`;
     description.value = `${task['description']}`;
-
     duedate.value = `${task['due_date']}`;
     selectCategory(cat);
     task['category'] = cat;
@@ -173,6 +188,14 @@ async function renderTaskinEdit(id) {
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     document.getElementById(`${prioBoard}Prio`).classList.add(`${prioBoard}PrioButtonClicked`);
 
+}
+
+function findContactIndexByName(assignedContactName) {
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].name === assignedContactName) {
+            return i;
+        }
+    }
 }
 
 function saveEdit(id) {

@@ -226,8 +226,6 @@ function isSelectedContact(contact) {
     return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
 }
 
-
-
 function getContactsListHTML(contact, badgeColor, i) {
     return /*HTML*/ `
                     <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
@@ -293,7 +291,6 @@ function renderAssignedContactsList(assignedContactsList) {
     }
 }
 
-
 function findSelectedIndex(contactName) {
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
@@ -346,6 +343,5 @@ function setPrio(selectedPrio) {
     document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     prio = selectedPrio;
-    prioBoard = selectedPrio;
     document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);
 }

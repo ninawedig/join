@@ -1,12 +1,12 @@
 let currentDraggedElement;
 let alreadyExecuted = false;
 let tasks = [];
-let allStatus = ['toDo', 'inProgress', 'awaitFeedback','done'];
+let allStatus = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
 
-async function initBoard(){
+async function initBoard() {
 
     await loadUsers();
-    await loadtasks(); 
+    await loadtasks();
     renderHeader();
     renderNavbar();
     makeNavbarActive('board');
@@ -18,20 +18,20 @@ async function initBoard(){
  * This function render the task in the board in the right category.
  */
 async function loadtasks() {
-    
+
     myTasks = await getItem('tasks')
-    .then(response => JSON.parse(response));
+        .then(response => JSON.parse(response));
     console.log('the tasks are', myTasks);
 
-     tasks = myTasks;
+    tasks = myTasks;
 }
 
-function renderBoard(array){
+function renderBoard(array) {
 
     for (let i = 0; i < allStatus.length; i++) {
         const status = allStatus[i];
         let filterTask = array.filter(t => t['status'] == status);
-        
+
         document.getElementById(`${status}`).innerHTML = '';
 
         if (filterTask == 0) {
@@ -45,24 +45,24 @@ function renderBoard(array){
             let task = tasks[id];
             let category;
             let categoryClass;
-            if(task['category'] == 'User Story'){
+            if (task['category'] == 'User Story') {
                 category = 'User Story';
                 categoryClass = category.replace(/\s/g, '');
-                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-            } else if(task['category'] == 'Technical Task'){
+                categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+            } else if (task['category'] == 'Technical Task') {
                 category = 'Technical Task';
                 categoryClass = category.replace(/\s/g, '');
-                categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+                categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
             }
 
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category,id, categoryClass); 
+            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id, categoryClass);
             renderPrio(filterTasks, id);
             renderTaskMember(filterTasks, id);
             renderSubtaskBar(filterTasks, id);
 
         }
-        
-    }  
+
+    }
 }
 
 
@@ -72,7 +72,7 @@ function renderBoard(array){
  * @param {string} element - the string for the array of tasks per category
  * @returns 
  */
-function generateCardHTML(element, category, id, categoryClass){
+function generateCardHTML(element, category, id, categoryClass) {
 
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" onclick="showCardDetail(${id})" id="task${id}">
@@ -99,17 +99,17 @@ function generateCardHTML(element, category, id, categoryClass){
 /**
  * This function shows the detailcard of a task or addTask-container.
  */
-async function showCardDetail(taskId){
-    if(taskId == 'addTask'){
+async function showCardDetail(taskId) {
+    if (taskId == 'addTask') {
         renderAddTask();
         await loadContacts();
         await loadUsers();
         await loadTasks();
         renderContacts();
         renderHeader();
-    } if(taskId == 'editTask'){
+    } if (taskId == 'editTask') {
         await renderAddTask();
-        
+
         document.getElementById('cardDetailHeaderH1').style = 'display: none;';
         document.getElementById('cardDetailHeader').style = 'justify-content: right;';
 
@@ -119,40 +119,38 @@ async function showCardDetail(taskId){
         renderContacts();
         renderHeader();;
 
-        
- 
-    }if(taskId >= 0){
+
+
+    } if (taskId >= 0) {
         renderCardDetail(taskId);
     }
-    
+
     document.getElementById('cardContainer').style = "display: flex";
     document.getElementById('cardContainerBackground').style = "display: flex";
-    let card =document.getElementById('cardDetail');
-    
+    let card = document.getElementById('cardDetail');
+
     card.style = "display: flex";
 }
 
 
-async function editTask(id){
+async function editTask(id) {
     await showCardDetail('editTask');
     renderTaskinEdit(id);
-    document.getElementById('lowerSection').innerHTML ='';
+    document.getElementById('lowerSection').innerHTML = '';
     document.getElementById('lowerSection').innerHTML =/*html*/`
     <button class= "button" onclick="saveEdit(${id})">Ok</button>`;
-
-    
 }
 
 
 
-async function renderTaskinEdit(id){
+async function renderTaskinEdit(id) {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let duedate = document.getElementById('duedate');
     let category = document.getElementById('selectTaskCategory');
     let assignedContactsList = document.getElementById('assignedContactsList');
     let subtaskList = document.getElementById('subtaskList');
-    
+
 
     let task = tasks[id];
     subtasks = task['subtask'];
@@ -162,23 +160,22 @@ async function renderTaskinEdit(id){
     renderSubtasks();
     renderAssignedContactsList(assignedContactsList);
 
-    title.value =`${task['title']}`;
-    description.value =`${task['description']}`;
+    title.value = `${task['title']}`;
+    description.value = `${task['description']}`;
 
     duedate.value = `${task['due_date']}`;
     selectCategory(cat);
     task['category'] = cat;
-
-    // setPrio(task['prio']); funktioniert nicht aufgrund des event.preventDefault
+    toggleDropDownMenu();
 
     document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
-    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked'); 
+    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     document.getElementById(`${prioBoard}Prio`).classList.add(`${prioBoard}PrioButtonClicked`);
 
 }
 
-function saveEdit(id){
+function saveEdit(id) {
     let task = tasks[id];
 
     let title = document.getElementById('title');
@@ -194,12 +191,7 @@ function saveEdit(id){
     task['category'] = category.innerHTML;
     task['assign_to'] = assignedContacts;
     task['subtask'] = subtasks;
-    console.log(task['title']);
-    console.log(task['description']);
-    console.log(task['due_date']);
-    console.log(task['category']);
-    console.log(task['assign_to']);
-    console.log(task['subtask']);
+    task['prio'] = prio;
 
     renderBoard(tasks);
     closeCardDetail();
@@ -211,7 +203,7 @@ function saveEdit(id){
 /**
  * This function closes the detailcard of a task.
  */
-function closeCardDetail(){
+function closeCardDetail() {
     document.getElementById('cardContainer').style = "display: none";
     document.getElementById('cardContainerBackground').style = "display: none";
     document.getElementById('cardDetail').style = "display: none";
@@ -222,7 +214,7 @@ function closeCardDetail(){
 
 
 // Funktion zum Abrufen und Einsetzen der externen HTML-Datei
-async function renderAddTask(){
+async function renderAddTask() {
     const externalHtmlFile = 'addtask.html';
     const response = await fetch(externalHtmlFile);
     const htmlContent = await response.text();
@@ -240,57 +232,57 @@ async function renderAddTask(){
             </div>                    
     </div>`;
     document.getElementById('cardDetail').innerHTML += desiredDiv.outerHTML;
- 
+
 }
 
 /**
  * This function renders the HTML of the detailcard. let index = tasks.indexOf
- */ 
+ */
 
-function renderCardDetail(id){
+function renderCardDetail(id) {
 
     let task = tasks[id];
     let category;
     let categoryClass;
-        if(task['category'] == 'User Story'){
-            category = 'User Story';
-            categoryClass = category.replace(/\s/g, '');
-            categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-        } else if(task['category'] == 'Technical Task'){
-            category = 'Technical Task';
-            categoryClass = category.replace(/\s/g, '');
-            categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-        }
-
-
-        document.getElementById('cardDetail').innerHTML ='';
-        document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass, id);
-        
-        
-        renderPrio(task, id);
-        renderSubtasksBoard(task, id);
-        renderTaskMember(task, id);
-
+    if (task['category'] == 'User Story') {
+        category = 'User Story';
+        categoryClass = category.replace(/\s/g, '');
+        categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+    } else if (task['category'] == 'Technical Task') {
+        category = 'Technical Task';
+        categoryClass = category.replace(/\s/g, '');
+        categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
     }
 
-    // function getTaskIndex(taskId){
-    //     for (let i = 0; i < tasks.length; i++) {
-        
-    //         if(tasks[i]['id'] == taskId){
-    //             return i;
-    //            }
-    //         }
-    // }
- 
-    
-    
+
+    document.getElementById('cardDetail').innerHTML = '';
+    document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass, id);
+
+
+    renderPrio(task, id);
+    renderSubtasksBoard(task, id);
+    renderTaskMember(task, id);
+
+}
+
+// function getTaskIndex(taskId){
+//     for (let i = 0; i < tasks.length; i++) {
+
+//         if(tasks[i]['id'] == taskId){
+//             return i;
+//            }
+//         }
+// }
+
+
+
 
 /**
  * This functoin returns the HTML of the detailcard
  * @param {Array} task - the array and id of the choosen detailcard
  * @returns returns the HTML of the detailcard
  */
-function generateCardDetailHTML(task, category, categoryClass, id){
+function generateCardDetailHTML(task, category, categoryClass, id) {
     return /*html*/`
         <div id="cardDetailHeader">
             <div class="taskCategory ${categoryClass}">${category}</div>
@@ -325,41 +317,41 @@ function generateCardDetailHTML(task, category, categoryClass, id){
         </div>`;
 }
 
-function renderSubtasksBoard(task, id){
+function renderSubtasksBoard(task, id) {
     let takenTask = tasks[id];
-    let subtasksBoard =task['subtask'];
+    let subtasksBoard = task['subtask'];
 
-    document.getElementById('taskSubtasks').innerHTML ='';
+    document.getElementById('taskSubtasks').innerHTML = '';
     for (let i = 0; i < subtasksBoard.length; i++) {
         const element = subtasksBoard[i];
-        
-        if (element['status'] == 'done'){
-            
+
+        if (element['status'] == 'done') {
+
             document.getElementById('taskSubtasks').innerHTML += renderSubtaskToDoSvg(i, element, id);
-        } else{
+        } else {
             document.getElementById('taskSubtasks').innerHTML += renderSubtaskDoneSvg(i, element, id);
-        } 
+        }
     }
 }
 
-function renderSubtaskBar(task, id){
+function renderSubtaskBar(task, id) {
     let subtaskToDo;
     let totalSubtasks;
-    if(task['subtask']){
+    if (task['subtask']) {
         let subtaskArray = task['subtask'];
         let filterTask = subtaskArray.filter(t => t['status'] == 'done');
         subtaskToDo = filterTask.length;
-        totalSubtasks =subtaskArray.length;
+        totalSubtasks = subtaskArray.length;
     }
-    
+
 
     let barProgress = 0;
 
-    if(totalSubtasks >= 1){
-        barProgress = (subtaskToDo/totalSubtasks)*100;
+    if (totalSubtasks >= 1) {
+        barProgress = (subtaskToDo / totalSubtasks) * 100;
     }
-    
-    if(totalSubtasks == 0){
+
+    if (totalSubtasks == 0) {
         document.getElementById(`taskSubtasks${id}`).style = "display: none;";
     }
     document.getElementById(`progressBar${id}`).style = `width: ${barProgress}%;`;
@@ -367,7 +359,7 @@ function renderSubtaskBar(task, id){
     document.getElementById(`progressInfo${id}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
 }
 
-function renderSubtaskToDoSvg(i, element, takenTask){
+function renderSubtaskToDoSvg(i, element, takenTask) {
     return /*html*/`
             <li id="subtask${i}">
                 <div onclick="changeSubtaskStatus(${i}, ${takenTask})">
@@ -377,10 +369,10 @@ function renderSubtaskToDoSvg(i, element, takenTask){
                     </svg>
                 </div>                        
                 <p>${element['description']}</p>    
-            </li>`; 
+            </li>`;
 }
 
-function renderSubtaskDoneSvg(i, element, takenTask){
+function renderSubtaskDoneSvg(i, element, takenTask) {
     return  /*html*/`
     <li id="subtask${i}">
         <div onclick="changeSubtaskStatus(${i}, ${takenTask})">
@@ -392,53 +384,53 @@ function renderSubtaskDoneSvg(i, element, takenTask){
     </li>`;
 }
 
-function changeSubtaskStatus(i, takenTask){
+function changeSubtaskStatus(i, takenTask) {
     let task = tasks[takenTask];
     let element = task['subtask'][i];
 
-    if (element['status'] == 'done'){
+    if (element['status'] == 'done') {
         element['status'] = 'toDo';
-    } else{
+    } else {
         element['status'] = 'done'
     }
 
     setItem('tasks', tasks);
     renderSubtasksBoard(task, takenTask);
     renderBoard(tasks);
-    
+
 }
 
 
-function renderTaskMember(task, id){
+function renderTaskMember(task, id) {
     let member = task['assign_to'];
 
 
     let checkId = document.getElementById('taskMemberDetail');
-    if(checkId !== null){checkId.innerHTML = '';}
+    if (checkId !== null) { checkId.innerHTML = ''; }
 
     document.getElementById(`taskMemberCard${id}`).innerHTML = '';
 
     for (let i = 0; i < member.length; i++) {
         const element = member[i];
         let zIndex = 1;
-        if(checkId){
+        if (checkId) {
             document.getElementById('taskMemberDetail').innerHTML +=/*html*/ `
             <li>
                 <div class="taskMember" style="background-color: ${element['badgeColor']}"">${element['initials']}</div>
                 <p>${element['name']}</p>
             </li>`;
         }
-        if(i==0){
+        if (i == 0) {
             document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
         <div class="taskMember" style="z-index: ${zIndex}; background-color: ${element['badgeColor']}"">${element['initials']}</div>`;
-        }else{
+        } else {
             document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
             <div class="taskMember" style="z-index: ${zIndex};  margin-left: -10%; background-color: ${element['badgeColor']}">${element['initials']}</div>`;
         }
 
         zIndex++;
     }
-       
+
 
 
 
@@ -449,41 +441,41 @@ function renderTaskMember(task, id){
  * @param {Array} task - the task in the array
  * @param {*} index - the id of the task
  */
-function renderPrio(task, id){
-    let prio =task['prio'];
+function renderPrio(task, id) {
+    let prio = task['prio'];
     // let index = tasks[id];
     let prioHTML;
     //chose the priority
     if (prio == 'urgent') {
         prioHTML = renderUrgentHTML();
-    }else if(prio == 'medium'){
+    } else if (prio == 'medium') {
         prioHTML = renderMediumHTML();
-    }else if(prio == 'low'){
+    } else if (prio == 'low') {
         prioHTML = renderLowHTML();
     }
 
     //render HTML in the detailcard
     let checkId = document.getElementById('taskPrio');
-    if(checkId !== null){
+    if (checkId !== null) {
         document.getElementById('taskPrio').innerHTML = '';
         document.getElementById('taskPrio').innerHTML = /*html*/`
             <p>${prio}</p>
-            ${prioHTML}`; 
-    
+            ${prioHTML}`;
+
     }
- 
+
     //render HTML in the card in the Board
     document.getElementById(`tasksPrio${id}`).innerHTML = '';
     document.getElementById(`tasksPrio${id}`).innerHTML = /*html*/`
         ${prioHTML}`;
-    
+
 }
 
 /**
  * This function render the the HTML of urgent SVG
  * @returns the HTML of urgent SVG
  */
-function renderUrgentHTML(){
+function renderUrgentHTML() {
     return /*html*/`
         <div style="display: flex; align-items: center;">
             <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -504,7 +496,7 @@ function renderUrgentHTML(){
  *  This function render the the HTML of medium SVG
  * @returns the HTML of medium SVG
  */
-function renderMediumHTML(){
+function renderMediumHTML() {
     return  /*html*/`
     <div style="display: flex; align-items: center;">
         <svg width="18" height="8" viewBox="0 0 18 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -525,7 +517,7 @@ function renderMediumHTML(){
  *  This function render the the HTML of low SVG
  * @returns the HTML of low SVG
  */
-function renderLowHTML(){
+function renderLowHTML() {
     return /*html*/`
     <div style="display: flex; align-items: center;">
         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -537,68 +529,68 @@ function renderLowHTML(){
 
 //Drag and Drop of the boadcards
 
-function startDragging(id){
+function startDragging(id) {
     currentDraggedElement = id;
     document.getElementById(`task${id}`).style = "transform: rotate(5deg);";
 }
 
-function allowDrop(ev){
+function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(status){
+function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     alreadyExecuted = false;
     renderBoard(tasks);
     setItem('tasks', tasks);
 }
 
-function moveFrom(fromCategory){
-    if(!alreadyExecuted){
-        if(fromCategory == 'toDo'){
+function moveFrom(fromCategory) {
+    if (!alreadyExecuted) {
+        if (fromCategory == 'toDo') {
             showDropZone('inProgress');
-        }if(fromCategory == 'inProgress'){
+        } if (fromCategory == 'inProgress') {
             showDropZone('awaitFeedback');
             showDropZone('toDo');
             showDropZone('done');
-        }if(fromCategory == 'awaitFeedback'){
+        } if (fromCategory == 'awaitFeedback') {
             showDropZone('toDo');
             showDropZone('inProgress');
             showDropZone('done');
-        }if(fromCategory == 'done'){
+        } if (fromCategory == 'done') {
             showDropZone('toDo');
             showDropZone('inProgress');
             showDropZone('awaitFeedback');
         }
         alreadyExecuted = true;
     }
-          
+
 }
 
 
-function showDropZone(inCategory){
+function showDropZone(inCategory) {
     let cardHeight = document.getElementById(`task${currentDraggedElement}`).offsetHeight;
-    
+
     let elements = document.querySelectorAll('.noTaskCard');
-    elements.forEach(function(element) {
+    elements.forEach(function (element) {
         element.classList.add('hidden');
     });
-  
+
     document.getElementById(inCategory).innerHTML += /*html*/`
     <div class="dragCard" style="background-color: transparent; border-radius: 24px; height: ${cardHeight}px;    margin-top: 12px;"></div>`;
-  
-    }
+
+}
 
 
-function findTaskFunction(){
+function findTaskFunction() {
     let search = document.getElementById('findTask').value.toLowerCase();
 
     let searchArray = [];
 
     for (let i = 0; i < tasks.length; i++) {
         const element = tasks[i];
-        
-        if (element['title'].toLowerCase().includes(search)|| element['description'].toLowerCase().includes(search)){
+
+        if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
     }
@@ -607,14 +599,14 @@ function findTaskFunction(){
 }
 
 
-async function deleteTask(task){
-    
-        tasks.splice(task, 1);
-        await setItem('tasks', JSON.stringify(tasks));
-        renderBoard(tasks);
+async function deleteTask(task) {
 
-        closeCardDetail();
-    }
+    tasks.splice(task, 1);
+    await setItem('tasks', JSON.stringify(tasks));
+    renderBoard(tasks);
+
+    closeCardDetail();
+}
 
 
 function goBack() {

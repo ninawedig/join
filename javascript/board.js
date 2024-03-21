@@ -65,27 +65,7 @@ function renderBoard(array){
     }  
 }
 
-function renameCategory(id){
-    // let categoryClass;
-    //         if(filterTasks['category'] == 'User Story'){
-    //             category = 'User Story';
-                
-    //             categoryClass = category.replace(/\s/g, '');
-    //             categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-                
-                
-               
-    //         } if(filterTasks['category'] == 'Technical Task'){
-    //             category = 'Technical Task';
-    //             console.log(category);
-    //             categoryClass = category.replace(/\s/g, '');
-    //             categoryClass =categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-    //             console.log(categoryClass);  
-    //         }
-    //         return category, categoryClass;
-    
-        
-}
+
 
 /**
  * This function render the HTML of the card in the board.
@@ -93,7 +73,7 @@ function renameCategory(id){
  * @returns 
  */
 function generateCardHTML(element, category, id, categoryClass){
-    renameCategory(element, category);
+
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" onclick="showCardDetail(${id})" id="task${id}">
             <div class="taskCategory ${categoryClass}">${category}</div>
@@ -177,7 +157,7 @@ async function renderTaskinEdit(id){
     let task = tasks[id];
     subtasks = task['subtask'];
     assignedContacts = task['assign_to'];
-    let prio = task['prio'];
+    let prioBoard = task['prio'];
     let cat = task['category']
     renderSubtasks();
     renderAssignedContactsList(assignedContactsList);
@@ -188,20 +168,43 @@ async function renderTaskinEdit(id){
     duedate.value = `${task['due_date']}`;
     selectCategory(cat);
     task['category'] = cat;
-    // category.innerHTML = `${task['category']}`;
-    // category.value = `${task['category']}`;
+
     // setPrio(task['prio']); funktioniert nicht aufgrund des event.preventDefault
 
     document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
     document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked'); 
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
-    document.getElementById(`${prio}Prio`).classList.add(`${prio}PrioButtonClicked`);
+    document.getElementById(`${prioBoard}Prio`).classList.add(`${prioBoard}PrioButtonClicked`);
 
 }
 
 function saveEdit(id){
+    let task = tasks[id];
+
+    let title = document.getElementById('title');
+    let description = document.getElementById('description');
+    let duedate = document.getElementById('duedate');
+    let category = document.getElementById('selectTaskCategory');
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    let subtaskList = document.getElementById('subtaskList');
+
+    task['title'] = title.value;
+    task['description'] = description.value;
+    task['due_date'] = duedate.value;
+    task['category'] = category.innerHTML;
+    task['assign_to'] = assignedContacts;
+    task['subtask'] = subtasks;
+    console.log(task['title']);
+    console.log(task['description']);
+    console.log(task['due_date']);
+    console.log(task['category']);
+    console.log(task['assign_to']);
+    console.log(task['subtask']);
 
     renderBoard(tasks);
+    closeCardDetail();
+    setItem('tasks', tasks);
+
 }
 
 
@@ -324,11 +327,11 @@ function generateCardDetailHTML(task, category, categoryClass, id){
 
 function renderSubtasksBoard(task, id){
     let takenTask = tasks[id];
-    let subtasks =task['subtask'];
+    let subtasksBoard =task['subtask'];
 
     document.getElementById('taskSubtasks').innerHTML ='';
-    for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+    for (let i = 0; i < subtasksBoard.length; i++) {
+        const element = subtasksBoard[i];
         
         if (element['status'] == 'done'){
             
@@ -448,14 +451,14 @@ function renderTaskMember(task, id){
  */
 function renderPrio(task, id){
     let prio =task['prio'];
-    let index = tasks[id];
+    // let index = tasks[id];
     let prioHTML;
     //chose the priority
     if (prio == 'urgent') {
         prioHTML = renderUrgentHTML();
-    } if(prio == 'medium'){
+    }else if(prio == 'medium'){
         prioHTML = renderMediumHTML();
-    } if(prio == 'low'){
+    }else if(prio == 'low'){
         prioHTML = renderLowHTML();
     }
 
@@ -614,6 +617,6 @@ async function deleteTask(task){
     }
 
 
-    function goBack() {
-        window.history.back();
-      }
+function goBack() {
+    window.history.back();
+}

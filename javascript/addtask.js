@@ -346,5 +346,6 @@ function setPrio(selectedPrio) {
     document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
     prio = selectedPrio;
+    prioBoard = selectedPrio;
     document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);
 }

@@ -696,6 +696,14 @@ label {
         width: auto;
         align-items: flex-start;
     }
+
+    .inputSubtaskContainer{
+        max-width: 295px;
+    }
+
+    .inputBox{
+        max-width: 295px;
+    }
 }
 
 @media (max-width: 440px) {
@@ -704,3 +712,11 @@ label {
         padding-left: 0px;
     }
 }
+
+@media (max-width: 340px){
+    main {
+        padding: 85px 0 !important;
+    }
+}
+
+

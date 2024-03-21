@@ -64,9 +64,14 @@ function renderNumbers() {
 function renderDueDate() {
     let summaryDueDates = tasks.map(task => task.due_date)
     let summaryDueDatesAsDates = summaryDueDates.map(dateString => new Date(dateString));
+
+    if (summaryDueDatesAsDates.length > 0){
     summaryDueDatesAsDates.sort((a, b) => a - b);
     let formattedDate = summaryDueDatesAsDates[0].toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
     urgentDueDateText.innerHTML = formattedDate;
+    } else {
+        urgentDueDateText.innerHTML = "No due dates";
+    }
 }
 
 function getGreetingName() {

@@ -342,3 +342,9 @@
         gap: 12px;
     }
 }
+
+@media (max-width: 340px){
+    main{
+        margin-left: 3px;
+    }
+}

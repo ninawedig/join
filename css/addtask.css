@@ -36,6 +36,7 @@ main {
     align-items: center;
     justify-content: flex-start;
 }
+
 #lowerSection {
     display: flex;
     flex-direction: row;
@@ -43,7 +44,6 @@ main {
     align-items: flex-end;
     margin-top: 146px;
     margin-bottom: 50px;
-
 }
 
 .title {
@@ -77,7 +77,6 @@ main {
     border-radius: 10px; 
     height: 48px;
 }
-
 
 .contactsDropDownMenu {
     display: flex;
@@ -146,7 +145,6 @@ main {
     resize: none;
     position: relative;
     width: 100%;
-
 }
 
 .inputField:focus {
@@ -190,7 +188,6 @@ main {
 .inputDescription {
     height: 120px;
     padding: 12px 16px 12px 16px;
-
 }
 
 .inputAssigned {
@@ -211,15 +208,12 @@ main {
     color: #2A3647 !important;
 }
 
-
-
 .inputDate {
     color: #D1D1D1 !important;
     height: 48px;
     padding: 12px 16px 12px 16px;
     background-color: white;
 }
-
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     background: url(/img/addtask/event.svg);
@@ -261,7 +255,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subTaskList {
     list-style-position: inside;
-
 }
 
 .subTaskList li {
@@ -423,7 +416,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: brightness(0) invert(1);
 }
 
-
 .prioButtonBox {
     display: flex;
     flex-direction: row;
@@ -528,7 +520,6 @@ label {
     cursor: pointer;
 }
 
-
 .buttonCreate:hover {
     background-color: #29ABE2;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
@@ -544,13 +535,10 @@ label {
     width: 24px;
 }
 
-
-
 .iconPrio {
     height: 14.51px;
     width: 20px;
 }
-
 
 .iconMedium {
     height: 7.45px;
@@ -590,7 +578,6 @@ label {
         order: -1;
         position: relative;
         bottom: 112px;
-
     }
 
     .date {
@@ -618,7 +605,7 @@ label {
 
 @media (max-width: 940px) {
     main h1 {
-        padding: 48px 0 8px 0px;
+        padding: 0px 0 8px 0px;
     }
 
     main {
@@ -657,7 +644,6 @@ label {
 }
 
 @media (max-width: 500px) {
-
     .buttonsRight {
         width: fit-content;
         gap: 0px;
@@ -713,7 +699,8 @@ label {
 }
 
 @media (max-width: 440px) {
-    main h1 {
-        padding-left: 6px;
+    .mainSection {
+        margin-left: 8px;
+        padding-left: 0px;
     }
 }

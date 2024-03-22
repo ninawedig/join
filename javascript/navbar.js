@@ -49,11 +49,15 @@ function renderNavbar() {
 }
 
 function makeNavbarActive(page) {
+    deactivateNavbar();
+    document.getElementById(page).classList.add('sidenavLinkActive');
+}
+
+function deactivateNavbar(){
     document.getElementById('summary').classList.remove('sidenavLinkActive');
     document.getElementById('addTask').classList.remove('sidenavLinkActive');
     document.getElementById('board').classList.remove('sidenavLinkActive');
     document.getElementById('contacts').classList.remove('sidenavLinkActive');
-    document.getElementById(page).classList.add('sidenavLinkActive');
 }
 
 function makeSmallNavbarActive(page) {

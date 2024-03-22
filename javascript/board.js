@@ -620,9 +620,3 @@ async function deleteTask(task) {
     closeCardDetail();
 }
 
-/**
- * This function goes back to the last html.
- */
-function goBack() {
-    window.history.back();
-}

@@ -88,13 +88,13 @@ header {
 }
 
 .helpIcon {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
 }
 
 .helpIcon:hover {
-    height: 24px;
-    width: 24px;
+    height: 48px;
+    width: 48px;
 }
 
 .activeUser {
@@ -303,10 +303,6 @@ nav {
     }
 
     nav {
-        display: none;
-    }
-
-    .helpIcon {
         display: none;
     }
 

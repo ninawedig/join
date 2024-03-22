@@ -91,7 +91,6 @@ function guestLogin() {
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
     let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
-    console.log(idBigFirstLetter);
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
 

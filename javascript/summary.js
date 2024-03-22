@@ -78,7 +78,6 @@ function getGreetingName() {
     const activeUser = users.find(user => user.active === true);
     let greetingNameText;
     if (activeUser) {
-        console.log(activeUser.name);
         greetingNameText = activeUser.name;
     } else {
         greetingNameText = '';

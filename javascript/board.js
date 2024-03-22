@@ -22,7 +22,6 @@ async function initBoard() {
 async function loadtasks() {
     myTasks = await getItem('tasks')
         .then(response => JSON.parse(response));
-    console.log('the tasks are', myTasks);
     tasks = myTasks;
 }
 

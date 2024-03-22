@@ -32,10 +32,8 @@ async function init() {
 async function loadContacts() {
     firstLetters = await getItem('firstLetters')
         .then(response => JSON.parse(response));
-    console.log('the first letters are', firstLetters);
     contacts = await getItem('contacts')
         .then(response => JSON.parse(response));
-    console.log('the contacts are', contacts);
 }
 
 /**
@@ -142,8 +140,7 @@ function getRandomColor(){
 /**
  * This function opens the contact page on full screen if the screen width is smaller/equal 740px
  */
-function openContactPage() { //doesnt work yet
-    console.log('yes');
+function openContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'block';
 
@@ -232,7 +229,6 @@ function checkIfCategoryExists(firstLetter) {
         let letterToRemove = `${firstLetter}`;
         let indexOfLetter = firstLetters.indexOf(letterToRemove);
         firstLetters.splice(indexOfLetter, 1);
-        console.log(firstLetters);
         renderContacts();
     }
 }
@@ -494,7 +490,6 @@ function deleteAssignedContact(i){
         for (let k = 0; k < task.assign_to.length; k++) {
             const assignedContact = task.assign_to[k].name;
             if(assignedContact === contactName){
-                console.log(task.assign_to[k].name);
                 task.assign_to.splice(k, 1);
         }
         }

@@ -93,7 +93,6 @@ function selectCategory(category) {
 function resetOutlineAddtask(id) {
     document.getElementById(id).classList.remove('inputEmpty');
     let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
-    console.log(idBigFirstLetter);
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
 
@@ -172,10 +171,8 @@ function toggleDropDownMenu() {
 async function loadContacts() {
     firstLetters = await getItem('firstLetters')
         .then(response => JSON.parse(response));
-    console.log('the first letters are', firstLetters);
     contacts = await getItem('contacts')
         .then(response => JSON.parse(response));
-    console.log('the contacts are', contacts);
 }
 
 function renderContacts() {

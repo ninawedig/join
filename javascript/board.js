@@ -26,7 +26,10 @@ async function loadtasks() {
     tasks = myTasks;
 }
 
-
+/**
+ * 
+ * @param {*} array 
+ */
 function renderBoard(array) {
     allStatus.forEach(status => {
         let filterTask = array.filter(t => t['status'] == status);

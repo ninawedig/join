@@ -303,34 +303,37 @@ function renderSubtasks() {
 }
 
 
-function rendersubtasksHTML(subtask, i){
+function rendersubtasksHTML(subtask, i) {
     return /*html*/`
-    <li id="subtask">${subtask}
+    <li id="subtask${i}">${subtask}
         <div class="subTasksImgContainer">
-            <img onclick="editSubtask()" src="./img/addtask/editpen.svg" alt="">
+            <img onclick="editSubtask(${i})" src="./img/addtask/editpen.svg" alt="">
             <div class="subTaskVerticalLine"></div>
             <img onclick="deleteSubtask(${i})" src="./img/addtask/deleteicon.svg" alt="">
         </div>
     </li>
-    <div id="editSubtaskField" class="editSubtasksContainer noDisplay">${subtask}
+    <div id="editSubtaskField${i}" class="editSubtasksContainer noDisplay">
+        <input id="editSubtaskText${i}" value='${subtask}'>
         <div class="subTasksImgContainer editSubtasks">
             <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
-            <div class="subTaskVerticalLine">
-        </div>
-        <img class="editSubtaskIcon" onclick="saveEditChanges()" src="./img/addtask/check2.svg" alt="">
-    </div>`;
+        <div class="subTaskVerticalLine">
+    </div>
+            <img class="editSubtaskIcon" onclick="saveEditChanges(${i})" src="./img/addtask/check2.svg" alt="">
+`;
 }
 
-function editSubtask() {
-    let subtask = document.getElementById('subtask');
-    let editSubtaskField = document.getElementById('editSubtaskField');
+function editSubtask(i) {
+    let subtask = document.getElementById(`subtask${i}`);
+    let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
 
     subtask.classList.toggle('noDisplay');
     editSubtaskField.classList.toggle('noDisplay');
 }
 
-function saveEditChanges() {
-    editSubtask();
+function saveEditChanges(i) {
+    let newSubtaskText = document.getElementById(`editSubtaskText${i}`).value;
+    subtasks[i].description = newSubtaskText;
+    renderSubtasks();
 }
 
 function deleteSubtask(i) {

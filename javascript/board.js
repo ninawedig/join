@@ -65,27 +65,26 @@ function getCategoryClass(category) {
  * @returns 
  */
 function generateCardHTML(element, category, id, categoryClass) {
-
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" onclick="showCardDetail(${id})" id="task${id}">
-            <div class="taskCategory ${categoryClass}">${category}</div>
-            <div class="taskInfo">
-                <div class="taskTitle">${element['title']}</div>
-                <div class="taskDescription">${element['description']}</div>
+    <div draggable="true" ondragstart="startDragging(${id})" class="taskCard" onclick="showCardDetail(${id})" id="task${id}">
+        <div class="taskCategory ${categoryClass}">${category}</div>
+        <div class="taskInfo">
+            <div class="taskTitle">${element['title']}</div>
+            <div class="taskDescription">${element['description']}</div>
+        </div>
+        <div class="taskSubtasks" id="taskSubtasks${id}">
+            <div class="progressBar" id="progressBar">
+                <div class="progress" id="progressBar${id}"></div>
             </div>
-            <div class="taskSubtasks" id="taskSubtasks${id}">
-                <div class="progressBar" id="progressBar">
-                    <div class="progress" id="progressBar${id}"></div>
+            <div class="progressInfo" id="progressInfo${id}"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="taskMembers" id="taskMemberCard${id}"></div>
+            <div id="tasksPrio${id}"> 
+                
                 </div>
-                <div class="progressInfo" id="progressInfo${id}"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="taskMembers" id="taskMemberCard${id}"></div>
-                <div id="tasksPrio${id}"> 
-                    
-                    </div>
-            </div>
-        </div>`;
+        </div>
+    </div>`;
 }
 
 
@@ -102,7 +101,6 @@ async function showCardDetail(taskId) {
     } else if (taskId >= 0) {
         renderCardDetail(taskId);
     }
-
     document.getElementById('cardContainer').style.display = 'flex';
     document.getElementById('cardContainerBackground').style.display = 'flex';
     document.getElementById('cardDetail').style.display = 'flex';
@@ -114,8 +112,7 @@ async function showEditTask(id) {
     renderTaskinEdit(id);
     document.getElementById('lowerSection').innerHTML = '';
     document.getElementById('lowerSection').style = 'justify-content: right;';
-    document.getElementById('lowerSection').innerHTML =/*html*/`
-    <button class= "button" onclick="saveEdit(${id})">Ok</button>`;
+    document.getElementById('lowerSection').innerHTML =/*html*/`<button class= "button" onclick="saveEdit(${id})">Ok</button>`;
 }
 
 
@@ -124,22 +121,26 @@ async function renderTaskinEdit(id) {
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let duedate = document.getElementById('duedate');
-    let category = document.getElementById('selectTaskCategory');
-    let assignedContactsList = document.getElementById('assignedContactsList');
-    let subtaskList = document.getElementById('subtaskList');
     let task = tasks[id];
     subtasks = task['subtask'];
     assignedContacts = task['assign_to'];
     let prioBoard = task['prio'];
     let cat = task['category']
-    renderSubtasks();
 
+    renderSubtasksinEdit();
+    renderAssignedContactsListInEdit();
+    selectCategory(cat);
 
-    if (window.innerWidth <= 1400) {
-        document.getElementById('subtaskInput').style.marginTop = '25px';
-    } else {
-        document.getElementById('subtaskInput').style.marginTop = '0';
-    }
+    task['category'] = cat;
+    title.value = `${task['title']}`;
+    description.value = `${task['description']}`;
+    duedate.value = `${task['due_date']}`;
+
+    toggleDropDownMenu();
+    showPrioInEdit(prioBoard);
+}
+
+function renderAssignedContactsListInEdit(){
     let indexOfAssignedContact;
     for (let j = 0; j < assignedContacts.length; j++) {
         const assginedContactName = assignedContacts[j].name;
@@ -148,18 +149,20 @@ async function renderTaskinEdit(id) {
         document.getElementById(`contactNo${indexOfAssignedContact}`).classList.add('contactSelected');
         selectedContacts.push(contacts[indexOfAssignedContact]) - 1;
     }
-
-
-
     renderAssignedContactsList(assignedContactsList);
+}
 
-    title.value = `${task['title']}`;
-    description.value = `${task['description']}`;
-    duedate.value = `${task['due_date']}`;
-    selectCategory(cat);
-    task['category'] = cat;
-    toggleDropDownMenu();
+function renderSubtasksinEdit(){
+    renderSubtasks();
 
+    if (window.innerWidth <= 1400) {
+        document.getElementById('subtaskInput').style.marginTop = '25px';
+    } else {
+        document.getElementById('subtaskInput').style.marginTop = '0';
+    }
+}
+
+function showPrioInEdit(prioBoard){
     document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
     document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
     document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
@@ -177,13 +180,10 @@ function findContactIndexByName(assignedContactName) {
 
 function saveEdit(id) {
     let task = tasks[id];
-
     let title = document.getElementById('title');
     let description = document.getElementById('description');
     let duedate = document.getElementById('duedate');
     let category = document.getElementById('selectTaskCategory');
-    let assignedContactsList = document.getElementById('assignedContactsList');
-    let subtaskList = document.getElementById('subtaskList');
 
     task['title'] = title.value;
     task['description'] = description.value;
@@ -196,7 +196,6 @@ function saveEdit(id) {
     renderBoard(tasks);
     closeCardDetail();
     setItem('tasks', tasks);
-
 }
 
 
@@ -210,54 +209,42 @@ function closeCardDetail() {
 }
 
 
-// Funktion zum Abrufen und Einsetzen der externen HTML-Datei
 async function renderAddTask() {
     const externalHtmlFile = 'addtask.html';
     const response = await fetch(externalHtmlFile);
     const htmlContent = await response.text();
 
-    // Parse den HTML-Inhalt, um nur das gewünschte Div zu extrahieren
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlContent;
     const desiredDiv = tempDiv.querySelector('#addTaskMain');
 
-    document.getElementById('cardDetail').innerHTML = /*html */`
+    document.getElementById('cardDetail').innerHTML = renderCardDetailHeaderHTML();
+    document.getElementById('cardDetail').innerHTML += desiredDiv.outerHTML;
+}
+
+function renderCardDetailHeaderHTML(){
+    return /*html */`
     <div id="cardDetailHeader">
             <h1 id="cardDetailHeaderH1">Add task</h1>
             <div class="closeIconContainer" onclick="closeCardDetail()">
                 <img class="closeIcon" src="./img/contacts/close.svg" alt="">
             </div>                    
     </div>`;
-    document.getElementById('cardDetail').innerHTML += desiredDiv.outerHTML;
-
 }
 
 /**
  * This function renders the HTML of the detailcard. let index = tasks.indexOf
  */
-
 function renderCardDetail(id) {
+    const task = tasks[id];
+    let category = task['category'];
+    const categoryClass = category.replace(/\s/g, '').toLowerCase();
 
-    let task = tasks[id];
-    let category;
-    let categoryClass;
-    if (task['category'] == 'User Story') {
-        category = 'User Story';
-        categoryClass = category.replace(/\s/g, '');
-        categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-    } else if (task['category'] == 'Technical Task') {
-        category = 'Technical Task';
-        categoryClass = category.replace(/\s/g, '');
-        categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-    }
-
-    document.getElementById('cardDetail').innerHTML = '';
     document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass, id);
 
     renderPrio(task, id);
     renderSubtasksBoard(task, id);
     renderTaskMember(task, id);
-
 }
 
 
@@ -301,6 +288,7 @@ function generateCardDetailHTML(task, category, categoryClass, id) {
         </div>`;
 }
 
+
 function renderSubtasksBoard(task, id) {
     let subtasksBoard = task['subtask'];
 
@@ -314,6 +302,7 @@ function renderSubtasksBoard(task, id) {
         }
     }
 }
+
 
 function renderSubtaskBar(task, id) {
     let subtaskToDo = 0;
@@ -331,18 +320,20 @@ function renderSubtaskBar(task, id) {
     document.getElementById(`progressInfo${id}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
 }
 
+
 function renderSubtaskToDoSvg(i, element, takenTask) {
     return /*html*/`
-            <li id="subtask${i}">
-                <div onclick="changeSubtaskStatus(${i}, ${takenTask})">
-                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.6821 8.39673V14.3967C17.6821 16.0536 16.339 17.3967 14.6821 17.3967H4.68213C3.02527 17.3967 1.68213 16.0536 1.68213 14.3967V4.39673C1.68213 2.73987 3.02527 1.39673 4.68213 1.39673H12.6821" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>                        
-                <p>${element['description']}</p>    
-            </li>`;
+    <li id="subtask${i}">
+        <div onclick="changeSubtaskStatus(${i}, ${takenTask})">
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.6821 8.39673V14.3967C17.6821 16.0536 16.339 17.3967 14.6821 17.3967H4.68213C3.02527 17.3967 1.68213 16.0536 1.68213 14.3967V4.39673C1.68213 2.73987 3.02527 1.39673 4.68213 1.39673H12.6821" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+            <path d="M5.68213 9.39673L9.68213 13.3967L17.6821 1.89673" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>                        
+        <p>${element['description']}</p>    
+    </li>`;
 }
+
 
 function renderSubtaskDoneSvg(i, element, takenTask) {
     return  /*html*/`
@@ -355,6 +346,7 @@ function renderSubtaskDoneSvg(i, element, takenTask) {
         <p>${element['description']}</p>    
     </li>`;
 }
+
 
 function changeSubtaskStatus(i, takenTask) {
     let task = tasks[takenTask];
@@ -372,7 +364,6 @@ function changeSubtaskStatus(i, takenTask) {
 }
 
 
-
 function renderTaskMember(task, id) {
     const members = task['assign_to'];
     const taskMemberDetail = document.getElementById('taskMemberDetail');
@@ -384,15 +375,10 @@ function renderTaskMember(task, id) {
 
     members.forEach((member, index) => {
         if (taskMemberDetail) {
-            taskMemberDetail.innerHTML += `
-                <li>
-                    <div class="taskMember" style="background-color: ${member['badgeColor']}">${member['initials']}</div>
-                    <p>${member['name']}</p>
-                </li>`;
+            taskMemberDetail.innerHTML += `<li><div class="taskMember" style="background-color: ${member['badgeColor']}">${member['initials']}</div><p>${member['name']}</p></li>`;
         }
         const marginLeft = index !== 0 ? 'margin-left: -10%;' : '';
-        taskMemberCard.innerHTML += `
-            <div class="taskMember" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${member['badgeColor']}">${member['initials']}</div>`;
+        taskMemberCard.innerHTML += `<div class="taskMember" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${member['badgeColor']}">${member['initials']}</div>`;
     });
 }
 
@@ -402,25 +388,21 @@ function renderTaskMember(task, id) {
  * @param {*} index - the id of the task
  */
 function renderPrio(task, id) {
-    let prio = task['prio'];
-    let prioHTML;
-    let checkId = document.getElementById('taskPrio');
+    const prio = task['prio'];
+    let prioHTML = '';
 
-    if (prio == 'urgent') {
+    if (prio === 'urgent') {
         prioHTML = renderUrgentHTML();
-    } else if (prio == 'medium') {
+    } else if (prio === 'medium') {
         prioHTML = renderMediumHTML();
-    } else if (prio == 'low') {
+    } else if (prio === 'low') {
         prioHTML = renderLowHTML();
     }
-    if (checkId !== null) {
-        document.getElementById('taskPrio').innerHTML = '';
-        document.getElementById('taskPrio').innerHTML = /*html*/`
-            <p>${prio}</p>
-            ${prioHTML}`;
+    const taskPrioElement = document.getElementById('taskPrio');
+    if (taskPrioElement) {
+        taskPrioElement.innerHTML = `<p>${prio}</p>${prioHTML}`;
     }
-    document.getElementById(`tasksPrio${id}`).innerHTML = '';
-    document.getElementById(`tasksPrio${id}`).innerHTML = /*html*/`${prioHTML}`;
+    document.getElementById(`tasksPrio${id}`).innerHTML = prioHTML;
 }
 
 /**
@@ -505,7 +487,6 @@ function moveFrom(fromCategory) {
     const allowedCategories = categories.filter(category => category !== fromCategory);
 
     allowedCategories.forEach(category => showDropZone(category));
-    
     alreadyExecuted = true;
 }
 

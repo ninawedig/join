@@ -134,7 +134,7 @@ input[type=checkbox]{
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: url('./img/login/unchecked.svg') 0 0 no-repeat;
+    background: url('./../img/login/unchecked.svg') 0 0 no-repeat;
     background-size: contain;
     height: 16px;
     width: 16px;

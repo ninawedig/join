@@ -216,7 +216,7 @@ main {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background: url(/img/addtask/event.svg);
+    background: url(./../img/addtask/event.svg);
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 24px 24px;

@@ -301,23 +301,27 @@ function renderSubtasks() {
 
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i].description;
-        subtaskList.innerHTML += `
-                    <li id="subtask">${subtask}
-                        <div class="subTasksImgContainer">
-                            <img onclick="editSubtask()" src="./img/addtask/editpen.svg" alt="">
-                            <div class="subTaskVerticalLine"></div>
-                            <img onclick="deleteSubtask(${i})" src="./img/addtask/deleteicon.svg" alt="">
-                        </div>
-                    </li>
-                    <div id="editSubtaskField" class="editSubtasksContainer noDisplay">${subtask}
-                        <div class="subTasksImgContainer editSubtasks">
-                            <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
-                            <div class="subTaskVerticalLine">
-                        </div>
-                        <img class="editSubtaskIcon" onclick="saveEditChanges()" src="./img/addtask/check2.svg" alt="">
-                    </div>
-    `;
+        subtaskList.innerHTML += rendersubtasksHTML(subtask, i);
     }
+}
+
+
+function rendersubtasksHTML(subtask, i){
+    return /*html*/`
+    <li id="subtask">${subtask}
+        <div class="subTasksImgContainer">
+            <img onclick="editSubtask()" src="./img/addtask/editpen.svg" alt="">
+            <div class="subTaskVerticalLine"></div>
+            <img onclick="deleteSubtask(${i})" src="./img/addtask/deleteicon.svg" alt="">
+        </div>
+    </li>
+    <div id="editSubtaskField" class="editSubtasksContainer noDisplay">${subtask}
+        <div class="subTasksImgContainer editSubtasks">
+            <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
+            <div class="subTaskVerticalLine">
+        </div>
+        <img class="editSubtaskIcon" onclick="saveEditChanges()" src="./img/addtask/check2.svg" alt="">
+    </div>`;
 }
 
 function editSubtask() {

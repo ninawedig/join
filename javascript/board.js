@@ -26,46 +26,38 @@ async function loadtasks() {
     tasks = myTasks;
 }
 
+
 function renderBoard(array) {
-
-    for (let i = 0; i < allStatus.length; i++) {
-        const status = allStatus[i];
+    allStatus.forEach(status => {
         let filterTask = array.filter(t => t['status'] == status);
+        let statusElement = document.getElementById(status);
+        statusElement.innerHTML = '';
 
-        document.getElementById(`${status}`).innerHTML = '';
-
-        if (filterTask == 0) {
-            document.getElementById(`${status}`).innerHTML =/*html*/`
-                <div class="noTaskCard">No tasks ${status}</div>`;
+        if (filterTask.length === 0) {
+            statusElement.innerHTML = `<div class="noTaskCard">No tasks ${status}</div>`;
+        } else {
+            filterTask.forEach((task) => {
+                let id = tasks.indexOf(task);
+                let category = getCategory(task['category']);
+                let categoryClass = getCategoryClass(category);
+                
+                statusElement.innerHTML += generateCardHTML(task, category, id, categoryClass);
+                renderPrio(task, id);
+                renderTaskMember(task, id);
+                renderSubtaskBar(task, id);
+            });
         }
-        for (let index = 0; index < filterTask.length; index++) {
-            const filterTasks = filterTask[index];
-            let id = tasks.indexOf(filterTasks);
-
-            let task = tasks[id];
-            let category;
-            let categoryClass;
-            if (task['category'] == 'User Story') {
-                category = 'User Story';
-                categoryClass = category.replace(/\s/g, '');
-                categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-            } else if (task['category'] == 'Technical Task') {
-                category = 'Technical Task';
-                categoryClass = category.replace(/\s/g, '');
-                categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
-            }
-
-            document.getElementById(`${status}`).innerHTML += generateCardHTML(filterTasks, category, id, categoryClass);
-            renderPrio(filterTasks, id);
-            renderTaskMember(filterTasks, id);
-            renderSubtaskBar(filterTasks, id);
-
-        }
-
-    }
+    });
 }
 
+function getCategory(category) {
+    return category === 'User Story' ? 'User Story' : 'Technical Task';
+}
 
+function getCategoryClass(category) {
+    let categoryClass = category.replace(/\s/g, '');
+    return categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
+}
 
 /**
  * This function render the HTML of the card in the board.
@@ -96,47 +88,32 @@ function generateCardHTML(element, category, id, categoryClass) {
         </div>`;
 }
 
-/**
- * This function shows the detailcard of a task or addTask-container.
- */
+
 async function showCardDetail(taskId) {
-    if (taskId == 'addTask') {
-        renderAddTask();
-        await loadContacts();
-        await loadUsers();
-        await loadTasks();
+    if (taskId == 'addTask' || taskId == 'editTask') {
+        await renderAddTask();
+        if (taskId == 'editTask') {
+            document.getElementById('cardDetailHeaderH1').style.display = 'none';
+            document.getElementById('cardDetailHeader').style.justifyContent = 'right';
+        }
+        await Promise.all([loadContacts(), loadUsers(), loadTasks()]);
         renderContacts();
         renderHeader();
-    } if (taskId == 'editTask') {
-        await renderAddTask();
-
-        document.getElementById('cardDetailHeaderH1').style = 'display: none;';
-        document.getElementById('cardDetailHeader').style = 'justify-content: right;';
-
-        await loadContacts();
-        await loadUsers();
-        await loadTasks();
-        renderContacts();
-        renderHeader();;
-
-
-
-    } if (taskId >= 0) {
+    } else if (taskId >= 0) {
         renderCardDetail(taskId);
     }
 
-    document.getElementById('cardContainer').style = "display: flex";
-    document.getElementById('cardContainerBackground').style = "display: flex";
-    let card = document.getElementById('cardDetail');
-
-    card.style = "display: flex";
+    document.getElementById('cardContainer').style.display = 'flex';
+    document.getElementById('cardContainerBackground').style.display = 'flex';
+    document.getElementById('cardDetail').style.display = 'flex';
 }
 
 
-async function editTask(id) {
+async function showEditTask(id) {
     await showCardDetail('editTask');
     renderTaskinEdit(id);
     document.getElementById('lowerSection').innerHTML = '';
+    document.getElementById('lowerSection').style = 'justify-content: right;';
     document.getElementById('lowerSection').innerHTML =/*html*/`
     <button class= "button" onclick="saveEdit(${id})">Ok</button>`;
 }
@@ -233,9 +210,6 @@ function closeCardDetail() {
 }
 
 
-
-
-
 // Funktion zum Abrufen und Einsetzen der externen HTML-Datei
 async function renderAddTask() {
     const externalHtmlFile = 'addtask.html';
@@ -277,27 +251,14 @@ function renderCardDetail(id) {
         categoryClass = categoryClass.charAt(0).toLowerCase() + categoryClass.slice(1);
     }
 
-
     document.getElementById('cardDetail').innerHTML = '';
     document.getElementById('cardDetail').innerHTML = generateCardDetailHTML(task, category, categoryClass, id);
-
 
     renderPrio(task, id);
     renderSubtasksBoard(task, id);
     renderTaskMember(task, id);
 
 }
-
-// function getTaskIndex(taskId){
-//     for (let i = 0; i < tasks.length; i++) {
-
-//         if(tasks[i]['id'] == taskId){
-//             return i;
-//            }
-//         }
-// }
-
-
 
 
 /**
@@ -333,7 +294,7 @@ function generateCardDetailHTML(task, category, categoryClass, id) {
             <ul id="taskSubtasks"></ul>
         </div>
         <div class="taskFunctionsContainer">
-            <div class="taskFunctions" onclick="editTask(${id})"><img class="taskFunctionsIcons"
+            <div class="taskFunctions" onclick="showEditTask(${id})"><img class="taskFunctionsIcons"
                     src="./img/contacts/edit.svg" alt="">Edit</div>
             <div class="taskFunctions" onclick="deleteTask(${id})" style="border-left: solid 1px #D1D1D1; padding-left: 16px;"><img class="taskFunctionsIcons"
                     src="./img/contacts/delete.svg" alt="">Delete</div>
@@ -341,15 +302,12 @@ function generateCardDetailHTML(task, category, categoryClass, id) {
 }
 
 function renderSubtasksBoard(task, id) {
-    let takenTask = tasks[id];
     let subtasksBoard = task['subtask'];
 
     document.getElementById('taskSubtasks').innerHTML = '';
     for (let i = 0; i < subtasksBoard.length; i++) {
         const element = subtasksBoard[i];
-
         if (element['status'] == 'done') {
-
             document.getElementById('taskSubtasks').innerHTML += renderSubtaskToDoSvg(i, element, id);
         } else {
             document.getElementById('taskSubtasks').innerHTML += renderSubtaskDoneSvg(i, element, id);
@@ -358,27 +316,18 @@ function renderSubtasksBoard(task, id) {
 }
 
 function renderSubtaskBar(task, id) {
-    let subtaskToDo;
-    let totalSubtasks;
+    let subtaskToDo = 0;
+    let totalSubtasks = 0;
+
     if (task['subtask']) {
         let subtaskArray = task['subtask'];
-        let filterTask = subtaskArray.filter(t => t['status'] == 'done');
-        subtaskToDo = filterTask.length;
+        subtaskToDo = subtaskArray.filter(t => t['status'] == 'done').length;
         totalSubtasks = subtaskArray.length;
     }
-
-
-    let barProgress = 0;
-
-    if (totalSubtasks >= 1) {
-        barProgress = (subtaskToDo / totalSubtasks) * 100;
-    }
-
-    if (totalSubtasks == 0) {
-        document.getElementById(`taskSubtasks${id}`).style = "display: none;";
-    }
-    document.getElementById(`progressBar${id}`).style = `width: ${barProgress}%;`;
-
+    const barProgress = totalSubtasks > 0 ? (subtaskToDo / totalSubtasks) * 100 : 0;
+    const progressBarStyle = totalSubtasks === 0 ? "display: none;" : "";
+    document.getElementById(`taskSubtasks${id}`).style = progressBarStyle;
+    document.getElementById(`progressBar${id}`).style.width = `${barProgress}%`;
     document.getElementById(`progressInfo${id}`).innerHTML = `${subtaskToDo}/${totalSubtasks} Subtasks`;
 }
 
@@ -420,43 +369,31 @@ function changeSubtaskStatus(i, takenTask) {
     setItem('tasks', tasks);
     renderSubtasksBoard(task, takenTask);
     renderBoard(tasks);
-
 }
 
 
+
 function renderTaskMember(task, id) {
-    let member = task['assign_to'];
+    const members = task['assign_to'];
+    const taskMemberDetail = document.getElementById('taskMemberDetail');
+    const taskMemberCard = document.getElementById(`taskMemberCard${id}`);
+    let zIndex = 1;
 
+    if (taskMemberDetail !== null) { taskMemberDetail.innerHTML = ''; }
+    taskMemberCard.innerHTML = '';
 
-    let checkId = document.getElementById('taskMemberDetail');
-    if (checkId !== null) { checkId.innerHTML = ''; }
-
-    document.getElementById(`taskMemberCard${id}`).innerHTML = '';
-
-    for (let i = 0; i < member.length; i++) {
-        const element = member[i];
-        let zIndex = 1;
-        if (checkId) {
-            document.getElementById('taskMemberDetail').innerHTML +=/*html*/ `
-            <li>
-                <div class="taskMember" style="background-color: ${element['badgeColor']}"">${element['initials']}</div>
-                <p>${element['name']}</p>
-            </li>`;
+    members.forEach((member, index) => {
+        if (taskMemberDetail) {
+            taskMemberDetail.innerHTML += `
+                <li>
+                    <div class="taskMember" style="background-color: ${member['badgeColor']}">${member['initials']}</div>
+                    <p>${member['name']}</p>
+                </li>`;
         }
-        if (i == 0) {
-            document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
-        <div class="taskMember" style="z-index: ${zIndex}; background-color: ${element['badgeColor']}"">${element['initials']}</div>`;
-        } else {
-            document.getElementById(`taskMemberCard${id}`).innerHTML +=/*html*/ `
-            <div class="taskMember" style="z-index: ${zIndex};  margin-left: -10%; background-color: ${element['badgeColor']}">${element['initials']}</div>`;
-        }
-
-        zIndex++;
-    }
-
-
-
-
+        const marginLeft = index !== 0 ? 'margin-left: -10%;' : '';
+        taskMemberCard.innerHTML += `
+            <div class="taskMember" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${member['badgeColor']}">${member['initials']}</div>`;
+    });
 }
 
 /**
@@ -466,9 +403,9 @@ function renderTaskMember(task, id) {
  */
 function renderPrio(task, id) {
     let prio = task['prio'];
-    // let index = tasks[id];
     let prioHTML;
-    //chose the priority
+    let checkId = document.getElementById('taskPrio');
+
     if (prio == 'urgent') {
         prioHTML = renderUrgentHTML();
     } else if (prio == 'medium') {
@@ -476,22 +413,14 @@ function renderPrio(task, id) {
     } else if (prio == 'low') {
         prioHTML = renderLowHTML();
     }
-
-    //render HTML in the detailcard
-    let checkId = document.getElementById('taskPrio');
     if (checkId !== null) {
         document.getElementById('taskPrio').innerHTML = '';
         document.getElementById('taskPrio').innerHTML = /*html*/`
             <p>${prio}</p>
             ${prioHTML}`;
-
     }
-
-    //render HTML in the card in the Board
     document.getElementById(`tasksPrio${id}`).innerHTML = '';
-    document.getElementById(`tasksPrio${id}`).innerHTML = /*html*/`
-        ${prioHTML}`;
-
+    document.getElementById(`tasksPrio${id}`).innerHTML = /*html*/`${prioHTML}`;
 }
 
 /**
@@ -500,19 +429,19 @@ function renderPrio(task, id) {
  */
 function renderUrgentHTML() {
     return /*html*/`
-        <div style="display: flex; align-items: center;">
-            <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_149397_2254)">
-            <path d="M8.50014 4.75476C8.69957 4.75443 8.89385 4.81633 9.05439 4.93137L16.6229 10.3653C16.7214 10.4361 16.8045 10.525 16.8677 10.627C16.9308 10.7291 16.9726 10.8422 16.9908 10.9599C17.0275 11.1977 16.9655 11.4399 16.8185 11.6333C16.6715 11.8266 16.4515 11.9553 16.207 11.9909C15.9624 12.0266 15.7133 11.9664 15.5144 11.8234L8.50014 6.7925L1.48589 11.8234C1.38742 11.8942 1.27557 11.9454 1.15674 11.9742C1.03791 12.0029 0.914423 12.0086 0.793326 11.9909C0.672226 11.9733 0.555893 11.9326 0.450966 11.8712C0.346037 11.8099 0.254568 11.729 0.181784 11.6333C0.109 11.5375 0.0563226 11.4288 0.0267625 11.3132C-0.00279753 11.1977 -0.00866262 11.0776 0.00950107 10.9599C0.0276667 10.8422 0.0695043 10.7291 0.13263 10.627C0.195754 10.525 0.278927 10.4361 0.377402 10.3653L7.94589 4.93137C8.10643 4.81633 8.30071 4.75443 8.50014 4.75476Z" fill="#FF0000"/>
-            <path d="M8.49996 -0.000121266C8.69939 -0.000455511 8.89366 0.0614475 9.0542 0.176482L16.6227 5.61045C16.8216 5.75336 16.9539 5.96724 16.9906 6.20502C17.0273 6.4428 16.9653 6.68501 16.8183 6.87837C16.6713 7.07173 16.4513 7.20039 16.2068 7.23606C15.9622 7.27173 15.7131 7.21147 15.5142 7.06856L8.49996 2.03761L1.48571 7.06856C1.28683 7.21147 1.03771 7.27173 0.793142 7.23606C0.548573 7.20039 0.328596 7.07173 0.181601 6.87837C0.0346055 6.68501 -0.0273661 6.4428 0.00931796 6.20502C0.0460039 5.96723 0.178341 5.75336 0.377219 5.61044L7.94571 0.176482C8.10625 0.0614474 8.30053 -0.000455546 8.49996 -0.000121266Z" fill="#FF0000"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_149397_2254">
-            <rect width="17" height="12" fill="white" transform="translate(17 12) rotate(-180)"/>
-            </clipPath>
-            </defs>
-            </svg>
-        </div>`;
+    <div style="display: flex; align-items: center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_149397_2254)">
+        <path d="M8.50014 4.75476C8.69957 4.75443 8.89385 4.81633 9.05439 4.93137L16.6229 10.3653C16.7214 10.4361 16.8045 10.525 16.8677 10.627C16.9308 10.7291 16.9726 10.8422 16.9908 10.9599C17.0275 11.1977 16.9655 11.4399 16.8185 11.6333C16.6715 11.8266 16.4515 11.9553 16.207 11.9909C15.9624 12.0266 15.7133 11.9664 15.5144 11.8234L8.50014 6.7925L1.48589 11.8234C1.38742 11.8942 1.27557 11.9454 1.15674 11.9742C1.03791 12.0029 0.914423 12.0086 0.793326 11.9909C0.672226 11.9733 0.555893 11.9326 0.450966 11.8712C0.346037 11.8099 0.254568 11.729 0.181784 11.6333C0.109 11.5375 0.0563226 11.4288 0.0267625 11.3132C-0.00279753 11.1977 -0.00866262 11.0776 0.00950107 10.9599C0.0276667 10.8422 0.0695043 10.7291 0.13263 10.627C0.195754 10.525 0.278927 10.4361 0.377402 10.3653L7.94589 4.93137C8.10643 4.81633 8.30071 4.75443 8.50014 4.75476Z" fill="#FF0000"/>
+        <path d="M8.49996 -0.000121266C8.69939 -0.000455511 8.89366 0.0614475 9.0542 0.176482L16.6227 5.61045C16.8216 5.75336 16.9539 5.96724 16.9906 6.20502C17.0273 6.4428 16.9653 6.68501 16.8183 6.87837C16.6713 7.07173 16.4513 7.20039 16.2068 7.23606C15.9622 7.27173 15.7131 7.21147 15.5142 7.06856L8.49996 2.03761L1.48571 7.06856C1.28683 7.21147 1.03771 7.27173 0.793142 7.23606C0.548573 7.20039 0.328596 7.07173 0.181601 6.87837C0.0346055 6.68501 -0.0273661 6.4428 0.00931796 6.20502C0.0460039 5.96723 0.178341 5.75336 0.377219 5.61044L7.94571 0.176482C8.10625 0.0614474 8.30053 -0.000455546 8.49996 -0.000121266Z" fill="#FF0000"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_149397_2254">
+        <rect width="17" height="12" fill="white" transform="translate(17 12) rotate(-180)"/>
+        </clipPath>
+        </defs>
+        </svg>
+    </div>`;
 }
 
 /**
@@ -568,26 +497,16 @@ function moveTo(status) {
     setItem('tasks', tasks);
 }
 
-function moveFrom(fromCategory) {
-    if (!alreadyExecuted) {
-        if (fromCategory == 'toDo') {
-            showDropZone('inProgress');
-        } if (fromCategory == 'inProgress') {
-            showDropZone('awaitFeedback');
-            showDropZone('toDo');
-            showDropZone('done');
-        } if (fromCategory == 'awaitFeedback') {
-            showDropZone('toDo');
-            showDropZone('inProgress');
-            showDropZone('done');
-        } if (fromCategory == 'done') {
-            showDropZone('toDo');
-            showDropZone('inProgress');
-            showDropZone('awaitFeedback');
-        }
-        alreadyExecuted = true;
-    }
 
+function moveFrom(fromCategory) {
+    if (alreadyExecuted) return;
+
+    const categories = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
+    const allowedCategories = categories.filter(category => category !== fromCategory);
+
+    allowedCategories.forEach(category => showDropZone(category));
+    
+    alreadyExecuted = true;
 }
 
 
@@ -598,7 +517,6 @@ function showDropZone(inCategory) {
     elements.forEach(function (element) {
         element.classList.add('hidden');
     });
-
     document.getElementById(inCategory).innerHTML += /*html*/`
     <div class="dragCard" style="background-color: transparent; border-radius: 24px; height: ${cardHeight}px;    margin-top: 12px;"></div>`;
 
@@ -607,12 +525,10 @@ function showDropZone(inCategory) {
 
 function findTaskFunction() {
     let search = document.getElementById('findTask').value.toLowerCase();
-
     let searchArray = [];
 
     for (let i = 0; i < tasks.length; i++) {
         const element = tasks[i];
-
         if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
             searchArray.push(element);
         }
@@ -623,11 +539,9 @@ function findTaskFunction() {
 
 
 async function deleteTask(task) {
-
     tasks.splice(task, 1);
     await setItem('tasks', JSON.stringify(tasks));
     renderBoard(tasks);
-
     closeCardDetail();
 }
 

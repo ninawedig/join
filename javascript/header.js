@@ -22,7 +22,7 @@ function renderInitials() {
         document.getElementById('activeUserButton').innerHTML = userInitials;
     } else {
         document.getElementById('activeUserButton').innerHTML = `
-        <img class="guestLogo" src="./../img/summary/logo.svg">
+        <img class="guestLogo" src="img/summary/logo.svg">
         `;
     }
 }

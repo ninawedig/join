@@ -253,11 +253,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #F9F9F9;
 }
 
-.subTaskList {
+.subtaskList {
     list-style-position: inside;
+    max-height: 100px;
+    overflow-y: auto;
 }
 
-.subTaskList li {
+.subtaskList li {
     margin-bottom: 8px;
     cursor: pointer;
     padding: 6.5px 16px 6.5px 32px;
@@ -270,11 +272,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     float: right;
 }
 
-.subTaskList li:hover {
+.subtaskList li:hover {
     background-color: #eeeeee;
 }
 
-.subTaskList li:hover .subTasksImgContainer {
+.subtaskList li:hover .subTasksImgContainer {
     display: inline-flex;
 }
 

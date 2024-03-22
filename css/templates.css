@@ -121,7 +121,7 @@ header {
 /* SMALL MENU */
 
 .smallMenu {
-    position: absolute;
+    position: fixed;
     top: 97px;
     right: 40px;
     display: flex;

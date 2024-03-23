@@ -36,7 +36,7 @@ async function loadTasks() {
 
 /**
  * this function is to add a new task to the board.
- * @param {*} status 
+ * @param {string} status 
  */
 
 async function addtask(status) {
@@ -55,7 +55,7 @@ async function addtask(status) {
         'prio': prio,
         'subtask': subtasks,
         'title': title.value,
-        'status': status
+        'status': status,
     }
 
     let categoryframe = document.getElementById('category');
@@ -65,6 +65,7 @@ async function addtask(status) {
     let technicalTask = document.getElementById('technicalTask');
     let userStory = document.getElementById('userStory');
 
+    //check every required field if it is filled, otherwise warning is shown
     if (!title.value) {
         messageBoxTitle.textContent = "Please fill out this field.";
         title.classList.add('inputEmpty');
@@ -85,13 +86,19 @@ async function addtask(status) {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
     }
-
+    // check if all required fields are filled, then forward to the boardpage
     if (title.value && duedate.value && (technicalTask.checked || userStory.checked)) {
+        // tasks are pushed in the task array 
         tasks.push(task);
         await setItem('tasks', JSON.stringify(tasks));
         window.location.href = "board.html";
     }
 }
+
+/**
+ * This function is to select the task category.
+ * @param {string} category category presents the different task categories. 
+ */
 
 function selectCategory(category) {
     let selectCategory = document.getElementById('selectTaskCategory');
@@ -99,12 +106,20 @@ function selectCategory(category) {
     toggleDropDownMenu();
 }
 
+/**
+ * this function is to reset the red outlines of the input fields and to empty the messagebox when the field is focused. 
+ * @param {string} id this is the inputfield that is focused.
+ */
+
 function resetOutlineAddtask(id) {
     document.getElementById(id).classList.remove('inputEmpty');
     let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
 
+/**
+ * this function is to clear all filled fields when click on the clear button. 
+ */
 function clearFields() {
     clearTitle();
     clearDescription();
@@ -114,19 +129,30 @@ function clearFields() {
     clearSelectedContacts();
     clearCategory();
 }
-
+/**
+ * This function is to clear the filled title field.
+ */
 function clearTitle() {
     document.getElementById('title').value = "";
 }
 
+/**
+ * This function is to clear the filled description field.
+ */
 function clearDescription() {
     document.getElementById('description').value = "";
 }
 
+/**
+ * This function is to clear the filled Due Date field.
+ */
 function clearDueDate() {
     document.getElementById('duedate').value = "";
 }
 
+/**
+ * This function is to clear the delete the saved subtasks. 
+ */
 function clearSubtasks() {
     document.getElementById('inputSubtask').value = "";
     while (subtasks.length > 0) {
@@ -134,13 +160,22 @@ function clearSubtasks() {
     }
 }
 
+/**
+ * This function is to reset the Prio Field to medium when clear the form. 
+ */
+
 function clearPrio() {
     setPrio('medium');
 }
 
+/**
+ * This function is to reset the chosen contacts when clear the form.
+ */
 function clearSelectedContacts() {
+    //clear the arrays
     assignedContacts = [];
     selectedContacts = [];
+    // render the contact list and show all contacts as unmarked
     renderAssignedContactsList(assignedContactsList);
     document.querySelectorAll('.checkbox').forEach(function (checkbox) {
         checkbox.src = "./../img/addtask/rectangle.svg";
@@ -151,11 +186,17 @@ function clearSelectedContacts() {
     document.getElementById('subtaskInput').style.marginTop = '0';
 }
 
+/**
+ * This function is to reset the task category when clear the form. 
+ */
 function clearCategory() {
     let selectCategory = document.getElementById('selectTaskCategory');
     selectCategory.innerHTML = 'Select task category';
 }
 
+/**
+ * This function is to add subtasks to the list.
+ */
 function addSubtask() {
     let inputSubtask = document.getElementById('inputSubtask');
     if (inputSubtask.value) {
@@ -169,6 +210,9 @@ function addSubtask() {
     }
 }
 
+/**
+ * This function is to show the dropdownmenu at categories and to change the direction of the arrow in the dropdown.
+ */
 function toggleDropDownMenu() {
     const arrow = document.getElementById('categoryDropDownArrow');
     const dropDown = document.getElementById('dropDownCategory');
@@ -177,12 +221,20 @@ function toggleDropDownMenu() {
     dropDown.classList.toggle('noDisplay');
 }
 
+/**
+ * This function is to load the saved contacts from the remote storage. 
+ */
+
 async function loadContacts() {
     firstLetters = await getItem('firstLetters')
         .then(response => JSON.parse(response));
     contacts = await getItem('contacts')
         .then(response => JSON.parse(response));
 }
+
+/**
+ * This function is to render all contacts to the contactlist. 
+ */
 
 function renderContacts() {
     let contactsList = document.getElementById('contactsList');
@@ -194,11 +246,19 @@ function renderContacts() {
     }
 }
 
+/**
+ * This function is to open the contacts in the dropdownmenu.
+ */
+
 function openContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
     dropDownMenu.classList.remove('noDisplay');
     document.getElementById('assignedContactsList').classList.add('noDisplay');
 }
+
+/**
+ * This function is to close the contacts in the dropdownmenu.
+ */
 
 function closeContactsDropDown() {
     const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
@@ -206,20 +266,26 @@ function closeContactsDropDown() {
     document.getElementById('assignedContactsList').classList.remove('noDisplay');
 }
 
-function filterContactNames() {
-    let search = document.getElementById('searchContact').value.toLowerCase();
+/**
+ * This function is to search for the contacts in the searchfield.
+ */
 
+function filterContactNames() {
+    //This function changes the letters of the value of seachContacts into small letter, that we compare small letters to small letters
+    let search = document.getElementById('searchContact').value.toLowerCase();
+    //empty the input that we can use it for a new search
     let contactsList = document.getElementById('contactsList');
     contactsList.innerHTML = '';
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let badgeColor = contact.badgeColor;
+        //check if value of the search is part of one of the contacts
         if (contact['name'].toLowerCase().includes(search)) {
             let isSelected = isSelectedContact(contact);
 
             contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
-
+            //check if the searched contact is marked 
             if (isSelected) {
                 document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
                 document.getElementById(`contactNo${i}`).classList.toggle('contactSelected');

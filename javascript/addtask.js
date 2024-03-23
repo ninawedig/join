@@ -15,6 +15,7 @@ async function init() {
     await loadTasks();
     renderContacts();
     renderHeader();
+    setupDropDownCloseListener();
 }
 
 function showSmallMenu() {
@@ -221,78 +222,105 @@ function toggleDropDownMenu() {
     dropDown.classList.toggle('noDisplay');
 }
 
+function setupDropDownCloseListener() {
+    setupDropDownCategory();
+    setupDropDownContacts();
+}
+
+function setupDropDownContacts() {
+    document.addEventListener("click", function (event) {
+        const dropDownContacts = document.getElementById('contactsDropDownMenuContainer');
+        const arrowContacts = document.getElementById('assignedDropDownArrow');
+        const targetElement = event.target;
+        if (!dropDownContacts.contains(targetElement) && !dropDownContacts.classList.contains('noDisplay') && targetElement !== arrowContacts) {
+            closeContactsDropDown();
+        }
+    });
+}
+
+function setupDropDownCategory() {
+    document.addEventListener("click", function (event) {
+        const dropDownCategory = document.getElementById('dropDownCategory');
+        const arrowCategory = document.getElementById('categoryDropDownArrow');
+        const targetElement = event.target;
+        if (!dropDownCategory.contains(targetElement) && !dropDownCategory.classList.contains('noDisplay') && targetElement !== arrowCategory) {
+            toggleDropDownMenu();
+        }
+    });
+}
+
 /**
  * This function is to load the saved contacts from the remote storage. 
  */
 
 async function loadContacts() {
-    firstLetters = await getItem('firstLetters')
-        .then(response => JSON.parse(response));
-    contacts = await getItem('contacts')
-        .then(response => JSON.parse(response));
-}
+            firstLetters = await getItem('firstLetters')
+                .then(response => JSON.parse(response));
+            contacts = await getItem('contacts')
+                .then(response => JSON.parse(response));
+        }
 
 /**
  * This function is to render all contacts to the contactlist. 
  */
 
 function renderContacts() {
-    let contactsList = document.getElementById('contactsList');
+            let contactsList = document.getElementById('contactsList');
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        let badgeColor = contacts[i].badgeColor;
-        contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
-    }
-}
+            for (let i = 0; i < contacts.length; i++) {
+                const contact = contacts[i];
+                let badgeColor = contacts[i].badgeColor;
+                contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
+            }
+        }
 
 /**
  * This function is to open the contacts in the dropdownmenu.
  */
 
 function openContactsDropDown() {
-    const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
-    dropDownMenu.classList.remove('noDisplay');
-    document.getElementById('assignedContactsList').classList.add('noDisplay');
-}
+            const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
+            dropDownMenu.classList.remove('noDisplay');
+            document.getElementById('assignedContactsList').classList.add('noDisplay');
+        }
 
 /**
  * This function is to close the contacts in the dropdownmenu.
  */
 
 function closeContactsDropDown() {
-    const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
-    dropDownMenu.classList.add('noDisplay');
-    document.getElementById('assignedContactsList').classList.remove('noDisplay');
-}
+            const dropDownMenu = document.getElementById('contactsDropDownMenuContainer');
+            dropDownMenu.classList.add('noDisplay');
+            document.getElementById('assignedContactsList').classList.remove('noDisplay');
+        }
 
 /**
  * This function is to search for the contacts in the searchfield.
  */
 
 function filterContactNames() {
-    //This function changes the letters of the value of seachContacts into small letter, that we compare small letters to small letters
-    let search = document.getElementById('searchContact').value.toLowerCase();
-    //empty the input that we can use it for a new search
-    let contactsList = document.getElementById('contactsList');
-    contactsList.innerHTML = '';
+            //This function changes the letters of the value of seachContacts into small letter, that we compare small letters to small letters
+            let search = document.getElementById('searchContact').value.toLowerCase();
+            //empty the input that we can use it for a new search
+            let contactsList = document.getElementById('contactsList');
+            contactsList.innerHTML = '';
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        let badgeColor = contact.badgeColor;
-        //check if value of the search is part of one of the contacts
-        if (contact['name'].toLowerCase().includes(search)) {
-            let isSelected = isSelectedContact(contact);
+            for (let i = 0; i < contacts.length; i++) {
+                const contact = contacts[i];
+                let badgeColor = contact.badgeColor;
+                //check if value of the search is part of one of the contacts
+                if (contact['name'].toLowerCase().includes(search)) {
+                    let isSelected = isSelectedContact(contact);
 
-            contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
-            //check if the searched contact is marked 
-            if (isSelected) {
-                document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
-                document.getElementById(`contactNo${i}`).classList.toggle('contactSelected');
+                    contactsList.innerHTML += getContactsListHTML(contact, badgeColor, i);
+                    //check if the searched contact is marked 
+                    if (isSelected) {
+                        document.getElementById(`checkboxNo${i}`).src = "./../img/addtask/checked.svg";
+                        document.getElementById(`contactNo${i}`).classList.toggle('contactSelected');
+                    }
+                }
             }
         }
-    }
-}
 
 /**
  * This function checks if the name of the returned contact is already part of the selected contacts
@@ -300,11 +328,11 @@ function filterContactNames() {
  * @returns true if the name of the returned contact is already part of the selected contacts
  */
 function isSelectedContact(contact) {
-    return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
-}
+            return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
+        }
 
 function getContactsListHTML(contact, badgeColor, i) {
-    return /*HTML*/ `
+            return /*HTML*/ `
                     <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
                         <div class="contactDetails">
                             <div class="contactProfileBadge" style="background-color: ${badgeColor};">${contact.initials}</div>
@@ -313,80 +341,80 @@ function getContactsListHTML(contact, badgeColor, i) {
                         <img id="checkboxNo${i}" src="./img/addtask/rectangle.svg" class="checkbox">
                     </div>
                     `
-}
+        }
 
 function selectContact(i, contactName, contactInitials) {
-    let contact = document.getElementById(`contactNo${i}`);
-    let checkbox = document.getElementById(`checkboxNo${i}`);
+            let contact = document.getElementById(`contactNo${i}`);
+            let checkbox = document.getElementById(`checkboxNo${i}`);
 
-    contact.classList.toggle('contactSelected');
-    let isSelected = contact.classList.contains('contactSelected');
+            contact.classList.toggle('contactSelected');
+            let isSelected = contact.classList.contains('contactSelected');
 
-    if (window.innerWidth <= 1400 && isSelected) {
-        document.getElementById('subtaskInput').style.marginTop = '25px';
-    } else {
-        document.getElementById('subtaskInput').style.marginTop = '0';
-    }
+            if (window.innerWidth <= 1400 && isSelected) {
+                document.getElementById('subtaskInput').style.marginTop = '25px';
+            } else {
+                document.getElementById('subtaskInput').style.marginTop = '0';
+            }
 
-    if (isSelected) {
-        checkbox.src = "./img/addtask/checked.svg";
-        selectedContacts.push(contacts[i]) - 1;
-        addToAssignedList(i, contacts[i]);
-    } else {
-        deselectContacts(contactName, checkbox);
-    }
-}
+            if (isSelected) {
+                checkbox.src = "./img/addtask/checked.svg";
+                selectedContacts.push(contacts[i]) - 1;
+                addToAssignedList(i, contacts[i]);
+            } else {
+                deselectContacts(contactName, checkbox);
+            }
+        }
 
 function deselectContacts(contactName, checkbox) {
-    checkbox.src = "./img/addtask/rectangle.svg";
-    let selectedContactIndex = findSelectedIndex(contactName);
-    selectedContacts.splice(selectedContactIndex, 1);
-    removeFromAssignedList(selectedContactIndex);
-}
+            checkbox.src = "./img/addtask/rectangle.svg";
+            let selectedContactIndex = findSelectedIndex(contactName);
+            selectedContacts.splice(selectedContactIndex, 1);
+            removeFromAssignedList(selectedContactIndex);
+        }
 
 function removeFromAssignedList(selectedContactIndex) {
-    let assignedContactsList = document.getElementById('assignedContactsList');
-    assignedContacts.splice(selectedContactIndex, 1);
-    renderAssignedContactsList(assignedContactsList);
-}
+            let assignedContactsList = document.getElementById('assignedContactsList');
+            assignedContacts.splice(selectedContactIndex, 1);
+            renderAssignedContactsList(assignedContactsList);
+        }
 
 function addToAssignedList(i, contact) {
-    let assignedContactsList = document.getElementById('assignedContactsList');
-    assignedContacts.push(contact);
-    renderAssignedContactsList(assignedContactsList);
-}
+            let assignedContactsList = document.getElementById('assignedContactsList');
+            assignedContacts.push(contact);
+            renderAssignedContactsList(assignedContactsList);
+        }
 
 function renderAssignedContactsList(assignedContactsList) {
-    assignedContactsList.innerHTML = '';
+            assignedContactsList.innerHTML = '';
 
-    for (let i = 0; i < assignedContacts.length; i++) {
-        const assignedContact = assignedContacts[i];
-        let badgeColor = assignedContact.badgeColor;
-        assignedContactsList.innerHTML += `
+            for (let i = 0; i < assignedContacts.length; i++) {
+                const assignedContact = assignedContacts[i];
+                let badgeColor = assignedContact.badgeColor;
+                assignedContactsList.innerHTML += `
         <div class="contactProfileBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
         `;
-    }
-}
+            }
+        }
 
 function findSelectedIndex(contactName) {
-    return selectedContacts.findIndex(contact => contact['name'] === contactName);
-}
+            return selectedContacts.findIndex(contact => contact['name'] === contactName);
+        }
 
 /**
  * This function is to render the list of subtasks.
  */
 function renderSubtasks() {
-    let subtaskList = document.getElementById('subtaskList');
-    subtaskList.innerHTML = '';
+            let subtaskList = document.getElementById('subtaskList');
+            subtaskList.innerHTML = '';
 
-    for (let i = 0; i < subtasks.length; i++) {
-        const subtask = subtasks[i].description;
-        subtaskList.innerHTML += rendersubtasksHTML(subtask, i);
-    }
-}
+            for (let i = 0; i < subtasks.length; i++) {
+                const subtask = subtasks[i].description;
+                subtaskList.innerHTML += rendersubtasksHTML(subtask, i);
+            }
+        }
 
 function rendersubtasksHTML(subtask, i) {
-    return /*html*/`
+            return /*html*/`
     <li id="subtask${i}">${subtask}
         <div class="subTasksImgContainer">
             <img onclick="editSubtask(${i})" src="./img/addtask/editpen.svg" alt="">
@@ -402,48 +430,48 @@ function rendersubtasksHTML(subtask, i) {
     </div>
             <img class="editSubtaskIcon" onclick="saveEditChanges(${i})" src="./img/addtask/check2.svg" alt="">
 `;
-}
+        }
 
 /**
  * This function is to change from showing to editing the subtask.
  * @param {array} i is the subtask 
  */
 function editSubtask(i) {
-    let subtask = document.getElementById(`subtask${i}`);
-    let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
+            let subtask = document.getElementById(`subtask${i}`);
+            let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
 
-    subtask.classList.toggle('noDisplay');
-    editSubtaskField.classList.toggle('noDisplay');
-}
+            subtask.classList.toggle('noDisplay');
+            editSubtaskField.classList.toggle('noDisplay');
+        }
 
 /**
  * This function is to save the edited subtasks. 
  * @param {string} i is the subtask 
  */
 function saveEditChanges(i) {
-    let newSubtaskText = document.getElementById(`editSubtaskText${i}`).value;
-    subtasks[i].description = newSubtaskText;
-    renderSubtasks();
-}
+            let newSubtaskText = document.getElementById(`editSubtaskText${i}`).value;
+            subtasks[i].description = newSubtaskText;
+            renderSubtasks();
+        }
 
 /**
  * This function is to delete the already saved subtasks from the array.
  * @param {string} i is the subtask
  */
 function deleteSubtask(i) {
-    subtasks.splice(i, 1);
-    renderSubtasks();
-}
+            subtasks.splice(i, 1);
+            renderSubtasks();
+        }
 
 /**
  * This function is to set a priority for a new task.
  * @param {string} selectedPrio is the priority for the new task.
  */
 function setPrio(selectedPrio) {
-    event.preventDefault();
-    document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
-    document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
-    document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
-    prio = selectedPrio;
-    document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);
-}
+            event.preventDefault();
+            document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');
+            document.getElementById('mediumPrio').classList.remove('mediumPrioButtonClicked');
+            document.getElementById('urgentPrio').classList.remove('urgentPrioButtonClicked');
+            prio = selectedPrio;
+            document.getElementById(`${selectedPrio}Prio`).classList.add(`${prio}PrioButtonClicked`);
+        }

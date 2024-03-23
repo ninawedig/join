@@ -294,6 +294,11 @@ function filterContactNames() {
     }
 }
 
+/**
+ * This function checks if the name of the returned contact is already part of the selected contacts
+ * @param {string} contact is the name of the saved contacts
+ * @returns true if the name of the returned contact is already part of the selected contacts
+ */
 function isSelectedContact(contact) {
     return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
 }
@@ -367,6 +372,9 @@ function findSelectedIndex(contactName) {
     return selectedContacts.findIndex(contact => contact['name'] === contactName);
 }
 
+/**
+ * This function is to render the list of subtasks.
+ */
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML = '';
@@ -376,7 +384,6 @@ function renderSubtasks() {
         subtaskList.innerHTML += rendersubtasksHTML(subtask, i);
     }
 }
-
 
 function rendersubtasksHTML(subtask, i) {
     return /*html*/`
@@ -397,6 +404,10 @@ function rendersubtasksHTML(subtask, i) {
 `;
 }
 
+/**
+ * This function is to change from showing to editing the subtask.
+ * @param {array} i is the subtask 
+ */
 function editSubtask(i) {
     let subtask = document.getElementById(`subtask${i}`);
     let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
@@ -405,17 +416,29 @@ function editSubtask(i) {
     editSubtaskField.classList.toggle('noDisplay');
 }
 
+/**
+ * This function is to save the edited subtasks. 
+ * @param {string} i is the subtask 
+ */
 function saveEditChanges(i) {
     let newSubtaskText = document.getElementById(`editSubtaskText${i}`).value;
     subtasks[i].description = newSubtaskText;
     renderSubtasks();
 }
 
+/**
+ * This function is to delete the already saved subtasks from the array.
+ * @param {string} i is the subtask
+ */
 function deleteSubtask(i) {
     subtasks.splice(i, 1);
     renderSubtasks();
 }
 
+/**
+ * This function is to set a priority for a new task.
+ * @param {string} selectedPrio is the priority for the new task.
+ */
 function setPrio(selectedPrio) {
     event.preventDefault();
     document.getElementById('lowPrio').classList.remove('lowPrioButtonClicked');

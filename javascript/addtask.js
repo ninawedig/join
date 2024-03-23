@@ -451,7 +451,7 @@ function rendersubtasksHTML(subtask, i) {
         </div>
     </li>
     <div id="editSubtaskField${i}" class="editSubtasksContainer noDisplay">
-        <input id="editSubtaskText${i}" value='${subtask}'>
+        <input class="editSubtaskText" id="editSubtaskText${i}" value='${subtask}'>
         <div class="subTasksImgContainer editSubtasks">
             <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
         <div class="subTaskVerticalLine">

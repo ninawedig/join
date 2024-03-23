@@ -260,6 +260,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
 }
 
+.editSubtaskText{
+    border: 0;
+    width: 80%;
+}
+
+.editSubtaskText:focus{
+    outline: none;
+}
+
 .subtaskList li {
     margin-bottom: 8px;
     cursor: pointer;

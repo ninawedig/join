@@ -343,9 +343,14 @@ function getContactsListHTML(contact, badgeColor, i) {
                     `
         }
 
-function selectContact(i, contactName, contactInitials) {
-            let contact = document.getElementById(`contactNo${i}`);
-            let checkbox = document.getElementById(`checkboxNo${i}`);
+/**
+ * This function is to select or deselect a contact.
+ * @param {string} i is the contact from the list of contacts. 
+ * @param {string} contactName is the name of the contact
+ */
+function selectContact(i, contactName) {
+    let contact = document.getElementById(`contactNo${i}`);
+    let checkbox = document.getElementById(`checkboxNo${i}`);
 
             contact.classList.toggle('contactSelected');
             let isSelected = contact.classList.contains('contactSelected');
@@ -365,6 +370,11 @@ function selectContact(i, contactName, contactInitials) {
             }
         }
 
+/**
+ * This function is to deselect a selected contact.
+ * @param {string} contactName is the name of the contact
+ * @param {image} checkbox is the box that shows if a contact is selected or not
+ */
 function deselectContacts(contactName, checkbox) {
             checkbox.src = "./img/addtask/rectangle.svg";
             let selectedContactIndex = findSelectedIndex(contactName);
@@ -372,18 +382,30 @@ function deselectContacts(contactName, checkbox) {
             removeFromAssignedList(selectedContactIndex);
         }
 
+/**
+ * This function is to delete a selected contact from the list of saved contacts.
+ * @param {string} selectedContactIndex is the index of the contact that is supposed to be deleted
+ */
 function removeFromAssignedList(selectedContactIndex) {
-            let assignedContactsList = document.getElementById('assignedContactsList');
-            assignedContacts.splice(selectedContactIndex, 1);
-            renderAssignedContactsList(assignedContactsList);
-        }
-
+    let assignedContactsList = document.getElementById('assignedContactsList');
+    assignedContacts.splice(selectedContactIndex, 1);
+    renderAssignedContactsList(assignedContactsList);
+}
+/**
+ * This function is to save a selected contact to the list of saved contacts.
+ * @param {string} i is the contact of the list of contacts
+ * @param {string} contact is the contact that is supposed to be saved 
+ */
 function addToAssignedList(i, contact) {
             let assignedContactsList = document.getElementById('assignedContactsList');
             assignedContacts.push(contact);
             renderAssignedContactsList(assignedContactsList);
         }
 
+/**
+ * This function is to render the liste of assigned contacts to the user interface.
+ * @param {string} assignedContactsList is the list of assigned contacts 
+ */
 function renderAssignedContactsList(assignedContactsList) {
             assignedContactsList.innerHTML = '';
 
@@ -395,6 +417,12 @@ function renderAssignedContactsList(assignedContactsList) {
         `;
             }
         }
+
+/**
+ * This function searches the selectedContacts array to find the index of the selected contact with the specified name contactName
+ * @param {string} contactName is the name that is searched in the array 
+ * @returns the first element in the Array selectedContacts
+ */
 
 function findSelectedIndex(contactName) {
             return selectedContacts.findIndex(contact => contact['name'] === contactName);

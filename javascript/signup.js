@@ -3,7 +3,9 @@ let users = [];
 function renderUsers() {
     loadUsers();
 }
-
+/**
+ * This function is to load the user data from the remote storage.
+ */
 async function loadUsers() {
     try {
         users = JSON.parse(await getItem('users'))
@@ -13,20 +15,25 @@ async function loadUsers() {
     }
 }
 
+/**
+ * this function is to signup a new user.
+ */
+
 async function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('confirmpassword').value;
     let policy = document.querySelector('.checkbox').checked;
-    let user = {'name': name,'email': email,'password': password, active: false}
+    let user = { 'name': name, 'email': email, 'password': password, active: false }
     let messageBoxName = document.getElementById('messageboxName');
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
     let messageboxConfirmpassword = document.getElementById('messageboxConfirmpassword');
     let messageBoxPolicy = document.getElementById('messageboxPolicy');
-
+    //check if all fields are filled 
     if (name && email && password && confirmPassword && policy) {
+        //check if password is the same as confirmed password. Otherwise warning is shown 
         if (password !== confirmPassword) {
             messageboxConfirmpassword.textContent = "Ups! Your password don`t match";
             document.getElementById('confirmpassword').classList.add('inputEmpty');
@@ -34,9 +41,11 @@ async function addUser() {
         } else {
             messageBoxPassword.textContent = "";
         }
+        //user is added to remote storage 
         users.push(user);
         await setItem('users', JSON.stringify(users));
         showSuccess();
+        //check the single input field if filled. Otherwise warning is shown 
     } else {
         if (!name) {
             messageBoxName.textContent = "Please fill out this field.";
@@ -70,12 +79,19 @@ async function addUser() {
     }
 }
 
+/**
+ * this function is to reset the red outlines of the input fields and to empty the messagebox when the field is focused. 
+ * @param {*} id this is the inputfield that is focused.
+ */
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
     let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
     document.getElementById(`messagebox${idBigFirstLetter}`).textContent = "";
 }
 
+/**
+ * this function is to change the icon and type of the password field depending if the password should be visible or not.
+ */
 function changeEye() {
     let passwordInput = document.getElementById('password');
     let passwordImage = document.getElementById('passwordimage');
@@ -88,6 +104,9 @@ function changeEye() {
     }
 }
 
+/**
+ * this function is to change the icon and type of the confirmpassword field depending if the password should be visible or not.
+ */
 function changeEyeAtConfirmPassword() {
     let passwordInput = document.getElementById('confirmpassword');
     let passwordImage = document.getElementById('passwordimageConfirmed');
@@ -100,14 +119,24 @@ function changeEyeAtConfirmPassword() {
     }
 }
 
+/**
+ * this function is to change the icon of the password field from lock to closedeye when focus the inputfield.
+ */
 function changeImage() {
     document.getElementById('passwordimage').src = '/img/login/visibility_off.svg';
 }
+
+/**
+ * this function is to change the icon of the changepassword field from lock to closedeye when focus the inputfield.
+ */
 
 function changeImageAtConfirmPassword() {
     document.getElementById('passwordimageConfirmed').src = '/img/login/visibility_off.svg';
 }
 
+/**
+ * this function is to remove the warning and to show the checked icon if the checkbox is checked. 
+ */
 function checkPolicy() {
     let checkbox = document.querySelector('.checkbox');
     if (checkbox.checked) {
@@ -116,7 +145,9 @@ function checkPolicy() {
         document.getElementById('checkbox').classList.add('input[type=checkbox]:checked')
     }
 }
-
+/**
+ * this function shows the "Signup was successful" display and forwards to the login page.
+ */
 async function showSuccess() {
     document.getElementById('successBackgroud').classList.remove('successBackgroundHide');
     document.getElementById('successBackgroud').classList.add('successBackgroundShow');
@@ -127,23 +158,39 @@ async function showSuccess() {
     window.location.href = "login.html";
 }
 
+/**
+ * this function is to open the privacypolicy.
+ */
 function openPrivacyPolicyPage() {
     window.location.href = "privacypolicy.html";
 }
+/**
+ * this function is to open the legalnotice.
+ */
 
 function openLegalNoticePage() {
     window.location.href = "legalnotice.html";
 }
 
+/**
+ * this function is to open the loginpage.
+ */
 function openLoginPage() {
     window.location.href = "login.html";
 }
+
+/**
+ * this function is to open the signup page.
+ */
 
 function openSignUpPage() {
     window.location.href = "signup.html";
 }
 
-async function clearUsers(){
+/**
+ * this function is to empty the users array.
+ */
+async function clearUsers() {
     users = [];
     await setItem('users', JSON.stringify(users));
 }

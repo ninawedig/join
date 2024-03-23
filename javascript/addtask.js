@@ -21,6 +21,10 @@ function showSmallMenu() {
     smallMenu.classList.toggle('noDisplay');
 }
 
+/**
+ * This function is to load the tasks data from the remote storage.
+ */
+
 async function loadTasks() {
     try {
         tasks = JSON.parse(await getItem('tasks'))
@@ -29,6 +33,11 @@ async function loadTasks() {
         console.info('Could not load tasks')
     }
 }
+
+/**
+ * this function is to add a new task to the board.
+ * @param {*} status 
+ */
 
 async function addtask(status) {
     let assign_to = assignedContacts;

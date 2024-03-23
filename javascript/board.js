@@ -166,7 +166,7 @@ function renderAssignedContactsListInEdit(){
     for (let j = 0; j < assignedContacts.length; j++) {
         const assginedContactName = assignedContacts[j].name;
         indexOfAssignedContact = findContactIndexByName(assginedContactName);
-        document.getElementById(`checkboxNo${indexOfAssignedContact}`).src = "./../img/addtask/checked.svg";
+        document.getElementById(`checkboxNo${indexOfAssignedContact}`).src = "./img/addtask/checked.svg";
         document.getElementById(`contactNo${indexOfAssignedContact}`).classList.add('contactSelected');
         selectedContacts.push(contacts[indexOfAssignedContact]) - 1;
     }

@@ -258,7 +258,7 @@ function selectContact(i, contactName, contactInitials) {
 }
 
 function deselectContacts(contactName, checkbox) {
-    checkbox.src = "./../img/addtask/rectangle.svg";
+    checkbox.src = "./img/addtask/rectangle.svg";
     let selectedContactIndex = findSelectedIndex(contactName);
     selectedContacts.splice(selectedContactIndex, 1);
     removeFromAssignedList(selectedContactIndex);

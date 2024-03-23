@@ -249,7 +249,7 @@ function selectContact(i, contactName, contactInitials) {
     }
 
     if (isSelected) {
-        checkbox.src = "./../img/addtask/checked.svg";
+        checkbox.src = "./img/addtask/checked.svg";
         selectedContacts.push(contacts[i]) - 1;
         addToAssignedList(i, contacts[i]);
     } else {

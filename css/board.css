@@ -20,6 +20,9 @@
     transition: 100ms all ease-in-out;
     cursor: pointer;
 }
+.okButton{
+    margin-top: 82px;
+}
 .button:hover{
     background-color: var(--secondarycolor);
     box-shadow: 0px 4px 4px 0px #00000040;

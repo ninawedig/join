@@ -128,7 +128,7 @@ async function showEditTask(id) {
     renderTaskinEdit(id);
     document.getElementById('lowerSection').innerHTML = '';
     document.getElementById('lowerSection').style = 'justify-content: right;';
-    document.getElementById('lowerSection').innerHTML =/*html*/`<button class= "button" onclick="saveEdit(${id})">Ok</button>`;
+    document.getElementById('lowerSection').innerHTML =/*html*/`<button class= "button okButton" onclick="saveEdit(${id})">Ok</button>`;
 }
 
 /**

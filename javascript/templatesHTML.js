@@ -176,3 +176,46 @@ function renderLowHTML() {
         </svg>
     </div>`;
 }
+
+/**
+ * This function renders the HTML of the contactlist in the addtask page.
+ * @param {string} contact is the selected contact
+ * @param {string} badgeColor is the color of the badge in which the initials are shown. 
+ * @param {string} i is the contact from the list of contacts. 
+ * @returns the HTML when opening the contact list
+ */
+function getContactsListHTML(contact, badgeColor, i) {
+    return /*HTML*/ `
+            <div class="dropDownContact" id="contactNo${i}" onclick="selectContact(${i}, '${contact.name}', '${contact.initials}')">
+                <div class="contactDetails">
+                    <div class="contactProfileBadge" style="background-color: ${badgeColor};">${contact.initials}</div>
+                    <div class="contactName">${contact.name}</div>
+                </div>
+                <img id="checkboxNo${i}" src="./img/addtask/rectangle.svg" class="checkbox">
+            </div>
+            `
+}
+/**
+ * This function is to render the HTML of the created subtasks on the addtaskpage. 
+ * @param {string} subtask is the created subtask
+ * @param {string} i is the subtask from the subtasks list
+ * @returns the HTML when create a subtask.
+ */
+function rendersubtasksHTML(subtask, i) {
+    return /*html*/`
+<li id="subtask${i}">${subtask}
+<div class="subTasksImgContainer">
+    <img onclick="editSubtask(${i})" src="./img/addtask/editpen.svg" alt="">
+    <div class="subTaskVerticalLine"></div>
+    <img onclick="deleteSubtask(${i})" src="./img/addtask/deleteicon.svg" alt="">
+</div>
+</li>
+<div id="editSubtaskField${i}" class="editSubtasksContainer noDisplay">
+<input class="editSubtaskText" id="editSubtaskText${i}" value='${subtask}'>
+<div class="subTasksImgContainer editSubtasks">
+    <img onclick="deleteSubtask(${i})" class="editSubtaskIcon" src="./img/addtask/deleteicon.svg" alt="">
+<div class="subTaskVerticalLine">
+</div>
+    <img class="editSubtaskIcon" onclick="saveEditChanges(${i})" src="./img/addtask/check2.svg" alt="">
+`;
+}

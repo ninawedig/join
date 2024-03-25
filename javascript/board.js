@@ -86,8 +86,10 @@ async function showCardDetail(taskId) {
     } else if (taskId >= 0) {
         renderCardDetail(taskId);
     }
-    document.getElementById('cardContainer').style.display = 'flex';
     document.getElementById('cardContainerBackground').style.display = 'flex';
+    let height = document.getElementById('main').offsetHeight;
+    document.getElementById('cardContainer').style = `display: flex; max-height: ${height}px;`;
+
     document.getElementById('cardDetail').style.display = 'flex';
 }
 

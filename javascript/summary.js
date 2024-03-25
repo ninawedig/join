@@ -78,7 +78,7 @@ function renderDueDate() {
 
 /**
  * This gets the name of the user that's logged in so they can be greeted.
- * @returns 
+ * @returns The name as string or an empty string for the guest log in.
  */
 function getGreetingName() {
     const activeUser = users.find(user => user.active === true);

@@ -26,7 +26,6 @@ function generateCardHTML(element, category, id, categoryClass) {
     </div>`;
 }
 
-
 /**
  * This function renders the CardDetailHeaderHTML-
  * @returns html
@@ -40,7 +39,6 @@ function renderCardDetailHeaderHTML(){
             </div>                    
     </div>`;
 }
-
 
 /**
  * This functoin returns the HTML of the detailcard
@@ -195,6 +193,7 @@ function getContactsListHTML(contact, badgeColor, i) {
             </div>
             `
 }
+
 /**
  * This function is to render the HTML of the created subtasks on the addtaskpage. 
  * @param {string} subtask is the created subtask
@@ -218,4 +217,185 @@ function rendersubtasksHTML(subtask, i) {
 </div>
     <img class="editSubtaskIcon" onclick="saveEditChanges(${i})" src="./img/addtask/check2.svg" alt="">
 `;
+}
+
+/**
+ * This generates the HTML text for the categories.
+ * @param {*} firstLetter is the category name
+ * @returns the HTML with the cattegories sorted alphabetically.
+ */
+function generateLettersCategoriesHTML(firstLetter) {
+    return /*HTML*/ `
+                    <div id="container${firstLetter}">
+                        <div class="contactLetter">${firstLetter}</div>
+                        <div class="contactsSeparationLine"></div>
+                        <div class="contactsGroup" id="contactsList${firstLetter}">
+                                <!-- RENDER JS-->
+                        </div>
+                    </div>
+                    `;
+}
+
+/**
+ * This function renders the contacts HTML under each category.
+ * @param {*} firstLetter is the category name
+ * @param {*} i is the index of the contact
+ * @param {*} nameInitials are the initials of the name
+ * @param {*} contact is the element of the array contacts
+ * @param {*} badgeColor this is the random color for the badge background
+ */
+function renderContactUnderCategory(firstLetter, i, nameInitials, contact, badgeColor) {
+    document.getElementById(`contactsList${firstLetter}`).innerHTML += /*HTML*/`
+                    <div onclick="selectContact(${i})" class="contactField" id="contact${i}">
+                        <div class="contactProfileBadge" style="background-color: ${badgeColor};">${nameInitials}</div>
+                        <div class="contactDetails">
+                            <div class="contactName">${contact['name']}</div>
+                            <div class="contactEmail">${contact['email']}</div>
+                        </div>
+                    </div>       
+                `;
+}
+
+/**
+ * This function generates the HTML for the contact card.
+ * @param {*} nameInitials are the initials of the name
+ * @param {*} i is the index of the contact
+ * @param {*} badgeColor is a random color for the badge background
+ * @returns  The html code for a contact card when clicked.
+ */
+function generateContactCardHTML(nameInitials, i, badgeColor) {
+    return /*HTML*/`
+                    <div class="contactCardMainInfos">
+                        <div class="contactProfileBadgeBig" style="background-color: ${badgeColor};">${nameInitials}</div>
+                        <div class="contactNameBigContainer">
+                            <div class="contactNameBig">${contacts[i]['name']}</div>
+                            <div class="contactFunctionsContainer">
+                                <div class="contactFunctions" onclick="openContactEditor(${i})"><img class="contactFunctionsIcons" src="./img/contacts/edit.svg" alt="">Edit</div>
+                                <div onclick="deleteContact(${i})" class="contactFunctions"><img class="contactFunctionsIcons" src="./img/contacts/delete.svg" alt="">Delete</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contactCardSubHead">Contact Information</div>
+                    <div class="contactCardDetails">
+                        <div class="contactCardContactInformations">
+                            <div class="contactMethod">Email</div>
+                            <div class="contactDetails contactEmail">${contacts[i]['email']}</div>
+                        </div>
+                        <div class="contactCardContactInformations">
+                            <div class="contactMethod">Phone</div>
+                            <div class="contactDetails contactPhone">${contacts[i]['phone']}</div>
+                        </div>
+                    </div>
+    `;
+}
+
+/**
+ * This function generates the edit contact form
+ * @param {*} nameInitials are the initials of the contact
+ * @param {*} i is the index of the contact
+ * @returns the contact to be edited.
+ */
+function generateContactFormHTML(nameInitials, i) {
+    return /*HTML*/`
+                    <div class="contactProfileBadgeBig editContactProfileBadge contactActionProfileBadgeBig">${nameInitials}</div>
+                    <form class="contactActionForm">
+                        <div class="closeIconContainer" onclick="closeContactEditor()"><img class="closeIcon"
+                            src="./img/contacts/close.svg" alt=""></div>
+                        <input id="editNameInput" class="contactActionInput" type="text" value="${contacts[i]['name']}">
+                        <input id="editEmailInput" class="contactActionInput" type="email" value="${contacts[i]['email']}">
+                        <input id="editPhoneInput" class="contactActionInput" type="tel" value="${contacts[i]['phone']}">
+                        <div class="formButtonsContainer">
+                            <button onclick="deleteContact(${i});return false;" class="formButton deleteButton">Delete</button>
+                            <button class="formButton saveButton" onclick="editContact()">Save <img src="./img/contacts/check.svg" alt=""></button>
+                        </div>
+                    </form>
+    `;
+}
+
+/**
+ * This renders the html of the header.
+ * @returns the html code.
+ */
+function getHeaderHTML(){
+    return /*HTML*/ `
+            <div class="headerTitle">Kanban Project Management Tool</div>
+            <div class="headerLogo"><img src="./img/favicon.png"></div>
+            <div class="headerIcons">
+                <a href="help.html" class="helpIconContainer"><img class="helpIcon" src="./img/help.svg" alt=""></a>
+                <div onclick="showSmallMenu()" id="activeUserButton" class="activeUser"></div>
+            </div>
+    `;
+}
+
+/**
+ * This returns the html of the small menu.
+ * @returns the html code.
+ */
+function getSmallMenuHTML(){
+    return /*HTML*/ `
+            <a href="legalnotice.html">Legal Notice</a>
+            <a href="privacypolicy.html">Privacy Policy</a>
+            <a onclick="logout()" href="#">Log out</a>
+`;
+}
+
+/**
+ * This returns the html of the navbar.
+ * @returns the html code.
+ */
+function getNavbarHTML(){
+    return /*HTML*/ `
+            <div class="sidenavLogoContainer"><img src="./img/nav/logo.png" alt="" class="logo"></div>
+            <div class="sidenavLinks">
+                <a id="summary" class="sidenavLinkActive" href="summary.html">
+                    <div class="iconContainer">
+                        <img class="sideNavIcon" src="./img/nav/summaryIcon.svg">
+                    </div>Summary
+                </a>
+                <a id="addTask" href="addtask.html">
+                    <div class="iconContainer">
+                        <img class="sideNavIcon" src="./img/nav/editSquareIcon.svg">
+                    </div>Add Task
+                </a>
+                <a id="board" href="board.html">
+                    <div class="iconContainer">
+                        <img class="sideNavIcon" src="./img/nav/boardIcon.svg" alt="">
+                    </div>Board
+                </a>
+                <a id="contacts" href="contacts.html">
+                    <div class="iconContainer">
+                        <img class="sideNavIcon" src="./img/nav/contactIcon.svg" alt="">
+                    </div>Contacts    
+                </a>
+            </div>
+            <div class="sidenavLegalLinks">
+                <a href="privacypolicy.html">Privacy Policy</a>
+                <a href="legalnotice.html">Legal notice</a>
+            </div>
+`;
+}
+
+/**
+ * This returns the html of the small navbar.
+ * @returns the html code.
+ */
+function getSmallNavHTML(){
+    return /*HTML*/ `
+            <a id="summarySmall" class="smallNavElement smallNavLinkActive" href="summary.html">
+                <img src="./img/nav/summaryIcon.svg" class="smallNavImg" alt="">
+                <div class="smallNavText">Summary</div>
+            </a>
+            <a id="boardSmall" class="smallNavElement" href="board.html">
+                <img src="./img/nav/boardIcon.svg" class="smallNavImg" alt="">
+                <div class="smallNavText">Board</div>
+            </a>
+            <a id="addTaskSmall" class="smallNavElement" href="addtask.html">
+                <img src="./img/nav/editSquareIcon.svg" class="smallNavImg" alt="">
+                <div class="smallNavText">Add Tasks</div>
+            </a>
+            <a id="contactsSmall" class="smallNavElement" href="contacts.html">
+                <img src="./img/nav/contactIcon.svg" class="smallNavImg" alt="">
+                <div class="smallNavText">Contacts</div>
+            </a>
+    `;
 }

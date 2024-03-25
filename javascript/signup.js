@@ -194,6 +194,3 @@ async function clearUsers() {
     users = [];
     await setItem('users', JSON.stringify(users));
 }
-
-
-

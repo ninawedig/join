@@ -290,4 +290,3 @@ function findTaskFunction() {
     event.preventDefault();
     renderBoard(searchArray);
 }
-

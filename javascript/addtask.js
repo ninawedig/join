@@ -6,6 +6,9 @@ let assignedContacts = [];
 let taskId = 0;
 let prio = 'medium';
 
+/**
+ * This loads the page.
+ */
 async function init() {
     renderNavbar();
     makeNavbarActive('addTask');
@@ -18,6 +21,9 @@ async function init() {
     setupDropDownCloseListener();
 }
 
+/**
+ * This shows or hides the small menu when clicked.
+ */
 function showSmallMenu() {
     smallMenu.classList.toggle('noDisplay');
 }

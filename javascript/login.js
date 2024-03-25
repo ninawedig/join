@@ -167,7 +167,3 @@ function openLoginPage() {
 function openSignUpPage() {
     window.location.href = "signup.html";
 }
-
-
-
-

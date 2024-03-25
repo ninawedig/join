@@ -51,7 +51,6 @@ function showSmallMenu() {
 function checkIfActive() {
     let contactFields = document.querySelectorAll('.contactField');
     let isActive = false;
-
     contactFields.forEach(element => {
         if (element.classList.contains('contactFieldActive')) {
             isActive = true;
@@ -69,14 +68,11 @@ function selectContact(i) {
     currentContact = i;
     clickedContact.classList.toggle('contactFieldActive');
     deselectContacts(clickedContact);
-
     if (window.innerWidth <= 740) {
         openContactPage();
         updateContact(i);
     }
-
     renderContactCard(i);
-
     let isActive = checkIfActive();
     if (isActive) {
         showContact();
@@ -143,7 +139,6 @@ function getRandomColor(){
 function openContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'block';
-
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
 }
@@ -155,12 +150,10 @@ function closeContactPage() {
     contactsFrame.classList.toggle('noDisplay');
     contactPage.style.display = 'none';
     contactCard.classList.toggle('contactCardActive');
-
     let contactFields = document.querySelectorAll('.contactField');
     contactFields.forEach(contactField => {
         contactField.classList.remove('contactFieldActive')
     });
-
     addPersonIcon.classList.toggle('noDisplay');
     editContactIcon.classList.toggle('noDisplay');
 }
@@ -257,7 +250,6 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let firstLetter = contact['name'].charAt(0);
-
         if (firstLetters.includes(firstLetter)) {
             let nameInitials = contacts[i].initials;
             let badgeColor = contacts[i].badgeColor;
@@ -291,11 +283,9 @@ function renderContactAgenda() {
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
     contactsAgenda.innerHTML = '';
-
     for (let i = 0; i < firstLetters.length; i++) {
         const firstLetter = firstLetters[i];
         contactsAgenda.innerHTML += generateLettersCategoriesHTML(firstLetter);
-
     }
 }
 
@@ -358,7 +348,6 @@ function closeContactEditor() {
 function renderContactEditor(i) {
     let editContactForm = document.getElementById('editContactForm');
     let nameInitials = contacts[i].initials;
-
     editContactForm.innerHTML = generateContactFormHTML(nameInitials, i);
 }
 

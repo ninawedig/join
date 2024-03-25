@@ -24,7 +24,7 @@
     <main>
         <h1>Add Task</h1>
         <div class="mainContainer" id="addTaskMain">
-            <div class="mainSection">
+            <div class="mainSection mainSectionBoard">
                 <form action="" class="sectionLeft">
 
                     <div class="title inputBox">
@@ -41,7 +41,7 @@
                             placeholder="Enter a Description" autocomplete="off"></textarea>
                     </div>
 
-                    <div class="assigned inputBox dropdown">
+                    <div class="assigned assignedBoard inputBox dropdown">
                         <span class="typo">Assigned to</span>
                         <div onclick="openContactsDropDown()" class="inputAssigned inputField"><span>Select contacts
                                 to asign</span><img onclick="closeContactsDropDown()" id="assignedDropDownArrow"
@@ -60,11 +60,11 @@
                     </div>
                 </form>
 
-                <div class="border"></div>
+                <div class="border borderBoard"></div>
 
                 <div class="sectionRight">
-                    <form action="">
-                        <div class="inputBox date">
+                    <form class="sectionRightFormBoard" action="">
+                        <div class="inputBox date dateBoard">
                             <div class="titleStar">
                                 <span class="typo">Due date</span><span class="typo typoRed">*</span>
                             </div>
@@ -73,7 +73,7 @@
                             <div class="messagebox" id="messageboxDuedate"></div>
                         </div>
 
-                        <div class="prioBox prio">
+                        <div class="prioBox prioBoxBoard prio">
                             <span class="typo">Prio</span>
                             <div class="prioButtonBox">
                                 <button id="urgentPrio" onclick="setPrio('urgent')"
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="inputBox category">
+                        <div class="inputBox category categoryBoard">
                             <div class="titleStar"><span class="typo">Category</span><span class="typo typoRed">*</span>
                             </div>
                             <div id="category" class="inputCategory inputField" onclick="toggleDropDownMenu()"><span
@@ -105,7 +105,7 @@
                             <div class="messagebox messageboxCategory" id="messageboxCategory"></div>
                         </div>
 
-                        <div id="subtaskInput" class="inputBox subtask">
+                        <div id="subtaskInput" class="inputBox subtask subtaskBoard">
                             <span class="typo">Subtasks</span>
                             <div class="inputSubtaskContainer"><input minlength="3" id="inputSubtask"
                                     class="inputSubtask inputField" type="text" placeholder="Add new subtask"><img
@@ -121,7 +121,7 @@
                     </form>
                 </div>
             </div>
-            <div id="lowerSection">
+            <div id="lowerSection" class="lowerSectionBoard">
                 <div>
                     <span class="typoSmall typoRed">*</span><span class="typoSmall">This field is required</span>
                 </div>

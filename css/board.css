@@ -308,6 +308,47 @@
     animation: slideInFromRight 0.25s ease;
 }
 
+.mainSectionBoard {
+    flex-direction: column !important;
+}
+
+.borderBoard {
+    display: none;
+}
+
+.assignedBoard {
+    position: relative;
+    top: 336px;
+}
+
+.sectionRightFormBoard {
+    display: flex;
+    flex-direction: column;
+}
+
+.prioBoxBoard {
+    order: -1;
+    position: relative;
+    bottom: 112px;
+}
+
+.dateBoard {
+    position: relative;
+    bottom: 112px;
+}
+
+.categoryBoard{
+    bottom: 112px;
+}
+
+.lowerSectionBoard {
+    margin-top: 46px !important;
+}
+
+.subtaskBoard {
+    margin-top: 25px !important;
+}
+
 @keyframes slideInFromRight {
     0% {
       transform: translateX(100%);
@@ -456,5 +497,3 @@
 }
 
 }
-
-

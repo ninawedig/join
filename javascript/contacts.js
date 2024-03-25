@@ -483,6 +483,10 @@ function generateContactFormHTML(nameInitials, i) {
     `;
 }
 
+/**
+ * This function checks whether a contact is assigned to a task and deletes it from all the assigned tasks.
+ * @param {*} i is the contact to be deleted. 
+ */
 function deleteAssignedContact(i){
     let contactName = contacts[i]['name'];
     for (let j = 0; j < tasks.length; j++) {

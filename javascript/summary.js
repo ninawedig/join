@@ -9,14 +9,13 @@ let urgentDueDateText = document.getElementById('summaryUrgentDueDate');
 let screenWidth = window.innerWidth;
 
 /**
- * This function loads the page elements
+ * This function loads the page elements.
  */
 async function initSummary() {
     await loadtasks();
     await loadUsers();
     if (screenWidth < 982 && document.referrer.endsWith('login.html')) {
         showGreetingPage();
-        
     };
     renderPage();
     renderNavbar();
@@ -28,6 +27,9 @@ async function initSummary() {
     renderHeader();
 }
 
+/**
+ * This function shows the content of the page.
+ */
 function renderPage(){
     let summaryMain = document.getElementById('summaryMain');
     summaryMain.style.display = "block";
@@ -59,7 +61,7 @@ function renderNumbers() {
 }
 
 /**
- * This function renders the date of the next urgent task
+ * This renders the date of the next urgent task
  */
 function renderDueDate() {
     let summaryDueDates = tasks.map(task => task.due_date)
@@ -74,6 +76,10 @@ function renderDueDate() {
     }
 }
 
+/**
+ * This gets the name of the user that's logged in so they can be greeted.
+ * @returns 
+ */
 function getGreetingName() {
     const activeUser = users.find(user => user.active === true);
     let greetingNameText;
@@ -86,7 +92,7 @@ function getGreetingName() {
 }
 
 /**
- * This function renders the greeting name
+ * This renders the greeting name.
  */
 function renderGreetingName() {
     let greetingNameText = document.getElementById('greetingName');
@@ -94,8 +100,8 @@ function renderGreetingName() {
 }
 
 /**
- * This function gets the greeting message based on the time of the day
- * @returns the greeting message
+ * This gets the greeting message based on the time of the day.
+ * @returns the greeting message.
  */
 function getGreeting() {
     const activeUser = users.find(user => user.active === true);
@@ -126,7 +132,7 @@ function getGreeting() {
 }
 
 /**
- * This function renders the greeting
+ * This renders the greeting.
  */
 function renderGreeting() {
     let greetingMessage = getGreeting();
@@ -135,10 +141,16 @@ function renderGreeting() {
     renderGreetingName();
 }
 
+/**
+ * This opens the page 'board'.
+ */
 function openBoard() {
     window.location.href = "board.html";
 }
 
+/**
+ * This shows a greeting page after logging in.(on small screens)
+ */
 function showGreetingPage() {
     let greetingPage = document.getElementById('greetingPage');
     let summaryMain = document.getElementById('summaryMain');
@@ -157,6 +169,9 @@ function showGreetingPage() {
     }, 3500);
 }
 
+/**
+ * This renders the greeting on small screens.
+ */
 function renderGreetingOnSmallScreen() {
     let greetingMessageSmallScreen = document.getElementById('greetingMessageSmallScreen');
     let greetingNameSmallScreen = document.getElementById('greetingNameSmallScreen');

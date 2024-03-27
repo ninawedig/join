@@ -73,12 +73,7 @@ function selectContact(i) {
         updateContact(i);
     }
     renderContactCard(i);
-    let isActive = checkIfActive();
-    if (isActive) {
-        showContact();
-    } else {
-        hideContact();
-    }
+    checkIfActive() ? showContact() : hideContact();
 }
 
 /**
@@ -121,12 +116,15 @@ function hideContact() {
  * @param {*} i is the number of the card in the JSON.
  */
 function renderContactCard(i) {
-    let nameInitials = contacts[i].initials;
+    let { initials, badgeColor } = contacts[i];
     let firstLetter = contacts[i]['name'].charAt(0);
-    let badgeColor = contacts[i].badgeColor;
-    contactCard.innerHTML = generateContactCardHTML(nameInitials, i, badgeColor, firstLetter);
+    contactCard.innerHTML = generateContactCardHTML(initials, i, badgeColor, firstLetter);
 }
 
+/**
+ * This gets a random color for the badge of the contact.
+ * @returns the badge color
+ */
 function getRandomColor(){
     const badgeColors = ["#9327FF", "#FF7A00", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1"];
     const randomColor = badgeColors[Math.floor(Math.random() * badgeColors.length)];
@@ -163,25 +161,33 @@ function closeContactPage() {
  */
 async function addContact() {
     event.preventDefault();
-    let newContactName = document.getElementById('newContactName');
-    let newContactEmail = document.getElementById('newContactEmail');
-    let newContactPhone = document.getElementById('newContactPhone');
-    let newContactInitials = getInitials(newContactName.value);
-    let newBadgeColor = getRandomColor()
-    let newContact = {
-        "name": newContactName.value.charAt(0).toUpperCase() + newContactName.value.slice(1),
-        "email": newContactEmail.value,
-        "phone": newContactPhone.value,
-        "initials": newContactInitials,
-        "badgeColor": newBadgeColor
-    };
-    contacts.push(newContact);
+    let { name, email, phone, initials, badgeColor } = getContactVariables();
+    contacts.push({name, email, phone, initials, badgeColor });
     contacts.sort();
     await setItem('contacts', JSON.stringify(contacts));
     await setItem('firstLetters', JSON.stringify(firstLetters));
     clearValues(newContactName, newContactEmail, newContactPhone);
     closeAddContact();
     renderContacts();
+}
+
+/**
+ * This gets the values from the input fields for the new Contact.
+ * @returns an object with the details of the new contact.
+ */
+function getContactVariables(){
+    let newContactName = document.getElementById('newContactName').value;
+    let newContactEmail = document.getElementById('newContactEmail').value;
+    let newContactPhone = document.getElementById('newContactPhone').value;
+    let newContactInitials = getInitials(newContactName);
+    let newBadgeColor = getRandomColor();
+    return {
+        name: newContactName.charAt(0).toUpperCase() + newContactName.slice(1),
+        email: newContactEmail,
+        phone: newContactPhone,
+        initials: newContactInitials,
+        badgeColor: newBadgeColor
+    };
 }
 
 /**
@@ -283,10 +289,7 @@ function renderContactAgenda() {
 function renderLetters() {
     const contactsAgenda = document.getElementById('contactsAgenda');
     contactsAgenda.innerHTML = '';
-    for (let i = 0; i < firstLetters.length; i++) {
-        const firstLetter = firstLetters[i];
-        contactsAgenda.innerHTML += generateLettersCategoriesHTML(firstLetter);
-    }
+    firstLetters.forEach(firstLetter => contactsAgenda.innerHTML += generateLettersCategoriesHTML(firstLetter));
 }
 
 /**

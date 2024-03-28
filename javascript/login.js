@@ -9,15 +9,12 @@ async function login() {
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
     let checkbox = document.getElementById('checkbox');
-
-    //check if email is filled. Otherwise warning is shown.
     if (!emailInput.value) {
         messageBoxEmail.textContent = "Please fill out this field.";
         document.getElementById('email').classList.add('inputEmpty');
     } else {
         messageBoxEmail.textContent = "";
     }
-    //check if password is filled. Otherwise warning is shown.
     if (!passwordInput.value) {
         messageBoxPassword.textContent = "Please fill out this field.";
         document.getElementById('password').classList.add('inputEmpty');
@@ -25,19 +22,15 @@ async function login() {
         messageBoxPassword.textContent = "";
     }
     if (emailInput.value && passwordInput.value) {
-        //check if email and password are saved in remote storage, if user is registered
         let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
         if (user) {
             user.active = true;
             await setItem('users', JSON.stringify(users));
-            //if user is registered, forward to the summarypage
             openSummaryPage();
-            // if "remeber me" is checked, the data is saved to local storage for the next login
             if (checkbox.checked) {
                 saveToLocalStorage();
                 changeIcon();
             }
-            // if tha data is not the same that is saved in the storage, warning is shown
         } else {
             messageBoxPassword.textContent = "Wrong password. Please try again.";
             passwordInput.classList.add('inputEmpty');

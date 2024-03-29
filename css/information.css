@@ -19,7 +19,9 @@ a{
 }
 .informationText{
     max-width: 1014px;
+    margin-bottom: 50px;
 }
+
 h3{
    font-size: 27px;
    font-weight: 700;

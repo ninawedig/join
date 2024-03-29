@@ -18,64 +18,6 @@ async function loadUsers() {
 /**
  * this function is to signup a new user.
  */
-// async function addUser() {
-//     let name = document.getElementById('name').value;
-//     let email = document.getElementById('email').value;
-//     let password = document.getElementById('password').value;
-//     let confirmPassword = document.getElementById('confirmpassword').value;
-//     let policy = document.querySelector('.checkbox').checked;
-//     let user = { 'name': name, 'email': email, 'password': password, active: false }
-//     let messageBoxName = document.getElementById('messageboxName');
-//     let messageBoxEmail = document.getElementById('messageboxEmail');
-//     let messageBoxPassword = document.getElementById('messageboxPassword');
-//     let messageboxConfirmpassword = document.getElementById('messageboxConfirmpassword');
-//     let messageBoxPolicy = document.getElementById('messageboxPolicy');
-   
-//     if (name && email && password && confirmPassword && policy) { 
-//         if (password !== confirmPassword) {
-//             messageboxConfirmpassword.textContent = "Ups! Your password don`t match";
-//             document.getElementById('confirmpassword').classList.add('inputEmpty');
-//             return;
-//         } else {
-//             messageBoxPassword.textContent = "";
-//         }
-//         users.push(user);
-//         await setItem('users', JSON.stringify(users));
-//         showSuccess();
-       
-//     } else {
-//         if (!name) {
-//             messageBoxName.textContent = "Please fill out this field.";
-//             document.getElementById('name').classList.add('inputEmpty');
-//         } else {
-//             messageBoxName.textContent = "";
-//         }
-//         if (!email) {
-//             messageBoxEmail.textContent = "Please fill out this field.";
-//             document.getElementById('email').classList.add('inputEmpty');
-//         } else {
-//             messageBoxEmail.textContent = "";
-//         }
-//         if (!password) {
-//             messageBoxPassword.textContent = "Please fill out this field.";
-//             document.getElementById('password').classList.add('inputEmpty');
-//         } else {
-//             messageBoxPassword.textContent = "";
-//         }
-//         if (!confirmPassword) {
-//             messageboxConfirmpassword.textContent = "Please fill out this field.";
-//             document.getElementById('confirmpassword').classList.add('inputEmpty');
-//         } else {
-//             messageBoxPassword.textContent = "";
-//         }
-//         if (!policy) {
-//             messageBoxPolicy.textContent = "Please confirm the Privacy policy.";
-//         } else {
-//             messageBoxPolicy.textContent = "";
-//         }
-//     }
-// }
-
 async function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
@@ -88,40 +30,61 @@ async function addUser() {
     let messageBoxPassword = document.getElementById('messageboxPassword');
     let messageboxConfirmpassword = document.getElementById('messageboxConfirmpassword');
     let messageBoxPolicy = document.getElementById('messageboxPolicy');
- 
- 
+
     if (name && email && password && confirmPassword && policy) {
-        checkPasswords();
+        checkPassword(password, confirmPassword, messageboxConfirmpassword, messageBoxPassword, user);
+    } else {
+        checkFilledInput(name, messageBoxName, email, messageBoxEmail, password, messageBoxPassword, confirmPassword, messageboxConfirmpassword, policy, messageBoxPolicy)
+    }
+}
+
+/**
+ * This function is to check if the password and the confirmed password are equal and to push the registered user into the JSON
+ * @param {*} password is the value of the password 
+ * @param {*} confirmPassword is the value of the confirmed password 
+ * @param {*} messageboxConfirmpassword shows the warning under the inputfield of the confirmed password 
+ * @param {*} messageBoxPassword shows the warning under the inputfield of the password
+ * @param {*} user is the JSON of the registered data
+ */
+async function checkPassword(password, confirmPassword, messageboxConfirmpassword, messageBoxPassword, user) {
+    if (password !== confirmPassword) {
+        messageboxConfirmpassword.textContent = "Ups! Your password don`t match";
+        document.getElementById('confirmpassword').classList.add('inputEmpty');
+    } else {
+        messageBoxPassword.textContent = "";
         users.push(user);
         await setItem('users', JSON.stringify(users));
         showSuccess();
-    } else {
-        checkFilledInput(name.value, messageBoxName, "Bitte füllen Sie dieses Feld aus.");
-        checkFilledInput(email.value, messageBoxEmail, "Bitte füllen Sie dieses Feld aus.");
-        checkFilledInput(password.value, messageBoxPassword, "Bitte füllen Sie dieses Feld aus.");
-        checkFilledInput(confirmPassword.value, messageboxConfirmpassword, "Bitte füllen Sie dieses Feld aus.");
-        checkFilledInput(policy.checked, messageBoxPolicy, "Bitte bestätigen Sie die Datenschutzrichtlinie.");
     }
- }
- 
- async function checkFilledInput(value, messageBox, errorMessage) {
+}
+
+/**
+ * This function is used as a variable to check if the required input fields are filled and shows a warning if not. 
+ */
+function checkInput(value, messageBox, inputElement) {
     if (!value) {
-        messageBox.textContent = errorMessage;
-        value.classList.add('inputEmpty');
+        messageBox.textContent = "Please fill out this field.";
+        inputElement.classList.add('inputEmpty');
     } else {
         messageBox.textContent = "";
+        inputElement.classList.remove('inputEmpty');
     }
- }
- 
- async function checkPasswords() {
-    if (password.value !== confirmPassword.value) {
-        messageboxConfirmpassword.textContent = "Ups! Ihre Passwörter stimmen nicht überein";
-        confirmPassword.classList.add('inputEmpty');
-        return;
+}
+
+/**
+ * This function checks with the checkInput function if the required input fields are filled and shows a warning if not. 
+ */
+function checkFilledInput(name, messageBoxName, email, messageBoxEmail, password, messageBoxPassword, confirmPassword, messageboxConfirmpassword, policy, messageBoxPolicy) {
+    checkInput(name, messageBoxName, document.getElementById('name'));
+    checkInput(email, messageBoxEmail, document.getElementById('email'));
+    checkInput(password, messageBoxPassword, document.getElementById('password'));
+    checkInput(confirmPassword, messageboxConfirmpassword, document.getElementById('confirmpassword'));
+    if (!policy) {
+        messageBoxPolicy.textContent = "Please confirm the Privacy policy.";
     } else {
-        messageBoxPassword.textContent = "";
+        messageBoxPolicy.textContent = "";
     }
- }
+}
 
 /**
  * this function is to reset the red outlines of the input fields and to empty the messagebox when the field is focused. 

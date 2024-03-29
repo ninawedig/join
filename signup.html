@@ -26,7 +26,7 @@
             <form class="form" onsubmit="addUser();return false;">
                 <div class="inputFields">
                         <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('name')"
-                            id="name" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3"
+                            id="name" minlength="3"
                             class="input" type="text" placeholder="Name"><img class="inputSmallIcon" src="./img/register/person.svg"></div>
                     <div class="messagebox" id="messageboxName"></div>
                         <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('email')"
@@ -34,12 +34,12 @@
                             class="input" type="email" placeholder="Email"><img class="inputSmallIcon" src="./img/login/mail.svg"></div>
                     <div class="messagebox" id="messageboxEmail"></div>
                     <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('password')"
-                            onfocus="changeImage()" id="password" pattern="^[A-Za-z][A-Za-z ]*$" minlength="3"
+                            onfocus="changeImage()" id="password" minlength="3"
                             class="input" type="password" placeholder="Password"><img id="passwordimage"
                             onclick="changeEye()" class="inputSmallIcon" src="./img/login/lock.svg"></div>
                     <div class="messagebox" id="messageboxPassword"></div>
                     <div class="inputContainer"><input autocomplete="off" onfocus="resetOutline('confirmpassword')"
-                            onfocus="changeImageAtConfirmPassword()" id="confirmpassword" pattern="^[A-Za-z][A-Za-z ]*$"
+                            onfocus="changeImageAtConfirmPassword()" id="confirmpassword" 
                             minlength="3" class="input" type="password" placeholder="Confirm Password"><img
                             id="passwordimageConfirmed" onclick="changeEyeAtConfirmPassword()" class="inputSmallIcon"
                             src="./img/login/lock.svg"></div>

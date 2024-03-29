@@ -700,21 +700,13 @@ label {
         top: 472px;
     }
 
-    .inputField {
-        max-width: 295px;
-    }
-
     .sectionLeft {
         width: auto;
         align-items: flex-start;
     }
 
-    .inputSubtaskContainer{
-        max-width: 295px;
-    }
-
     .inputBox{
-        max-width: 295px;
+        padding-right: 16px;
     }
 }
 

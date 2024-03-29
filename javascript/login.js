@@ -1,7 +1,7 @@
 let storedLogins = [];
 
 /**
- * this is the function to login into join and to warn if required messageboxes are not filled.
+ * this is the function to login into join.
  */
 async function login() {
     let emailInput = document.getElementById('email');
@@ -9,6 +9,14 @@ async function login() {
     let messageBoxEmail = document.getElementById('messageboxEmail');
     let messageBoxPassword = document.getElementById('messageboxPassword');
     let checkbox = document.getElementById('checkbox');
+    checkInputFilled(emailInput, messageBoxEmail, passwordInput, messageBoxPassword);
+    checkRegisteredUser(emailInput, passwordInput, checkbox, messageBoxPassword, passwordInput) 
+}
+
+/**
+ * this function checks if the inputfield are filled and shows a warning if not.
+ */
+function checkInputFilled(emailInput, messageBoxEmail, passwordInput, messageBoxPassword) {
     if (!emailInput.value) {
         messageBoxEmail.textContent = "Please fill out this field.";
         document.getElementById('email').classList.add('inputEmpty');
@@ -21,6 +29,12 @@ async function login() {
     } else {
         messageBoxPassword.textContent = "";
     }
+}
+
+/**
+ * this function checks if the user is registered.
+ */
+async function checkRegisteredUser(emailInput, passwordInput, checkbox, messageBoxPassword, passwordInput) {
     if (emailInput.value && passwordInput.value) {
         let user = users.find(u => u.email === emailInput.value && u.password === passwordInput.value);
         if (user) {
@@ -72,7 +86,6 @@ function loadLocalStorage() {
 /**
  * this function is to change the checkbox icon to checked.
  */
-
 function changeIcon() {
     document.getElementById('checkbox').classList.remove('input[type=checkbox]')
     document.getElementById('checkbox').classList.add('input[type=checkbox]:checked')
@@ -97,7 +110,6 @@ function changeEye() {
 /**
  * this function is to change the icon of the password field from lock to closedeye when focus the inputfield.
  */
-
 function changeImage() {
     document.getElementById('passwordimage').src = '/img/login/visibility_off.svg';
 }
@@ -105,7 +117,6 @@ function changeImage() {
 /**
  * this function is to open the summarypage when click on the guestLogin.
  */
-
 function guestLogin() {
     openSummaryPage();
 }
@@ -114,7 +125,6 @@ function guestLogin() {
  * this function is to reset the red outlines of the input fields and to empty the messagebox when the field is focused. 
  * @param {*} id this is the inputfield that is focused.
  */
-
 function resetOutline(id) {
     document.getElementById(id).classList.remove('inputEmpty');
     let idBigFirstLetter = id[0].toUpperCase() + id.slice(1);
@@ -124,7 +134,6 @@ function resetOutline(id) {
 /**
  * this function is to open the summarypage.
  */
-
 function openSummaryPage() {
     window.location.href = "summary.html";
 }
@@ -132,7 +141,6 @@ function openSummaryPage() {
 /**
  * this function is to open the privacypolicy.
  */
-
 function openPrivacyPolicyPage() {
     window.location.href = "privacypolicy.html";
 }
@@ -140,7 +148,6 @@ function openPrivacyPolicyPage() {
 /**
  * this function is to open the legalnotice.
  */
-
 function openLegalNoticePage() {
     window.location.href = "legalnotice.html";
 }
@@ -148,7 +155,6 @@ function openLegalNoticePage() {
 /**
  * this function is to open the loginpage.
  */
-
 function openLoginPage() {
     window.location.href = "login.html";
 }
@@ -156,7 +162,6 @@ function openLoginPage() {
 /**
  * this function is to open the signup page.
  */
-
 function openSignUpPage() {
     window.location.href = "signup.html";
 }

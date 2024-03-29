@@ -66,27 +66,31 @@ async function addtask(status) {
  * This function is to check if the required inputFields are filled before sending the form. 
  */
 function checkInputFields() {
+    let title = document.getElementById('title').value;
+    let duedate = document.getElementById('duedate').value;
     let categoryframe = document.getElementById('category');
     let messageBoxTitle = document.getElementById('messageboxTitle');
     let messageBoxDuedate = document.getElementById('messageboxDuedate');
     let messageBoxCategory = document.getElementById('messageboxCategory');
-    if (!title.value) {
-        messageBoxTitle.textContent = "Please fill out this field.";
-        title.classList.add('inputEmpty');
-    } else {
-        messageBoxTitle.textContent = "";
-    }
-    if (!duedate.value) {
-        messageBoxDuedate.textContent = "Please fill out this field.";
-        duedate.classList.add('inputEmpty');
-    } else {
-        messageBoxDuedate.textContent = "";
-    }
+    checkInput(title, messageBoxTitle, document.getElementById('title'));
+    checkInput(duedate, messageBoxDuedate, document.getElementById('duedate'));
     if (technicalTask.checked || userStory.checked) {
         messageBoxCategory.textContent = "";
     } else {
         messageBoxCategory.textContent = "Please select a category.";
         categoryframe.classList.add('inputEmpty');
+    }
+}
+
+/**
+ * This function is used as a variable to check if the required input fields are filled and shows a warning if not. 
+ */
+function checkInput(value, messageBox, inputElement) {
+    if (!value) {
+        messageBox.textContent = "Please fill out this field.";
+        inputElement.classList.add('inputEmpty');
+    } else {
+        messageBox.textContent = "";
     }
 }
 

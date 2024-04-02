@@ -35,19 +35,28 @@ function renderBoard(array) {
         let statusElement = document.getElementById(status);
         statusElement.innerHTML = '';
         if (filterTask.length === 0) {
-            statusElement.innerHTML = `<div class="noTaskCard">No tasks ${status}</div>`;
+            statusElement.innerHTML = `<div class="noTaskCard" style= "width: 252px;">No tasks ${status}</div>`;
         } else {
             filterTask.forEach((task) => {
-                let id = tasks.indexOf(task);
-                let category = getCategory(task['category']);
-                let categoryClass = getCategoryClass(category);
-                statusElement.innerHTML += generateCardHTML(task, category, id, categoryClass);
-                renderPrio(task, id);
-                renderTaskMember(task, id);
-                renderSubtaskBar(task, id);
+                renderBoardTaskDetails(task, statusElement);
             });
         }
     });
+}
+
+/**
+ * This function genertes the details od the boardcard.
+ * @param {array} task - the specific task
+ * @param {string} statusElement - one of the 4 status of a task
+ */
+function renderBoardTaskDetails(task, statusElement){
+    let id = tasks.indexOf(task);
+    let category = getCategory(task['category']);
+    let categoryClass = getCategoryClass(category);
+    statusElement.innerHTML += generateCardHTML(task, category, id, categoryClass);
+    renderPrio(task, id);
+    renderTaskMember(task, id);
+    renderSubtaskBar(task, id);
 }
 
 /**

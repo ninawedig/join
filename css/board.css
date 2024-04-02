@@ -194,6 +194,7 @@
 .taskTitle{
     font-weight: 700;
     color: #2A3647;
+    min-width: 220px;
 }
 .taskDescription{
     font-weight: 400;
@@ -218,6 +219,9 @@
     background-color: #4589FF;
     height: 8px;
     border-radius: 8px;
+}
+.progressInfo{
+    white-space: nowrap;
 }
 
 .taskMembers{
@@ -298,7 +302,7 @@
     border-radius: 30px;
     max-width: 525px;
     min-width: 525px;
-    max-height: 90vh;
+    max-height: 70vh;
     overflow-y: auto;
     padding: 48px 40px 48px 40px;
     display: none;

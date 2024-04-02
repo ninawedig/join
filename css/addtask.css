@@ -707,6 +707,15 @@ label {
 
     .inputBox{
         padding-right: 16px;
+        max-width: 295px;
+    }
+
+    .inputField {
+        max-width: 295px;
+    }
+
+    .inputSubtaskContainer{
+        max-width: 295px;
     }
 }
 
